@@ -8,6 +8,5 @@
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
-    <!-- Test Commi 123t -->
   </welcome-file-list>
 </web-app>
