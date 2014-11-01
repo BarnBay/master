@@ -1,9 +1,25 @@
 /* ------------------------------------------------------------------------------------
    Navbar
    ------------------------------------------------------------------------------------ */
-#mainAccount .dropdown-menu {
+#mainLogin .dropdown-menu {
 	min-width: 350px;
 	padding: 20px;
+}
+
+#shoppingCart .dropdown-menu {
+	min-width: 350px;
+	padding: 20px;	
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+/* Mouse Over Effect for Dropdown */
+.dropdown:hover .dropdown-menu {
+	display: block;
 }
    
 /* ------------------------------------------------------------------------------------

@@ -32,12 +32,21 @@ $(document).ready(function () {
 		var $content = $(this).attr('href');
 		if (!$parent.hasClass('active')) {
 			$parent.addClass('active');
+			
 			$('#mainContainer').hide().load('./content/' + $content + '.html').fadeIn('500');
 			$('#mainFooter').hide().fadeIn('500');
         }
         e.preventDefault();
     });
 });
+
+/* ------------------------------------------------------------------------------------
+   Navigation - Change the Login to Account, if User is logged in
+   ------------------------------------------------------------------------------------ */
+$(document).ready(function() {
+	$('#mainNavbarRight').load('./content/nav_login.html');
+});
+
 
 /* ------------------------------------------------------------------------------------
    Start Coursel automatically

@@ -1,0 +1,55 @@
+<li id="shoppingCart" class="dropdown">
+	<a href="" class="dropdown-toggle" data-toogle="dropdown"><span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="caret"></span></a>
+	<div class="dropdown-menu">
+		<form class="form col-md-12 center-block">
+			<div class="form-group">
+				<div class="scrollable-menu">
+					<div>Single Item</div>
+					<div>Single Item</div>
+					<div>Single Item</div>
+					<div>Single Item</div>
+					<div>Single Item</div>
+					<div>Single Item</div>
+					<div>Single Item</div>
+					<div>Single Item</div>
+					<div>Single Item</div>
+					<div>Single Item</div>
+					<div>Single Item</div>
+					<div>Single Item</div>
+					<div>Single Item</div>
+					<div>Single Item</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<span class="pull-right">
+					<h4 id="total">Subtotal $40</h4>
+				</span>
+			</div>
+			<div class="form-group">
+				<span class="pull-right">
+					<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-shopping-cart"></span> View cart</button>
+					<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-usd"></span> Check out</button>
+				</span>
+			</div>
+		</form>	
+     </div>
+</li>
+<li id="mainAccount" class="dropdown">
+	<a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> My Account <span class="caret"></span></a>
+	<ul class="dropdown-menu">
+		<li><a href=""><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+		<li><a href=""><span class="glyphicon glyphicon-list-alt"></span> Orders</a>
+		<li><a href=""><span class="glyphicon glyphicon-cog"></span> Settings</a>
+		<li class="divider"></li>
+		<li id="navSignOut"><a href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+     </ul>
+</li>
+
+<!-- Workaround for now!! -->
+<script>
+	$(document).ready(function () {
+		$('#navSignOut').click(function() {
+			$('#mainNavbarRight').load('./content/nav_login.html');
+		});
+	});
+</script>
