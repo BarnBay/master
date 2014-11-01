@@ -3,7 +3,8 @@
    ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
 	if($('#mainHome').hasClass('active')) {
-		$('#mainContainer').load('./content/home.html');
+		$('#mainContainer').hide().load('./content/home.html').fadeIn('500');
+		$('#mainFooter').hide().fadeIn('500');
 	}
 });
 
@@ -18,7 +19,8 @@ $(document).ready(function () {
 		$('#mainHome').addClass('active');
 		
 		var $content = $(this).attr('href');
-		$('#mainContainer').load('./content/' + $content + '.html');
+		$('#mainContainer').hide().load('./content/' + $content + '.html').fadeIn('500');
+		$('#mainFooter').hide().fadeIn('500');
         e.preventDefault();
     });
 	
@@ -30,7 +32,8 @@ $(document).ready(function () {
 		var $content = $(this).attr('href');
 		if (!$parent.hasClass('active')) {
 			$parent.addClass('active');
-			$('#mainContainer').load('./content/' + $content + '.html');
+			$('#mainContainer').hide().load('./content/' + $content + '.html').fadeIn('500');
+			$('#mainFooter').hide().fadeIn('500');
         }
         e.preventDefault();
     });
