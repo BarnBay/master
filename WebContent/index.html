@@ -1,68 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+	    <link rel="icon" href="img/favicon.ico">
+	
+	    <title>BarnBay</title>
+	
+	    <!-- Bootstrap CSS -->
+	    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	    <!-- Custom styles CSS -->
+	    <link href="css/styles.css" rel="stylesheet">
+	</head>
 
-<title>BarnBay</title>
-
-<!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<!-- Main CSS File -->
-<link href="css/main.css" rel="stylesheet">
-</head>
-<body>
-
-		<header class="navbar navbar-default navbar-static-top" role="banner">
-		<div class="container">
-			<div class="navbar-header">
-				<nav class="navbar navbar-inverse navbar-fixed-top"
-					role="navigation">
-					<div class="container">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed"
-								data-toggle="collapse" data-target="#navbar"
-								aria-expanded="false" aria-controls="navbar">
-								<span class="sr-only">Toggle navigation</span> <span
-									class="icon-bar"></span> <span class="icon-bar"></span> <span
-									class="icon-bar"></span>
-							</button>
-							<a class="navbar-brand" href="#">BarnBay</a>
-						</div>
-						<div id="navbar" class="collapse navbar-collapse">
-							<ul class="nav navbar-nav">
-								<li class="active"><a href="/index.html">Home</a></li>
-								<li><a href="/products.html">Products</a></li>
-								<li><a href="#farmer">Farmers</a></li>
-								<li><a href="#location">Locations</a></li>
-								<li><a href="/login.html">Sign In</a></li>
-							</ul>
-						</div>
-						<!--/.nav-collapse -->
+	<body>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container">
+  				<div class="navbar-header">
+  					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		              	<span class="icon-bar"></span>
+		              	<span class="icon-bar"></span>
+		              	<span class="icon-bar"></span>
+            		</button>
+            		<a class="navbar-brand" href="home">BarnBay</a>
+          		</div>
+          		<div id="navbar" class="navbar-collapse collapse">
+          			<ul class="nav navbar-nav">
+          				<li id="mainHome" class="active"><a href="home">Home</a></li>
+          				<li class="dropdown">
+          					<a href="" class="dropdown-toggle" data-toggle="dropdown">Products <span class="caret"></span></a>
+          					<ul class="dropdown-menu" role="menu">
+          						<li><a href="#">Action</a></li>
+          						<li><a href="#">Another action</a></li>
+          						<li><a href="#">Something else here</a></li>
+          						<li><a href="products_marcel">Products Marcel</a></li>
+			                </ul>
+		                </li>
+		                <li><a href="farmer">Farmers</a></li>
+          				<li><a href="location">Locations</a></li>
+	                </ul>
+	                <form class="navbar-form navbar-left" role="search">
+	                	<div class="input-group">
+          					<input type="text" class="form-control" placeholder="Search..." id="searchInput">
+          					<div class="input-group-btn">
+          						<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            				</div>
+        				</div>
+      				</form>
+            		<ul class="nav navbar-nav navbar-right">
+              			<li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            		</ul>
+				</div><!-- end navbar-collapse -->
+			</div><!--end container -->
+		</nav> <!-- end navbar -->
+		
+		
+		<div class="container" id="mainContainer">
+			
+			<!-- Load by default from the Navigation with jQuery -->
+			
+		</div><!-- end container -->
+		
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3">
+						<h6>Copyright &copy; 2014 BarnBay</h6>
 					</div>
-				</nav>
-			</div>
-	</header>
-
-				<!-- Begin Body -->
-				<div class="container">
-
-					<div class="starter-template">
-						<h1>Bootstrap starter template</h1>
-						<p class="lead">
-							Use this document as a way to quickly start any new project.<br>
-							All you get is this text and a mostly barebones HTML document.
-						</p>
+					<div class="col-sm-6">
+						<h6>About Us</h6>
+						<p>Lorem isum dolor sit amet, consectetur
 					</div>
-
-				</div>
-				<!-- /.container -->
-
-				<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-				<script
-					src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-				<!-- Include all compiled plugins (below), or include individual files as needed -->
-				<script src="js/bootstrap.min.js"></script>
-</body>
+					<div class="col-sm-3">
+						<h6>Navigation</h6>
+						<ul class="unstyled">
+							<li><a href="#">Home</a></li>
+							<li><a href="#">Products</a></li>
+							<li><a href="#">Farmer</a></li>
+							<li><a href="#">Locations</a></li>
+							<li><a href="#">Login</a></li>
+						</ul>
+					</div>
+				</div><!-- end row -->
+			</div><!-- end container -->
+		</footer>
+    
+	    <!-- Placed at the end of the document so the pages load faster -->
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	    <script src="bootstrap/js/bootstrap.min.js"></script>
+	    
+	    <!-- Custom JS -->
+	    <script src="js/script.js"></script>
+	</body>
 </html>

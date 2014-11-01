@@ -1,0 +1,122 @@
+/* ------------------------------------------------------------------------------------
+   Navbar
+   ------------------------------------------------------------------------------------ */
+   
+/* ------------------------------------------------------------------------------------
+   Main Container
+   ------------------------------------------------------------------------------------ */
+   
+#mainContainer {
+	margin-top: 20px;
+}
+
+/* ------------------------------------------------------------------------------------
+   Carousel
+   3 Sizes
+    - Large
+    	- Width: 1170px
+    	- Height: 502px
+    - Medium:
+    	- Width:  940px
+    	- Height: 400px
+    - Small:
+    	- Width:  728px
+    	- Height: 310px
+   ------------------------------------------------------------------------------------ */
+
+#homeCarousel { margin-bottom: 30px; }
+
+#homeCarousel .item { height: 400px; } /* Default Size */
+
+.carousel-caption { font-size: 20px; }
+
+.carousel-caption h4 { font-size: 32px; }
+
+#slide1 {
+	background: url("../img/carousel_medium_01.jpg") top center no-repeat;
+}
+
+#slide2 {
+	background: url("../img/carousel_medium_02.jpg") top center no-repeat;
+}
+
+#slide2 {
+	background: url("../img/carousel_medium_03.jpg") top center no-repeat;
+}
+
+/* ------------------------------------------------------------------------------------
+   Media Queries
+   ------------------------------------------------------------------------------------ */
+   
+/* Portrait & Landscape Phone */
+@MEDIA (max-width: 480px) {
+
+}
+
+/* Landscape phone to portrait Tablet */
+@MEDIA (max-width: 768px) {
+	#homeCarousel .item { height: 310px; } /* Default Size */
+	
+	.carousel-caption { font-size: 16px; }
+
+	.carousel-caption h4 { font-size: 24px; }
+
+	#slide1 {
+		background: url("../img/carousel_small_01.jpg") top center no-repeat;
+	}
+	
+	#slide2 {
+		background: url("../img/carousel_small_02.jpg") top center no-repeat;
+	}
+	
+	#slide2 {
+		background: url("../img/carousel_small_03.jpg") top center no-repeat;
+	}	
+}
+
+/* Large Desktop */
+@MEDIA (max-width: 1200px) {
+	#homeCarousel .item { height: 500px; } /* Default Size */
+
+	#slide1 {
+		background: url("../img/carousel_large_01.jpg") top center no-repeat;
+	}
+	
+	#slide2 {
+		background: url("../img/carousel_large_02.jpg") top center no-repeat;
+	}
+	
+	#slide2 {
+		background: url("../img/carousel_large_03.jpg") top center no-repeat;
+	}	
+}
+
+/* ------------------------------------------------------------------------------------
+   Layout
+   ------------------------------------------------------------------------------------ */
+
+#category-row-1 {
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+#category-row-2 {
+	text-align: center;
+}
+
+/* ------------------------------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------------------------------ */
+   
+footer {
+	background: #333;
+	color: #eee;
+	font-size: 11px;
+	margin-top: 20px;
+	padding: 20px;
+}
+
+ul.unstyled {
+	list-style: none;
+	padding: 0;
+}
