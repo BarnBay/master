@@ -38,6 +38,17 @@ $(document).ready(function () {
         }
         e.preventDefault();
     });
+	
+	//OnCLick for the Footer-Navigation
+	$('#mainFooterNavigation li a').click(function(e) {
+		$('#mainFooterNavigation li').removeClass('active');
+		
+		var $parent = $(this).parent();
+		var $content = $(this).attr('href');
+		$('#mainContainer').hide().load('./content/' + $content + '.html').fadeIn('500');
+		$('#mainFooter').hide().fadeIn('500');
+        e.preventDefault();
+    });
 });
 
 /* ------------------------------------------------------------------------------------
