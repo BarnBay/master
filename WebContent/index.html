@@ -28,7 +28,7 @@
             		</button>
             		<a class="navbar-brand" href="home">BarnBay</a>
           		</div>
-          		<div id="navbar" class="navbar-collapse collapse">
+          		<div class="navbar-collapse collapse" id="navbar">
           			<ul class="nav navbar-nav">
           				<li id="mainHome" class="active"><a href="home">Home</a></li>
           				<li class="dropdown">
@@ -44,15 +44,17 @@
 		                <li><a href="farmer">Farmers</a></li>
           				<li><a href="location">Locations</a></li>
 	                </ul>
-	                <form class="navbar-form navbar-left" role="search">
-	                	<div class="input-group">
-          					<input type="text" class="form-control" placeholder="Search..." id="searchInput">
-          					<div class="input-group-btn">
-          						<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-            				</div>
-        				</div>
-      				</form>
-            		<ul id="mainNavbarRight" class="nav navbar-nav navbar-right">
+	                <div class="col-sm-3 col-md-3">
+		                <form class="navbar-form" role="search">
+		                	<div class="input-group">
+	          					<input type="text" class="form-control" placeholder="Search..." id="searchInput">
+	          					<div class="input-group-btn">
+	          						<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+	            				</div>
+	        				</div>
+	      				</form>
+      				</div>
+            		<ul class="nav navbar-nav navbar-right" id="mainNavbarRight">
             			
             			<!-- Import Login Navigation or LoggedIn Navigation -->
             			

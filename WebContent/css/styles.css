@@ -1,6 +1,7 @@
 /* ------------------------------------------------------------------------------------
    Navbar
    ------------------------------------------------------------------------------------ */
+
 #mainLogin .dropdown-menu {
 	min-width: 350px;
 	padding: 20px;
@@ -17,9 +18,11 @@
     overflow-x: hidden;
 }
 
-/* Mouse Over Effect for Dropdown */
-.dropdown:hover .dropdown-menu {
-	display: block;
+/* Mouse Over Effect for Dropdown if Screensize is bigger then 768px */
+@media (min-width: 768px) {
+	.dropdown:hover .dropdown-menu {
+		display: block;
+	}
 }
    
 /* ------------------------------------------------------------------------------------
