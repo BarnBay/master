@@ -49,6 +49,7 @@ $(document).ready(function () {
 		$('#mainFooter').hide().fadeIn('500');
         e.preventDefault();
     });
+	
 });
 
 /* ------------------------------------------------------------------------------------
@@ -56,6 +57,14 @@ $(document).ready(function () {
    ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
 	$('#mainNavbarRight').load('./content/nav_login.html');
+	
+	$('#mainNavbarRight').on('click', '#navSignIn', function(event) {
+		$('#mainNavbarRight').load('./content/nav_account.html');
+	});
+	
+	$('#mainNavbarRight').on('click', '#navSignOut', function(event) {
+		$('#mainNavbarRight').load('./content/nav_login.html');
+	});
 });
 
 
@@ -66,4 +75,21 @@ $(document).ready(function() {
      $('#homeCarousel').carousel({
          interval: 4500
      })
+});
+
+
+/* ------------------------------------------------------------------------------------
+   Location Change List to Grid or Grid to List
+   ------------------------------------------------------------------------------------ */
+$(document).ready(function() {
+	$('#mainContainer').on('click', '#locationList', function(event) {
+		event.preventDefault();
+		$('#products .item').addClass('list-group-item');
+	});
+	
+	$('#mainContainer').on('click', '#locationGrid', function(event) {
+		event.preventDefault();
+		$('#products .item').removeClass('list-group-item');
+		$('#products .item').addClass('grid-group-item');
+	});
 });
