@@ -3,7 +3,7 @@
    ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
 	if($('#mainHome').hasClass('active')) {
-		$('#mainContainer').hide().load('./content/home.html').fadeIn('500');
+		$('#mainContainer').hide().load('./content/nav_home.html').fadeIn('500');
 		$('#mainFooter').hide().fadeIn('500');
 	}
 });
@@ -79,16 +79,22 @@ $(document).ready(function() {
 
 
 /* ------------------------------------------------------------------------------------
-   Location Change List to Grid or Grid to List
+   Product Change List to Grid or Grid to List
    ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
-	$('#mainContainer').on('click', '#locationList', function(event) {
+	$('#mainContainer').on('click', '#productList', function(event) {
 		event.preventDefault();
+		$('#productGrid').removeClass('active');
+		$('#productList').addClass('active');
+		
 		$('#products .item').addClass('list-group-item');
 	});
 	
-	$('#mainContainer').on('click', '#locationGrid', function(event) {
+	$('#mainContainer').on('click', '#productGrid', function(event) {
 		event.preventDefault();
+		$('#productList').removeClass('active');
+		$('#productGrid').addClass('active');
+		
 		$('#products .item').removeClass('list-group-item');
 		$('#products .item').addClass('grid-group-item');
 	});
