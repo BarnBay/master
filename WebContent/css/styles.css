@@ -96,7 +96,7 @@
 }
 
 /* symbol for "collapsed" panels */
-.panel-heading .accordion-toggle .collapsed:after {
+.panel-heading .accordion-toggle.collapsed:after {
 	content: "\e080";
 }
 

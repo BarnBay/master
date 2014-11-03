@@ -1,0 +1,159 @@
+<!-- Implement the JSON Script File for the Product list -->
+<script src="./json/nav_products_list.js"></script>
+<!-- End of Implementation -->
+
+<div class="row">
+	<!-- Searchbar at the top -->
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="Search for Products..." id="searchInput">
+			<div class="input-group-btn">
+				<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Left Column -->
+	<div class="col-lg-3 col-md-3 col-sm-12" style="margin-top: 20px;">
+		<div class="panel-group" role="tablist" id="accorionNo">
+			<!-- Category -->
+			<div class="panel panel-default" id="panelLocation">
+				<div class="panel-heading" role="tab">
+					<h4 class="panel-title">
+						<a class="accordion-toggle" data-toggle="collapse" href="#collapseListGroupCategory" aria-expanded="true" aria-controls="collapseListGroupCategory">Category</a>
+					</h4>
+				</div>
+				<div id="collapseListGroupCategory" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupCategory" aria-expanded="true">
+					<ul class="list-group">
+          				<li class="list-group-item">BlaBla</li>
+          				<li class="list-group-item">BlaBla</li>
+          				<li class="list-group-item">BlaBla</li>
+        			</ul>
+      			</div>
+			</div><!-- end of category -->
+			
+			<!-- Price -->
+			<div class="panel panel-default" id="panelLocation">
+				<div class="panel-heading" role="tab">
+					<h4 class="panel-title">
+						<a class="accordion-toggle" data-toggle="collapse" href="#collapseListGroupPrice" aria-expanded="true" aria-controls="collapseListGroupPrice">Price</a>
+					</h4>
+				</div>
+				<div id="collapseListGroupPrice" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupPrice" aria-expanded="true">
+					<ul class="list-group">
+          				<li class="list-group-item">BlaBla</li>
+          				<li class="list-group-item">BlaBla</li>
+          				<li class="list-group-item">BlaBla</li>
+        			</ul>
+      			</div>
+			</div><!-- end of price -->	
+			
+			<!-- Farmer -->
+			<div class="panel panel-default" id="panelLocation">
+				<div class="panel-heading" role="tab">
+					<h4 class="panel-title">
+						<a class="accordion-toggle" data-toggle="collapse" href="#collapseListGroupFarmer" aria-expanded="true" aria-controls="collapseListGroupFarmer">Farmer</a>
+					</h4>
+				</div>
+				<div id="collapseListGroupFarmer" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupFarmer" aria-expanded="true">
+					<ul class="list-group">
+          				<li class="list-group-item">Farmer John</li>
+          				<li class="list-group-item">BlaBla</li>
+          				<li class="list-group-item">BlaBla</li>
+          				<li class="list-group-item">BlaBla</li>
+          				<li class="list-group-item">BlaBla</li>
+        			</ul>
+      			</div>
+			</div><!-- end of farmer -->	
+			
+			<!-- Discount -->
+			<div class="panel panel-default" id="panelLocation">
+				<div class="panel-heading" role="tab">
+					<h4 class="panel-title">
+						<a class="accordion-toggle" data-toggle="collapse" href="#collapseListGroupDiscount" aria-expanded="true" aria-controls="collapseListGroupDiscount">Discount</a>
+					</h4>
+				</div>
+				<div id="collapseListGroupDiscount" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupDiscount" aria-expanded="true">
+					<ul class="list-group">
+          				<li class="list-group-item">BlaBla</li>
+          				<li class="list-group-item">BlaBla</li>
+        			</ul>
+      			</div>
+			</div><!-- end of discount -->	
+		</div>
+	</div><!-- end left column -->
+	
+	<!-- Right Column -->
+	<div class="col-lg-9 col-md-9 col-sm-12" style="margin-top: 20px;">
+		<!-- <img src="http://placehold.it/1000x300" class="img-responsive" alt="Responsive image">  -->
+				
+		<div class="well well-sm">
+			Showing <strong id="countProducts"></strong> Products
+			<script>
+				myFunction(myArray);
+				
+				function myFunction(arr) {
+					document.getElementById("countProducts").innerHTML = arr.length;
+				}
+			</script>
+						
+			<div class="pull-right">
+				<!-- List or Grid View -->
+				<div class="btn-group pull-right" style="margin-top: -5px;">
+	        		<a href="#" id="locationList" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span></a> 
+	        		<a href="#" id="locationGrid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span></a>
+	        	</div>
+	        	
+	        	<!-- Sort by: Default -->
+				<div class="form-group pull-right" style="margin-right: 20px;">
+					<label for="text" style="float:left; font-weight: normal; margin-right: 10px;">Sort by:</label>       
+					<div class="input-group" style="margin-top: -5px;">   
+						<select class="form-control input-sm">
+							<option value="">Default</option>
+							<option value="">Name: A-Z</option>
+							<option value="">Name: Z-A</option>
+							<option value="">Price: low to high</option>
+							<option value="">Price: high to low</option>
+						</select>                                    
+					</div>   
+				</div>
+				
+        	</div> 		
+		</div>
+		
+		<!-- Some Testing!! -->
+		<div id="products" class="row list-group">
+			<!-- JSON - Create the Product List -->
+			<script>
+				myFunction(myArray);
+				
+				function myFunction(arr) {
+				    var out = "";
+				    var i;
+				    for(i = 0; i < arr.length; i++) {
+				    	out += '<div class="item  col-xs-4 col-lg-4">';
+				    	out += '	<div class="thumbnail">';					
+				    	out += '		<img class="group list-group-image" src="http://placehold.it/400x250" alt="" />';
+				    	out += '		<div class="caption">';
+				    	out += '			<h4 class="group inner list-group-item-heading">' + arr[i].pTitle + '</h4>';
+				    	out += '			<p class="group inner list-group-item-text">' + arr[i].pDescription + '</p>';
+				    	out += '			<div class="row">';
+				    	out += '				<div class="col-xs-12 col-md-6">';
+				    	out += '					<p class="lead">' + arr[i].pPrice + '</p>';
+				    	out += '				</div>';
+				    	out += '				<div class="col-xs-12 col-md-6">';
+				    	out += '					<a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>';
+				    	out += '				</div>';
+				    	out += '			</div>';
+				    	out += '		</div>';
+				    	out += '	</div>';
+				    	out += '</div>';
+				    }
+				    document.getElementById("products").innerHTML = out;
+				}
+			</script>
+			<!-- JSON END -->
+		</div>
+
+	</div><!-- end right column -->
+</div><!-- end row -->
