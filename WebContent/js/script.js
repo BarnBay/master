@@ -52,6 +52,7 @@ $(document).ready(function () {
 	
 });
 
+
 /* ------------------------------------------------------------------------------------
    Navigation - Change the Login to Account, if User is logged in
    ------------------------------------------------------------------------------------ */
@@ -64,6 +65,16 @@ $(document).ready(function() {
 	
 	$('#mainNavbarRight').on('click', '#navSignOut', function(event) {
 		$('#mainNavbarRight').load('./content/nav_login.html');
+	});
+});
+
+
+/* ------------------------------------------------------------------------------------
+   Navigation - By Clicking on View Cart, go to Cart.html
+   ------------------------------------------------------------------------------------ */
+$(document).ready(function() {
+	$('#mainNavbarRight').on('click', '#navViewShoppingCartButton', function(event) {
+		$('#mainContainer').load('./content/cart.html');
 	});
 });
 
