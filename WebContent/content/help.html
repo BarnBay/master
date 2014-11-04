@@ -1,0 +1,52 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4">
+			<h3>Contact us!</h3>
+			<hr>
+			<address>
+				<strong>Email:</strong> <a href="mailto:#"> Barn@BarnBay.de</a><br>
+				<br> <strong>Phone:</strong> +49(0)123-4567
+			</address>
+		</div>
+
+		<div class="col-sm-8 contact-form">
+			<form id="contact" method="post" class="form" role="form">
+				<div class="row">
+					<div class="col-xs-6 col-md-6 form-group">
+						<input class="form-control" id="name" name="name"
+							placeholder="Name" type="text" required autofocus />
+					</div>
+					<div class="col-xs-6 col-md-6 form-group">
+						<input class="form-control" id="email" name="email"
+							placeholder="Email" type="email" required />
+					</div>
+				</div>
+				<textarea class="form-control" id="message" name="message"
+					placeholder="Message" rows="5"></textarea>
+				<br />
+				<div class="row">
+					<div class="col-xs-12 col-md-12 form-group">
+						<button class="btn btn-primary pull-right" type="submit">Submit</button>
+			</form>
+		</div>
+	</div>
+
+	<h4 class="">Forgot your password?</h4>
+	<form accept-charset="UTF-8" role="form" id="login-recordar"
+		method="post">
+		<fieldset>
+			<span class="help-block"> Email address you use to log in to
+				your account <br> We'll send you an email with instructions to
+				choose a new password.
+			</span>
+			<div class="form-group input-group">
+				<span class="input-group-addon"> @ </span> <input
+					class="form-control" placeholder="Email" name="email" type="email"
+					required="">
+			</div>
+			<button type="submit" class="btn btn-primary btn-block"
+				id="btn-olvidado">Continue</button>
+			<p class="help-block"></p>
+		</fieldset>
+	</form>
+</div>

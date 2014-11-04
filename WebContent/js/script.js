@@ -78,6 +78,25 @@ $(document).ready(function() {
 	});
 });
 
+/* ------------------------------------------------------------------------------------
+Navigation Login - By Clicking on Register, go to register.html
+------------------------------------------------------------------------------------ */
+$(document).ready(function() {
+	$('#mainNavbarRight').on('click', '#registerForm', function(event) {
+		$('#mainContainer').hide().load('./content/register.html').fadeIn('500');
+	});
+});
+
+/* ------------------------------------------------------------------------------------
+Navigation Login - By Clicking on Help, go to help.html
+------------------------------------------------------------------------------------ */
+$(document).ready(function() {
+	$('#mainNavbarRight').on('click', '#helpForm', function(event) {
+		$('#mainContainer').hide().load('./content/help.html').fadeIn('500');
+	});
+});
+
+
 
 /* ------------------------------------------------------------------------------------
    Start Coursel automatically
