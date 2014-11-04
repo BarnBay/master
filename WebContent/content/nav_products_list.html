@@ -106,12 +106,12 @@
 				<div class="form-group pull-right" style="margin-right: 20px;">
 					<label for="text" style="float:left; font-weight: normal; margin-right: 10px;">Sort by:</label>       
 					<div class="input-group" style="margin-top: -5px;">   
-						<select class="form-control input-sm">
-							<option value="">Default</option>
-							<option value="">Name: A-Z</option>
-							<option value="">Name: Z-A</option>
-							<option value="">Price: low to high</option>
-							<option value="">Price: high to low</option>
+						<select class="form-control input-sm" id="selectNavProdutsList">
+							<option value="pId,ASC">Default</option>
+							<option value="pTitle,ASC">Name: A-Z</option>
+							<option value="pTitle,DESC">Name: Z-A</option>
+							<option value="pPrice,ASC">Price: low to high</option>
+							<option value="pPrice,DESC">Price: high to low</option>
 						</select>                                    
 					</div>   
 				</div>
@@ -123,26 +123,26 @@
 		<div id="products" class="row list-group">
 			<!-- JSON - Create the Product List -->
 			<script>
-				myFunction(myArray);
+				productListFunction();
 				
-				function myFunction(arr) {
+				function productListFunction() {
 				    var out = "";
 				    var i;
-				    for(i = 0; i < arr.length; i++) {
+				    for(i = 0; i < myArray.length; i++) {
 				    	out += '<div class="item  col-xs-4 col-lg-4">';
 				    	out += '	<div class="thumbnail">';					
 				    	out += '		<img class="group list-group-image" id="productDetailView" src="http://placehold.it/400x250" alt="" style="cursor:pointer;"/></a>';
-				    	if(arr[i].pSoldOut == "true") {
+				    	if(myArray[i].pSoldOut == "true") {
 				    		out += '		<div class="label label-danger price"><span class="glyphicon glyphicon-tag"></span> Sold Out</div>';
-				    	} else if(arr[i].pDiscount == "true") {
+				    	} else if(myArray[i].pDiscount == "true") {
 				    		out += '		<div class="label label-success price"><span class="glyphicon glyphicon-tag"></span> Discount</div>';	
 				    	}
 				    	out += '		<div class="caption">';
-				    	out += '			<h3 class="group inner list-group-item-heading" id="productDetailView" style="cursor:pointer;">' + arr[i].pTitle + '</h3>';
-				    	out += '			<p class="group inner list-group-item-text">' + arr[i].pDescription + '</p>';
+				    	out += '			<h3 class="group inner list-group-item-heading" id="productDetailView" style="cursor:pointer;">' + myArray[i].pTitle + '</h3>';
+				    	out += '			<p class="group inner list-group-item-text">' + myArray[i].pDescription + '</p>';
 				    	out += '			<div class="row">';
 				    	out += '				<div class="col-xs-12 col-md-6" style="height: 34px;">';
-				    	out += '					<h3 class="list-group-item-price">'+ arr[i].pCurrency + arr[i].pPrice + '</h3>';
+				    	out += '					<h3 class="list-group-item-price">'+ myArray[i].pCurrency + myArray[i].pPrice + '</h3>';
 				    	out += '				</div>';
 				    	out += '				<div class="col-xs-12 col-md-6">';
 				    	out += '					<a class="btn btn-success" href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>';
@@ -151,9 +151,9 @@
 				    	out += '		</div>';
 				    	out += '	</div>';
 				    	out += '</div>';
-				    }
-				    
-				    document.getElementById("products").innerHTML = out;
+			    	}
+			    
+			    	document.getElementById("products").innerHTML = out;
 				}
 			</script>
 			<!-- JSON END -->

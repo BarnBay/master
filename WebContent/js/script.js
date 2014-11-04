@@ -93,6 +93,7 @@ $(document).ready(function() {
    Product Change List to Grid or Grid to List
    ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
+	/* On click of ListView Icon */
 	$('#mainContainer').on('click', '#productList', function(event) {
 		event.preventDefault();
 		$('#productGrid').removeClass('active');
@@ -101,6 +102,7 @@ $(document).ready(function() {
 		$('#products .item').addClass('list-group-item');
 	});
 	
+	/* On click of GridView Icon */
 	$('#mainContainer').on('click', '#productGrid', function(event) {
 		event.preventDefault();
 		$('#productList').removeClass('active');
@@ -110,6 +112,29 @@ $(document).ready(function() {
 		$('#products .item').addClass('grid-group-item');
 	});
 	
+	/* On click on Selector for Sorting */
+	$('#mainContainer').on('change', '#selectNavProdutsList', function(event) {
+		var selectValue = this.value.split(",");
+		var prop = selectValue[0];
+		
+		if(selectValue[1] == "ASC") {
+			var asc = true;
+		} else {
+			var asc = false;
+		}
+		
+		myArray = myArray.sort(function(a, b) {
+	        if(asc) { 
+	        	return (a[prop] > b[prop]);
+	        } else { 
+	        	return (b[prop] > a[prop]);
+	        }
+	    });
+		
+		productListFunction();
+	});
+	
+	/* On click of Item */
 	$('#mainContainer').on('click', '#productDetailView', function(event) {
 		$('#mainContainer').hide().load('./content/product_chris.html').fadeIn('500');
 	});
