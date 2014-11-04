@@ -1,4 +1,4 @@
-var myArray = [
+var ProductListJSONObject = [
 	{
 		"pId" : "0",
 		"pTitle" : "Banane",

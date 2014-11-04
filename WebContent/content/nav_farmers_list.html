@@ -1,5 +1,5 @@
 <!-- Implement the JSON Script File for the Farmer list -->
-<script src="./json/nav_products_list.js"></script>
+<script src="./json/nav_farmers_list.js"></script>
 <!-- End of Implementation -->
 
 <div class="row">
@@ -86,12 +86,12 @@
 		<!-- <img src="http://placehold.it/1000x300" class="img-responsive" alt="Responsive image">  -->
 				
 		<div class="well well-sm">
-			Showing <strong id="countProducts"></strong> Products
+			Showing <strong id="countFarmers"></strong> Farmers
 			<script>
-				myFunction(myArray);
+				countFarmerListFunction(FarmerListJSONObject);
 				
-				function myFunction(arr) {
-					document.getElementById("countProducts").innerHTML = arr.length;
+				function countFarmerListFunction(arr) {
+					document.getElementById("countFarmers").innerHTML = arr.length;
 				}
 			</script>
 						
@@ -123,26 +123,26 @@
 		<div id="products" class="row list-group">
 			<!-- JSON - Create the Product List -->
 			<script>
-				myFunction(myArray);
+				farmerListFunction();
 				
-				function myFunction(arr) {
+				function farmerListFunction() {
 				    var out = "";
 				    var i;
-				    for(i = 0; i < arr.length; i++) {
+				    for(i = 0; i < FarmerListJSONObject.length; i++) {
 				    	out += '<div class="item  col-xs-4 col-lg-4">';
 				    	out += '	<div class="thumbnail">';					
-				    	out += '		<img class="group list-group-image" src="http://placehold.it/400x250" alt="" />';
-				    	if(arr[i].pSoldOut == "true") {
+				    	out += '		<img class="group list-group-image" id="productDetailView" src="http://placehold.it/400x250" alt="" style="cursor:pointer;"/></a>';
+				    	if(FarmerListJSONObject[i].fSoldOut == "true") {
 				    		out += '		<div class="label label-danger price"><span class="glyphicon glyphicon-tag"></span> Sold Out</div>';
-				    	} else if(arr[i].pDiscount == "true") {
+				    	} else if(FarmerListJSONObject[i].fDiscount == "true") {
 				    		out += '		<div class="label label-success price"><span class="glyphicon glyphicon-tag"></span> Discount</div>';	
 				    	}
 				    	out += '		<div class="caption">';
-				    	out += '			<h3 class="group inner list-group-item-heading">' + arr[i].pTitle + '</h3>';
-				    	out += '			<p class="group inner list-group-item-text">' + arr[i].pDescription + '</p>';
+				    	out += '			<h3 class="group inner list-group-item-heading" id="productDetailView" style="cursor:pointer;">' + FarmerListJSONObject[i].fTitle + '</h3>';
+				    	out += '			<p class="group inner list-group-item-text">' + FarmerListJSONObject[i].fDescription + '</p>';
 				    	out += '			<div class="row">';
 				    	out += '				<div class="col-xs-12 col-md-6" style="height: 34px;">';
-				    	out += '					<h3 class="list-group-item-price">'+ arr[i].pCurrency + arr[i].pPrice + '</h3>';
+				    	out += '					<h3 class="list-group-item-price">'+ FarmerListJSONObject[i].fCurrency + FarmerListJSONObject[i].fPrice + '</h3>';
 				    	out += '				</div>';
 				    	out += '				<div class="col-xs-12 col-md-6">';
 				    	out += '					<a class="btn btn-success" href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>';
@@ -151,8 +151,9 @@
 				    	out += '		</div>';
 				    	out += '	</div>';
 				    	out += '</div>';
-				    }
-				    document.getElementById("products").innerHTML = out;
+			    	}
+			    
+			    	document.getElementById("products").innerHTML = out;
 				}
 			</script>
 			<!-- JSON END -->

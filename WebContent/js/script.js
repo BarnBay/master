@@ -112,7 +112,7 @@ $(document).ready(function() {
 		$('#products .item').addClass('grid-group-item');
 	});
 	
-	/* On click on Selector for Sorting */
+	/* On changed value of selector -> Sort JSON-Object ProductListJSONObject */
 	$('#mainContainer').on('change', '#selectNavProdutsList', function(event) {
 		var selectValue = this.value.split(",");
 		var prop = selectValue[0];
@@ -123,7 +123,7 @@ $(document).ready(function() {
 			var asc = false;
 		}
 		
-		myArray = myArray.sort(function(a, b) {
+		ProductListJSONObject = ProductListJSONObject.sort(function(a, b) {
 	        if(asc) { 
 	        	return (a[prop] > b[prop]);
 	        } else { 
