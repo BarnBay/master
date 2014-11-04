@@ -16,68 +16,26 @@
 	<!-- Left Column -->
 	<div class="col-lg-3 col-md-3 col-sm-12" style="margin-top: 20px;">
 		<div class="panel-group" role="tablist" id="accorionNo">
-			<!-- Category -->
-			<div class="panel panel-default" id="panelProducts">
+			<!-- Location -->
+			<div class="panel panel-default" id="panelFarmers">
 				<div class="panel-heading" role="tab">
 					<h4 class="panel-title">
-						<a class="accordion-toggle" data-toggle="collapse" href="#collapseListGroupCategory" aria-expanded="true" aria-controls="collapseListGroupCategory">Category</a>
+						<a class="accordion-toggle" data-toggle="collapse" href="#collapseListGroupLocation" aria-expanded="true" aria-controls="collapseListGroupLocation">Location</a>
 					</h4>
 				</div>
-				<div id="collapseListGroupCategory" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupCategory" aria-expanded="true">
+				<div id="collapseListGroupLocation" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupCategory" aria-expanded="true">
 					<ul class="list-group checkbox">
-          				<li class="list-group-item productCheckbox"><input type="checkbox"> Fruits <span class="badge pull-right">4</span></li>
-          				<li class="list-group-item productCheckbox"><input type="checkbox"> Vegetables <span class="badge pull-right">4</span></li>
-          				<li class="list-group-item productCheckbox"><input type="checkbox"> Meat <span class="badge pull-right">4</span></li>
+          				<li class="list-group-item">
+          					<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter ZIP Code..." id="searchInput">
+								<div class="input-group-btn">
+									<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+								</div>
+							</div>
+          				</li>
         			</ul>
       			</div>
-			</div><!-- end of category -->
-			
-			<!-- Price -->
-			<div class="panel panel-default" id="panelProducts">
-				<div class="panel-heading" role="tab">
-					<h4 class="panel-title">
-						<a class="accordion-toggle" data-toggle="collapse" href="#collapseListGroupPrice" aria-expanded="true" aria-controls="collapseListGroupPrice">Price</a>
-					</h4>
-				</div>
-				<div id="collapseListGroupPrice" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupPrice" aria-expanded="true">
-					<ul class="list-group">
-          				<li class="list-group-item">BlaBla</li>
-          				<li class="list-group-item">BlaBla</li>
-          				<li class="list-group-item">BlaBla</li>
-        			</ul>
-      			</div>
-			</div><!-- end of price -->	
-			
-			<!-- Farmer -->
-			<div class="panel panel-default" id="panelProducts">
-				<div class="panel-heading" role="tab">
-					<h4 class="panel-title">
-						<a class="accordion-toggle" data-toggle="collapse" href="#collapseListGroupFarmer" aria-expanded="true" aria-controls="collapseListGroupFarmer">Farmer</a>
-					</h4>
-				</div>
-				<div id="collapseListGroupFarmer" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupFarmer" aria-expanded="true">
-					<ul class="list-group checkbox">
-          				<li class="list-group-item productCheckbox"><input type="checkbox"> Farmer John</li>
-          				<li class="list-group-item productCheckbox"><input type="checkbox"> Farmer Weicekl</li>
-          				<li class="list-group-item productCheckbox"><input type="checkbox"> Farmer Schott</li>
-        			</ul>
-      			</div>
-			</div><!-- end of farmer -->	
-			
-			<!-- Discount -->
-			<div class="panel panel-default" id="panelProducts">
-				<div class="panel-heading" role="tab">
-					<h4 class="panel-title">
-						<a class="accordion-toggle" data-toggle="collapse" href="#collapseListGroupDiscount" aria-expanded="true" aria-controls="collapseListGroupDiscount">Discount</a>
-					</h4>
-				</div>
-				<div id="collapseListGroupDiscount" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupDiscount" aria-expanded="true">
-					<ul class="list-group checkbox">
-          				<li class="list-group-item productCheckbox"><input type="checkbox"> Non-Discounted products</li>
-          				<li class="list-group-item productCheckbox"><input type="checkbox"> Discounted products</li>
-        			</ul>
-      			</div>
-			</div><!-- end of discount -->	
+			</div><!-- end of location -->
 		</div>
 	</div><!-- end left column -->
 	
@@ -98,54 +56,50 @@
 			<div class="pull-right">
 				<!-- List or Grid View -->
 				<div class="btn-group pull-right" style="margin-top: -5px;">
-	        		<a href="#" id="productList" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span></a> 
-	        		<a href="#" id="productGrid" class="btn btn-default btn-sm active"><span class="glyphicon glyphicon-th"></span></a>
+	        		<a href="#" id="farmerList" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span></a> 
+	        		<a href="#" id="farmerGrid" class="btn btn-default btn-sm active"><span class="glyphicon glyphicon-th"></span></a>
 	        	</div>
 	        	
 	        	<!-- Sort by: Default -->
 				<div class="form-group pull-right" style="margin-right: 20px;">
 					<label for="text" style="float:left; font-weight: normal; margin-right: 10px;">Sort by:</label>       
 					<div class="input-group" style="margin-top: -5px;">   
-						<select class="form-control input-sm">
-							<option value="">Default</option>
-							<option value="">Name: A-Z</option>
-							<option value="">Name: Z-A</option>
-							<option value="">Price: low to high</option>
-							<option value="">Price: high to low</option>
-						</select>                                    
-					</div>   
+						<select class="form-control input-sm" id="selectNavFarmersList">
+							<option value="fId,ASC">Default</option>
+							<option value="fName,ASC">Name: A-Z</option>
+							<option value="fName,DESC">Name: Z-A</option>
+							<option value="fRating,ASC">Rating: low to high</option>
+							<option value="fRating,DESC">Rating: high to low</option>
+							<option value="fDistance">Distance: low to high</option>
+							<option value="fDistance">Distance: high to low</option>
+						</select>
+					</div>
 				</div>
 				
-        	</div> 		
+        	</div>
 		</div>
 		
-		<!-- Some Testing!! -->
-		<div id="products" class="row list-group">
+		<div id="farmers" class="row list-group">
 			<!-- JSON - Create the Product List -->
 			<script>
-				farmerListFunction();
+				farmerListFunction(FarmerListJSONObject);
 				
-				function farmerListFunction() {
+				function farmerListFunction(farmerArray) {
 				    var out = "";
 				    var i;
-				    for(i = 0; i < FarmerListJSONObject.length; i++) {
+				    for(i = 0; i < farmerArray.length; i++) {
 				    	out += '<div class="item  col-xs-4 col-lg-4">';
 				    	out += '	<div class="thumbnail">';					
-				    	out += '		<img class="group list-group-image" id="productDetailView" src="http://placehold.it/400x250" alt="" style="cursor:pointer;"/></a>';
-				    	if(FarmerListJSONObject[i].fSoldOut == "true") {
-				    		out += '		<div class="label label-danger price"><span class="glyphicon glyphicon-tag"></span> Sold Out</div>';
-				    	} else if(FarmerListJSONObject[i].fDiscount == "true") {
-				    		out += '		<div class="label label-success price"><span class="glyphicon glyphicon-tag"></span> Discount</div>';	
-				    	}
+				    	out += '		<img class="group list-group-image" id="farmerDetailView" src="http://placehold.it/400x250" alt="" style="cursor:pointer;"/></a>';
 				    	out += '		<div class="caption">';
-				    	out += '			<h3 class="group inner list-group-item-heading" id="productDetailView" style="cursor:pointer;">' + FarmerListJSONObject[i].fTitle + '</h3>';
-				    	out += '			<p class="group inner list-group-item-text">' + FarmerListJSONObject[i].fDescription + '</p>';
+				    	out += '			<h3 class="group inner list-group-item-heading" id="farmerDetailView" style="cursor:pointer;">' + farmerArray[i].fName + '</h3>';
+				    	out += '			<p class="group inner list-group-item-text">' + farmerArray[i].fDescription + '</p>';
 				    	out += '			<div class="row">';
 				    	out += '				<div class="col-xs-12 col-md-6" style="height: 34px;">';
-				    	out += '					<h3 class="list-group-item-price">'+ FarmerListJSONObject[i].fCurrency + FarmerListJSONObject[i].fPrice + '</h3>';
+				    	out += '					<h3 class="list-group-item-price"></h3>';
 				    	out += '				</div>';
 				    	out += '				<div class="col-xs-12 col-md-6">';
-				    	out += '					<a class="btn btn-success" href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>';
+				    	out += '					<a class="btn btn-info" href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-info-sign"></span> Get Info</a>';
 				    	out += '				</div>';
 				    	out += '			</div>';
 				    	out += '		</div>';
@@ -153,7 +107,7 @@
 				    	out += '</div>';
 			    	}
 			    
-			    	document.getElementById("products").innerHTML = out;
+			    	document.getElementById("farmers").innerHTML = out;
 				}
 			</script>
 			<!-- JSON END -->
