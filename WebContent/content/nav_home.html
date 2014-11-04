@@ -49,75 +49,55 @@
 
 <!--/#whatwedo end-->
 
+<hr>
 <!-- Category Elements -->
-<!-- Thumbnails (http://getbootstrap.com/components/#thumbnails) -->		
-<div class="row" id="category-row-1">
-	<div class="col-sm-4 feature">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Category 1</h3>
-			</div>
-			<div class="panel-body">
-				<img src="http://placehold.it/200x200" class="img-circle">
-			</div>
-		</div>
-	</div><!-- end col-sm-4 -->
-	
-	<div class="col-sm-4 feature">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Category 2</h3>
-			</div>
-			<div class="panel-body">
-				<img src="http://placehold.it/200x200" class="img-circle">
-			</div>
-		</div>
-	</div><!-- end col-sm-4 -->
-	
-	<div class="col-sm-4 feature">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Category 3</h3>
-			</div>
-			<div class="panel-body">
-				<img src="http://placehold.it/200x200" class="img-circle">
-			</div>
-		</div>
-	</div><!-- end col-sm-4 -->
-</div><!-- end row -->
-
-
-<div class="row" id="category-row-2">
-	<div class="col-sm-4 feature">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Category 4</h3>
-			</div>
-			<div class="panel-body">
-				<img src="http://placehold.it/200x200" class="img-circle">
-			</div>
-		</div>
-	</div><!-- end col-sm-4 -->
-	
-	<div class="col-sm-4 feature">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Category 5</h3>
-			</div>
-			<div class="panel-body">
-				<img src="http://placehold.it/200x200" class="img-circle">
-			</div>
-		</div>
-	</div><!-- end col-sm-4 -->
-	
-	<div class="col-sm-4 feature">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Category 6</h3>
-			</div>
-			<div class="panel-body">
-				<img src="http://placehold.it/200x200" class="img-circle">
-			</div>
-		</div>
-	</div><!-- end col-sm-4 -->
-</div><!-- end row -->
+<div class="row">
+	<div class="panel panel-default" id="bigdata">
+			
+		<!-- Content from the "BigData"-Plugin -->
+	</div>
+</div>
+		
+			<script src="./json/bigdata.js"></script>
+			
+			<script>
+			/*var updateDiv = function ()
+			{  
+			  $.get('http://deineurl.de?deineparameter',function(d)
+			  {
+			    $('#deinDiv').html(d);
+			    window.setTimeout(updateDiv, 5000);
+			  }
+			}*/
+				myFunction(myArray);
+				//var myFunc = 
+				function myFunction(arr) {
+				    var out = "";
+				    //Math.random() * (((10-2)+1)2);
+				    var j = Math.floor(Math.random() * ((5-0)+1) + 0);
+				    //var i;
+				    //window.setTimeout(myFunc, 50);
+				    out += '	<div class="panel-heading">';
+				    out += '		<h2 class="panel-title">News-Feed</h2>';
+				    out += '	</div>';
+				    out += '	<div class="panel-body">';
+				    out += '		<div class="col-md-6">';
+				    out += '			<img src="http://placehold.it/400x400">';
+				    out += '		</div';
+				    out += '		<div class="col-md-6">';
+				    for(i = 0; i < 5; i++) {
+				    	out += '<h4>' + arr[i].heading + '</h4>';
+				    	out += '<p>' + arr[i].news + '</p>';
+				    }
+				    out += '		</div>';
+		  			out += '	</div>';
+					out += '</div>';
+				    
+				    /*
+				    for(i = 0; i < 1; i++) {
+				    	out += '<h2>' + arr[j].heading + '</h2>';
+				    }*/
+				    //deinTimer = window.setTimeout(myFunction(myArray), 50);
+				    document.getElementById("bigdata").innerHTML = out;
+				}
+			</script>
