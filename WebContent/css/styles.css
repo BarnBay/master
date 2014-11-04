@@ -119,11 +119,11 @@ html, body {
 }
 
 /* adjusting panel */
-#panelProducts {
+#panelProducts, #panelFarmers, #panelLocations {
 	margin-bottom: 15px;
 }
 
-#panelProducts .panel-collapse {
+#panelProducts .panel-collapse, #panelFarmers .panel-collapse, #panelLocations .panel-collapse {
 	margin: 10px 20px 0 20px;
 }
 
@@ -131,7 +131,6 @@ html, body {
 	padding-left: 40px
 }
 
-/* List and GridView */
 /* List and GridView */
 .thumbnail {
     margin-bottom: 20px;
@@ -159,7 +158,6 @@ html, body {
 }
 
 .item.list-group-item {
-	
     float: none;
   	width: 100%;
     padding: 0px;

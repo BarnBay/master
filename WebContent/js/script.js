@@ -202,6 +202,52 @@ $(document).ready(function() {
 
 
 /* ------------------------------------------------------------------------------------
+   Location List View
+   ------------------------------------------------------------------------------------ */
+$(document).ready(function() {
+	/* On click of ListView Icon */
+	$('#mainContainer').on('click', '#farmerList', function(event) {
+		event.preventDefault();
+		$('#farmerGrid').removeClass('active');
+		$('#farmerList').addClass('active');
+		
+		$('#farmers .item').addClass('list-group-item');
+	});
+	
+	/* On click of GridView Icon */
+	$('#mainContainer').on('click', '#farmerGrid', function(event) {
+		event.preventDefault();
+		$('#farmerList').removeClass('active');
+		$('#farmerGrid').addClass('active');
+		
+		$('#farmers .item').removeClass('list-group-item');
+		$('#farmers .item').addClass('grid-group-item');
+	});
+	
+	/* On changed value of selector -> Sort JSON-Object ProductListJSONObject */
+	$('#mainContainer').on('change', '#selectNavFarmersList', function(event) {
+		var selectValue = this.value.split(",");
+		var prop = selectValue[0];
+		
+		if(selectValue[1] == "ASC") {
+			var asc = true;
+		} else {
+			var asc = false;
+		}
+		
+		FarmerListJSONObject = sortJSON(FarmerListJSONObject, prop, asc);	
+		
+		farmerListFunction(FarmerListJSONObject);
+	});
+	
+	/* On click of Item */
+	$('#mainContainer').on('click', '#farmerDetailView', function(event) {
+		$('#mainContainer').hide().load('./content/farmer_chris.html').fadeIn('500');
+	});
+});
+
+
+/* ------------------------------------------------------------------------------------
    Sorting-Algorithm
    ------------------------------------------------------------------------------------ */
 function sortJSON(data, key, asc) {		
