@@ -142,16 +142,24 @@ $(document).ready(function() {
 			var asc = false;
 		}
 		
-		ProductListJSONObject = ProductListJSONObject.sort(function(a, b) {
-	        if(asc) { 
-	        	return (a[prop] > b[prop]);
-	        } else { 
-	        	return (b[prop] > a[prop]);
-	        }
-	    });
+		ProductListJSONObject = sortJSON(ProductListJSONObject, prop, asc);	
 		
-		productListFunction();
+		productListFunction(ProductListJSONObject);
 	});
+	
+	
+	/* Sorting-Algorithm */
+	function sortJSON(data, key, asc) {		
+	    return data.sort(function (a, b) {
+	        var x = a[key];
+	        var y = b[key];
+			if(asc) {
+				return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+			} else {
+				return ((y < x) ? -1 : ((y > x) ? 1 : 0));
+			}
+	    });
+	}
 	
 	/* On click of Item */
 	$('#mainContainer').on('click', '#productDetailView', function(event) {
