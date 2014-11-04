@@ -74,7 +74,7 @@ $(document).ready(function() {
    ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
 	$('#mainNavbarRight').on('click', '#navViewShoppingCartButton', function(event) {
-		$('#mainContainer').load('./content/cart.html');
+		$('#mainContainer').hide().load('./content/cart.html').fadeIn('500');
 	});
 });
 
@@ -108,5 +108,9 @@ $(document).ready(function() {
 		
 		$('#products .item').removeClass('list-group-item');
 		$('#products .item').addClass('grid-group-item');
+	});
+	
+	$('#mainContainer').on('click', '#productDetailView', function(event) {
+		$('#mainContainer').hide().load('./content/product_chris.html').fadeIn('500');
 	});
 });

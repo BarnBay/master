@@ -27,7 +27,7 @@
 					<ul class="list-group checkbox">
           				<li class="list-group-item productCheckbox"><input type="checkbox"> Fruits <span class="badge pull-right">4</span></li>
           				<li class="list-group-item productCheckbox"><input type="checkbox"> Vegetables <span class="badge pull-right">4</span></li>
-          				<li class="list-group-item productCheckbox"><input type="checkbox"> Meat <span class="badge pull-right">4</span></li>
+          				<li class="list-group-item productCheckbox"><input type="checkbox"> Meat <span class="badge pull-right">2</span></li>
         			</ul>
       			</div>
 			</div><!-- end of category -->
@@ -131,14 +131,14 @@
 				    for(i = 0; i < arr.length; i++) {
 				    	out += '<div class="item  col-xs-4 col-lg-4">';
 				    	out += '	<div class="thumbnail">';					
-				    	out += '		<img class="group list-group-image" src="http://placehold.it/400x250" alt="" />';
+				    	out += '		<img class="group list-group-image" id="productDetailView" src="http://placehold.it/400x250" alt="" style="cursor:pointer;"/></a>';
 				    	if(arr[i].pSoldOut == "true") {
 				    		out += '		<div class="label label-danger price"><span class="glyphicon glyphicon-tag"></span> Sold Out</div>';
 				    	} else if(arr[i].pDiscount == "true") {
 				    		out += '		<div class="label label-success price"><span class="glyphicon glyphicon-tag"></span> Discount</div>';	
 				    	}
 				    	out += '		<div class="caption">';
-				    	out += '			<h3 class="group inner list-group-item-heading">' + arr[i].pTitle + '</h3>';
+				    	out += '			<h3 class="group inner list-group-item-heading" id="productDetailView" style="cursor:pointer;">' + arr[i].pTitle + '</h3>';
 				    	out += '			<p class="group inner list-group-item-text">' + arr[i].pDescription + '</p>';
 				    	out += '			<div class="row">';
 				    	out += '				<div class="col-xs-12 col-md-6" style="height: 34px;">';
