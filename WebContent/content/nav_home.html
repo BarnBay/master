@@ -50,54 +50,87 @@
 <!--/#whatwedo end-->
 
 <hr>
-<!-- Category Elements -->
+<!-- News Feed Elements -->
 <div class="row">
-	<div class="panel panel-default" id="bigdata">
-			
-		<!-- Content from the "BigData"-Plugin -->
+	<div class="panel panel-default">
+		<!-- Placeholder -->
+		<div class="panel-heading">
+			<h2 class="panel-title">News-Feed</h2>
+		</div>
+		<div class="panel-body">
+			<div class="col-md-6">
+				<img src="http://placehold.it/550x400" id="imgPicture">
+			</div>
+			<div class="col-md-6" id="bigDataActivity">
+				<div id="first"></div>
+				<div id="second"></div>
+				<div id="third"></div>
+			</div>
+		</div>
 	</div>
 </div>
+
+<script src="./json/bigdata.js"></script>
+
+<script>
+	$(document).ready(function() {
+		var counter = 1;
+		var firstrun = true;
+		var bigDataLength = myBigDataArray.length;
+		var bigDataDelay = 500;
+	
+		addValue();
 		
-			<script src="./json/bigdata.js"></script>
+		function addValue() {
+			var out = "";
+			var randomTimeOut = 4 + Math.floor(Math.random() * 6);
 			
-			<script>
-			/*var updateDiv = function ()
-			{  
-			  $.get('http://deineurl.de?deineparameter',function(d)
-			  {
-			    $('#deinDiv').html(d);
-			    window.setTimeout(updateDiv, 5000);
-			  }
-			}*/
-				myFunction(myArray);
-				//var myFunc = 
-				function myFunction(arr) {
-				    var out = "";
-				    //Math.random() * (((10-2)+1)2);
-				    var j = Math.floor(Math.random() * ((5-0)+1) + 0);
-				    //var i;
-				    //window.setTimeout(myFunc, 50);
-				    out += '	<div class="panel-heading">';
-				    out += '		<h2 class="panel-title">News-Feed</h2>';
-				    out += '	</div>';
-				    out += '	<div class="panel-body">';
-				    out += '		<div class="col-md-6">';
-				    out += '			<img src="http://placehold.it/400x400">';
-				    out += '		</div';
-				    out += '		<div class="col-md-6">';
-				    for(i = 0; i < 5; i++) {
-				    	out += '<h4>' + arr[i].heading + '</h4>';
-				    	out += '<p>' + arr[i].news + '</p>';
-				    }
-				    out += '		</div>';
-		  			out += '	</div>';
-					out += '</div>';
-				    
-				    /*
-				    for(i = 0; i < 1; i++) {
-				    	out += '<h2>' + arr[j].heading + '</h2>';
-				    }*/
-				    //deinTimer = window.setTimeout(myFunction(myArray), 50);
-				    document.getElementById("bigdata").innerHTML = out;
+			out += '<div class="panel panel-primary" style="display: none;">';
+			out += '	<div class="panel-heading">';
+			out += '		<h4>' + myBigDataArray[counter-1].heading + '</h4>';
+			out += '	</div>';
+			out += '	<div class="panel-body">';
+			out += '		' + myBigDataArray[counter-1].news;
+			out += '	</div>';
+			out += '</div>';
+			
+			if(counter <= 3 && firstrun) {
+				if(counter == 1) {
+					$(out).appendTo($("#bigDataActivity #third")).slideDown(bigDataDelay);
+				} else if(counter == 2) {
+					$(out).appendTo($("#bigDataActivity #second")).slideDown(bigDataDelay);
+				} else if(counter == 3) {
+					$(out).appendTo($("#bigDataActivity #first")).slideDown(bigDataDelay);
 				}
-			</script>
+			} else {
+					$("#bigDataActivity #third").fadeOut(bigDataDelay);
+					
+					setTimeout(sample, bigDataDelay + 150);
+					
+					function sample() {
+						var first = $("#bigDataActivity #first").clone().html();
+						var second = $("#bigDataActivity #second").clone().html();
+						
+						$("#bigDataActivity #first").empty();
+						$("#bigDataActivity #second").empty();
+						$("#bigDataActivity #third").empty();
+						
+						$("#bigDataActivity #third").show();
+						
+						$(second).appendTo($("#bigDataActivity #third"));
+						$(first).appendTo($("#bigDataActivity #second"));
+						$(out).appendTo($("#bigDataActivity #first")).slideDown(bigDataDelay);
+					}
+			}
+			
+			if(counter != bigDataLength) {
+				counter++;
+			} else {
+				firstrun = false;
+				counter = 1;
+			}
+			
+			setTimeout(addValue, (bigDataDelay * randomTimeOut));
+		}
+	});
+</script>
