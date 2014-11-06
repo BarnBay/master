@@ -206,26 +206,26 @@ $(document).ready(function() {
    ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
 	/* On click of ListView Icon */
-	$('#mainContainer').on('click', '#farmerList', function(event) {
+	$('#mainContainer').on('click', '#locationList', function(event) {
 		event.preventDefault();
-		$('#farmerGrid').removeClass('active');
-		$('#farmerList').addClass('active');
+		$('#locationGrid').removeClass('active');
+		$('#locationList').addClass('active');
 		
-		$('#farmers .item').addClass('list-group-item');
+		$('#locations .item').addClass('list-group-item');
 	});
 	
 	/* On click of GridView Icon */
-	$('#mainContainer').on('click', '#farmerGrid', function(event) {
+	$('#mainContainer').on('click', '#locationGrid', function(event) {
 		event.preventDefault();
-		$('#farmerList').removeClass('active');
-		$('#farmerGrid').addClass('active');
+		$('#locationList').removeClass('active');
+		$('#locationGrid').addClass('active');
 		
-		$('#farmers .item').removeClass('list-group-item');
-		$('#farmers .item').addClass('grid-group-item');
+		$('#locations .item').removeClass('list-group-item');
+		$('#locations .item').addClass('grid-group-item');
 	});
 	
 	/* On changed value of selector -> Sort JSON-Object ProductListJSONObject */
-	$('#mainContainer').on('change', '#selectNavFarmersList', function(event) {
+	$('#mainContainer').on('change', '#selectNavLocationsList', function(event) {
 		var selectValue = this.value.split(",");
 		var prop = selectValue[0];
 		
@@ -235,15 +235,15 @@ $(document).ready(function() {
 			var asc = false;
 		}
 		
-		FarmerListJSONObject = sortJSON(FarmerListJSONObject, prop, asc);	
+		LocationListJSONObject = sortJSON(LocationListJSONObject, prop, asc);	
 		
-		farmerListFunction(FarmerListJSONObject);
+		locationListFunction(LocationListJSONObject);
 	});
 	
 	/* On click of Item */
-	$('#mainContainer').on('click', '#farmerDetailView', function(event) {
+	/*$('#mainContainer').on('click', '#farmerDetailView', function(event) {
 		$('#mainContainer').hide().load('./content/farmer_chris.html').fadeIn('500');
-	});
+	});*/
 });
 
 

@@ -46,7 +46,7 @@
 				</div>
 				<div id="collapseListGroupPickupTime" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupPickupTime" aria-expanded="true">
 					<ul class="list-group">
-          				<li class="list-group-item">BlaBla</li>
+          				<li class="list-group-item">Placeholder</li>
         			</ul>
       			</div>
 			</div><!-- end of pickup time -->	
@@ -63,23 +63,23 @@
 			<script>
 				countLocationListFunction(LocationListJSONObject);
 				
-				function countLocationListFunction(arr) {
-					document.getElementById("countLocations").innerHTML = arr.length;
+				function countLocationListFunction(locationArray) {
+					document.getElementById("countLocations").innerHTML = locationArray.length;
 				}
 			</script>
 						
 			<div class="pull-right">
 				<!-- List or Grid View -->
 				<div class="btn-group pull-right" style="margin-top: -5px;">
-	        		<a href="#" id="productList" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span></a> 
-	        		<a href="#" id="productGrid" class="btn btn-default btn-sm active"><span class="glyphicon glyphicon-th"></span></a>
+	        		<a href="#" id="locationList" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span></a> 
+	        		<a href="#" id="locationGrid" class="btn btn-default btn-sm active"><span class="glyphicon glyphicon-th"></span></a>
 	        	</div>
 	        	
 	        	<!-- Sort by: Default -->
 				<div class="form-group pull-right" style="margin-right: 20px;">
 					<label for="text" style="float:left; font-weight: normal; margin-right: 10px;">Sort by:</label>       
 					<div class="input-group" style="margin-top: -5px;">   
-						<select class="form-control input-sm">
+						<select class="form-control input-sm" id="selectNavLocationsList">
 							<option value="lId,ASC">Default</option>
 							<option value="lName,ASC">Name: A-Z</option>
 							<option value="lName,DESC">Name: Z-A</option>
@@ -93,7 +93,7 @@
 		</div>
 
 		<div id="locations" class="row list-group">
-			<!-- JSON - Create the Product List -->
+			<!-- JSON - Create the Location List -->
 			<script>
 				locationListFunction(LocationListJSONObject);
 				
@@ -112,7 +112,7 @@
 				    	out += '					<h3 class="list-group-item-price"></h3>';
 				    	out += '				</div>';
 				    	out += '				<div class="col-xs-12 col-md-6">';
-				    	out += '					<a class="btn btn-info" href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-info-sign"></span> Get Info</a>';
+				    	out += '					<a class="btn btn-info"><span class="glyphicon glyphicon-info-sign"></span> Get Info</a>';
 				    	out += '				</div>';
 				    	out += '			</div>';
 				    	out += '		</div>';

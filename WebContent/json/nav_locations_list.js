@@ -1,22 +1,22 @@
 var LocationListJSONObject = [
 	{
 		lId : 0,
-		lName : "Location A",
+		lName : "SAP",
 		lDescription : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 	},
 	{
 		lId : 1,
-		lName : "Location B",
+		lName : "Uni Mannheim",
 		lDescription : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 	},
 	{
 		lId : 2,
-		lName : "Location C",
+		lName : "Main Station",
 		lDescription : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 	},
 	{
 		lId : 3,
-		lName : "Location D",
+		lName : "John Deere",
 		lDescription : "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 	},
 ]

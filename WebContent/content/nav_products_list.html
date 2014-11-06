@@ -41,9 +41,9 @@
 				</div>
 				<div id="collapseListGroupPrice" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupPrice" aria-expanded="true">
 					<ul class="list-group">
-          				<li class="list-group-item">BlaBla</li>
-          				<li class="list-group-item">BlaBla</li>
-          				<li class="list-group-item">BlaBla</li>
+          				<li class="list-group-item">Placeholder</li>
+          				<li class="list-group-item">Placeholder</li>
+          				<li class="list-group-item">Placeholder</li>
         			</ul>
       			</div>
 			</div><!-- end of price -->	
@@ -90,8 +90,8 @@
 			<script>
 				countProductListFunction(ProductListJSONObject);
 				
-				function countProductListFunction(arr) {
-					document.getElementById("countProducts").innerHTML = arr.length;
+				function countProductListFunction(productArray) {
+					document.getElementById("countProducts").innerHTML = productArray.length;
 				}
 			</script>
 						
@@ -127,13 +127,13 @@
 				function productListFunction(productArray) {
 				    var out = "";
 				    var i;
-				    for(i = 0; i < myArray.length; i++) {
+				    for(i = 0; i < productArray.length; i++) {
 				    	out += '<div class="item  col-xs-4 col-lg-4">';
 				    	out += '	<div class="thumbnail">';					
 				    	out += '		<img class="group list-group-image" id="productDetailView" src="http://placehold.it/400x250" alt="" style="cursor:pointer;"/></a>';
-				    	if(productArray[i].pSoldOut == "true") {
+				    	if(productArray[i].pSoldOut == true) {
 				    		out += '		<div class="label label-danger price"><span class="glyphicon glyphicon-tag"></span> Sold Out</div>';
-				    	} else if(productArray[i].pDiscount == "true") {
+				    	} else if(productArray[i].pDiscount == true) {
 				    		out += '		<div class="label label-success price"><span class="glyphicon glyphicon-tag"></span> Discount</div>';	
 				    	}
 				    	out += '		<div class="caption">';
@@ -144,7 +144,7 @@
 				    	out += '					<h3 class="list-group-item-price">'+ productArray[i].pCurrency + productArray[i].pPrice + '</h3>';
 				    	out += '				</div>';
 				    	out += '				<div class="col-xs-12 col-md-6">';
-				    	out += '					<a class="btn btn-success" href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>';
+				    	out += '					<a class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>';
 				    	out += '				</div>';
 				    	out += '			</div>';
 				    	out += '		</div>';
