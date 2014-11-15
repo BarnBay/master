@@ -102,8 +102,8 @@
 			$.ajax({
 				url: "/barnbay_ui/GetAllSubCategories"
 			}).done(function(data) {
-				obj = JSON.parse(data);
-				alert(data);
+				var products = JSON.parse(data);
+				alert("Name: " + products[0].name);
 			});
 		</script>
 	</body>

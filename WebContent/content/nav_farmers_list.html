@@ -12,35 +12,9 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- Left Column -->
-	<div class="col-lg-3 col-md-3 col-sm-12" style="margin-top: 20px;">
-		<div class="panel-group" role="tablist" id="accorionNo">
-			<!-- Location -->
-			<div class="panel panel-default" id="panelFarmers">
-				<div class="panel-heading" role="tab">
-					<h4 class="panel-title">
-						<a class="accordion-toggle" data-toggle="collapse" href="#collapseListGroupLocation" aria-expanded="true" aria-controls="collapseListGroupLocation">Location</a>
-					</h4>
-				</div>
-				<div id="collapseListGroupLocation" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupCategory" aria-expanded="true">
-					<ul class="list-group">
-          				<li class="list-group-item">
-          					<div class="input-group">
-								<input type="text" class="form-control" placeholder="Enter ZIP Code..." id="searchInput">
-								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-								</div>
-							</div>
-          				</li>
-        			</ul>
-      			</div>
-			</div><!-- end of location -->
-		</div>
-	</div><!-- end left column -->
 	
 	<!-- Right Column -->
-	<div class="col-lg-9 col-md-9 col-sm-12" style="margin-top: 20px;">
+	<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 20px;">
 		<!-- <img src="http://placehold.it/1000x300" class="img-responsive" alt="Responsive image">  -->
 				
 		<div class="well well-sm">
@@ -88,7 +62,7 @@
 				    var out = "";
 				    var i;
 				    for(i = 0; i < farmerArray.length; i++) {
-				    	out += '<div class="item  col-xs-4 col-lg-4">';
+				    	out += '<div class="item  col-xs-3 col-lg-3">';
 				    	out += '	<div class="thumbnail">';					
 				    	out += '		<img class="group list-group-image" id="farmerDetailView" src="http://placehold.it/400x250" alt="" style="cursor:pointer;"/></a>';
 				    	out += '		<div class="caption">';
