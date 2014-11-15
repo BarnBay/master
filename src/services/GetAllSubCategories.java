@@ -46,6 +46,12 @@ public class GetAllSubCategories extends HttpServlet {
 					c.idcategory = rs.getInt(1);
 					c.name = rs.getString(2);
 					c.category_description = rs.getString(4);
+					
+					ResultSet rs2 = db.executeSQL("SELECT MIN(PRICE) FROM TEST.PRODUCT WHERE FK_CATEGORY=" + c.idcategory);
+					if(rs2!=null && rs2.next()){
+						c.price = rs2.getInt(1);
+					}
+					
 					a.add(c);
 				}
 				String json = JSON_Server.categoryArrayToJson(a);

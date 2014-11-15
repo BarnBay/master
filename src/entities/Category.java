@@ -5,4 +5,5 @@ public class Category {
   public String super_category;
   public String name;
   public String category_description;
+  public int price;
 }

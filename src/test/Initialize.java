@@ -37,7 +37,7 @@ public class Initialize extends HttpServlet {
 		
 		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
            		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(0,"
-            	 + "'Sehr saftige Apfelsorte, die Sie lieben werden.', 2, 0, 0.8, 100, 0, 0)");
+            	 + "'Sehr saftige Apfelsorte, die Sie lieben werden.', 5, 2, 3, 100, 0, 0)");
 		
 		
 		
