@@ -88,5 +88,24 @@
 	    
 	    <!-- Custom JS -->
 		<script src="js/script.js"></script>
+		
+		<script type="text/javascript">
+			$.ajax({
+				type: "POST",
+				url: "/TestService",
+				data: {
+					name: "John",
+					location: "Boston"
+				}
+			}).done(function(msg) {
+				alert("Data Saved: " + msg);
+			});
+			
+			$.ajax({
+				url: "/TestService"
+			}).done(function() {
+				alert("done");
+			});
+		</script>
 	</body>
 </html>
