@@ -96,10 +96,10 @@
 		
 		<script type="text/javascript">
 			$.ajax({
-				url: "/barnbay_ui/GetAllSubCategories"
+				url: "/barnbay_ui/GetSubCategoriesByCategoryId"
 			}).done(function(data) {
-				var products = JSON.parse(data);
-				alert("Name: " + products[0].name);
+				//var products = JSON.parse(data);
+				//alert(data);
 			});
 		</script>
 	</body>

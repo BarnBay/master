@@ -155,7 +155,7 @@ $(document).ready(function() {
 		}
 		
 		ProductListJSONObject = sortJSON(ProductListJSONObject, prop, asc);	
-		
+
 		productListFunction(ProductListJSONObject);
 	});
 		
