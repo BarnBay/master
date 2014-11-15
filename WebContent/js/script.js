@@ -100,6 +100,17 @@ $(document).ready(function() {
 
 
 /* ------------------------------------------------------------------------------------
+Navigation Login - By Clicking on Dashboard, go to Dashboard.html
+------------------------------------------------------------------------------------ */
+$(document).ready(function() {
+	$('#mainNavbarRight').on('click', '#dashboard', function(event) {
+		$('#mainContainer').hide().load('./content/dashboard.html').fadeIn('500');
+		event.preventDefault();
+	});
+});
+
+
+/* ------------------------------------------------------------------------------------
    Start Coursel automatically
    ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
