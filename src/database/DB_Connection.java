@@ -31,21 +31,17 @@ public class DB_Connection {
 	}
 
 	public ResultSet executeSQL(String sql) {
-
 		ResultSet rs = null;
-
-		Statement s;
 		try {
-			s = con.createStatement();
+			Statement s = con.createStatement();
 			s.execute(sql);
-			//rs = s.getResultSet();
+			rs = s.getResultSet();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return rs;
-
 	}
 	
 	public void close(){
