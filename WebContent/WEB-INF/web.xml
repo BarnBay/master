@@ -33,4 +33,14 @@
     <servlet-name>TestService</servlet-name>
     <url-pattern>/TestService</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAllProducts</display-name>
+    <servlet-name>GetAllProducts</servlet-name>
+    <servlet-class>services.GetAllProducts</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllProducts</servlet-name>
+    <url-pattern>/GetAllProducts</url-pattern>
+  </servlet-mapping>
 </web-app>
