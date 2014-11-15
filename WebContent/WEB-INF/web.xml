@@ -9,29 +9,19 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>ProductServlet</display-name>
-    <servlet-name>ProductServlet</servlet-name>
-    <servlet-class>productServices.ProductServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ProductServlet</servlet-name>
-    <url-pattern>/product</url-pattern>
-  </servlet-mapping>
   <resource-ref>
     <res-ref-name>jdbc/DefaultDB</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>
   </resource-ref>
   <servlet>
     <description></description>
-    <display-name>InitializeLocally</display-name>
-    <servlet-name>InitializeLocally</servlet-name>
-    <servlet-class>initialization.InitializeLocally</servlet-class>
+    <display-name>Initialize</display-name>
+    <servlet-name>Initialize</servlet-name>
+    <servlet-class>test.Initialize</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>InitializeLocally</servlet-name>
-    <url-pattern>/InitializeLocally</url-pattern>
+    <servlet-name>Initialize</servlet-name>
+    <url-pattern>/Initialize</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
