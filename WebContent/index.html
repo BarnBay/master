@@ -91,20 +91,9 @@
 		
 		<script type="text/javascript">
 			$.ajax({
-				type: "POST",
-				url: "/TestService",
-				data: {
-					name: "John",
-					location: "Boston"
-				}
-			}).done(function(msg) {
-				alert("Data Saved: " + msg);
-			});
-			
-			$.ajax({
-				url: "/TestService"
-			}).done(function() {
-				alert("done");
+				url: "/barnbay_ui/TestService"
+			}).done(function(data) {
+				alert(data);
 			});
 		</script>
 	</body>
