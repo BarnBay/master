@@ -209,6 +209,31 @@ $(document).ready(function() {
 	$('#mainContainer').on('click', '#farmerDetailView', function(event) {
 		$('#mainContainer').hide().load('./content/farmer_chris.html').fadeIn('500');
 	});
+	
+	/*
+	 *  On Click of Dashboard Item
+	 *  dash_viewDetails
+	 *  dash_NewOrders
+	 */
+	$('#mainContainer').on('click', '#dash_stock', function(event) {
+		$('#dashMain').hide().load('./content/dash_stock.html').fadeIn('500');
+		event.preventDefault();
+	});
+	
+	$('#mainContainer').on('click', '#dash_viewDetails', function(event) {
+		$('#dashMain').hide().load('./content/viewDetails.html').fadeIn('500');
+		event.preventDefault();
+	});
+	
+	$('#mainContainer').on('click', '#dash_NewOrders', function(event) {
+		$('#dashMain').hide().load('./content/newOrder.html').fadeIn('500');
+		event.preventDefault();
+	});
+	
+	$('#mainContainer').on('click', '#profil', function(event) {
+		$('#dashMain').hide().load('./content/profil.html').fadeIn('500');
+		event.preventDefault();
+	});
 });
 
 
@@ -250,6 +275,7 @@ $(document).ready(function() {
 		
 		locationListFunction(LocationListJSONObject);
 	});
+	
 	
 	/* On click of Item */
 	/*$('#mainContainer').on('click', '#farmerDetailView', function(event) {
