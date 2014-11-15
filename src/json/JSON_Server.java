@@ -12,6 +12,8 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
+import entities.User;
+
 public class JSON_Server {
 	
 	public static JSONObject wrap_JSON(Object myObject) {
@@ -32,6 +34,11 @@ public class JSON_Server {
 		}	
 		
 		return jsonobject;
+	}
+	
+	public static User jsonToUser(JSONObject jsonobject) {
+		User currentuser = new User();
+		
 	}
 	
 	public static JSONObject http_post_json(String request){
