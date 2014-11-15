@@ -38,7 +38,10 @@ public class JSON_Server {
 	
 	public static User jsonToUser(JSONObject jsonobject) {
 		User currentuser = new User();
+		Gson gson = new Gson();
+		currentuser = gson.fromJson(jsonobject.toString(), User.class);
 		
+		return currentuser;
 	}
 	
 	public static JSONObject http_post_json(String request){

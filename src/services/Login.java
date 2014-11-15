@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import database.DB_Connection;
 import entities.User;
 
 public class Login extends HttpServlet {
@@ -33,29 +34,6 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		User peter = new User();
-		peter.firstname = "Peter";
-		peter.lastname = "Lustig";
-		peter.title = "Mr.";      // Mr. or Mrs. (Dr.)
-		peter.email = "peter.lustig@vollbio.de";
-		peter.username = "peter.lustig@vollbio.de";   // currently equals email
-		peter.usertype = "Customer";   // Examples: Farmer, Customer, Barnbay-Pickup, Barnbay-Financials
-		peter.passwordhash = "tisch";
-		peter.salt = "lol";
-		peter.session = "";
-		peter.street = "Waldstraﬂe";
-		peter.number = "99";
-		peter.zip = "68159";
-		peter.town = "Mannheim";
-		
-		
-		
-		
-		JSONObject jsonobject = new JSONObject();
-
-		jsonobject = JSON_Server.wrap_JSON(peter);
-		
-		response.getWriter().println(jsonobject.toString());
 	}
 
 	/**
@@ -81,9 +59,15 @@ public class Login extends HttpServlet {
 
 		
 		jsonobject = JSON_Server.http_post_json(jb.toString());
+		User currentuser = JSON_Server.jsonToUser(jsonobject);
 		
+		// TODO: Check DB if User exists.
+		
+		DB_Connection dbconnect = new DB_Connection();
+		
+	
 			
-		response.getWriter().println(jsonobject.toString());
+		//response.getWriter().println(obj2.toString());
 		
 	}
 
