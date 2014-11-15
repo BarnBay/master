@@ -3,24 +3,30 @@ package services;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import json.JSON_Server;
+
+import org.json.simple.JSONObject;
+
 import database.DB_Connection;
+import entities.Category;
 
 /**
  * Servlet implementation class GetAllProducts
  */
-public class GetAllProducts extends HttpServlet {
+public class GetAllSubCategories extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetAllProducts() {
+    public GetAllSubCategories() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,15 +37,25 @@ public class GetAllProducts extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DB_Connection db = new DB_Connection();
 		
-		ResultSet rs = db.executeSQL("SELECT * FROM PRODUCT");
-		try {
-			while(rs.next()){
-				
+		ResultSet rs = db.executeSQL("SELECT * FROM TEST.CATEGORY WHERE FK_SUPER_CATEGORY!=0");
+		if(rs!=null){
+			ArrayList<Category> a = new ArrayList<Category>();
+			try {
+				while(rs.next()){
+					Category c = new Category();
+					c.idcategory = rs.getInt(1);
+					c.name = rs.getString(2);
+					c.category_description = rs.getString(4);
+					a.add(c);
+				}
+				String json = JSON_Server.categoryArrayToJson(a);
+				response.getWriter().println(json);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		
 		db.close();
 		
 	}

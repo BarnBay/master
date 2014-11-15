@@ -1,17 +1,15 @@
 package json;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
+import entities.Category;
 import entities.User;
 
 public class JSON_Server {
@@ -56,5 +54,11 @@ public class JSON_Server {
 			// Nothing to do here
 		}	
 		return jsonobject;
+	}
+	
+	public static String categoryArrayToJson(ArrayList<Category> a){
+		Gson g = new Gson();
+		String gs = g.toJson(a);
+		return gs;
 	}
 }
