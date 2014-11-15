@@ -53,4 +53,14 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetSubCategoriesByCategoryId</display-name>
+    <servlet-name>GetSubCategoriesByCategoryId</servlet-name>
+    <servlet-class>services.GetSubCategoriesByCategoryId</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetSubCategoriesByCategoryId</servlet-name>
+    <url-pattern>/GetSubCategoriesByCategoryId</url-pattern>
+  </servlet-mapping>
 </web-app>
