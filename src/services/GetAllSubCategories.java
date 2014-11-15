@@ -48,7 +48,7 @@ public class GetAllSubCategories extends HttpServlet {
 					c.category_description = rs.getString(4);
 					a.add(c);
 				}
-				String json = "products:" + JSON_Server.categoryArrayToJson(a);
+				String json = JSON_Server.categoryArrayToJson(a);
 				response.getWriter().println(json);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
