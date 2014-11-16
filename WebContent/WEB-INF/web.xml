@@ -63,4 +63,24 @@
     <servlet-name>GetSubCategoriesByCategoryId</servlet-name>
     <url-pattern>/GetSubCategoriesByCategoryId</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetProductInformation</display-name>
+    <servlet-name>GetProductInformation</servlet-name>
+    <servlet-class>services.GetProductInformation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetProductInformation</servlet-name>
+    <url-pattern>/GetProductInformation</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAllFarmers</display-name>
+    <servlet-name>GetAllFarmers</servlet-name>
+    <servlet-class>services.GetAllFarmers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllFarmers</servlet-name>
+    <url-pattern>/GetAllFarmers</url-pattern>
+  </servlet-mapping>
 </web-app>

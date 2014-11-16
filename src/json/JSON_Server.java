@@ -7,9 +7,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 
 import entities.Category;
+import entities.Farmer;
 import entities.User;
 
 public class JSON_Server {
@@ -57,6 +57,12 @@ public class JSON_Server {
 	}
 	
 	public static String categoryArrayToJson(ArrayList<Category> a){
+		Gson g = new Gson();
+		String gs = g.toJson(a);
+		return gs;
+	}
+	
+	public static String farmerArrayToJson(ArrayList<Farmer> a){
 		Gson g = new Gson();
 		String gs = g.toJson(a);
 		return gs;
