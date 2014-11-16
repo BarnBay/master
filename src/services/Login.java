@@ -105,12 +105,15 @@ public class Login extends HttpServlet {
 		
 		dbconnect.close();
 	
-		response.getWriter().println("receiveduser.passwordhash : " + receiveduser.passwordhash);
-		response.getWriter().println("db_user.passwordhash : " + db_user.passwordhash);
+//		response.getWriter().println("receiveduser.passwordhash : " + receiveduser.passwordhash);
+//		response.getWriter().println("db_user.passwordhash : " + db_user.passwordhash);
 
 		
 		if ( receiveduser.passwordhash.equals(db_user.passwordhash) ) {
-			response.getWriter().print("{\"login\":\"success\"}");
+			JSONObject user_return = JSON_Server.wrap_JSON(db_user);
+			String returnstring = "{\"login\":\"success\",\"user\":" + user_return.toString() + "}";
+			JSONObject returnjson = JSON_Server.http_post_json(returnstring);
+			response.getWriter().print(returnjson.toString());
 		} else {
 			response.getWriter().print("{\"login\":\"fail\"}");
 		}
