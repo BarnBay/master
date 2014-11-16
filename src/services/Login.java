@@ -44,11 +44,6 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		
-
-
 		
 		StringBuffer jb = new StringBuffer();
 		String line;
@@ -68,21 +63,17 @@ public class Login extends HttpServlet {
 		
 		// Getting Data from Database:	
 		DB_Connection dbconnect = new DB_Connection(); //
-		ResultSet rs = dbconnect.executeSQL("SELECT  * FROM TEST.USERD, TEST.USERTYPE, TEST.ADDRESS, TEST.TITLE WHERE FK_USERTYPE = IDUSERTYPE AND IDADDRESS = FK_ADDRESS AND IDTITLE = FK_TITLE AND USERNAME = '" + receiveduser.username + "'");
-		//ResultSet rs = dbconnect.executeSQL("SELECT  * FROM TEST.USERD"); //, TEST.USERTYPE, TEST.ADDRESS, TEST.TITLE WHERE FK_USERTYPE = IDUSERTYPE AND idAddress = fk_Address AND idTitle = fk_Title AND username = '" + receiveduser.username + "'");
+		String sql = "SELECT  * FROM TEST.USERD, TEST.USERTYPE, TEST.ADDRESS, TEST.TITLE WHERE FK_USERTYPE = IDUSERTYPE AND IDADDRESS = FK_ADDRESS AND IDTITLE = FK_TITLE AND USERNAME = '" + receiveduser.username + "'";
+		ResultSet rs = dbconnect.executeSQL(sql);
 		int length = 0;
 		
 		// Transforming Data to User-Object
-		
-		
 		
 		if(rs!=null){
 
 			try {
 				while(rs.next()){
-//					for (int i=1; i<50; i++){
-//						response.getWriter().println(i + ": " + rs.getString(i));
-//					} 
+
 					db_user.firstname = rs.getString(2);
 					db_user.lastname = rs.getString(3);
 					db_user.username = rs.getString(4);
@@ -102,12 +93,10 @@ public class Login extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
 		dbconnect.close();
-	
-//		response.getWriter().println("receiveduser.passwordhash : " + receiveduser.passwordhash);
-//		response.getWriter().println("db_user.passwordhash : " + db_user.passwordhash);
-
+		
+		
+		
 		
 		if ( receiveduser.passwordhash.equals(db_user.passwordhash) ) {
 			db_user.generateSession();
@@ -115,40 +104,18 @@ public class Login extends HttpServlet {
 			String returnstring = "{\"login\":\"success\",\"user\":" + user_return.toString() + "}";
 			JSONObject returnjson = JSON_Server.http_post_json(returnstring);
 			response.getWriter().print(returnjson.toString());
+			
+			String sql2 = "UPDATE TEST.USERD SET SESSION = '" + db_user.session + "' WHERE USERNAME = '" + db_user.username + "'";
+			DB_Connection dbconnect2 = new DB_Connection();
+			ResultSet rs2 = dbconnect2.executeSQL(sql2);
+
+			dbconnect2.close();
 		} else {
 			response.getWriter().print("{\"login\":\"fail\"}");
 		}
 		
-		//response.getWriter().print(mystring.toString());
-		
-			
-		//response.getWriter().println(obj2.toString());
-		
+
 	}
 
 }
 	
-	/*
-	 * 	public String firstname;
-	public String lastname;
-	public String title;      // Mr. or Mrs. (Dr.)
-	public String email;
-	public String username;   // currently equals email
-	public String usertype;   // Examples: Farmer, Customer, Barnbay-Pickup, Barnbay-Financials
-	public String passwordhash;
-	public String salt;
-	public String session;
-	public String street;
-	public String number;
-	public String zip;
-	public String town;
-	 */
-
-
-
-
-/*
-
-{{"user":{"title":"Mr.","firstname":"Peter":{"GlossEntry":{"SortAs":"SGML","GlossDef":{"GlossSeeAlso":["GML","XML"],"para":"A meta-markup language, used to create markup languages such as DocBook."},"GlossSee":"markup","GlossTerm":"Standard Generalized Markup Language","ID":"SGML","Acronym":"SGML","Abbrev":"ISO 8879:1986"}},"title":"S"}}} 
-
-*/
