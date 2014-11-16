@@ -14,6 +14,12 @@ public class User {
 	public String number;
 	public String zip;
 	public String town;
+	
+	
+	public void generateSession() {
+		RandomString random = new RandomString(16);
+		this.session = random.nextString();
+	}
 }
 
 

@@ -110,6 +110,7 @@ public class Login extends HttpServlet {
 
 		
 		if ( receiveduser.passwordhash.equals(db_user.passwordhash) ) {
+			db_user.generateSession();
 			JSONObject user_return = JSON_Server.wrap_JSON(db_user);
 			String returnstring = "{\"login\":\"success\",\"user\":" + user_return.toString() + "}";
 			JSONObject returnjson = JSON_Server.http_post_json(returnstring);
