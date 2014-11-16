@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +18,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import database.DB_Connection;
+import entities.Category;
 import entities.User;
 
 public class Login extends HttpServlet {
@@ -65,38 +67,55 @@ public class Login extends HttpServlet {
 		User receiveduser = JSON_Server.jsonToUser(jsonobject);
 		
 		// Getting Data from Database:	
-		DB_Connection dbconnect = new DB_Connection();
-		ResultSet resultset = dbconnect.executeSQL("SELECT User.first_name, User.last_name, title, User.email_address, User.username, Usertype.type, User.passwordhash, User.salt FROM User, Usertype, Address, Title WHERE User.fk_Usertype = Usertype.idUsertype AND Address.idAddress = User.fk_Address AND Title.idTitle = User.fk_Title AND username = '" + receiveduser.username + "'");
+		DB_Connection dbconnect = new DB_Connection(); //
+		ResultSet rs = dbconnect.executeSQL("SELECT  * FROM TEST.USERD, TEST.USERTYPE, TEST.ADDRESS, TEST.TITLE WHERE FK_USERTYPE = IDUSERTYPE AND IDADDRESS = FK_ADDRESS AND IDTITLE = FK_TITLE AND USERNAME = '" + receiveduser.username + "'");
+		//ResultSet rs = dbconnect.executeSQL("SELECT  * FROM TEST.USERD"); //, TEST.USERTYPE, TEST.ADDRESS, TEST.TITLE WHERE FK_USERTYPE = IDUSERTYPE AND idAddress = fk_Address AND idTitle = fk_Title AND username = '" + receiveduser.username + "'");
 		int length = 0;
 		
 		// Transforming Data to User-Object
-		try {
-			resultset.last();
-			length = resultset.getRow();
-			resultset.first(); // back to first datapoint
-			if (length == 1) {
-				db_user.firstname = resultset.getString("User.first_name");
-				db_user.lastname = resultset.getString("User.last_name");
-				db_user.title = resultset.getString("Title.title");
-				db_user.email = resultset.getString("User.email_address");
-				db_user.username = resultset.getString("User.username");
-				db_user.usertype = resultset.getString("Usertype.type");
-				db_user.passwordhash = resultset.getString("User.passwordhash");
-				db_user.salt = resultset.getString("User.salt");
-				db_user.session = resultset.getString("User.session");
-				db_user.street = resultset.getString("Address.street");
-				db_user.number = resultset.getString("Address.number");
-				db_user.zip = resultset.getString("Address.zip_code");
-				db_user.town = resultset.getString("Address.city");
-				
-			} else {
-				// More than 1 user found or no user found! Aborting!
+		
+		
+		
+		if(rs!=null){
+
+			try {
+				while(rs.next()){
+//					for (int i=1; i<50; i++){
+//						response.getWriter().println(i + ": " + rs.getString(i));
+//					} 
+					db_user.firstname = rs.getString(2);
+					db_user.lastname = rs.getString(3);
+					db_user.username = rs.getString(4);
+					db_user.email = rs.getString(10);
+					db_user.passwordhash = rs.getString(11);
+					db_user.usertype = rs.getString(15);
+					db_user.street = rs.getString(17);
+					db_user.number = rs.getString(18);
+					db_user.zip = rs.getString(19);
+					db_user.town = rs.getString(20);
+					db_user.title = rs.getString(22);
+
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
+		dbconnect.close();
+	
+		response.getWriter().println("receiveduser.passwordhash : " + receiveduser.passwordhash);
+		response.getWriter().println("db_user.passwordhash : " + db_user.passwordhash);
+
+		
+		if ( receiveduser.passwordhash.equals(db_user.passwordhash) ) {
+			response.getWriter().print("{\"login\":\"success\"}");
+		} else {
+			response.getWriter().print("{\"login\":\"fail\"}");
+		}
+		
+		//response.getWriter().print(mystring.toString());
 		
 			
 		//response.getWriter().println(obj2.toString());
