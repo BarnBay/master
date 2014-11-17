@@ -76,7 +76,7 @@ public class Initialize extends HttpServlet {
 		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(3, 'Fleisch', 0,'')");
 		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(4, 'Grannys Apfel', 1,'Grannys Apfel ist sehr lieblich.')");
 		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(5, 'Pink Ladys Apfel', 1,'Pink Lady ist eine sehr knackige Apfelsorte')");
-		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(6, 'Möhre flotte Hilde', 2,'Schön in der Farbe!')");
+		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(6, 'Moehre flotte Hilde', 2,'Schoen in der Farbe!')");
 		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(7, 'Tomate Red Bull', 2,'Saftig, saftiger am saftigsten!')");
 		
 		db.close();

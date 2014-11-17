@@ -8,12 +8,12 @@ html, body {
 #wrap {
 	min-height: 100%;
 	height: auto;
-	margin: 0 auto -193px;
-	padding: 0 0 193px;
+	margin: 0 auto -160px;
+	padding: 0 0 160px;
 }
 
 #footer {
-	height: 193px;
+	height: 160px;
 }
 
 /* ------------------------------------------------------------------------------------

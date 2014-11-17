@@ -45,6 +45,7 @@ public class GetAllSubCategories extends HttpServlet {
 					Category c = new Category();
 					c.idcategory = rs.getInt(1);
 					c.name = rs.getString(2);
+					c.super_category = rs.getInt(3);
 					c.category_description = rs.getString(4);
 					
 					ResultSet rs2 = db.executeSQL("SELECT MIN(PRICE) FROM TEST.PRODUCT WHERE FK_CATEGORY=" + c.idcategory);
