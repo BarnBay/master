@@ -38,7 +38,7 @@
 				</div>
 				<div id="collapseListGroupCategory" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupCategory" aria-expanded="true">
 					<ul class="list-group checkbox">
-          				<li class="list-group-item productCheckbox"><input type="checkbox"> Fruits 
+          				<li class="list-group-item productCheckbox"><input type="checkbox" onclick="productFilterCategory(this, 1)"> Fruits 
           					<span id="countProducts_Fruits" class="badge pull-right">
 	          					<script>				
 									function countProductListFruits(productArray) {
@@ -54,7 +54,7 @@
 								</script>
           					</span>
           				</li>
-          				<li class="list-group-item productCheckbox"><input type="checkbox"> Vegetables 
+          				<li class="list-group-item productCheckbox"><input type="checkbox" onclick="productFilterCategory(this, 2)"> Vegetables 
 	          				<span id="countProducts_Vegetables" class="badge pull-right">
 	          					<script>				
 									function countProductListVegetables(productArray) {
@@ -70,7 +70,7 @@
 								</script>
 	          				</span>
           				</li>
-          				<li class="list-group-item productCheckbox"><input type="checkbox"> Meat 
+          				<li class="list-group-item productCheckbox" id="productCheckbox"><input type="checkbox" onclick="productFilterCategory(this, 3)"> Meat 
           					<span id="countProducts_Meat" class="badge pull-right">
           						<script>				
 									function countProductListMeat(productArray) {
@@ -182,3 +182,26 @@
 
 	</div><!-- end right column -->
 </div><!-- end row -->
+
+<!-- Filter Products, will be removed an added to script.js later -->
+<script type="text/javascript">
+	function productFilterCategory(element, categoryid) {
+		if(element.checked) {
+			$.ajax({
+				url: "/barnbay_ui/GetSubCategoriesByCategoryId?id=" + categoryid
+			}).done(function(result) {
+				ProductListFilterJSONObject = JSON.parse(result);
+				
+				productListFunction(ProductListFilterJSONObject);
+			});
+		} else {
+			$.ajax({
+				url: "/barnbay_ui/GetAllSubCategories"
+			}).done(function(result) {
+				ProductListFilterJSONObject = JSON.parse(result);
+				
+				productListFunction(ProductListFilterJSONObject);
+			});	
+		}		
+	}
+</script>

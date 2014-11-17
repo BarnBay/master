@@ -59,9 +59,9 @@ $(document).ready(function () {
 $(document).ready(function() {
 	$('#mainNavbarRight').load('./content/nav_login.html');
 	
-	$('#mainNavbarRight').on('click', '#navSignIn', function(event) {
+	/*$('#mainNavbarRight').on('click', '#navSignIn', function(event) {
 		$('#mainNavbarRight').load('./content/nav_account.html');
-	});
+	});*/
 	
 	$('#mainNavbarRight').on('click', '#navSignOut', function(event) {
 		$('#mainNavbarRight').load('./content/nav_login.html');
@@ -124,6 +124,9 @@ $(document).ready(function() {
    Product List View
    ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
+	/* On click filter Products */
+	/* Have a look at nav_products_list.html */
+	
 	/* On click of ListView Icon */
 	$('#mainContainer').on('click', '#productList', function(event) {
 		event.preventDefault();

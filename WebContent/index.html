@@ -95,12 +95,37 @@
 		<script src="js/script.js"></script>
 		
 		<script type="text/javascript">
-			$.ajax({
-				url: "/barnbay_ui/GetSubCategoriesByCategoryId?id=1"
+			/*$.ajax({
+				url: "/barnbay_ui/GetAllFarmers"
 			}).done(function(data) {
 				//var products = JSON.parse(data);
 				alert(data);
-			});
+			});*/
+			
+			/*$.ajax({
+				type: "POST",
+				url: "/barnbay_ui/Register",
+				dataType : "json",
+				data: JSON.stringify({
+					"zip":"12354",
+					"username":"ubhjk",
+					"title":"Herr",
+					"email":"ghbjk@farms.com",
+					"street":"uhjk",
+					"lastname":"zghbjn",
+					"number":"8495",
+					"usertype":"FARMER",
+					"town":"KONZ",
+					"passwordhash":"stuhl",
+					"firstname":"gzhujk"
+				}),
+				success:function(data) {
+					alert(JSON.stringify(data));
+					//alert(data.login);
+				}, error: function(data) {
+					alert(JSON.stringify(data));
+				}
+			});*/
 		</script>
 	</body>
 </html>
