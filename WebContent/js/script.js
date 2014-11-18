@@ -119,6 +119,25 @@ $(document).ready(function() {
 	});
 });
 
+/* ------------------------------------------------------------------------------------
+Navigation Login - By Clicking on Orders, go to customer_orders.html
+------------------------------------------------------------------------------------ */
+$(document).ready(function() {
+	$('#mainNavbarRight').on('click', '#customer_orders', function(event) {
+		$('#mainContainer').hide().load('./content/customer_orders.html').fadeIn('500');
+		event.preventDefault();
+	});
+});
+
+/* ------------------------------------------------------------------------------------
+Navigation Login - By Clicking on settings, go to settings.html
+------------------------------------------------------------------------------------ */
+$(document).ready(function() {
+	$('#mainNavbarRight').on('click', '#settings', function(event) {
+		$('#mainContainer').hide().load('./content/settings.html').fadeIn('500');
+		event.preventDefault();
+	});
+});
 
 /* ------------------------------------------------------------------------------------
    Start Coursel automatically
