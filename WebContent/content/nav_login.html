@@ -37,6 +37,7 @@
 					$.cookie('User.Username', data.user.username, { expires: 1 });
 					$.cookie('User.Session', data.user.session, { expires: 1 });
 					$.cookie('User.Usertype', data.user.usertype, { expires: 1 });
+					$.cookie('User.JSON', JSON.stringify(data.user));
 				} else {
 					$('#navLoginModalFailed').modal('show'); 
 				}

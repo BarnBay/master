@@ -72,6 +72,7 @@ $(document).ready(function() {
 		$.removeCookie('User.Username');
 		$.removeCookie('User.Session');
 		$.removeCookie('User.Usertype');
+		$.removeCoocke('User.JSON');
 		location.reload();
 	});
 });
