@@ -84,17 +84,17 @@ Navigation Login - By Clicking on Register, go to register.html
 ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
 	$('#mainNavbarRight').on('click', '#registerForm', function(event) {
-		$('#mainContainer').hide().load('./content/register.html').fadeIn('500');
+		$('#mainContainer').hide().load('./content/nav_register.html').fadeIn('500');
 	});
 });
 
 
 /* ------------------------------------------------------------------------------------
-Navigation Login - By Clicking on Help, go to help.html
+Navigation Login - By Clicking on Help, go to nav_help.html
 ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
 	$('#mainNavbarRight').on('click', '#helpForm', function(event) {
-		$('#mainContainer').hide().load('./content/help.html').fadeIn('500');
+		$('#mainContainer').hide().load('./content/nav_help.html').fadeIn('500');
 	});
 });
 
