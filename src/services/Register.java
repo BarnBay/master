@@ -1,6 +1,5 @@
 package services;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -231,6 +230,21 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			sql = "INSERT INTO TEST.USERD ( " + cols + " ) VALUES ( " + vals + ")";
 			dbconnect = new DB_Connection();
 			rs = dbconnect.executeSQL(sql);
+			
+			try {
+				check_connect = rs.next();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				check_connect = false;
+				
+			}
+			
+			if (check_connect) {
+				response.getWriter().print("{\"register\":\"success\"}");
+			} else {
+				response.getWriter().print("{\"register\":\"fail\"}");
+			}
+			
 			dbconnect.close();
  		}
 		
