@@ -57,14 +57,22 @@ $(document).ready(function () {
    Navigation - Change the Login to Account, if User is logged in
    ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
-	$('#mainNavbarRight').load('./content/nav_login.html');
+	if($.cookie('User.Username') == null && $.cookie('User.Session') == null && $.cookie('User.Usertype') == null) {
+		$('#mainNavbarRight').load('./content/nav_login.html');
+	} else {
+		$('#mainNavbarRight').load('./content/nav_account.html');
+	}
 	
 	/*$('#mainNavbarRight').on('click', '#navSignIn', function(event) {
 		$('#mainNavbarRight').load('./content/nav_account.html');
 	});*/
-	
+		
 	$('#mainNavbarRight').on('click', '#navSignOut', function(event) {
 		$('#mainNavbarRight').load('./content/nav_login.html');
+		$.removeCookie('User.Username');
+		$.removeCookie('User.Session');
+		$.removeCookie('User.Usertype');
+		location.reload();
 	});
 });
 

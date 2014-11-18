@@ -56,7 +56,10 @@
   					data: JSON.stringify({"passwordhash":$('#navLoginPassword').val(), "username":$('#navLoginEmail').val()}),
   					success:function(data) {
   						if(data.login == "success") {
-  							$('#mainNavbarRight').load('./content/nav_account.html');	
+  							$('#mainNavbarRight').load('./content/nav_account.html');
+  							$.cookie('User.Username', data.user.username, { expires: 1 });
+  							$.cookie('User.Session', data.user.session, { expires: 1 });
+  							$.cookie('User.Usertype', data.user.usertype, { expires: 1 });
   						} else {
   							$('#navLoginModalFailed').modal('show'); 
   						}
