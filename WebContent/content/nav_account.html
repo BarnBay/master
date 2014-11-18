@@ -37,10 +37,16 @@
 <li id="mainAccount" class="dropdown">
 	<a style="cursor:pointer;" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> My Account <span class="caret"></span></a>
 	<ul class="dropdown-menu">
-		<li><a id="dashboard" href=""><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
-		<li><a id="customer_orders" href=""><span class="glyphicon glyphicon-list-alt"></span> Orders</a>
-		<li><a id="settings" href=""><span class="glyphicon glyphicon-cog"></span> Settings</a>
+		<li><a id="dashboard" href=""><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a><li>
+		<li><a id="customer_orders" href=""><span class="glyphicon glyphicon-list-alt"></span> Orders</a></li>
+		<li><a id="settings" href=""><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
 		<li class="divider"></li>
 		<li id="navSignOut"><a style="cursor:pointer;"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
      </ul>
 </li>
+
+<script type="text/javascript">
+if($.cookie('User.Usertype') == "CUSTOMER") {
+	$("#dashboard").hide();
+}
+</script>
