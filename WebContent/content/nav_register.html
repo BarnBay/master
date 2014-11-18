@@ -20,7 +20,7 @@
 				<p>
 					<label>Gender : </label>
 					<label class="radio-inline">
-						<input type="radio" name="navRegisterGender" value="Herr" checked="-"/> Male
+						<input type="radio" name="navRegisterGender" value="Herr" checked="checked"/> Male
 					</label> 
 					<label class="radio-inline">
 						<input type="radio" name="navRegisterGender" value="Frau"/> Female
@@ -84,9 +84,30 @@
 	</div>
 </div>
 
+<div id="testProduct">
+	
+</div>
+
 <script type="text/javascript">
 	$("#navRegisterForm").submit(function(event) {
 		event.preventDefault();
+		
+		var test = JSON.stringify({
+			"usertype":$('#navRegisterType').val(),
+			"title":$('input[name=navRegisterGender]:checked', '#navRegisterForm').val(),
+			"firstname":$('#navRegisterFirstname').val(),
+			"lastname":$('#navRegisterLastname').val(),
+			"email":$('#navRegisterEmail').val(),
+			"username":$('#navRegisterEmail').val(),
+			"passwordhash":$('#navRegisterPassword').val(),
+			"town":$('#navRegisterCity').val(),
+			"zip":$('#navRegisterZip').val(),
+			"street":$('#navRegisterAddress').val(),
+			"number":$('#navRegisterPhone').val()
+		});
+		
+		document.getElementById("testProduct").innerHTML = test;
+		
 		$.ajax({
 			type: "POST",
 			url: "/barnbay_ui/Register",
@@ -105,11 +126,74 @@
 				"number":$('#navRegisterPhone').val()
 			}),
 			success:function(data) {
-				//alert(JSON.stringify(data));
-				//alert(data.login);
+				if(data.register == "success") {
+					$('#navRegisterModalSuccess').modal('show');	
+				} else {
+					alert("Reason:" + data.reason);
+					if(data.reason == "exists") {
+						$('#navRegisterModalExists').modal('show');	
+					} else {
+						$('#navRegisterModalSQL').modal('show');
+					}
+				}
 			}, error: function(data) {
 				//alert(JSON.stringify(data));
 			}
 		});
 	});
 </script>
+
+<!-- Register Success -->
+<div class="modal fade" id="navRegisterModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+  			<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    			<h4 class="modal-title" id="myModalLabel">Successfully Registered</h4>
+  			</div>
+  			<div class="modal-body">
+    			You have been successfully registered to our BarnBay Community.
+    			Please check your E-Mail Address to complete the registration process.
+  			</div>
+  			<div class="modal-footer">
+    			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Register Failed: User already exists -->
+<div class="modal fade" id="navRegisterModalExists" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+  			<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    			<h4 class="modal-title" id="myModalLabel">User already exists</h4>
+  			</div>
+  			<div class="modal-body">
+    			We are sorry but the User you want to create already exists. Please change the your E-Mail Address
+  			</div>
+  			<div class="modal-footer">
+    			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Register Failed: SQL Error -->
+<div class="modal fade" id="navRegisterModalSQL" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+  			<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    			<h4 class="modal-title" id="myModalLabel">Something went wrong!</h4>
+  			</div>
+  			<div class="modal-body">
+    			We are sorry but something went wrong, please check again later.
+  			</div>
+  			<div class="modal-footer">
+    			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  			</div>
+		</div>
+	</div>
+</div>
