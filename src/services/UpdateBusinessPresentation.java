@@ -20,7 +20,7 @@ import database.DB_Connection;
 import entities.RandomString;
 import entities.User;
 
-public class Register extends HttpServlet {
+public class UpdateBusinessPresentation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -118,139 +118,134 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				rs = dbconnect.executeSQL(sql);
 				dbconnect.close();
 				
-			   // Address Data is inserted.
+			}  // Address Data is inserted.
 			
-				// Generating Salt - currently salt not implemented.
-				RandomString random_salt = new RandomString(16);
-				receiveduser.salt = random_salt.nextString();
+			// Generating Salt - currently salt not implemented.
+			RandomString random_salt = new RandomString(16);
+			receiveduser.salt = random_salt.nextString();
+			
+			// Calculating Usertype and Title
+			int usertype_id = 0;
+			int title_id = 0;
+			
+			// Usertype
+			sql = "SELECT IDUSERTYPE FROM TEST.USERTYPE WHERE TYPE = '" + receiveduser.usertype + "'";
+			dbconnect = new DB_Connection();
+			rs = dbconnect.executeSQL(sql);
+			try {
+				rs.next();
+				usertype_id = rs.getInt(1);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			dbconnect.close();
+			
+			// Title
+			sql = "SELECT IDTITLE FROM TEST.TITLE WHERE TITLE = '" + receiveduser.title + "'";
+			dbconnect = new DB_Connection();
+			rs = dbconnect.executeSQL(sql);
+			try {
+				rs.next();
+				title_id = rs.getInt(1);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			dbconnect.close();
+			
+			// Getting maximum User ID
+			sql = "SELECT MAX(IDUSER) FROM TEST.USERD";
+			dbconnect = new DB_Connection(); //
+			rs = dbconnect.executeSQL(sql);
+			int max_user_id = 1;
+			try {
+				rs.next();
+				max_user_id = rs.getInt(1) + 1;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			// Inserting into Users:
+				// Building columns and values accordingly
+				// sql = INSERT INTO TEST.USERD ( COLUMNS ) VALUES (VALUES);
+			
+			String cols = "";
+			String vals = "";
+			
+			if (!receiveduser.firstname.isEmpty()) {
+				cols = cols + "FIRST_NAME";
+				vals = vals + "'" + receiveduser.firstname +"'";
+			}
+			
+			if (!receiveduser.lastname.isEmpty()) {
+				cols = cols + ", LAST_NAME";
+				vals = vals + ", '" + receiveduser.lastname +"'";
+			}
+			
+			if (!receiveduser.username.isEmpty()) {
+				cols = cols + ", USERNAME";
+				vals = vals + ", '" + receiveduser.username +"'";
+			}
+			
+			if (usertype_id != 0) {
+				cols = cols + ", FK_USERTYPE";
+				vals = vals + ", " + usertype_id +"";
+			}
+			
+			if (title_id != 0) {
+				cols = cols + ", FK_TITLE";
+				vals = vals + ", " + title_id +"";
+			}
+			
+			if (max_address_id != 0) {
+				cols = cols + ", FK_ADDRESS";
+				vals = vals + ", " + max_address_id +"";
+			}
+			
+			if (!receiveduser.email.isEmpty()) {
+				cols = cols + ", EMAIL_ADDRESS";
+				vals = vals + ", '" + receiveduser.email +"'";
+			}
+			
+			if (!receiveduser.passwordhash.isEmpty()) {
+				cols = cols + ", PASSWORDHASH";
+				vals = vals + ", '" + receiveduser.passwordhash +"'";
+			}
+			
+			if (!receiveduser.salt.isEmpty()) {
+				cols = cols + ", SALT";
+				vals = vals + ", '" + receiveduser.salt +"'";
+			}
+			
+			if (max_user_id != 0) {
+				cols = cols + ", IDUSER";
+				vals = vals + ", " + max_user_id +"";
+			}
+			
+			
+			
+			sql = "INSERT INTO TEST.USERD ( " + cols + " ) VALUES ( " + vals + ")";
+			dbconnect = new DB_Connection();
+			rs = dbconnect.executeSQL(sql);
+			
+			try {
+				check_connect = rs.next();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				check_connect = false;
 				
-				// Calculating Usertype and Title
-				int usertype_id = 0;
-				int title_id = 0;
-				
-				// Usertype
-				sql = "SELECT IDUSERTYPE FROM TEST.USERTYPE WHERE TYPE = '" + receiveduser.usertype + "'";
-				dbconnect = new DB_Connection();
-				rs = dbconnect.executeSQL(sql);
-				try {
-					rs.next();
-					usertype_id = rs.getInt(1);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				dbconnect.close();
-				
-				// Title
-				sql = "SELECT IDTITLE FROM TEST.TITLE WHERE TITLE = '" + receiveduser.title + "'";
-				dbconnect = new DB_Connection();
-				rs = dbconnect.executeSQL(sql);
-				try {
-					rs.next();
-					title_id = rs.getInt(1);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				dbconnect.close();
-				
-				// Getting maximum User ID
-				sql = "SELECT MAX(IDUSER) FROM TEST.USERD";
-				dbconnect = new DB_Connection(); //
-				rs = dbconnect.executeSQL(sql);
-				int max_user_id = 1;
-				try {
-					rs.next();
-					max_user_id = rs.getInt(1) + 1;
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				
-				// Inserting into Users:
-					// Building columns and values accordingly
-					// sql = INSERT INTO TEST.USERD ( COLUMNS ) VALUES (VALUES);
-				
-				String cols = "";
-				String vals = "";
-				
-				if (!receiveduser.firstname.isEmpty()) {
-					cols = cols + "FIRST_NAME";
-					vals = vals + "'" + receiveduser.firstname +"'";
-				}
-				
-				if (!receiveduser.lastname.isEmpty()) {
-					cols = cols + ", LAST_NAME";
-					vals = vals + ", '" + receiveduser.lastname +"'";
-				}
-				
-				if (!receiveduser.username.isEmpty()) {
-					cols = cols + ", USERNAME";
-					vals = vals + ", '" + receiveduser.username +"'";
-				}
-				
-				if (usertype_id != 0) {
-					cols = cols + ", FK_USERTYPE";
-					vals = vals + ", " + usertype_id +"";
-				}
-				
-				if (title_id != 0) {
-					cols = cols + ", FK_TITLE";
-					vals = vals + ", " + title_id +"";
-				}
-				
-				if (max_address_id != 0) {
-					cols = cols + ", FK_ADDRESS";
-					vals = vals + ", " + max_address_id +"";
-				}
-				
-				if (!receiveduser.email.isEmpty()) {
-					cols = cols + ", EMAIL_ADDRESS";
-					vals = vals + ", '" + receiveduser.email +"'";
-				}
-				
-				if (!receiveduser.passwordhash.isEmpty()) {
-					cols = cols + ", PASSWORDHASH";
-					vals = vals + ", '" + receiveduser.passwordhash +"'";
-				}
-				
-				if (!receiveduser.salt.isEmpty()) {
-					cols = cols + ", SALT";
-					vals = vals + ", '" + receiveduser.salt +"'";
-				}
-				
-				if (max_user_id != 0) {
-					cols = cols + ", IDUSER";
-					vals = vals + ", " + max_user_id +"";
-				}
-				
-				
-				
-				sql = "INSERT INTO TEST.USERD ( " + cols + " ) VALUES ( " + vals + ")";
-				dbconnect = new DB_Connection();
-				rs = dbconnect.executeSQL(sql);
-				
-				try {
-					check_connect = rs.next();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					check_connect = false;
-					
-				}
-				
-
-				
-				dbconnect.close();
 			}
 			
 			if (check_connect) {
 				response.getWriter().print("{\"register\":\"success\"}");
-			} else if (!is_valid) {
-				response.getWriter().print("{\"register\":\"fail\",\"reason\":\"exists\"");
 			} else {
-				response.getWriter().print("{\"register\":\"fail\",\"reason\":\"sqlerror\"}");
+				response.getWriter().print("{\"register\":\"fail\"}");
 			}
+			
+			dbconnect.close();
  		}
 		
 
