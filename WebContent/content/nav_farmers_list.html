@@ -1,5 +1,16 @@
 <!-- Implement the JSON Script File for the Farmer list -->
 <script src="./json/nav_farmers_list.js"></script>
+<script type="text/javascript">
+	var ProductListJSONObject;
+	$.ajax({
+		url: "/barnbay_ui/GetAllFarmers"
+	}).done(function(data) {
+		FarmerListJSONObject = JSON.parse(data);
+		
+		countFarmerListFunction(FarmerListJSONObject);
+		farmerListFunction(FarmerListJSONObject);
+	});
+</script>
 <!-- End of Implementation -->
 
 <div class="row">
@@ -20,7 +31,7 @@
 		<div class="well well-sm">
 			Showing <strong id="countFarmers"></strong> Farmers
 			<script>
-				countFarmerListFunction(FarmerListJSONObject);
+				//countFarmerListFunction(FarmerListJSONObject);
 				
 				function countFarmerListFunction(farmerArray) {
 					document.getElementById("countFarmers").innerHTML = farmerArray.length;
@@ -55,9 +66,7 @@
 		
 		<div id="farmers" class="row list-group">
 			<!-- JSON - Create the Product List -->
-			<script>
-				farmerListFunction(FarmerListJSONObject);
-				
+			<script>				
 				function farmerListFunction(farmerArray) {
 				    var out = "";
 				    var i;
@@ -66,8 +75,8 @@
 				    	out += '	<div class="thumbnail">';					
 				    	out += '		<img class="group list-group-image" id="farmerDetailView" src="http://placehold.it/400x250" alt="" style="cursor:pointer;"/></a>';
 				    	out += '		<div class="caption">';
-				    	out += '			<h3 class="group inner list-group-item-heading" id="farmerDetailView" style="cursor:pointer;">' + farmerArray[i].fName + '</h3>';
-				    	out += '			<p class="group inner list-group-item-text">' + farmerArray[i].fDescription + '</p>';
+				    	out += '			<h3 class="group inner list-group-item-heading" id="farmerDetailView" style="cursor:pointer;">' + farmerArray[i].farmname + '</h3>';
+				    	out += '			<p class="group inner list-group-item-text">' + farmerArray[i].farmdescription + '</p>';
 				    	out += '			<div class="row">';
 				    	out += '				<div class="col-xs-12 col-md-6" style="height: 34px;">';
 				    	out += '					<h3 class="list-group-item-price"></h3>';
@@ -79,6 +88,20 @@
 			    	}
 			    
 			    	document.getElementById("farmers").innerHTML = out;
+			    	
+			    	/* Exampler Array
+			    	{
+						"idfarmer":"",
+						"firstname":"",
+						"lastname":"",
+						"farmname":"",
+						"farmpicutre":"",
+						"street":"",
+						"number":"",
+						"zipcode":"",
+						"city":""
+					}
+			    	*/
 				}
 			</script>
 			<!-- JSON END -->
