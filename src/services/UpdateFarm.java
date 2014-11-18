@@ -20,13 +20,13 @@ import database.DB_Connection;
 import entities.RandomString;
 import entities.User;
 
-public class UpdateBusinessPresentation extends HttpServlet {
+public class UpdateFarm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateBusinessPresentation() {
+    public UpdateFarm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,7 +45,35 @@ public class UpdateBusinessPresentation extends HttpServlet {
 	 */
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-	response.getWriter().println("");
+	StringBuffer jb = new StringBuffer();
+	String line;
+	String teststring = "{\"username\":\"johnb\",\"session\":\"asdfusw\",\"farm\":{\"name\":\"Johns Farm\",\"picture\":\"johns_farm.png\",\"description\":\"John's Farm liegt im Umland von Mannheim. Sie ist für die gute Milch bekannt.\",\"opening_hours\":\"10:00 am - 4:00 pm\"}}";
+	JSONObject jsonobject = new JSONObject();
+	JSONParser jsonparser = new JSONParser();
+	User db_user = new User();
+	
+	try {
+	    BufferedReader reader = request.getReader();
+	    while ((line = reader.readLine()) != null)
+	      jb.append(line);
+	  } catch (Exception e) { /*report an error*/ }
+
+	
+	
+	
+	// jsonobject = JSON_Server.http_post_json(jb.toString());
+	jsonobject = JSON_Server.http_post_json(teststring);
+	
+	
+	JSONObject farm_json;
+	farm_json = (JSONObject) jsonobject.get("farm");
+	
+	
+	
+	
+	
+	
+	response.getWriter().println(farm_json.toString());
 
 	}
 

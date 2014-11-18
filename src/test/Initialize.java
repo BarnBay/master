@@ -57,6 +57,9 @@ public class Initialize extends HttpServlet {
 				+"(2, 'Super Hof', '2', 'Unsere Produkte koennen Sie sich schmecken lassen', 'Montag-Sonntag 9:00-18:00 Uhr')");
 		
 		db.executeSQL("INSERT INTO TEST.USERTYPE VALUES(1, 'FARMER')");
+		db.executeSQL("INSERT INTO TEST.USERTYPE VALUES(1, 'CUSTOMER')");
+		db.executeSQL("INSERT INTO TEST.USERTYPE VALUES(1, 'PICKUPLOCATION')");
+		db.executeSQL("INSERT INTO TEST.USERTYPE VALUES(1, 'BARNBAYFINANCIALS')");
 		
 		db.executeSQL("INSERT INTO TEST.TITLE VALUES(1, 'Herr')");
 		

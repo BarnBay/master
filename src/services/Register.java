@@ -61,7 +61,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		User receiveduser = JSON_Server.jsonToUser(jsonobject);
 		
 		// Checking requirements:
-		if (receiveduser.email.isEmpty() || receiveduser.firstname.isEmpty() //Pflichtfelder überprüfen
+		if (receiveduser.email.isEmpty() || receiveduser.firstname.isEmpty() // Pflichtfelder überprüfen
 				|| receiveduser.lastname.isEmpty() || receiveduser.passwordhash.isEmpty()
 				|| receiveduser.usertype.isEmpty() || receiveduser.title.isEmpty()) {
 			is_valid = false;
@@ -229,15 +229,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				
 				sql = "INSERT INTO TEST.USERD ( " + cols + " ) VALUES ( " + vals + ")";
 				dbconnect = new DB_Connection();
-				rs = dbconnect.executeSQL(sql);
-				
-				try {
-					check_connect = rs.next();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					check_connect = false;
-					
-				}
+				check_connect = dbconnect.executeSQLbool(sql);
 				
 
 				

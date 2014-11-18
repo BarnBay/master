@@ -29,6 +29,23 @@ public class DB_Connection {
 		}
 
 	}
+	
+	public boolean executeSQLbool(String sql) {
+		int res = 0;
+		try {
+			Statement s = con.createStatement();
+			res = s.executeUpdate(sql);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (res == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	public ResultSet executeSQL(String sql) {
 		ResultSet rs = null;

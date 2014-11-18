@@ -65,6 +65,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>UpdateFarm</display-name>
+    <servlet-name>UpdateFarm</servlet-name>
+    <servlet-class>services.UpdateFarm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateFarm</servlet-name>
+    <url-pattern>/UpdateFarm</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>GetSubCategoriesByCategoryId</display-name>
     <servlet-name>GetSubCategoriesByCategoryId</servlet-name>
     <servlet-class>services.GetSubCategoriesByCategoryId</servlet-class>
