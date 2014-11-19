@@ -1,10 +1,11 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
+        <div class="col-sm-12 col-md-12">
             <table class="table table-hover">
                 <thead>
                     <tr>
                     	<th>Product</th>
+                    	<th>Location</th>
                         <th>Quantity</th>
                         <th class="text-center">Price</th>
                         <th class="text-center">Total</th>
@@ -13,15 +14,23 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="col-sm-8 col-md-6">
+                        <td class="col-md-5">
                         <div class="media">
                             <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://placehold.it/72x72"> </a>
                             <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Product name</a></h4>
-                                <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
+                                <h4 class="media-heading"><a href="#">Apple Pink Lady</a></h4>
+                                <h5 class="media-heading"> by <a href="#">Farmer John</a></h5>
                                 <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
                             </div>
                         </div></td>
+                        <td class="col-md-2">
+                        	<select class="form-control input-md">
+      							<option>UNI Mannheim</option>
+      							<option>SAP Walldorf</option>
+      							<option>Central Station Mannheim</option>
+    						</select>
+    					</td>
+    					
                         <td class="col-sm-1 col-md-1" style="text-align: center">
                         <input type="email" class="form-control" id="exampleInputEmail1" value="3">
                         </td>
@@ -37,11 +46,18 @@
                         <div class="media">
                             <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://placehold.it/72x72"> </a>
                             <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Product name</a></h4>
-                                <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
-                                <span>Status: </span><span class="text-warning"><strong>Leaves warehouse in 2 - 3 weeks</strong></span>
+                                <h4 class="media-heading"><a href="#">Pumpkin</a></h4>
+                                <h5 class="media-heading"> by <a href="#">Farmer Paul</a></h5>
+                                <span>Status: </span><span class="text-warning"><strong>Currently not in farmers Stock</strong></span>
                             </div>
                         </div></td>
+                        <td class="col-md-2">
+                        	<select class="form-control input-md">
+      							<option>UNI Mannheim</option>
+      							<option>SAP Walldorf</option>
+      							<option>Central Station Mannheim</option>
+    						</select>
+    					</td>
                         <td class="col-md-1" style="text-align: center">
                         <input type="email" class="form-control" id="exampleInputEmail1" value="2">
                         </td>
@@ -56,6 +72,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td><h5>Subtotal</h5></td>
                         <td class="text-right"><h5><strong>$24.59</strong></h5></td>
                     </tr>
@@ -63,17 +80,20 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><h5>Estimated shipping</h5></td>
-                        <td class="text-right"><h5><strong>$6.94</strong></h5></td>
+                        <td></td>
+                        <td><h5>Barnbay fee</h5></td>
+                        <td class="text-right"><h5><strong>$2.46</strong></h5></td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td><h3>Total</h3></td>
-                        <td class="text-right"><h3><strong>$31.53</strong></h3></td>
+                        <td class="text-right"><h3><strong>$27.05</strong></h3></td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -82,12 +102,15 @@
                             <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
                         </button></td>
                         <td>
-                        <button type="button" class="btn btn-success">
+                        <button type="button" id="checkout" class="btn btn-success">
                         	<span class="glyphicon glyphicon-usd"></span>Checkout
                         </button></td>
                     </tr>
                 </tbody>
             </table>
+            <script type="text/javascript">
+                        	
+                        </script>
         </div>
     </div>
 </div>

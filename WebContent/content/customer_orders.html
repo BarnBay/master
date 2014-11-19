@@ -1,3 +1,5 @@
+<script src="./js/star-rating.js"></script>
+<link href="./css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
 <div class="panel-group" id="accordion" role="tablist"
 	aria-multiselectable="true">
 	<div class="panel panel-default">
@@ -111,5 +113,42 @@
 				</table>
 			</div>
 		</div>
+		</div>
+		
+		<div class="panel panel-default">
+		<div class="panel-heading" role="tab" id="headingThree">
+			<h4 class="panel-title">
+				<a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+					href="#collapseThree" aria-expanded="false"
+					aria-controls="collapseThree"> Farmers you ordered from </a>
+			</h4>
+		</div>
+		<div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+			aria-labelledby="headingThree">
+			<div class="panel-body">
+				<table class="table table-hover">
+					<caption>Farmers you ordered from</caption>
+					<thead>
+						<tr>
+							<th class="col-md-1">#</th>
+							<th class="col-md-5">Name</th>
+							<th class="col-md-5">Rating</th>
+							<th class="col-md-1">Conform</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>Farmer John</td>
+							<td>
+								<input id="input-21b" value="2.5" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs">
+							</td>
+							<td><button>Confirm</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
 	</div>
+</div>

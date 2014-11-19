@@ -85,8 +85,15 @@ $(document).ready(function() {
 	$('#mainNavbarRight').on('click', '#navViewShoppingCartButton', function(event) {
 		$('#mainContainer').hide().load('./content/cart.html').fadeIn('500');
 	});
-});
 
+	$('#mainNavbarRight').on('click', '#navCheckOutButton', function(event) {
+		  $('#mainContainer').hide().load('./content/orderConfirmation.html').fadeIn('500');
+		});
+	
+	$('#mainContainer').on('click', '#checkout', function(event) {
+		$('#mainContainer').hide().load('./content/orderConfirmation.html').fadeIn('500');
+	});
+});
 
 /* ------------------------------------------------------------------------------------
 Navigation Login - By Clicking on Register, go to register.html
