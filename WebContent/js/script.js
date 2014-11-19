@@ -23,7 +23,7 @@ $(document).ready(function () {
 		$('#mainFooter').hide().fadeIn('500');
         e.preventDefault();
     });
-	
+		
 	//OnCLick for the Rest of the Navigation
 	$('.nav li a').click(function(e) {
 		$('.nav li').removeClass('active');
