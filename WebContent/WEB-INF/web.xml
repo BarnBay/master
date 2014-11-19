@@ -53,7 +53,7 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>Register</display-name>
     <servlet-name>Register</servlet-name>
@@ -102,5 +102,35 @@
   <servlet-mapping>
     <servlet-name>GetAllFarmers</servlet-name>
     <url-pattern>/GetAllFarmers</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetCheapestProductInformation</display-name>
+    <servlet-name>GetCheapestProductInformation</servlet-name>
+    <servlet-class>services.GetCheapestProductInformation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetCheapestProductInformation</servlet-name>
+    <url-pattern>/GetCheapestProductInformation</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetCheapestProduct</display-name>
+    <servlet-name>GetCheapestProduct</servlet-name>
+    <servlet-class>services.GetCheapestProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetCheapestProduct</servlet-name>
+    <url-pattern>/GetCheapestProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DropSchema</display-name>
+    <servlet-name>DropSchema</servlet-name>
+    <servlet-class>test.DropSchema</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DropSchema</servlet-name>
+    <url-pattern>/DropSchema</url-pattern>
   </servlet-mapping>
 </web-app>

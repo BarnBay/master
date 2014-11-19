@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 
 import entities.Category;
 import entities.Farmer;
+import entities.Product;
 import entities.User;
 
 public class JSON_Server {
@@ -65,6 +66,12 @@ public class JSON_Server {
 	public static String farmerArrayToJson(ArrayList<Farmer> a){
 		Gson g = new Gson();
 		String gs = g.toJson(a);
+		return gs;
+	}
+	
+	public static String productToJson(Product p){
+		Gson g = new Gson();
+		String gs = g.toJson(p);
 		return gs;
 	}
 }

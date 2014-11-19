@@ -1,19 +1,16 @@
 package entities;
 
-import java.sql.*;
+import java.util.ArrayList;
 
-public class Product {
-	int fk_amount_type;
-	int fk_currency;
-	Date deactivation_date;
-	Date setup_date;
-	int available;
-	int current_stock;
-	int fk_overall_rating;
-	double price;
-	int fk_user;
-	int fk_category;
-	String product_descripition;
-	int id_product;
-	
+public class Product{
+	public int id;
+	public String name;
+	public String description;
+	public int stock;
+	public double price;
+	public int available;
+	public String farmerfirstname;
+	public String farmerlastname;
+	public ArrayList<Farmer> farmers = new ArrayList<Farmer>();
+	public ArrayList<Barnbay> barnbays = new ArrayList<Barnbay>();
 }

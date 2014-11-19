@@ -45,7 +45,12 @@ public class Initialize extends HttpServlet {
 		
 		db.executeSQL("CREATE TABLE TEST.ADDRESS (IDADDRESS INTEGER NOT NULL , STREET VARCHAR(100), NUMBER VARCHAR(5), ZIP_CODE VARCHAR(10), CITY VARCHAR(100))");
 		
+		db.executeSQL("CREATE TABLE TEST.BARNBAY (IDBARNBAY INTEGER NOT NULL , NAME VARCHAR(50) NOT NULL , PICTURE VARCHAR(256), DESCRIPTION VARCHAR(256), OPENING_HOURS VARCHAR(100))");
 		
+		
+		db.executeSQL("INSERT INTO TEST.BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS) VALUES(1, 'Barnbay am Schloss', 'Unser original Barnbay am Schloss', 'Montag-Sonntag von 7:00 bis 10:00')");
+		db.executeSQL("INSERT INTO TEST.BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS) VALUES(2, 'Barnbay am HBF Mannheim', 'Naechster Halt: Barnbay!', 'Montag-Sonntag von 7:00 bis 10:00')");
+		db.executeSQL("INSERT INTO TEST.BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS) VALUES(3, 'Barnbay@SAP', 'Perfekt fuer SAP-Mitarbeiter', 'Montag-Sonntag von 7:00 bis 10:00')");
 		
 		db.executeSQL("INSERT INTO TEST.ADDRESS VALUES(1, 'Waldstrasse', '23', '54329', 'KONZ')");
 		db.executeSQL("INSERT INTO TEST.ADDRESS VALUES(2, 'Seckenheimerstr.', '5', '68163', 'Mannheim')");
@@ -63,16 +68,20 @@ public class Initialize extends HttpServlet {
 		
 		db.executeSQL("INSERT INTO TEST.TITLE VALUES(1, 'Herr')");
 		
-		db.executeSQL("INSERT INTO TEST.USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH)"
-				+"VALUES (1, 'John', 'Bauer', 'johnb', 1, 1, 1, 2, 'johnb@farms.com', 'stuhl')");
+		db.executeSQL("INSERT INTO TEST.USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
+				+"VALUES (1, 'John', 'Bauer', 'johnb', 1, 1, 1, 2, 'johnb@farms.com', 'stuhl', 2)");
 		
-		db.executeSQL("INSERT INTO TEST.USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH)"
-				+"VALUES (2, 'Peter', 'Meier', 'peterm', 1, 1, 2, 1, 'peterm@vollbio.org', 'tisch')");
+		db.executeSQL("INSERT INTO TEST.USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
+				+"VALUES (2, 'Peter', 'Meier', 'peterm', 1, 1, 2, 1, 'peterm@vollbio.org', 'tisch', 3)");
 		
 		
 		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
-           		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(0,"
-            	 + "'Sehr saftige Apfelsorte, die Sie lieben werden.', 5, 2, 3, 100, 0, 0)");
+           		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(1,"
+            	 + "'Sehr saftige Apfelsorte, die Sie lieben werden.', 5, 1, 3, 100, 0, 0)");
+		
+		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
+          		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(2,"
+           	 + "'Yam, yam.', 5, 2, 2, 20, 0, 0)");
 		
 		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(1, 'Obst', 0,'')");
 		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(2, 'Gemüse', 0, '')");
