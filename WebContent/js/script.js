@@ -261,7 +261,7 @@ $(document).ready(function() {
 	});
 	
 	$('#mainContainer').on('click', '#dash_viewDetails', function(event) {
-		$('#dashMain').hide().load('./content/dash_sales.html').fadeIn('500');
+		$('#mainContainer').hide().load('./content/dashboard.html').fadeIn('500');
 		event.Default();
 	});
 	
