@@ -254,17 +254,17 @@ $(document).ready(function() {
 	});
 	
 	$('#mainContainer').on('click', '#dash_viewDetails', function(event) {
-		$('#dashMain').hide().load('./content/viewDetailsMockUp.html').fadeIn('500');
-		event.preventDefault();
+		$('#dashMain').hide().load('./content/dash_sales.html').fadeIn('500');
+		event.Default();
 	});
 	
 	$('#mainContainer').on('click', '#dash_NewOrders', function(event) {
-		$('#dashMain').hide().load('./content/newOrder.html').fadeIn('500');
+		$('#dashMain').hide().load('./content/dash_newOrder.html').fadeIn('500');
 		event.preventDefault();
 	});
 	
 	$('#mainContainer').on('click', '#profil', function(event) {
-		$('#dashMain').hide().load('./content/profil.html').fadeIn('500');
+		$('#dashMain').hide().load('./content/dash_profile.html').fadeIn('500');
 		event.preventDefault();
 	});
 });
