@@ -69,6 +69,12 @@ public class JSON_Server {
 		return gs;
 	}
 	
+	public static String productArrayToJson(ArrayList<Product> a){
+		Gson g = new Gson();
+		String gs = g.toJson(a);
+		return gs;
+	}
+	
 	public static String productToJson(Product p){
 		Gson g = new Gson();
 		String gs = g.toJson(p);

@@ -133,4 +133,14 @@
     <servlet-name>DropSchema</servlet-name>
     <url-pattern>/DropSchema</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetProductByCategoryAndFarmer</display-name>
+    <servlet-name>GetProductByCategoryAndFarmer</servlet-name>
+    <servlet-class>services.GetProductByCategoryAndFarmer</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetProductByCategoryAndFarmer</servlet-name>
+    <url-pattern>/GetProductByCategoryAndFarmer</url-pattern>
+  </servlet-mapping>
 </web-app>
