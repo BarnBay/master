@@ -1,6 +1,135 @@
+<script type="text/javascript">
+	var ProductDetailJSONObject;
+	$.ajax({
+		url: "/barnbay_ui/GetCheapestProduct?id=" + $.cookie("Product.ProductListCategoryID")
+	}).done(function(data) {
+		ProductDetailJSONObject = JSON.parse(data);
+		
+		productDetailFunction(ProductDetailJSONObject);
+	});
+</script>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="alert alert-success alert-block fade in" id="successAlert" style="display: none;">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<h4>Success!</h4>
+			<p>You successfully add the Product to your shopping-cart</p>
+		</div>
+	</div>
+</div>
+
+<!-- JSON - Create the Product List -->
+<div class="row" id="productDetailInformation">	
+	<script>							
+		function productDetailFunction(productDetailObject) {
+			var out = "";
+							
+			out += '<div class="col-md-6">';
+			out += '	<h2></h2>';
+			out += '	<img src="./img/Product ' + productDetailObject.name + '.png">';
+			out += '</div>';
+			out += '<div class="panel-body">';
+			out += '	<div class="col-md-6">';
+			out += '		<h2>' + productDetailObject.name + '</h2>';
+			out += '		<h3>ab ' + productDetailObject.price + ' &euro; <small>pro KG (only ' + productDetailObject.stock + ' left in Stock)</small></h3>';
+			out += '		<hr>';
+			out += '		<p>' + productDetailObject.description + '</p>';
+			out += '		<hr>';
+			out += '		<div class="col-sm-3">';
+			out += '			<input type="number" class="form-control" id="exampleInputQuantity" placeholder="Quantity">';
+			out += '		</div>';
+			out += '		<button type="button" class="btn btn-success" onclick="productAddToCart()">';
+			out += '			<span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart';
+			out += '		</button>';
+			out += '		<hr>';
+			out += '		<select class="form-control input-md" id="selectproductDetailFarmer" onchange="productFarmerSelect(this)">';
+			
+			for(i = 0; i < productDetailObject.farmers.length; i++) {
+				if((productDetailObject.farmerfirstname == productDetailObject.farmers[i].firstname) && (productDetailObject.farmerlastname == productDetailObject.farmers[i].lastname)) {
+					out += '			<option value="' + productDetailObject.farmers[i].idfarmer + '" selected="selected">' + productDetailObject.farmers[i].firstname + ' ' + productDetailObject.farmers[i].lastname + '</option>';
+				} else {
+					out += '			<option value="' + productDetailObject.farmers[i].idfarmer + '">' + productDetailObject.farmers[i].firstname + ' ' + productDetailObject.farmers[i].lastname + '</option>';	
+				}
+			}
+			
+			out += '		</select>';
+			out += '		<h4>Farmer Contact Data</h4>';
+			out += '		<address>';
+			out += '				<div><ul><strong>Name:</strong> ' + productDetailObject.farmerfirstname + '  ' + productDetailObject.farmerlastname + '</ul></div>';
+			out += '				<div><ul><strong>Address:</strong> ' + null + '</ul></div>';
+			out += '				<div><ul><strong>Zip:</strong> ' + null + '</ul></div>';
+			out += '				<div><ul><strong>Email:</strong> ' + null + '</ul></div>';
+			out += '				<div><ul><strong>Phone:</strong> ' + null + '</ul></div>';
+			out += '		</address>';
+			out += '		<br>';
+			out += '		<h4>Pickup Locations</h4>';
+			out += '		<table class="table table-striped">';
+			out += '			<tr>';
+			out += '				<th>Name of the Location</th>';
+			out += '				<th>Description</th>';
+			out += '				<th>Pick-Up Times</th>';
+			out += '			</tr>';
+			
+			for(i = 0; i < productDetailObject.barnbays.length; i++) {
+				out += '			<tr>';
+				out += '				<td>' + productDetailObject.barnbays[i].name + '</td>';
+				out += '				<td>' + productDetailObject.barnbays[i].description + '</td>';
+				out += '				<td>' + productDetailObject.barnbays[i].opening_hours + '</td>';
+				out += '			</tr>';
+			}
+	
+			out += '		</table>';
+			out += '	</div>';
+			out += '</div>';
+			
+			document.getElementById("productDetailInformation").innerHTML = out;
+		}	
+	</script>
+</div>
+
+<script type="text/javascript">
+	function productFarmerSelect(element) {
+		$.ajax({
+			url: "/barnbay_ui/GetProductByCategoryAndFarmer?catid=" + $.cookie("Product.ProductListCategoryID") + "&farmerid=" + element.value
+		}).done(function(data) {
+			ProductDetailJSONObject = JSON.parse(data);
+			
+			productDetailFunction(ProductDetailJSONObject);
+		});
+	}
+	
+	function productAddToCart() {
+		if($.cookie('User.Session')) {
+			$('#successAlert').slideDown();		
+		} else {
+			$('#productAddToCartLogin').modal('show'); 	
+		}
+	}
+	
+</script>
+
+<!-- Modal Login -->
+<div class="modal fade" id="productAddToCartLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+  			<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    			<h4 class="modal-title" id="myModalLabel">Please Login</h4>
+  			</div>
+  			<div class="modal-body">
+    			If you want to add some Products to you Shopping-Card you must Login
+  			</div>
+  			<div class="modal-footer">
+    			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  			</div>
+		</div>
+	</div>
+</div>
+
+<!--
 <div class= "row">
 	<div class="col-md-6">
-		<h2>Bilderspalte</h2>
 		<img src="http://placehold.it/500x500">
 	</div>
 	<div class="panel-body">
@@ -56,3 +185,4 @@
 	</div>
 	</div>
 </div>
+-->

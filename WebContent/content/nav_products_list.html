@@ -163,14 +163,14 @@
 				    for(i = 0; i < productArray.length; i++) {
 				    	out += '<div class="item  col-xs-4 col-lg-4">';
 				    	out += '	<div class="thumbnail" style="height: 350px">';
-				    	out += '		<img class="group list-group-image" id="productDetailView" src="./img/Product ' + productArray[i].name + '.png" alt="" style="cursor:pointer;" height="90"/></a>';
+				    	out += '		<img class="group list-group-image" id="productDetailView" src="./img/Product ' + productArray[i].name + '.png" alt="" style="cursor:pointer;" onclick="productGetDetailedProductInfo(' + productArray[i].idcategory + ')" height="90"/></a>';
 				    	/**if(productArray[i].pSoldOut == true) {
 				    		out += '		<div class="label label-danger price"><span class="glyphicon glyphicon-tag"></span> Sold Out</div>';
 				    	} else if(productArray[i].pDiscount == true) {
 				    		out += '		<div class="label label-success price"><span class="glyphicon glyphicon-tag"></span> Discount</div>';	
 				    	}*/
 				    	out += '		<div class="caption">';
-				    	out += '			<h3 class="group inner list-group-item-heading" id="productDetailView" style="cursor:pointer;">' + productArray[i].name + '</h3>';
+				    	out += '			<h3 class="group inner list-group-item-heading" id="productDetailView" style="cursor:pointer;" onclick="productGetDetailedProductInfo(' + productArray[i].idcategory + ')">' + productArray[i].name + '</h3>';
 				    	out += '			<p class="group inner list-group-item-text">' + productArray[i].category_description + '</p>';
 				    	out += '			<div class="row">';
 				    	out += '				<div class="col-xs-12 col-md-6" style="height: 34px;">';
@@ -211,5 +211,10 @@
 				productListFunction(ProductListFilterJSONObject);
 			});	
 		}		
+	}
+	
+	/* Display Detailed Information about the Product */
+	function productGetDetailedProductInfo(categoryid) {
+		$.cookie("Product.ProductListCategoryID", categoryid, { expires: 1 });
 	}
 </script>

@@ -23,7 +23,7 @@ $(document).ready(function () {
 		$('#mainFooter').hide().fadeIn('500');
         e.preventDefault();
     });
-	
+		
 	//OnCLick for the Rest of the Navigation
 	$('.nav li a').click(function(e) {
 		$('.nav li').removeClass('active');
@@ -122,6 +122,7 @@ Navigation Login - By Clicking on Dashboard, go to Dashboard.html
 ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
 	$('#mainNavbarRight').on('click', '#dashboard', function(event) {
+		$('.nav li').removeClass('active');
 		$('#mainContainer').hide().load('./content/dashboard.html').fadeIn('500');
 		event.preventDefault();
 	});
@@ -132,6 +133,7 @@ Navigation Login - By Clicking on Orders, go to customer_orders.html
 ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
 	$('#mainNavbarRight').on('click', '#customer_orders', function(event) {
+		$('.nav li').removeClass('active');
 		$('#mainContainer').hide().load('./content/customer_orders.html').fadeIn('500');
 		event.preventDefault();
 	});
@@ -142,6 +144,7 @@ Navigation Login - By Clicking on settings, go to settings.html
 ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
 	$('#mainNavbarRight').on('click', '#settings', function(event) {
+		$('.nav li').removeClass('active');
 		$('#mainContainer').hide().load('./content/settings.html').fadeIn('500');
 		event.preventDefault();
 	});
