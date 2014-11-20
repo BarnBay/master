@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import json.JSON_Server;
 import database.DB_Connection;
 import entities.Barnbay;
+import entities.Farmer;
 import entities.Product;
 
 /**
@@ -66,6 +67,20 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 							b.description = rs3.getString(4);
 							b.opening_hours = rs3.getString(5);
 							p.barnbays.add(b);
+						}
+						
+						ResultSet rs6 = db.executeSQL("SELECT * FROM TEST.PRODUCT WHERE FK_CATEGORY=" + catid);
+						ResultSet rs7;
+						while(rs6!=null && rs6.next()){
+							rs7 = db.executeSQL("SELECT * FROM TEST.USERD WHERE IDUSER=" + rs6.getInt(4));
+							Farmer f = new Farmer();
+							while(rs7!=null && rs7.next()){
+								f.idfarmer = rs7.getInt(1);
+								f.firstname = rs7.getString(2);
+								f.lastname = rs7.getString(3);
+								
+								p.farmers.add(f);
+							}
 						}
 					}
 					
