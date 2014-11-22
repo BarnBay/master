@@ -1,9 +1,14 @@
 <script type="text/javascript">
 	var ProductDetailJSONObject;
+	var ProductDetailName;
+	var ProductDetailDescription;
+	
 	$.ajax({
 		url: "/barnbay_ui/GetCheapestProduct?id=" + $.cookie("Product.ProductListCategoryID")
 	}).done(function(data) {
 		ProductDetailJSONObject = JSON.parse(data);
+		ProductDetailName = ProductDetailJSONObject.name;
+		ProductDetailDescription = ProductDetailJSONObject.description
 		
 		productDetailFunction(ProductDetailJSONObject);
 	});
@@ -24,17 +29,34 @@
 	<script>							
 		function productDetailFunction(productDetailObject) {
 			var out = "";
-							
+			
 			out += '<div class="col-md-6">';
 			out += '	<h2></h2>';
-			out += '	<img src="./img/Product ' + productDetailObject.name + '.png">';
+			out += '	<img src="./img/Product ' + ProductDetailName + '.png">';
+			out += '	<div class="row">';
+			out += '		<div class="col-sm-2"></div>';
+			out += '		<div class="col-sm-8">';
+			out += '			<div class="panel panel-default">';
+			out += '				<div class="panel-heading">';
+			out += '					<h4>' + productDetailObject.farmerfirstname + '  ' + productDetailObject.farmerlastname + '</h4>';
+			out += '				</div>';
+			out += '				<div class="panel-body">';
+			out += '					<h4>Address: <small>' + productDetailObject.farmeraddress.street + ' ' + productDetailObject.farmeraddress.number + '</small></h4>';
+			out += '					<h4>Zip: <small>' + productDetailObject.farmeraddress.zipcode + ' ' + productDetailObject.farmeraddress.city + '</small></h4>';
+			out += '					<h4>Email: <small>' + null + '</small></h4>';
+			out += '					<h4>Phone: <small>' + null + '</small></h4>';
+			out += '				</div>';
+			out += '			</div>';
+			out += '		</div>';
+			out += '		<div class="col-sm-2"></div>';
+			out += '	</div>';
 			out += '</div>';
 			out += '<div class="panel-body">';
 			out += '	<div class="col-md-6">';
-			out += '		<h2>' + productDetailObject.name + '</h2>';
+			out += '		<h2>' + ProductDetailName + '</h2>';
 			out += '		<h3>ab ' + productDetailObject.price + ' &euro; <small>pro KG (only ' + productDetailObject.stock + ' left in Stock)</small></h3>';
 			out += '		<hr>';
-			out += '		<p>' + productDetailObject.description + '</p>';
+			out += '		<p>' + ProductDetailDescription + '</p>';
 			out += '		<hr>';
 			out += '		<div class="col-sm-3">';
 			out += '			<input type="number" class="form-control" id="exampleInputQuantity" placeholder="Quantity">';
@@ -54,14 +76,6 @@
 			}
 			
 			out += '		</select>';
-			out += '		<h4>Farmer Contact Data</h4>';
-			out += '		<address>';
-			out += '				<div><ul><strong>Name:</strong> ' + productDetailObject.farmerfirstname + '  ' + productDetailObject.farmerlastname + '</ul></div>';
-			out += '				<div><ul><strong>Address:</strong> ' + null + '</ul></div>';
-			out += '				<div><ul><strong>Zip:</strong> ' + null + '</ul></div>';
-			out += '				<div><ul><strong>Email:</strong> ' + null + '</ul></div>';
-			out += '				<div><ul><strong>Phone:</strong> ' + null + '</ul></div>';
-			out += '		</address>';
 			out += '		<br>';
 			out += '		<h4>Pickup Locations</h4>';
 			out += '		<table class="table table-striped">';
@@ -94,8 +108,8 @@
 			url: "/barnbay_ui/GetProductByCategoryAndFarmer?catid=" + $.cookie("Product.ProductListCategoryID") + "&farmerid=" + element.value
 		}).done(function(data) {
 			ProductDetailJSONObject = JSON.parse(data);
-			
-			productDetailFunction(ProductDetailJSONObject);
+			alert(data);
+			productDetailFunction(ProductDetailJSONObject[0]);
 		});
 	}
 	

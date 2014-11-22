@@ -140,65 +140,69 @@ html, body {
     -moz-border-radius: 0px;
     border-radius: 0px;
 }
-  
-.thumbnail .caption {
+
+/* GridView */
+.thumbnail .gridview-group-item-caption {
   	padding: 10px;
 }
-  
-.thumbnail .list-group-item-text {
-    margin: 0 0 10px;
+
+.thumbnail .gridview-group-image {
+	height: 225px;
+	cursor: pointer;
 }
 
-.thumbnail .list-group-item-price {
-    font-weight: bold;
-    margin-top: 5px;
+.thumbnail .gridview-group-item-heading {
+	padding-top: 5px;
+	font-size: 18px;
+	font-weight: bold;
 }
 
-.thumbnail .caption .btn-success {
-  	float: right;
+.thumbnail .gridview-group-item-text {
+	padding: 5px 0;
+	color: #8b8b8b;
+	font-size: 14px;
+	line-height: 18px;
+	white-space: nowrap;
+	overflow: hidden;
+  	text-overflow: ellipsis
 }
 
-.item.list-group-item {
-    float: none;
-  	width: 100%;
-    padding: 0px;
-    padding-left: 15px;
-	padding-right: 15px;
-    margin-bottom: 10px;
-    border-color: #FFF;
+.thumbnail .gridview-group-item-price {
+	padding-top: 5px;
+	font-size: 22px;
+	font-weight: bold;
 }
 
-.item.list-group-item .list-group-image {
-    margin-right: 10px;
+/* ListView */
+.listview-group-item-caption {
+  	padding: 10px;
 }
 
-.item.list-group-item .thumbnail {
-    margin-bottom: 10px;
+.listview-group-image {
+	height: 225px;
+	cursor: pointer;
 }
 
-.item.list-group-item .caption {
-    padding: 10px 10px 0px 10px;
+.listview-group-item-heading {
+	padding-top: 5px;
+	font-size: 18px;
+	font-weight: bold;
 }
 
-.item.list-group-item .row {
-    bottom:0;
-    right:0;
+.listview-group-item-text {
+	padding: 5px 0;
+	color: #8b8b8b;
+	font-size: 14px;
+	line-height: 18px;
+	white-space: nowrap;
+	overflow: hidden;
+  	text-overflow: ellipsis
 }
 
-.item.list-group-item img {
-    float: left;
-}
-
-.item.list-group-item:after {
-    clear: both;
-}
-
-.item .label.label-danger.price, .item .label.label-success.price {
-	position: absolute;
-	top: -5px;
-	right: 10px;
-	padding: 5px; 
-	font-size: 14px; 	
+.listview-group-item-price {
+	padding-top: 5px;
+	font-size: 22px;
+	font-weight: bold;
 }
 
 

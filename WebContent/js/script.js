@@ -173,7 +173,9 @@ $(document).ready(function() {
 		$('#productGrid').removeClass('active');
 		$('#productList').addClass('active');
 		
-		$('#products .item').addClass('list-group-item');
+		//$('#products .item').addClass('list-group-item');
+		ListOrGridView = "ListView";
+		productListFunction(ProductListJSONObject);
 	});
 	
 	/* On click of GridView Icon */
@@ -182,8 +184,10 @@ $(document).ready(function() {
 		$('#productList').removeClass('active');
 		$('#productGrid').addClass('active');
 		
-		$('#products .item').removeClass('list-group-item');
-		$('#products .item').addClass('grid-group-item');
+		//$('#products .item').removeClass('list-group-item');
+		//$('#products .item').addClass('grid-group-item');
+		ListOrGridView = "GridView";
+		productListFunction(ProductListJSONObject);
 	});
 	
 	/* On changed value of selector -> Sort JSON-Object ProductListJSONObject */
