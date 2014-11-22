@@ -64,6 +64,7 @@ public class GetCheapestProduct extends HttpServlet {
 							p.id = rs.getInt(1);
 							p.available = rs3.getInt(8);
 							p.stock = rs3.getInt(7);
+							p.farmerproductdescription =rs3.getString(2);
 							fk_farmer = rs3.getInt(4);
 
 							int fk_barnbay = 0;
