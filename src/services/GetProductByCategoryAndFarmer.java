@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import json.JSON_Server;
 import database.DB_Connection;
+import entities.Address;
 import entities.Barnbay;
 import entities.Farmer;
 import entities.Product;
@@ -53,11 +54,23 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 					p.stock = rs.getInt(7);
 					
 					ResultSet rs2 = db.executeSQL("SELECT * FROM TEST.USERD WHERE IDUSER =" + farmerid);
+					int fk_address;
 					if(rs2!=null && rs2.next()){
 						int fk_barnbay = rs2.getInt(9);
 						
 						p.farmerfirstname = rs2.getString(2);
 						p.farmerlastname =rs2.getString(3);
+						fk_address = rs2.getInt(7);
+						
+						ResultSet rs4 = db.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS=" + fk_address);
+						p.farmeraddress = new Address();
+						if(rs4!=null && rs4.next()){
+							p.farmeraddress.idaddress = rs4.getInt(1);
+							p.farmeraddress.street = rs4.getString(2);
+							p.farmeraddress.number = rs4.getString(3);
+							p.farmeraddress.zipcode = rs4.getString(4);
+							p.farmeraddress.city = rs4.getString(5);
+						}
 						
 						ResultSet rs3 = db.executeSQL("SELECT * FROM TEST.BARNBAY WHERE IDBARNBAY =" + fk_barnbay);
 						while(rs3!=null && rs3.next()){
@@ -78,6 +91,16 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 								f.idfarmer = rs7.getInt(1);
 								f.firstname = rs7.getString(2);
 								f.lastname = rs7.getString(3);
+								
+								fk_address = rs7.getInt(7);
+								
+								ResultSet rs8 = db.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS=" + fk_address);
+								if(rs8 != null && rs8.next()){
+									f.street = rs8.getString(2);
+									f.number = rs8.getString(3);
+									f.zipcode = rs8.getString(4);
+									f.city = rs8.getString(5);
+								}
 								
 								p.farmers.add(f);
 							}
