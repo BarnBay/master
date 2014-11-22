@@ -11,6 +11,7 @@ public class Product{
 	public int available;
 	public String farmerfirstname;
 	public String farmerlastname;
+	public Address farmeraddress;
 	public ArrayList<Farmer> farmers = new ArrayList<Farmer>();
 	public ArrayList<Barnbay> barnbays = new ArrayList<Barnbay>();
 }
