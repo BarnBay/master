@@ -6,6 +6,7 @@ public class Product{
 	public int id;
 	public String name;
 	public String description;
+	public String farmerproductdescription;
 	public int stock;
 	public double price;
 	public int available;
