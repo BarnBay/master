@@ -25,152 +25,154 @@
 </div>
 
 <!-- JSON - Create the Product List -->
-<div class="row" id="productDetailInformation">	
-	<div class="col-sm-12" style="font-family: 'Roboto Condensed', sans-serif;">
-		<div class="col-sm-5">
-			<img src="./img/products/Grannys Apfel.png" alt="Image" class="img-responsive center-block">			
-		</div>
-		<div class="col-sm-7 productDetail">
-			<h2>Simply Organic seeds</h2>
-			<h5>Product Description</h5>
-			<hr>
+<div class="row" id="productDetailInformation">
+	<script type="text/javascript">							
+		function productDetailFunction(productDetailObject) {	
+			var out = "";
 			
-			<div class="row manufacturer">
-
-				<div class="col-sm-2">
-					<span>Stock:</span>
-				</div>
-				<div class="col-sm-10">
-					300
-				</div>
+			out += '<div class="col-sm-12" style="font-family: \'Roboto Condensed\', sans-serif;">';
+			out += '	<div class="col-sm-5">';
+			out += '		<img src="./img/products/' + ProductDetailName + '.png" alt="Image" class="img-responsive center-block">';
+			out += '	</div>';
+			out += '	<div class="col-sm-7 productDetail">';
+			out += '		<h2>' + ProductDetailName + '</h2>';
+			out += '		<h5>' + ProductDetailDescription + '</h5>';
+			out += '		<hr>';
+			out += '		<div class="row manufacturer">';
+			out += '			<div class="col-sm-2">';
+			out += '				<span>Stock:</span>';
+			out += '			</div>';
+			out += '			<div class="col-sm-10">';
+			out += '				' + productDetailObject.stock;
+			out += '			</div>';
+			out += '			<div class="col-sm-2">';
+			out += '				<span>Description:</span>';
+			out += '			</div>';
+			out += '			<div class="col-sm-10">';
+			out += '				BlaBla';
+			out += '			</div>';
+			out += '		</div>';
+			out += '		<hr>';
+			out += '		<button type="button" class="btn btn-success pull-right" onclick="productAddToCart()">';
+			out += '			<span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart';
+			out += '		</button>';
+			out += '		<div class="price">';
+			out += '			<span class="price-head">Price:</span>';
+			out += '			<span class="price-new">' + productDetailObject.price + ' &euro;</span> ';
+			out += '		</div>';
+			out += '		<hr>';
+			out += '		<div class="row productFamerLocation">';
+			out += '			<div class="col-sm-2">';
+			out += '				<span>Farmer:</span>';
+			out += '			</div>';
+			out += '			<div class="col-sm-10">';
+			out += '				<select class="form-control input-md" id="selectproductDetailFarmer" onchange="productFarmerSelect(this)">';
+			
+			for(i = 0; i < productDetailObject.farmers.length; i++) {
+				if((productDetailObject.farmerfirstname == productDetailObject.farmers[i].firstname) && (productDetailObject.farmerlastname == productDetailObject.farmers[i].lastname)) {
+					out += '					<option value="' + productDetailObject.farmers[i].idfarmer + '" selected="selected">' + productDetailObject.farmers[i].firstname + ' ' + productDetailObject.farmers[i].lastname + '</option>';
+				} else {
+					out += '					<option value="' + productDetailObject.farmers[i].idfarmer + '">' + productDetailObject.farmers[i].firstname + ' ' + productDetailObject.farmers[i].lastname + '</option>';	
+				}
+			}
+			
+			out += '				</select>';
+			out += '			</div>';
+			out += '		</div>';
+			out += '		<div class="row productFamerLocation">';
+			out += '			<div class="col-sm-2">';
+			out += '				<span>BarnBay:</span>';
+			out += '			</div>';
+			out += '			<div class="col-sm-10">';
+			out += '				<select class="form-control input-md" id="selectproductDetailLocation">';
+			
+			for(i = 0; i < productDetailObject.barnbays.length; i++) {
+				out += '					<option value="' + productDetailObject.barnbays[i].id + '">' + productDetailObject.barnbays[i].name + '</option>';	
+			}
+			
+			out += '				</select>';
+			out += '			</div>';
+			out += '		</div>';
+			out += '		<div class="row productFamerLocation">';
+			out += '			<div class="col-sm-2">';
+			out += '				<span>Quantity:</span>';
+			out += '			</div>';
+			out += '			<div class="col-sm-10">';
+			out += '				<input type="number" class="form-control" id="exampleInputQuantity" placeholder="1 kg">';
+			out += '			</div>';
+			out += '		</div>';
+			out += '	</div>';
+			out += '	<br/>';
+			out += '	<div class="col-sm-12" style="font-size: 16px">';
+			out += '	<hr>';
+			out += '		<div class="col-sm-4">';
+			out += '			<div class="panel panel-success">';
+			out += '				<div class="panel-heading">';
+			out += '					<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Address';
+			out += '				</div>';
+			out += '				<div class="panel-body" style="padding-bottom: 0px;">';
+			out += '					<address>';
+			out += '						<strong>' + productDetailObject.farmerfirstname + '  ' + productDetailObject.farmerlastname + '</strong>';
+			out += '						<br/>';
+			out += '						' + productDetailObject.farmeraddress.street + ' ' + productDetailObject.farmeraddress.number;
+			out += '						<br/>';
+			out += '						' + productDetailObject.farmeraddress.zipcode + ' ' + productDetailObject.farmeraddress.city;
+			out += '						<br/>';
+			out += '						Telefon';
+			out += '						<br/>';
+			out += '						Email';
+			out += '					</address>';
+			out += '				</div>';
+			out += '			</div>';
+			out += '		</div>';
+			out += '		<div class="col-sm-8">';
+			out += '			<div class="panel panel-success">';
+			out += '				<div class="panel-heading">';
+			out += '					<span class="glyphicon glyphicon-time" aria-hidden="true"></span> BarnBay pickup Locations';
+			out += '				</div>';
+			out += '				<div class="panel-body">';
+			out += '					<table class="table table-striped">';
+			out += '						<tr>';
+			out += '							<th>Name of the Location</th>';
+			out += '							<th>Description</th>';
+			out += '							<th>Pick-Up Times</th>';
+			out += '						</tr>';
+			
+			for(i = 0; i < productDetailObject.barnbays.length; i++) {
+				out += '						<tr>';
+				out += '							<td>' + productDetailObject.barnbays[i].name + '</td>';
+				out += '							<td>' + productDetailObject.barnbays[i].description + '</td>';
+				out += '							<td>' + productDetailObject.barnbays[i].opening_hours + '</td>';
+				out += '						</tr>';
+			}
+	
+			out += '					</table>';
+			out += '				</div>';
+			out += '			</div>';
+			out += '		</div>';
+			out += '		<br/>';
+			out += '	</div>';
+			out += '	<br/>';
+			out += '	<div class="col-sm-12" style="font-size: 16px">';
+			out += '		<div class="col-sm-12">';
+			out += '			<div class="panel panel-success">';
+			out += '				<div class="panel-heading">';
+			out += '					<span class="glyphicon glyphicon-time" aria-hidden="true"></span> BarnBay pickup Locations';
+			out += '				</div>';
+			out += '				<div class="panel-body">';
+			out += '					Bla';
+			out += '				</div>';
+			out += '			</div>';
+			out += '		</div>';
+			out += '	</div>';
+			out += '</div>';
+			
+			document.getElementById("productDetailInformation").innerHTML = out;
 				
-				<div class="col-sm-2">
-					<span>Description:</span>
-				</div>
-				<div class="col-sm-10">
-					BlaBla
-				</div>
-			</div>
-			
-			<hr>
-			
-			<button type="button" class="btn btn-success pull-right" onclick="productAddToCart()">
-				<span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
-			</button>
-			
-			<div class="price">
-				<span class="price-head">Price:</span>
-				<span class="price-new">199.50 &euro;</span> 
-			</div>
-				
-			<hr>
-						
-			<div class="row productFamerLocation">
-				<div class="col-sm-2">
-					<span>Farmer:</span>
-				</div>
-				<div class="col-sm-10">
-					<select class="form-control input-md" id="selectproductDetailFarmer" onchange="productFarmerSelect(this)">
-						
-					</select>
-				</div>
-			</div>
-			<div class="row productFamerLocation">
-				<div class="col-sm-2">
-					<span>BarnBay:</span>
-				</div>
-				<div class="col-sm-10">
-					<select class="form-control input-md" id="selectproductDetailLocation">
-						
-					</select>
-				</div>
-			</div>
-			<div class="row productFamerLocation">
-				<div class="col-sm-2">
-					<span>Quantity:</span>
-				</div>
-				<div class="col-sm-10">
-					<input type="number" class="form-control" id="exampleInputQuantity" placeholder="1 kg">
-				</div>
-			</div>
-		</div>
-		
-		<br/>
-		
-		<div class="col-sm-12" style="font-size: 16px">
-			<hr/>
-			<div class="col-sm-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Address
-					</div>
-					<div class="panel-body">
-						<address>
-							<strong>
-								Farmer Name
-							</strong>
-							<br/>
-							Addresse
-							<br/>
-							Zusatz
-							<br/>
-							Telefon
-							<br/>
-							Email
-						</address>
-					</div>
-				 </div>
-			</div>
-			<div class="col-sm-8">
-				<div class="panel panel-success">
-					<div class="panel-heading">
-						<span class="glyphicon glyphicon-time" aria-hidden="true"></span> BarnBay pickup Locations
-					</div>
-					<div class="panel-body">
-						<table class="table table-striped">
-							<tr>
-								<th>Name of the Location</th>
-								<th>PLZ</th>
-								<th>Adresse</th>
-								<th>Pick-Up Times</th>
-							</tr>
-							<tr>
-								<td>SAP</td>
-								<td>69190 Walldorf</td>
-								<td>Hasso-Plattner-Ring 7</td>
-								<td>Mo-Fr je 11.00 bis 14:00</td>
-							</tr>
-						
-							<tr>
-								<td>Uni Mannheim</td>
-								<td>68131 Mannheim</td>
-								<td>Schloss</td>
-								<td>Mo-Fr je 11.00 bis 14:00</td>
-							</tr>
-						</table>
-					</div>
-				 </div>
-			</div>
-			<br/>
-		</div>
-		
-		<br/>
-		
-		<div class="col-sm-12" style="font-size: 16px">
-			<div class="col-sm-12" style="font-size: 16px">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<span class="glyphicon glyphicon-time" aria-hidden="true"></span> BarnBay pickup Locations
-					</div>
-					<div class="panel-body">
-						Bla
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+		}
+	
+	</script>
 </div>
-
 
 <script type="text/javascript">
 	function productFarmerSelect(element) {
