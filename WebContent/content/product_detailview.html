@@ -1,0 +1,212 @@
+<script type="text/javascript">
+	var ProductDetailJSONObject;
+	var ProductDetailName;
+	var ProductDetailDescription;
+	
+	$.ajax({
+		url: "/barnbay_ui/GetCheapestProduct?id=" + $.cookie("Product.ProductListCategoryID")
+	}).done(function(data) {
+		ProductDetailJSONObject = JSON.parse(data);
+		ProductDetailName = ProductDetailJSONObject.name;
+		ProductDetailDescription = ProductDetailJSONObject.description
+		
+		productDetailFunction(ProductDetailJSONObject);
+	});
+</script>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="alert alert-success alert-block fade in" id="successAlert" style="display: none;">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<h4>Success!</h4>
+			<p>You successfully add the Product to your shopping-cart</p>
+		</div>
+	</div>
+</div>
+
+<!-- JSON - Create the Product List -->
+<div class="row" id="productDetailInformation">	
+	<div class="col-sm-12" style="font-family: 'Roboto Condensed', sans-serif;">
+		<div class="col-sm-5">
+			<img src="./img/products/Grannys Apfel.png" alt="Image" class="img-responsive center-block">			
+		</div>
+		<div class="col-sm-7 productDetail">
+			<h2>Simply Organic seeds</h2>
+			<h5>Product Description</h5>
+			<hr>
+			
+			<div class="row manufacturer">
+
+				<div class="col-sm-2">
+					<span>Stock:</span>
+				</div>
+				<div class="col-sm-10">
+					300
+				</div>
+				
+				<div class="col-sm-2">
+					<span>Description:</span>
+				</div>
+				<div class="col-sm-10">
+					BlaBla
+				</div>
+			</div>
+			
+			<hr>
+			
+			<button type="button" class="btn btn-success pull-right" onclick="productAddToCart()">
+				<span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
+			</button>
+			
+			<div class="price">
+				<span class="price-head">Price:</span>
+				<span class="price-new">199.50 &euro;</span> 
+			</div>
+				
+			<hr>
+						
+			<div class="row productFamerLocation">
+				<div class="col-sm-2">
+					<span>Farmer:</span>
+				</div>
+				<div class="col-sm-10">
+					<select class="form-control input-md" id="selectproductDetailFarmer" onchange="productFarmerSelect(this)">
+						
+					</select>
+				</div>
+			</div>
+			<div class="row productFamerLocation">
+				<div class="col-sm-2">
+					<span>BarnBay:</span>
+				</div>
+				<div class="col-sm-10">
+					<select class="form-control input-md" id="selectproductDetailLocation">
+						
+					</select>
+				</div>
+			</div>
+			<div class="row productFamerLocation">
+				<div class="col-sm-2">
+					<span>Quantity:</span>
+				</div>
+				<div class="col-sm-10">
+					<input type="number" class="form-control" id="exampleInputQuantity" placeholder="1 kg">
+				</div>
+			</div>
+		</div>
+		
+		<br/>
+		
+		<div class="col-sm-12" style="font-size: 16px">
+			<hr/>
+			<div class="col-sm-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Address
+					</div>
+					<div class="panel-body">
+						<address>
+							<strong>
+								Farmer Name
+							</strong>
+							<br/>
+							Addresse
+							<br/>
+							Zusatz
+							<br/>
+							Telefon
+							<br/>
+							Email
+						</address>
+					</div>
+				 </div>
+			</div>
+			<div class="col-sm-8">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-time" aria-hidden="true"></span> BarnBay pickup Locations
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped">
+							<tr>
+								<th>Name of the Location</th>
+								<th>PLZ</th>
+								<th>Adresse</th>
+								<th>Pick-Up Times</th>
+							</tr>
+							<tr>
+								<td>SAP</td>
+								<td>69190 Walldorf</td>
+								<td>Hasso-Plattner-Ring 7</td>
+								<td>Mo-Fr je 11.00 bis 14:00</td>
+							</tr>
+						
+							<tr>
+								<td>Uni Mannheim</td>
+								<td>68131 Mannheim</td>
+								<td>Schloss</td>
+								<td>Mo-Fr je 11.00 bis 14:00</td>
+							</tr>
+						</table>
+					</div>
+				 </div>
+			</div>
+			<br/>
+		</div>
+		
+		<br/>
+		
+		<div class="col-sm-12" style="font-size: 16px">
+			<div class="col-sm-12" style="font-size: 16px">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-time" aria-hidden="true"></span> BarnBay pickup Locations
+					</div>
+					<div class="panel-body">
+						Bla
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	function productFarmerSelect(element) {
+		$.ajax({
+			url: "/barnbay_ui/GetProductByCategoryAndFarmer?catid=" + $.cookie("Product.ProductListCategoryID") + "&farmerid=" + element.value
+		}).done(function(data) {
+			ProductDetailJSONObject = JSON.parse(data);
+			alert(data);
+			productDetailFunction(ProductDetailJSONObject[0]);
+		});
+	}
+	
+	function productAddToCart() {
+		if($.cookie('User.Session')) {
+			$('#successAlert').slideDown();		
+		} else {
+			$('#productAddToCartLogin').modal('show'); 	
+		}
+	}
+	
+</script>
+
+<!-- Modal Login -->
+<div class="modal fade" id="productAddToCartLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+  			<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    			<h4 class="modal-title" id="myModalLabel">Please Login</h4>
+  			</div>
+  			<div class="modal-body">
+    			If you want to add some Products to you Shopping-Card you must Login
+  			</div>
+  			<div class="modal-footer">
+    			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  			</div>
+		</div>
+	</div>
+</div>

@@ -208,7 +208,7 @@ $(document).ready(function() {
 		
 	/* On click of Item */
 	$('#mainContainer').on('click', '#productDetailView', function(event) {
-		$('#mainContainer').hide().load('./content/product_chris.html').fadeIn('500');
+		$('#mainContainer').hide().load('./content/product_detailview.html').fadeIn('500');
 	});
 });
 
