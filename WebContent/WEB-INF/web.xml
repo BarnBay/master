@@ -143,4 +143,14 @@
     <servlet-name>GetProductByCategoryAndFarmer</servlet-name>
     <url-pattern>/GetProductByCategoryAndFarmer</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetFarmerByFarmerId</display-name>
+    <servlet-name>GetFarmerByFarmerId</servlet-name>
+    <servlet-class>services.GetFarmerByFarmerId</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetFarmerByFarmerId</servlet-name>
+    <url-pattern>/GetFarmerByFarmerId</url-pattern>
+  </servlet-mapping>
 </web-app>

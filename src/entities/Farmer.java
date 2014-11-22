@@ -7,6 +7,7 @@ public class Farmer {
 	public String farmname;
 	public String farmdescription;
 	public String farmpicture;
+	public String farmopeninghours;
 	public String street;
 	public String number;
 	public String zipcode;
