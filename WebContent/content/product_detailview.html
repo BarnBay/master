@@ -62,13 +62,12 @@
 			out += '			</div>';
 			out += '		</div>';
 			out += '		<hr>';
-			out += '		<button type="button" class="btn btn-success pull-right" onclick="productAddToCart()">';
+			out += '		<button type="button" id="addProductToCartButton" class="btn btn-success pull-right" onclick="productAddToCart()">';
 			out += '			<span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart';
 			out += '		</button>';
 			out += '		<div class="price">';
 			out += '			<span class="price-head">Price:</span>';
 			out += '			<span class="price-new">' + productDetailObject.price + ' &euro;</span> ';
-			ProductPrice = productDetailObject.price;
 			out += '		</div>';
 			out += '		<hr>';
 			out += '		<div class="row productFamerLocation">';
@@ -78,6 +77,7 @@
 			out += '			<div class="col-sm-10">';
 			out += '				<select class="form-control input-md" id="selectproductDetailFarmer" onchange="productFarmerSelect(this)">';
 			
+			ProductPrice = productDetailObject.price;
 			for(i = 0; i < productDetailObject.farmers.length; i++) {
 				if((productDetailObject.farmerfirstname == productDetailObject.farmers[i].firstname) && (productDetailObject.farmerlastname == productDetailObject.farmers[i].lastname)) {
 					out += '					<option value="' + productDetailObject.farmers[i].idfarmer + '" selected="selected">' + productDetailObject.farmers[i].firstname + ' ' + productDetailObject.farmers[i].lastname + '</option>';
@@ -199,7 +199,7 @@
 	
 	function productAddToCart() {
 		if($.cookie('User.Session')) {
-			$('button').prop('disabled', true);
+			$('#addProductToCartButton').prop('disabled', true);
 			
 			var obj = JSON.parse($.cookie('Products.ShoppingCart'));
 			

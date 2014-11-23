@@ -4,6 +4,7 @@
 			var obj = JSON.parse($.cookie('Products.ShoppingCart'));
 			var shoppingcart = obj['shoppingcart'];
 			var out = "";
+			var productSubTotal = 0;
 			
 			out += '<div class="row">';
 			out += '	<div class="col-sm-12 col-md-12">';
@@ -21,8 +22,9 @@
 			out += '			<tbody>';
 			
 			for(i = 0; i < shoppingcart.length; i++) {
+				productSubTotal = productSubTotal + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity);
 				out += '				<tr>';
-				out += '					<td class="col-md-6">';
+				out += '					<td class="col-md-5">';
 				out += '						<div class="media">';
 				out += '							<img class="media-object pull-left" src="http://placehold.it/72x72">';
 				out += '							<div class="media-body" style="padding: 5px;">';
@@ -32,13 +34,13 @@
 				out += '							</div>';
 				out += '						</div>';
 				out += '					</td>';
-				out += '					<td class="col-md-2">';
+				out += '					<td class="col-md-3">';
 				out += '						<select class="form-control input-md" disabled>';
 				out += '							<option>' + shoppingcart[i].barnbayName + '</option>';
 				out += '						</select>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1" style="text-align: center">';
-				out += '						<input type="email" class="form-control" id="number" value="' + shoppingcart[i].productQuantity + '">';
+				out += '						<input type="email" class="form-control" id="number" value="' + shoppingcart[i].productQuantity + '" disabled>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1 text-center">';
 				out += '						<strong>' + shoppingcart[i].productPrice + ' &euro;</strong>';
@@ -47,7 +49,7 @@
 				out += '						<strong>' + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity) + ' &euro;</strong>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1">';
-				out += '						<button type="button" class="btn btn-danger">';
+				out += '						<button type="button" class="btn btn-danger" onClick="removeItemFromShoppingCart(' + i + ')">';
 				out += '							<span class="glyphicon glyphicon-remove"></span> Remove';
 				out += '						</button>';
 				out += '					</td>';
@@ -60,7 +62,7 @@
 			out += '					<td></td>';
 			out += '					<td></td>';
 			out += '					<td><h5>Subtotal</h5></td>';
-			out += '					<td class="text-right"><h5><strong>$24.59</strong></h5></td>';
+			out += '					<td class="text-right"><h5><strong>' + productSubTotal + ' &euro;</strong></h5></td>';
 			out += '              	</tr';
 			out += '				<tr>';
 			out += '					<td></td>';
@@ -68,7 +70,7 @@
 			out += '					<td></td>';
 			out += '					<td></td>';
 			out += '					<td><h5>Barnbay fee</h5></td>';
-			out += '					<td class="text-right"><h5><strong>$2.46</strong></h5></td>';
+			out += '					<td class="text-right"><h5><strong>' + (productSubTotal * 0.15) + ' &euro;</strong></h5></td>';
 			out += '              	</tr';
 			out += '				<tr>';
 			out += '					<td></td>';
@@ -76,7 +78,7 @@
 			out += '					<td></td>';
 			out += '					<td></td>';
 			out += '					<td><h3>Total</h3></td>';
-			out += '					<td class="text-right"><h3><strong>$27.05</strong></h3></td>';
+			out += '					<td class="text-right"><h3><strong>' + (productSubTotal * 1.15) + ' &euro;</strong></h3></td>';
 			out += '              	</tr';
 			out += '				<tr>';
 			out += '					<td></td>';
@@ -105,3 +107,20 @@
 		displayShoppingCartItem();
 	</script>
 </div>
+
+<script type="text/javascript">
+	function removeItemFromShoppingCart(item) {
+		var obj = JSON.parse($.cookie('Products.ShoppingCart'));
+		var result = JSON.parse('{"shoppingcart":[]}');
+		var shoppingcart = obj['shoppingcart'];
+		
+		for(i = 0; i < shoppingcart.length; i++) {
+			if(i != item) {
+				result['shoppingcart'].push(shoppingcart[i]);
+			}
+		}
+		
+		$.cookie('Products.ShoppingCart', JSON.stringify(result));
+		displayShoppingCartItem();
+	}
+</script>
