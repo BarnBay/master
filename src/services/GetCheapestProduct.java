@@ -75,6 +75,7 @@ public class GetCheapestProduct extends HttpServlet {
 							if (rs4 != null && rs4.next()) {
 								p.farmerfirstname = rs4.getString(2);
 								p.farmerlastname = rs4.getString(3);
+								p.farmeremail = rs4.getString(10);
 								fk_barnbay = rs4.getInt(9);
 								fk_address = rs4.getInt(7);
 								
@@ -113,6 +114,7 @@ public class GetCheapestProduct extends HttpServlet {
 											f.idfarmer = rs7.getInt(1);
 											f.firstname = rs7.getString(2);
 											f.lastname = rs7.getString(3);
+											f.email = rs7.getString(10);
 											
 											fk_address = rs7.getInt(7);
 											
