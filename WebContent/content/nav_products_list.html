@@ -164,7 +164,7 @@
 				    var i;
 				    for(i = 0; i < productArray.length; i++) {
 				    	if(ListOrGridView == "GridView") {
-					    	out += '<div class="col-xs-4 col-lg-4">';
+					    	out += '<div class="col-md-4 col-lg-4">';
 					    	out += '	<div class="thumbnail">';
 					    	out += '		<img class="group gridview-group-image" id="productDetailView" src="./img/products/' + productArray[i].name + '.png" alt="" onclick="productGetDetailedProductInfo(' + productArray[i].idcategory + ')"/></a>';
 					    	out += '		<div class="gridview-group-item-caption">';
@@ -172,7 +172,7 @@
 					    	out += '				' + productArray[i].name;
 					    	out += '			</div>';
 					    	out += '			<div class="gridview-group-item-text">';
-					    	out += '				'+ productArray[i].category_description;
+					    	out += '				' + productArray[i].category_description;
 					    	out += '			</div>';
 					    	out += '			<div class="gridview-group-item-price">';
 					    	out += '				' + productArray[i].price + ' &euro;';
@@ -192,7 +192,7 @@
 					    	out += '				' + productArray[i].name;
 					    	out += '			</div>';
 					    	out += '			<div class="listview-group-item-text">';
-					    	out += '				'+ productArray[i].category_description;
+					    	out += '				' + productArray[i].category_description;
 					    	out += '			</div>';
 					    	out += '			<div class="listview-group-item-price">';
 					    	out += '				' + productArray[i].price + ' &euro;';

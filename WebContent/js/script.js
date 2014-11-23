@@ -163,7 +163,6 @@ $(document).ready(function() {
 		$('#productGrid').removeClass('active');
 		$('#productList').addClass('active');
 		
-		//$('#products .item').addClass('list-group-item');
 		ListOrGridView = "ListView";
 		productListFunction(ProductListJSONObject);
 	});
@@ -174,8 +173,6 @@ $(document).ready(function() {
 		$('#productList').removeClass('active');
 		$('#productGrid').addClass('active');
 		
-		//$('#products .item').removeClass('list-group-item');
-		//$('#products .item').addClass('grid-group-item');
 		ListOrGridView = "GridView";
 		productListFunction(ProductListJSONObject);
 	});
@@ -213,7 +210,9 @@ $(document).ready(function() {
 		$('#farmerGrid').removeClass('active');
 		$('#farmerList').addClass('active');
 		
-		$('#farmers .item').addClass('list-group-item');
+		//$('#farmers .item').addClass('list-group-item');
+		ListOrGridView = "ListView";
+		farmerListFunction(FarmerListJSONObject);
 	});
 	
 	/* On click of GridView Icon */
@@ -222,8 +221,10 @@ $(document).ready(function() {
 		$('#farmerList').removeClass('active');
 		$('#farmerGrid').addClass('active');
 		
-		$('#farmers .item').removeClass('list-group-item');
-		$('#farmers .item').addClass('grid-group-item');
+		//$('#farmers .item').removeClass('list-group-item');
+		//$('#farmers .item').addClass('grid-group-item');
+		ListOrGridView = "GridView";
+		farmerListFunction(FarmerListJSONObject);
 	});
 	
 	/* On changed value of selector -> Sort JSON-Object ProductListJSONObject */
