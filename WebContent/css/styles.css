@@ -3,7 +3,7 @@
    ------------------------------------------------------------------------------------ */
 html, body {
 	height: 100%;
-	background-color: white;
+	/*background-color: white;*/
 }
 
 #wrap {
@@ -140,67 +140,123 @@ html, body {
     -moz-border-radius: 0px;
     border-radius: 0px;
 }
-  
-.thumbnail .caption {
+
+/* GridView */
+.thumbnail .gridview-group-item-caption {
   	padding: 10px;
 }
-  
-.thumbnail .list-group-item-text {
-    margin: 0 0 10px;
+
+.thumbnail .gridview-group-image {
+	height: 225px;
+	cursor: pointer;
 }
 
-.thumbnail .list-group-item-price {
-    font-weight: bold;
-    margin-top: 5px;
+.thumbnail .gridview-group-item-heading {
+	padding-top: 5px;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: 'Roboto Condensed', sans-serif;
 }
 
-.thumbnail .caption .btn-success {
-  	float: right;
+.thumbnail .gridview-group-item-text {
+	padding: 5px 0;
+	color: #8b8b8b;
+	font-size: 14px;
+	line-height: 18px;
+	white-space: nowrap;
+	overflow: hidden;
+  	text-overflow: ellipsis
 }
 
-.item.list-group-item {
-    float: none;
-  	width: 100%;
-    padding: 0px;
-    padding-left: 15px;
-	padding-right: 15px;
-    margin-bottom: 10px;
-    border-color: #FFF;
+.thumbnail .gridview-group-item-price {
+	padding-top: 5px;
+	font-size: 22px;
+	font-weight: bold;
+	font-family: 'Roboto Condensed', sans-serif;
 }
 
-.item.list-group-item .list-group-image {
-    margin-right: 10px;
+/* ListView */
+.listview {
+	border-top: 2px solid #DDDDDD;
 }
 
-.item.list-group-item .thumbnail {
-    margin-bottom: 10px;
+.listview-group-item-caption {
+  	padding: 10px;
 }
 
-.item.list-group-item .caption {
-    padding: 10px 10px 0px 10px;
+.listview-group-image {
+	height: 225px;
+	cursor: pointer;
 }
 
-.item.list-group-item .row {
-    bottom:0;
-    right:0;
+.listview-group-item-heading {
+	padding-top: 5px;
+	font-size: 18px;
+	font-weight: bold;
 }
 
-.item.list-group-item img {
-    float: left;
+.listview-group-item-text {
+	padding: 5px 0;
+	color: #8b8b8b;
+	font-size: 14px;
+	line-height: 18px;
+	white-space: nowrap;
+	overflow: hidden;
+  	text-overflow: ellipsis
 }
 
-.item.list-group-item:after {
-    clear: both;
+.listview-group-item-price {
+	padding-top: 5px;
+	font-size: 22px;
+	font-weight: bold;
 }
 
-.item .label.label-danger.price, .item .label.label-success.price {
-	position: absolute;
-	top: -5px;
-	right: 10px;
-	padding: 5px; 
-	font-size: 14px; 	
+/* ------------------------------------------------------------------------------------
+   Product Detail View
+   ------------------------------------------------------------------------------------ */
+#productDetailInformation .col-sm-5 {
+	padding: 10px;
 }
 
+#productDetailInformation .col-sm-5 img {
+	max-height: 305px;
+}
+
+.productDetail h2 {
+	font-size: 24px;
+	margin-top: 0px;	
+}
+
+.productDetail .row.manufacturer {
+	font-size: 16px;
+}
+
+.productDetail .manufacturer {
+	color: #808080
+}
+
+.productDetail .manufacturer span {
+	min-width: 130px;
+	display: inline-block;
+	color: #2f353b;
+}
+
+.productDetail .price {
+	font-size: 24px;
+}
+
+.productDetail .price-head {
+	min-width: 130px;
+}
+
+.productDetail .row.productFamerLocation {
+	font-size: 16px;
+	margin-top: 10px;
+}
+
+.productDetail .row.productFamerLocation .col-sm-2 {
+	padding-top: 5px;
+}
 
 /* ------------------------------------------------------------------------------------
    Footer

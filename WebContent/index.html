@@ -94,10 +94,12 @@
 	    <script src="js/jquery.cookie.js"></script>
 	    <!-- Custom JS -->
 		<script src="js/script.js"></script>
+		<!-- Google Script -->
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 		
 		<script type="text/javascript">
 			/*$.ajax({
-				url: "/barnbay_ui/GetProductByCategoryAndFarmer?catid=5&farmerid=1"
+				//url: "/barnbay_ui/GetFarmerByFarmerId?id=1"
 			}).done(function(data) {
 				//var products = JSON.parse(data);
 				//alert(data);
@@ -127,6 +129,18 @@
 					//alert(JSON.stringify(data));
 				}
 			});*/
+						
+			/*var obj = JSON.parse($.cookie('Products.ShoppingCart'));
+			obj['shoppingcart'].push({"teamId":"4","status":"pending"});
+			jsonStr = JSON.stringify(obj);	
+			//alert(jsonStr);
+			
+			obj['shoppingcart'].push({"teamId":"5","status":"pending"});
+			jsonStr = JSON.stringify(obj);
+			
+			var test = obj['shoppingcart'];
+			//alert(test[1].teamId);*/
+
 		</script>
 	</body>
 </html>

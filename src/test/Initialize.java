@@ -74,22 +74,61 @@ public class Initialize extends HttpServlet {
 		db.executeSQL("INSERT INTO TEST.USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
 				+"VALUES (2, 'Peter', 'Meier', 'peterm', 1, 1, 2, 1, 'peterm@vollbio.org', 'tisch', 3)");
 		
+	
+		/**
+		 * Initialize Grannys Apfel
+		 */
+		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
+          		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(1,"
+           	 + "'You will love this Product.', 4, 1, 2, 100, 0, 0)");
 		
 		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
+         		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(2,"
+          	 + "'Best Product in my stock.', 4, 2, 1, 20, 0, 0)");
+		
+		
+	
+		/**
+		 * Initialize Apple Cripps Pink
+		 */
+		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
+          		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(1,"
+           	 + "'You will love this Product.', 5, 1, 2, 100, 0, 0)");
+		
+		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
+         		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(2,"
+          	 + "'Best Product in my stock.', 5, 2, 3, 20, 0, 0)");
+		
+		
+		/**
+		 * Initialize carrot
+		 */
+		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
            		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(1,"
-            	 + "'Sehr saftige Apfelsorte, die Sie lieben werden.', 5, 1, 3, 100, 0, 0)");
+            	 + "'You will love this Product.', 6, 1, 3, 100, 0, 0)");
 		
 		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
           		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(2,"
-           	 + "'Yam, yam.', 5, 2, 2, 20, 0, 0)");
+           	 + "'Best Product in my stock.', 6, 2, 4, 20, 0, 0)");
 		
-		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(1, 'Obst', 0,'')");
-		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(2, 'Gemüse', 0, '')");
-		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(3, 'Fleisch', 0,'')");
-		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(4, 'Grannys Apfel', 1,'Grannys Apfel ist sehr lieblich.')");
-		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(5, 'Pink Ladys Apfel', 1,'Pink Lady ist eine sehr knackige Apfelsorte')");
-		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(6, 'Moehre flotte Hilde', 2,'Schoen in der Farbe!')");
-		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(7, 'Tomate Red Bull', 2,'Saftig, saftiger am saftigsten!')");
+		/**
+		 * Initialize tomato
+		 */
+		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
+          		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(1,"
+           	 + "'You will love this Product.', 7, 1, 4, 100, 0, 0)");
+		
+		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
+         		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(2,"
+          	 + "'Best Product in my stock.', 7, 2, 5, 20, 0, 0)");
+		
+		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(1, 'Fruits', 0,'')");
+		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(2, 'Vegetables', 0, '')");
+		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(3, 'Meat', 0,'')");
+		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(4, 'Apple Granny Smith', 1,'The Granny Smith is a tip-bearing apple cultivar, which originated in Australia in 1868.')");
+		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(5, 'Apple Cripps Pink', 1,'Cripps Pink is a variety of apple, sold under the trade mark name Pink Lady.')");
+		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(6, 'Carrot Milan', 2,'The carrot is a root vegetable, usually orange, purple, red, white, and yellow varieties exist.')");
+		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(7, 'Tomato', 2,'The tomato is the edible, often red fruit/berry of a tomato plant.')");
 		
 		db.close();
 		

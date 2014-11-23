@@ -73,6 +73,7 @@ $(document).ready(function() {
 		$.removeCookie('User.Session');
 		$.removeCookie('User.Usertype');
 		$.removeCookie('User.JSON');
+		$.removeCookie('Products.ShoppingCart');
 		location.reload();
 	});
 });
@@ -151,16 +152,6 @@ $(document).ready(function() {
 });
 
 /* ------------------------------------------------------------------------------------
-   Start Coursel automatically
-   ------------------------------------------------------------------------------------ */
-$(document).ready(function() {
-     $('#homeCarousel').carousel({
-         interval: 4500
-     })
-});
-
-
-/* ------------------------------------------------------------------------------------
    Product List View
    ------------------------------------------------------------------------------------ */
 $(document).ready(function() {
@@ -173,7 +164,8 @@ $(document).ready(function() {
 		$('#productGrid').removeClass('active');
 		$('#productList').addClass('active');
 		
-		$('#products .item').addClass('list-group-item');
+		ListOrGridView = "ListView";
+		productListFunction(ProductListJSONObject);
 	});
 	
 	/* On click of GridView Icon */
@@ -182,8 +174,8 @@ $(document).ready(function() {
 		$('#productList').removeClass('active');
 		$('#productGrid').addClass('active');
 		
-		$('#products .item').removeClass('list-group-item');
-		$('#products .item').addClass('grid-group-item');
+		ListOrGridView = "GridView";
+		productListFunction(ProductListJSONObject);
 	});
 	
 	/* On changed value of selector -> Sort JSON-Object ProductListJSONObject */
@@ -204,7 +196,7 @@ $(document).ready(function() {
 		
 	/* On click of Item */
 	$('#mainContainer').on('click', '#productDetailView', function(event) {
-		$('#mainContainer').hide().load('./content/product_chris.html').fadeIn('500');
+		$('#mainContainer').hide().load('./content/product_detailview.html').fadeIn('500');
 	});
 });
 
@@ -219,7 +211,9 @@ $(document).ready(function() {
 		$('#farmerGrid').removeClass('active');
 		$('#farmerList').addClass('active');
 		
-		$('#farmers .item').addClass('list-group-item');
+		//$('#farmers .item').addClass('list-group-item');
+		ListOrGridView = "ListView";
+		farmerListFunction(FarmerListJSONObject);
 	});
 	
 	/* On click of GridView Icon */
@@ -228,8 +222,10 @@ $(document).ready(function() {
 		$('#farmerList').removeClass('active');
 		$('#farmerGrid').addClass('active');
 		
-		$('#farmers .item').removeClass('list-group-item');
-		$('#farmers .item').addClass('grid-group-item');
+		//$('#farmers .item').removeClass('list-group-item');
+		//$('#farmers .item').addClass('grid-group-item');
+		ListOrGridView = "GridView";
+		farmerListFunction(FarmerListJSONObject);
 	});
 	
 	/* On changed value of selector -> Sort JSON-Object ProductListJSONObject */
@@ -251,6 +247,11 @@ $(document).ready(function() {
 	/* On click of Item */
 	$('#mainContainer').on('click', '#farmerDetailView', function(event) {
 		$('#mainContainer').hide().load('./content/farmer_chris.html').fadeIn('500');
+	});
+	
+	/* On click of Item */
+	$('#mainContainer').on('click', '#locationDetailView', function(event) {
+		$('#mainContainer').hide().load('./content/location_detailview.html').fadeIn('500');
 	});
 	
 	/*

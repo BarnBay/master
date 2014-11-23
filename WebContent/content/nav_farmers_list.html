@@ -2,6 +2,8 @@
 <script src="./json/nav_farmers_list.js"></script>
 <script type="text/javascript">
 	var ProductListJSONObject;
+	var ListOrGridView = "GridView";
+	
 	$.ajax({
 		url: "/barnbay_ui/GetAllFarmers"
 	}).done(function(data) {
@@ -71,41 +73,52 @@
 				    var out = "";
 				    var i;
 				    for(i = 0; i < farmerArray.length; i++) {
-				    	out += '<div class="item  col-xs-3 col-lg-3">';
-				    	out += '	<div class="thumbnail">';					
-				    	out += '		<img class="group list-group-image" id="farmerDetailView" src="http://placehold.it/400x250" alt="" style="cursor:pointer;"/></a>';
-				    	out += '		<div class="caption">';
-				    	out += '			<h3 class="group inner list-group-item-heading" id="farmerDetailView" style="cursor:pointer;">' + farmerArray[i].farmname + '</h3>';
-				    	out += '			<p class="group inner list-group-item-text">' + farmerArray[i].farmdescription + '</p>';
-				    	out += '			<div class="row">';
-				    	out += '				<div class="col-xs-12 col-md-6" style="height: 34px;">';
-				    	out += '					<h3 class="list-group-item-price"></h3>';
-				    	out += '				</div>';
-				    	out += '			</div>';
-				    	out += '		</div>';
-				    	out += '	</div>';
-				    	out += '</div>';
+				    	if(ListOrGridView == "GridView") {
+					    	out += '<div class="item  col-xs-3 col-lg-3">';
+					    	out += '	<div class="thumbnail">';					
+					    	out += '		<img class="group gridview-group-image" id="farmerDetailView" src="http://placehold.it/400x250" alt="" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')"/></a>';
+					    	out += '		<div class="gridview-group-item-caption">';
+					    	out += '			<div class="gridview-group-item-heading" id="farmerDetailView" style="cursor:pointer;" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')">';
+					    	out += '				' + farmerArray[i].farmname;
+					    	out += '			</div>';
+					    	out += '			<div class="gridview-group-item-text">';
+					    	out += '				' + farmerArray[i].farmdescription;
+					    	out += '			</div>';
+					    	out += '		</div>';
+					    	out += '	</div>';
+					    	out += '</div>';
+				    	} else {
+					    	out += '<div class="col-xs-12 col-lg-12" style="margin-top: 10px;">';
+					    	out += '	<div class="listview col-xs-12"></div>';
+					    	out += '	<div class="col-xs-4">';
+					    	out += '		<img class="group listview-group-image" id="farmerDetailView" src="http://placehold.it/400x250" alt="" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')"/></a>';
+					    	out += '	</div>';
+					    	out += '	<div class="col-xs-8">';
+					    	out += '		<div class="listview-group-item-caption">';
+					    	out += '			<div class="listview-group-item-heading" id="farmerDetailView" style="cursor:pointer;" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')">';
+					    	out += '				' + farmerArray[i].farmname;
+					    	out += '			</div>';
+					    	out += '			<div class="listview-group-item-text">';
+					    	out += '				' + farmerArray[i].farmdescription;
+					    	out += '			</div>';
+					    	out += '		</div>';
+					    	out += '	</div>';
+					    	out += '</div>';	
+				    	}
 			    	}
 			    
 			    	document.getElementById("farmers").innerHTML = out;
-			    	
-			    	/* Exampler Array
-			    	{
-						"idfarmer":"",
-						"firstname":"",
-						"lastname":"",
-						"farmname":"",
-						"farmpicutre":"",
-						"street":"",
-						"number":"",
-						"zipcode":"",
-						"city":""
-					}
-			    	*/
 				}
 			</script>
 			<!-- JSON END -->
 		</div>
-
 	</div><!-- end right column -->
 </div><!-- end row -->
+
+
+<script type="text/javascript">	
+	/* Display Detailed Information about the Product */
+	function farmerGetDetailedFarmerInfo(farmerid) {
+		$.cookie("Farmer.FarmerListCategoryID", farmerid, { expires: 1 });
+	}
+</script>

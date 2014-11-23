@@ -1,116 +1,126 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-12">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                    	<th>Product</th>
-                    	<th>Location</th>
-                        <th>Quantity</th>
-                        <th class="text-center">Price</th>
-                        <th class="text-center">Total</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="col-md-5">
-                        <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://placehold.it/72x72"> </a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Apple Pink Lady</a></h4>
-                                <h5 class="media-heading"> by <a href="#">Farmer John</a></h5>
-                                <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
-                            </div>
-                        </div></td>
-                        <td class="col-md-2">
-                        	<select class="form-control input-md">
-      							<option>UNI Mannheim</option>
-      							<option>SAP Walldorf</option>
-      							<option>Central Station Mannheim</option>
-    						</select>
-    					</td>
-    					
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="3">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$4.87</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-6">
-                        <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://placehold.it/72x72"> </a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Pumpkin</a></h4>
-                                <h5 class="media-heading"> by <a href="#">Farmer Paul</a></h5>
-                                <span>Status: </span><span class="text-warning"><strong>Currently not in farmers Stock</strong></span>
-                            </div>
-                        </div></td>
-                        <td class="col-md-2">
-                        	<select class="form-control input-md">
-      							<option>UNI Mannheim</option>
-      							<option>SAP Walldorf</option>
-      							<option>Central Station Mannheim</option>
-    						</select>
-    					</td>
-                        <td class="col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="2">
-                        </td>
-                        <td class="col-md-1 text-center"><strong>$4.99</strong></td>
-                        <td class="col-md-1 text-center"><strong>$9.98</strong></td>
-                        <td class="col-md-1">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><h5>Subtotal</h5></td>
-                        <td class="text-right"><h5><strong>$24.59</strong></h5></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><h5>Barnbay fee</h5></td>
-                        <td class="text-right"><h5><strong>$2.46</strong></h5></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><h3>Total</h3></td>
-                        <td class="text-right"><h3><strong>$27.05</strong></h3></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                        <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
-                        </button></td>
-                        <td>
-                        <button type="button" id="checkout" class="btn btn-success">
-                        	<span class="glyphicon glyphicon-usd"></span>Checkout
-                        </button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <script type="text/javascript">
-                        	
-                        </script>
-        </div>
-    </div>
+<div class="container" id="shoppingCartContainer">
+	<script type="text/javascript">							
+		function displayShoppingCartItem() {
+			var obj = JSON.parse($.cookie('Products.ShoppingCart'));
+			var shoppingcart = obj['shoppingcart'];
+			var out = "";
+			var productSubTotal = 0;
+			
+			out += '<div class="row">';
+			out += '	<div class="col-sm-12 col-md-12">';
+			out += '		<table class="table table-hover">';
+			out += '        	<thead>';
+			out += '				<tr>';
+			out += '					<th>Product</th>';
+			out += '					<th>Location</th>';
+			out += '					<th>Quantity</th>';
+			out += '					<th class="text-center">Price</th>';
+			out += '					<th class="text-center">Total</th>';
+			out += '					<th></th>';
+			out += '				</tr>';
+			out += '			</thead>';
+			out += '			<tbody>';
+			
+			for(i = 0; i < shoppingcart.length; i++) {
+				productSubTotal = productSubTotal + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity);
+				out += '				<tr>';
+				out += '					<td class="col-md-5">';
+				out += '						<div class="media">';
+				out += '							<img class="media-object pull-left" src="http://placehold.it/72x72">';
+				out += '							<div class="media-body" style="padding: 5px;">';
+				out += '								<h4 class="media-heading">' + shoppingcart[i].productName + '</h4>';
+				out += '								<h5 class="media-heading"> by ' + shoppingcart[i].farmerName + '</h5>';
+				out += '								<span>Status: </span><span class="text-success"><strong>In Stock</strong></span>';
+				out += '							</div>';
+				out += '						</div>';
+				out += '					</td>';
+				out += '					<td class="col-md-3">';
+				out += '						<select class="form-control input-md" disabled>';
+				out += '							<option>' + shoppingcart[i].barnbayName + '</option>';
+				out += '						</select>';
+				out += '					</td>';
+				out += '					<td class="col-sm-1 col-md-1" style="text-align: center">';
+				out += '						<input type="email" class="form-control" id="number" value="' + shoppingcart[i].productQuantity + '" disabled>';
+				out += '					</td>';
+				out += '					<td class="col-sm-1 col-md-1 text-center">';
+				out += '						<strong>' + shoppingcart[i].productPrice + ' &euro;</strong>';
+				out += '					</td>';
+				out += '					<td class="col-sm-1 col-md-1 text-center">';
+				out += '						<strong>' + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity) + ' &euro;</strong>';
+				out += '					</td>';
+				out += '					<td class="col-sm-1 col-md-1">';
+				out += '						<button type="button" class="btn btn-danger" onClick="removeItemFromShoppingCart(' + i + ')">';
+				out += '							<span class="glyphicon glyphicon-remove"></span> Remove';
+				out += '						</button>';
+				out += '					</td>';
+				out += '				</tr>';
+			}
+			
+			out += '				<tr>';
+			out += '					<td></td>';
+			out += '					<td></td>';
+			out += '					<td></td>';
+			out += '					<td></td>';
+			out += '					<td><h5>Subtotal</h5></td>';
+			out += '					<td class="text-right"><h5><strong>' + productSubTotal + ' &euro;</strong></h5></td>';
+			out += '              	</tr';
+			out += '				<tr>';
+			out += '					<td></td>';
+			out += '					<td></td>';
+			out += '					<td></td>';
+			out += '					<td></td>';
+			out += '					<td><h5>Barnbay fee</h5></td>';
+			out += '					<td class="text-right"><h5><strong>' + (productSubTotal * 0.15) + ' &euro;</strong></h5></td>';
+			out += '              	</tr';
+			out += '				<tr>';
+			out += '					<td></td>';
+			out += '					<td></td>';
+			out += '					<td></td>';
+			out += '					<td></td>';
+			out += '					<td><h3>Total</h3></td>';
+			out += '					<td class="text-right"><h3><strong>' + (productSubTotal * 1.15) + ' &euro;</strong></h3></td>';
+			out += '              	</tr';
+			out += '				<tr>';
+			out += '					<td></td>';
+			out += '					<td></td>';
+			out += '					<td></td>';
+			out += '					<td></td>';
+			out += '					<td>';
+			out += '						<button type="button" class="btn btn-default">';
+			out += '							<span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping';
+			out += '						</button>';
+			out += '					</td>';
+			out += '					<td>';
+			out += '						<button type="button" id="checkout" class="btn btn-success">';
+			out += '							<span class="glyphicon glyphicon-usd"></span>Checkout';
+			out += '						</button>';
+			out += '					</td>';
+			out += '				</tr>';
+			out += '			</tbody>';
+			out += '		</table>';
+			out += '    </div>';
+			out += '</div>';
+			
+			document.getElementById("shoppingCartContainer").innerHTML = out;
+		}
+		
+		displayShoppingCartItem();
+	</script>
 </div>
+
+<script type="text/javascript">
+	function removeItemFromShoppingCart(item) {
+		var obj = JSON.parse($.cookie('Products.ShoppingCart'));
+		var result = JSON.parse('{"shoppingcart":[]}');
+		var shoppingcart = obj['shoppingcart'];
+		
+		for(i = 0; i < shoppingcart.length; i++) {
+			if(i != item) {
+				result['shoppingcart'].push(shoppingcart[i]);
+			}
+		}
+		
+		$.cookie('Products.ShoppingCart', JSON.stringify(result));
+		displayShoppingCartItem();
+	}
+</script>
