@@ -103,7 +103,7 @@
 				    for(i = 0; i < locationArray.length; i++) {
 				    	out += '<div class="item  col-xs-4 col-lg-4">';
 				    	out += '	<div class="thumbnail">';					
-				    	out += '		<img class="group list-group-image" src="http://placehold.it/400x250" alt="" />';
+				    	out += '		<img class="group list-group-image" id="locationDetailView" src="./img/locations/' + locationArray[i].lName + '.png" alt="" style="cursor:pointer;" onclick="locationGetDetailedLocationInfo(' + locationArray[i].lId + ')" height="90"/></a>';
 				    	out += '		<div class="caption">';
 				    	out += '			<h3 class="group inner list-group-item-heading">' + locationArray[i].lName + '</h3>';
 				    	out += '			<p class="group inner list-group-item-text">' + locationArray[i].lDescription + '</p>';
@@ -124,3 +124,11 @@
 
 	</div><!-- end right column -->
 </div><!-- end row -->
+
+
+<script type="text/javascript">	
+	/* Display Detailed Information about the Product */
+	function locationGetDetailedLocationInfo(farmerid) {
+		$.cookie("Location.LocationListCategoryID", locationid, { expires: 1 });
+	}
+</script>

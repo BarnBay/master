@@ -249,6 +249,11 @@ $(document).ready(function() {
 		$('#mainContainer').hide().load('./content/farmer_chris.html').fadeIn('500');
 	});
 	
+	/* On click of Item */
+	$('#mainContainer').on('click', '#locationDetailView', function(event) {
+		$('#mainContainer').hide().load('./content/location_detailview.html').fadeIn('500');
+	});
+	
 	/*
 	 *  On Click of Dashboard Item
 	 *  dash_viewDetails
