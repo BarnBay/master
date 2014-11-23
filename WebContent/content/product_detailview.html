@@ -1,6 +1,6 @@
-<script type="text/javascript">
-	//var GoogleMapsAddress = [];
-	//var GoogleMapsTitle = [];
+<script type="text/javascript">	
+	var GoogleMapsAddress = [];
+	var GoogleMapsTitle = [];
 	
 	var ProductDetailJSONObject;
 	var ProductDetailName;
@@ -19,7 +19,11 @@
 		productDetailFunction(ProductDetailJSONObject);
 		
 		/* Start Google Maps */
-		startMap(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city, ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
+		//startMap(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city, ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
+		GoogleMapsAddress.push(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city);
+		GoogleMapsTitle.push(ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
+		
+		startMap();
 	});
 </script>
 
@@ -36,7 +40,7 @@
 <!-- JSON - Create the Product List -->
 <div class="row" id="productDetailInformation">
 	<script type="text/javascript">							
-		function productDetailFunction(productDetailObject) {			
+		function productDetailFunction(productDetailObject) {
 			var out = "";
 			
 			out += '<div class="col-sm-12" style="font-family: \'Roboto Condensed\', sans-serif;">';
@@ -154,6 +158,9 @@
 				out += '							<td>' + productDetailObject.barnbays[i].description + '</td>';
 				out += '							<td>' + productDetailObject.barnbays[i].opening_hours + '</td>';
 				out += '						</tr>';
+				
+				GoogleMapsAddress.push(productDetailObject.barnbays[i].address.city);
+				GoogleMapsTitle.push(productDetailObject.barnbays[i].name);
 			}
 	
 			out += '					</table>';
@@ -193,7 +200,13 @@
 			productDetailFunction(ProductDetailJSONObject[0]);
 			
 			/* Start Google Maps */
-			startMap(ProductDetailJSONObject[0].farmeraddress.street + ' ' + ProductDetailJSONObject[0].farmeraddress.number + ', ' + ProductDetailJSONObject[0].farmeraddress.zipcode + ' ' + ProductDetailJSONObject[0].farmeraddress.city, ProductDetailJSONObject[0].farmerfirstname + ' ' + ProductDetailJSONObject[0].farmerlastname);
+			//startMap(ProductDetailJSONObject[0].farmeraddress.street + ' ' + ProductDetailJSONObject[0].farmeraddress.number + ', ' + ProductDetailJSONObject[0].farmeraddress.zipcode + ' ' + ProductDetailJSONObject[0].farmeraddress.city, ProductDetailJSONObject[0].farmerfirstname + ' ' + ProductDetailJSONObject[0].farmerlastname);
+			
+			/* Start Google Maps */
+			GoogleMapsAddress.push(ProductDetailJSONObject[0].farmeraddress.street + ' ' + ProductDetailJSONObject[0].farmeraddress.number + ', ' + ProductDetailJSONObject[0].farmeraddress.zipcode + ' ' + ProductDetailJSONObject[0].farmeraddress.city);
+			GoogleMapsTitle.push(ProductDetailJSONObject[0].farmerfirstname + ' ' + ProductDetailJSONObject[0].farmerlastname);
+			
+			startMap();
 		});
 	}
 	
@@ -248,7 +261,8 @@
 <script type="text/javascript">
 	var markerBounds, geocoder, map;
 	
- 	function startMap(address, title) {
+	function startMap() {
+		
  		var mapOptions = {
      		zoom: 12,
      		disableDefaultUI: true,
@@ -259,38 +273,54 @@
  		markerBounds = new google.maps.LatLngBounds();
  	    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
  	    
- 	    
- 	  	geocoder.geocode({'address': address}, function(results, status) {
-	 	  	if(status == google.maps.GeocoderStatus.OK) {
-	 	  		map.setCenter(results[0].geometry.location);
-	 	  		var marker = new google.maps.Marker({
-	 	  			map: map,
-	 	  			position: results[0].geometry.location
-	 	  		});
-	 	  		
-	 	  		var infowindow = new google.maps.InfoWindow({
-  	  	    		content: '<div><h3>' + title + '</h3></div>'
-  	  	  		});
-	 	  		
-	 	  		google.maps.event.addListener(marker, 'click', function() {
-					infowindow.open(map, marker);
-				});
-	 	  		
-	 	  		markerBounds.extend(results[0].geometry.location);
-				map.fitBounds(markerBounds);
-			} else {
-	 	    	alert("Geocode was not successful for the following reason: " + status);
-	 	   	}
-		});
+ 	   	for (var i = 0; i < GoogleMapsAddress.length; i++) {
+ 	   		var address = GoogleMapsAddress[i];
+ 	   		var title = GoogleMapsTitle[i];
+ 	   		
+	 	  	geocoder.geocode({'address': address}, function(results, status) {
+		 	  	if(status == google.maps.GeocoderStatus.OK) {
+		 	  		map.setCenter(results[0].geometry.location);
+		 	  		var marker = new google.maps.Marker({
+		 	  			map: map,
+		 	  			position: results[0].geometry.location
+		 	  		});
+		 	  		
+		 	  		var infowindow = new google.maps.InfoWindow({
+		 	  			content: '<div style="width: 150px;"><h4>' + title + '</h4></div>'
+	  	  	  		});
+		 	  		
+		 	  		google.maps.event.addListener(marker, 'click', function() {
+						infowindow.open(map, marker);
+					});
+		 	  		
+		 	  		markerBounds.extend(results[0].geometry.location);
+					map.fitBounds(markerBounds);
+				} else {
+		 	    	alert("Geocode was not successful for the following reason: " + status);
+		 	   	}
+			});
+ 	   	}
+ 	  	
+ 	  	GoogleMapsAddress = [];
+ 	  	GoogleMapsTitle = [];
   	}
  	
  	/*function addMarkerToMap() {
- 		startMap();
  		
- 		for (var i = 0; i < GoogleMapsAddress.length; i++) {
+ 		var mapOptions = {
+     		zoom: 12,
+     		disableDefaultUI: true,
+     	    mapTypeId: google.maps.MapTypeId.ROADMAP
+    	}
+ 		
+ 	  	geocoder = new google.maps.Geocoder();
+ 		markerBounds = new google.maps.LatLngBounds();
+ 	    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+ 		for (var i = 0; i < GoogleMapsAddress.length; i++) { 			
  			var address = GoogleMapsAddress[i];
- 			var title = '<h2 id="firstHeading" class="firstHeading">' + GoogleMapsTitle[i] + '</h2>';
- 			
+ 			var title = GoogleMapsTitle[i];
+ 			 			 			
 	 		geocoder.geocode({'address': address}, function(results, status) {
 	 			if(status == google.maps.GeocoderStatus.OK) {	    	  				
 	 				var marker = new google.maps.Marker({
@@ -300,7 +330,7 @@
 					});
 					
 					var infowindow = new google.maps.InfoWindow({
-	  	  	    		content: title
+						content: '<div style="width: 150px;"><h4>' + title + '</h4></div>'
 	  	  	  		});
 										
 					google.maps.event.addListener(marker, 'click', function() {
@@ -313,6 +343,5 @@
 	      			alert("Geocode was not successful for the following reason: " + status);
 	    		}
 			});
- 		}
- 	}*/
+ 		}*/
  </script>
