@@ -13,6 +13,7 @@ public class Product{
 	public String farmerfirstname;
 	public String farmerlastname;
 	public Address farmeraddress;
+	public String farmeremail;
 	public ArrayList<Farmer> farmers = new ArrayList<Farmer>();
 	public ArrayList<Barnbay> barnbays = new ArrayList<Barnbay>();
 }
