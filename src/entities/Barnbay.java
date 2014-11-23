@@ -5,4 +5,5 @@ public class Barnbay {
 	public String name;
 	public String description;
 	public String opening_hours;
+	public Address address;
 }
