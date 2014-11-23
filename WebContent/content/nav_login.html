@@ -37,7 +37,8 @@
 					$.cookie('User.Username', data.user.username, { expires: 1 });
 					$.cookie('User.Session', data.user.session, { expires: 1 });
 					$.cookie('User.Usertype', data.user.usertype, { expires: 1 });
-					$.cookie('User.JSON', JSON.stringify(data.user));
+					$.cookie('User.JSON', JSON.stringify(data.user), { expires: 1 });
+					$.cookie('Products.ShoppingCart', '{"shoppingcart":[]}', { expires: 1 });
 				} else {
 					$('#navLoginModalFailed').modal('show'); 
 				}

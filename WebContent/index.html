@@ -129,6 +129,18 @@
 					//alert(JSON.stringify(data));
 				}
 			});*/
+						
+			var obj = JSON.parse($.cookie('Products.ShoppingCart'));
+			obj['shoppingcart'].push({"teamId":"4","status":"pending"});
+			jsonStr = JSON.stringify(obj);	
+			//alert(jsonStr);
+			
+			obj['shoppingcart'].push({"teamId":"5","status":"pending"});
+			jsonStr = JSON.stringify(obj);
+			
+			var test = obj['shoppingcart'];
+			//alert(test[1].teamId);
+
 		</script>
 	</body>
 </html>
