@@ -45,15 +45,18 @@ public class Initialize extends HttpServlet {
 		
 		db.executeSQL("CREATE TABLE TEST.ADDRESS (IDADDRESS INTEGER NOT NULL , STREET VARCHAR(100), NUMBER VARCHAR(5), ZIP_CODE VARCHAR(10), CITY VARCHAR(100))");
 		
-		db.executeSQL("CREATE TABLE TEST.BARNBAY (IDBARNBAY INTEGER NOT NULL , NAME VARCHAR(50) NOT NULL , PICTURE VARCHAR(256), DESCRIPTION VARCHAR(256), OPENING_HOURS VARCHAR(100))");
+		db.executeSQL("CREATE TABLE TEST.BARNBAY (IDBARNBAY INTEGER NOT NULL , NAME VARCHAR(50) NOT NULL , PICTURE VARCHAR(256), DESCRIPTION VARCHAR(256), OPENING_HOURS VARCHAR(100), FK_ADDRESS INTEGER NOT NULL)");
 		
 		
-		db.executeSQL("INSERT INTO TEST.BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS) VALUES(1, 'Barnbay am Schloss', 'Unser original Barnbay am Schloss', 'Montag-Sonntag von 7:00 bis 10:00')");
-		db.executeSQL("INSERT INTO TEST.BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS) VALUES(2, 'Barnbay am HBF Mannheim', 'Naechster Halt: Barnbay!', 'Montag-Sonntag von 7:00 bis 10:00')");
-		db.executeSQL("INSERT INTO TEST.BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS) VALUES(3, 'Barnbay@SAP', 'Perfekt fuer SAP-Mitarbeiter', 'Montag-Sonntag von 7:00 bis 10:00')");
+		db.executeSQL("INSERT INTO TEST.BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS, FK_ADDRESS) VALUES(1, 'Barnbay am Schloss', 'Unser original Barnbay am Schloss', 'Montag-Sonntag von 7:00 bis 10:00', 4)");
+		db.executeSQL("INSERT INTO TEST.BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS, FK_ADDRESS) VALUES(2, 'Barnbay am HBF Mannheim', 'Naechster Halt: Barnbay!', 'Montag-Sonntag von 7:00 bis 10:00', 5)");
+		db.executeSQL("INSERT INTO TEST.BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS, FK_ADDRESS) VALUES(3, 'Barnbay@SAP', 'Perfekt fuer SAP-Mitarbeiter', 'Montag-Sonntag von 7:00 bis 10:00', 6)");
 		
 		db.executeSQL("INSERT INTO TEST.ADDRESS VALUES(1, 'Waldstrasse', '23', '54329', 'KONZ')");
 		db.executeSQL("INSERT INTO TEST.ADDRESS VALUES(2, 'Seckenheimerstr.', '5', '68163', 'Mannheim')");
+		db.executeSQL("INSERT INTO TEST.ADDRESS VALUES(4, 'L1', '1', '68161', 'Mannheim')");
+		db.executeSQL("INSERT INTO TEST.ADDRESS VALUES(5, 'Tattersallstr.', '2', '68165', 'Mannheim')");
+		db.executeSQL("INSERT INTO TEST.ADDRESS VALUES(6, 'Dietmar-Hopp-Allee', '20', '69190', 'Walldorf')");
 		
 		db.executeSQL("INSERT INTO TEST.FARM(IDFARM, NAME, PICTURE, DESCRIPTION, OPENING_HOURS) VALUES"
 				+"(1, 'Seckenheimer Obsthof', '1', 'Wir haben Obstsorten aller Art und stellen alles biologisch her. Kommen Sie vorbei!', 'Montag-Sonntag 9:00-18:00 Uhr')");
