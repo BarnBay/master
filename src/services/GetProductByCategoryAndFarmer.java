@@ -80,6 +80,20 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 							b.name = rs3.getString(2);
 							b.description = rs3.getString(4);
 							b.opening_hours = rs3.getString(5);
+							
+							ResultSet rs5 = db
+									.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS="
+											+ rs3.getInt(6));
+							if(rs5 != null && rs5.next()){
+								b.address = new Address();
+								
+								b.address.idaddress = rs5.getInt(1);
+								b.address.street = rs5.getString(2);
+								b.address.number = rs5.getString(3);
+								b.address.zipcode = rs5.getString(4);
+								b.address.city = rs5.getString(5);
+							}
+							
 							p.barnbays.add(b);
 						}
 						
