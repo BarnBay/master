@@ -8,9 +8,6 @@
 	var ProductDetailDescription;
 	var ProductFarmerDescription;
 	
-	/* Shopping Cart */
-	var obj = JSON.parse($.cookie('Products.ShoppingCart'));
-	
 	$.ajax({
 		url: "/barnbay_ui/GetCheapestProduct?id=" + $.cookie("Product.ProductListCategoryID")
 	}).done(function(data) {
@@ -202,16 +199,22 @@
 	
 	function productAddToCart() {
 		if($.cookie('User.Session')) {
+			$('button').prop('disabled', true);
+			
+			var obj = JSON.parse($.cookie('Products.ShoppingCart'));
+			
 			var productID = $.cookie("Product.ProductListCategoryID");
 			var productName = ProductDetailName;
 			var productPrice = ProductPrice;
 			var productQuantity = $("#exampleInputQuantity").val();
-			var farmerID = $("#selectproductDetailFarmer option:selected").text();
-			var farmerName = $("#selectproductDetailFarmer option:selected").val();
-			var barnbayID = $("#selectproductDetailLocation option:selected").text();
-			var barnbayName = $("#selectproductDetailLocation option:selected").val();
+			var farmerID = $("#selectproductDetailFarmer option:selected").val();
+			var farmerName = $("#selectproductDetailFarmer option:selected").text();
+			var barnbayID = $("#selectproductDetailLocation option:selected").val();
+			var barnbayName = $("#selectproductDetailLocation option:selected").text();
 			
 			obj['shoppingcart'].push({"productID":productID,"productName":productName,"productPrice":productPrice,"productQuantity":productQuantity,"farmerID":farmerID,"farmerName":farmerName,"barnbayID":barnbayID,"barnbayName":barnbayName});			
+			$.cookie('Products.ShoppingCart', JSON.stringify(obj));
+			
 			$('#successAlert').slideDown();
 		} else {
 			$('#productAddToCartLogin').modal('show'); 	

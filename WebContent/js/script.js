@@ -73,6 +73,7 @@ $(document).ready(function() {
 		$.removeCookie('User.Session');
 		$.removeCookie('User.Usertype');
 		$.removeCookie('User.JSON');
+		$.removeCookie('Products.ShoppingCart');
 		location.reload();
 	});
 });

@@ -1,6 +1,8 @@
 <div class="container" id="shoppingCartContainer">
 	<script type="text/javascript">							
 		function displayShoppingCartItem() {
+			var obj = JSON.parse($.cookie('Products.ShoppingCart'));
+			var shoppingcart = obj['shoppingcart'];
 			var out = "";
 			
 			out += '<div class="row">';
@@ -18,31 +20,31 @@
 			out += '			</thead>';
 			out += '			<tbody>';
 			
-			//for(i = 0; i < 1; i++) {
+			for(i = 0; i < shoppingcart.length; i++) {
 				out += '				<tr>';
 				out += '					<td class="col-md-6">';
 				out += '						<div class="media">';
 				out += '							<img class="media-object pull-left" src="http://placehold.it/72x72">';
 				out += '							<div class="media-body" style="padding: 5px;">';
-				out += '								<h4 class="media-heading"><a href="#">Apple Pink Lady</a></h4>';
-				out += '								<h5 class="media-heading"> by <a href="#">Farmer John</a></h5>';
+				out += '								<h4 class="media-heading">' + shoppingcart[i].productName + '</h4>';
+				out += '								<h5 class="media-heading"> by ' + shoppingcart[i].farmerName + '</h5>';
 				out += '								<span>Status: </span><span class="text-success"><strong>In Stock</strong></span>';
 				out += '							</div>';
 				out += '						</div>';
 				out += '					</td>';
 				out += '					<td class="col-md-2">';
-				out += '						<select class="form-control input-md">';
-				out += '							<option>UNI Mannheim</option>';
+				out += '						<select class="form-control input-md" disabled>';
+				out += '							<option>' + shoppingcart[i].barnbayName + '</option>';
 				out += '						</select>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1" style="text-align: center">';
-				out += '						<input type="email" class="form-control" id="exampleInputEmail1" value="3">';
+				out += '						<input type="email" class="form-control" id="number" value="' + shoppingcart[i].productQuantity + '">';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1 text-center">';
-				out += '						<strong>$4.87</strong>';
+				out += '						<strong>' + shoppingcart[i].productPrice + ' &euro;</strong>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1 text-center">';
-				out += '						<strong>$14.61</strong>';
+				out += '						<strong>' + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity) + ' &euro;</strong>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1">';
 				out += '						<button type="button" class="btn btn-danger">';
@@ -50,7 +52,7 @@
 				out += '						</button>';
 				out += '					</td>';
 				out += '				</tr>';
-			//}
+			}
 			
 			out += '				<tr>';
 			out += '					<td></td>';
