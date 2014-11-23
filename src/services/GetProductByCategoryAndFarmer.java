@@ -60,6 +60,7 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 						
 						p.farmerfirstname = rs2.getString(2);
 						p.farmerlastname =rs2.getString(3);
+						p.farmeremail = rs2.getString(10);
 						fk_address = rs2.getInt(7);
 						
 						ResultSet rs4 = db.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS=" + fk_address);
@@ -91,6 +92,7 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 								f.idfarmer = rs7.getInt(1);
 								f.firstname = rs7.getString(2);
 								f.lastname = rs7.getString(3);
+								f.email = rs7.getString(10);
 								
 								fk_address = rs7.getInt(7);
 								
