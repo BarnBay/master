@@ -48,6 +48,10 @@
 		$("#dashboard").hide();
 	}
 	
+	if($.cookie('User.Session')) {
+		updateMiniShoppingCart();
+	}
+	
 	function updateMiniShoppingCart() {
 		var obj = JSON.parse($.cookie('Products.ShoppingCart'));
 		var shoppingcart = obj['shoppingcart'];
