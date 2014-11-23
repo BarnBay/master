@@ -1,6 +1,6 @@
 <!-- Some JS or jQuery to fill this page -->
 <!-- Carousel -->
-<div class="carousel slide" id="homeCarousel">
+<div class="carousel slide" id="homeCarousel" data-ride="carousel">
 
 	<!-- Indicators -->
 	<ol class="carousel-indicators">
@@ -38,6 +38,17 @@
 	<a class="right carousel-control" data-slide="next" href="#homeCarousel"><span class="icon-next"></span></a>
 	
 </div><!-- end homeCarousel -->
+
+<script type="text/javascript">
+	/* Start Coursel automatically */
+	$(document).ready(function () {
+		$('#homeCarousel').carousel({
+	    	interval: 4500
+	 	});
+		
+		$('#homeCarousel').carousel('cycle');
+	});
+</script>
 
 <!--/#whatwedo-->
 
