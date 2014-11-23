@@ -7,40 +7,20 @@
 					<table>
 						<thead>
 							<tr>
-								<th class="col-md-6">Test</th>
-								<th class="col-md-6">Bla</th>
+								<th class="col-md-6">Product</th>
+								<th class="col-md-3">Quantity</th>
+								<th class="col-md-3">Total</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>Eins</td>
-								<td>EinsPlus</td>
-							</tr>
-							<tr>
-								<td>Zwei</td>
-								<td>ZweiPlus</td>
-							</tr>
+						<tbody id="miniShopingCart">
+							<!-- Automatically -->
 						</tbody>
 					</table>
-					<!--<div>Single Item</div>
-					<div>Single Item</div>
-					<div>Single Item</div>
-					<div>Single Item</div>
-					<div>Single Item</div>
-					<div>Single Item</div>
-					<div>Single Item</div>
-					<div>Single Item</div>
-					<div>Single Item</div>
-					<div>Single Item</div>
-					<div>Single Item</div>
-					<div>Single Item</div>
-					<div>Single Item</div>
-					<div>Single Item</div>-->
 				</div>
 			</div>
 			<div class="form-group">
 				<span class="pull-right">
-					<h4 id="total">Subtotal $40</h4>
+					<h4 id="miniShopingCartSubTotal">Subtotal</h4>
 				</span>
 			</div>
 			<div class="form-group">
@@ -64,7 +44,28 @@
 </li>
 
 <script type="text/javascript">
-if($.cookie('User.Usertype') == "CUSTOMER") {
-	$("#dashboard").hide();
-}
+	if($.cookie('User.Usertype') == "CUSTOMER") {
+		$("#dashboard").hide();
+	}
+	
+	function updateMiniShoppingCart() {
+		var obj = JSON.parse($.cookie('Products.ShoppingCart'));
+		var shoppingcart = obj['shoppingcart'];
+		var out = "";
+		var productSubTotal = 0;
+		
+		for(i = 0; i < shoppingcart.length; i++) {
+			productSubTotal = productSubTotal + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity);
+			
+			out += '<tr>';
+			out += '	<td class="text-left">' + shoppingcart[i].productName + '</td>';
+			out += '	<td class="text-center">' + shoppingcart[i].productQuantity + '</td>';
+			out += '	<td class="text-center">' + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity) + ' &euro;</td>';
+			out += '</tr>';
+			
+		}
+		
+		document.getElementById("miniShopingCart").innerHTML = out;
+		document.getElementById("miniShopingCartSubTotal").innerHTML = "Subtotal " + productSubTotal + " &euro;";
+	}
 </script>

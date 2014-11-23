@@ -216,6 +216,9 @@
 			$.cookie('Products.ShoppingCart', JSON.stringify(obj));
 			
 			$('#successAlert').slideDown();
+			
+			/* Call Mini Shoping Card Method */
+			updateMiniShoppingCart();
 		} else {
 			$('#productAddToCartLogin').modal('show'); 	
 		}
