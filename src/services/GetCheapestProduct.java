@@ -100,6 +100,19 @@ public class GetCheapestProduct extends HttpServlet {
 									b.description = rs5.getString(4);
 									b.opening_hours = rs5.getString(5);
 
+									ResultSet rs56 = db
+											.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS="
+													+ rs5.getInt(6));
+									if(rs56 != null && rs56.next()){
+										b.address = new Address();
+										
+										b.address.idaddress = rs56.getInt(1);
+										b.address.street = rs56.getString(2);
+										b.address.number = rs56.getString(3);
+										b.address.zipcode = rs56.getString(4);
+										b.address.city = rs56.getString(5);
+									}
+									
 									p.barnbays.add(b);
 
 									ResultSet rs6 = db
