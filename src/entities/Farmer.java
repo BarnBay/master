@@ -12,4 +12,5 @@ public class Farmer {
 	public String number;
 	public String zipcode;
 	public String city;
+	public String email;
 }
