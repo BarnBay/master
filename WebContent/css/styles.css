@@ -297,9 +297,18 @@ html, body {
 	padding-bottom: 5px;
 }
 
-#farmerDetailInformation .col-sm-9 h2 {
-	margin-top: 5px;
-	font-size: 24px;
+#farmerDetailInformation .col-sm-9 #farmerDetailImageInfo {
+	position: absolute;
+	width: 100%;
+	top: 185px;
+	font-size: 20px;
+	text-align: center;
+	color: #FFFFFF;
+	text-shadow: 1px 1px #000000;
+}
+
+#farmerDetailInformation .col-sm-9 #farmerDetailImageInfo h4 {
+	font-size: 28px;
 }
 
 #farmerDetailInformation .col-sm-9 .barnbays .panel-heading {
