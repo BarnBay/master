@@ -55,12 +55,12 @@
 				}
 				/* ID UND NAME ANPASSEN !!!!!!!!!!!!!!!!!!!!!! */
 				out += '		<div class="col-md-3">';
-				out += '			<div class="panel panel-default" id="FarmerSingleProduct" style="cursor: pointer" onclick="farmerSwitchToProduct(' + farmerDetailObject.idfarmer + ', ' + farmerDetailObject.products[i].id + ')">';
+				out += '			<div class="panel panel-default" id="FarmerSingleProduct" style="cursor: pointer" onclick="farmerSwitchToProduct(' + farmerDetailObject.idfarmer + ', ' + farmerDetailObject.products[i].catid + ')">';
 				out += '				<div class="panel-body">';
 				out += '					<img src="http://placehold.it/100x100" class="img-circle">';
 				out += '				</div>';
 				out += '				<div class="panel-footer">';
-				out += '					<h3 class="panel-title">Produkt 1</h3>';
+				out += '					<h3 class="panel-title">' + farmerDetailObject.products[i].name + '</h3>';
 				out += '				</div>';
 				out += '			</div>';
 				out += '		</div>';
