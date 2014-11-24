@@ -301,7 +301,8 @@ $(document).ready(function() {
 		$('#locationGrid').removeClass('active');
 		$('#locationList').addClass('active');
 		
-		$('#locations .item').addClass('list-group-item');
+		ListOrGridView = "ListView";
+		BarnbayListFunction(LocationListJSONObject);
 	});
 	
 	/* On click of GridView Icon */
@@ -310,8 +311,8 @@ $(document).ready(function() {
 		$('#locationList').removeClass('active');
 		$('#locationGrid').addClass('active');
 		
-		$('#locations .item').removeClass('list-group-item');
-		$('#locations .item').addClass('grid-group-item');
+		ListOrGridView = "GridView";
+		BarnbayListFunction(LocationListJSONObject);
 	});
 	
 	/* On changed value of selector -> Sort JSON-Object ProductListJSONObject */

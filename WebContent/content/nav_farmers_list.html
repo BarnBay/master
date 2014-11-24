@@ -67,9 +67,9 @@
 				    var i;
 				    for(i = 0; i < farmerArray.length; i++) {
 				    	if(ListOrGridView == "GridView") {
-					    	out += '<div class="item  col-xs-3 col-lg-3">';
+					    	out += '<div class="item  col-md-3 col-lg-3">';
 					    	out += '	<div class="thumbnail">';					
-					    	out += '		<img class="group gridview-group-small-image" id="farmerDetailView" src="./img/farms/' + farmerArray[i].farmname + '.png" alt="" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')"/></a>';
+					    	out += '		<img class="group gridview-group-small-image" id="farmerDetailView" src="./img/farms/' + farmerArray[i].farmname + '.png" alt="" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')"/>';
 					    	out += '		<div class="gridview-group-item-caption">';
 					    	out += '			<div class="gridview-group-item-heading" id="farmerDetailView" style="cursor:pointer;" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')">';
 					    	out += '				' + farmerArray[i].farmname;
@@ -81,12 +81,12 @@
 					    	out += '	</div>';
 					    	out += '</div>';
 				    	} else {
-					    	out += '<div class="col-xs-12 col-lg-12" style="margin-top: 10px;">';
-					    	out += '	<div class="listview col-xs-12"></div>';
-					    	out += '	<div class="col-xs-4">';
-					    	out += '		<img class="group listview-group-image" id="farmerDetailView" src="./img/farms/' + farmerArray[i].farmname + '.png" alt="" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')"/></a>';
+					    	out += '<div class="col-md-12 col-lg-12" style="margin-top: 10px;">';
+					    	out += '	<div class="listview col-md-12"></div>';
+					    	out += '	<div class="col-md-4">';
+					    	out += '		<img class="group listview-group-image" id="farmerDetailView" src="./img/farms/' + farmerArray[i].farmname + '.png" alt="" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')"/>';
 					    	out += '	</div>';
-					    	out += '	<div class="col-xs-8">';
+					    	out += '	<div class="col-md-8">';
 					    	out += '		<div class="listview-group-item-caption">';
 					    	out += '			<div class="listview-group-item-heading" id="farmerDetailView" style="cursor:pointer;" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')">';
 					    	out += '				' + farmerArray[i].farmname;
