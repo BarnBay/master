@@ -8,23 +8,54 @@
 	var ProductDetailDescription;
 	var ProductFarmerDescription;
 	
-	$.ajax({
-		url: "/barnbay_ui/GetCheapestProduct?id=" + $.cookie("Product.ProductListCategoryID")
-	}).done(function(data) {
-		ProductDetailJSONObject = JSON.parse(data);
-		ProductDetailName = ProductDetailJSONObject.name;
-		ProductDetailDescription = ProductDetailJSONObject.description
-		ProductFarmerDescription = ProductDetailJSONObject.farmerproductdescription;
+	if($.cookie("Farmer.ProductID") && $.cookie("Farmer.FarmerID")) {
 		
-		productDetailFunction(ProductDetailJSONObject);
+		$.ajax({
+			url: "/barnbay_ui/GetCheapestProduct?id=" + $.cookie("Farmer.ProductID")
+		}).done(function(data) {
+			ProductDetailJSONObject = JSON.parse(data);
+			ProductDetailName = ProductDetailJSONObject.name;
+			ProductDetailDescription = ProductDetailJSONObject.description
+			ProductFarmerDescription = ProductDetailJSONObject.farmerproductdescription;
+		});
 		
-		/* Start Google Maps */
-		//startMap(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city, ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
-		GoogleMapsAddress.push(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city);
-		GoogleMapsTitle.push(ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
+		$.ajax({
+			url: "/barnbay_ui/GetProductByCategoryAndFarmer?catid=" + $.cookie("Farmer.ProductID") + "&farmerid=" + $.cookie("Farmer.FarmerID")
+		}).done(function(data) {
+			ProductDetailJSONObject = JSON.parse(data);
+			ProductFarmerDescription = ProductDetailJSONObject[0].description;
+			
+			productDetailFunction(ProductDetailJSONObject[0]);
+
+			/* Start Google Maps */
+			GoogleMapsAddress.push(ProductDetailJSONObject[0].farmeraddress.street + ' ' + ProductDetailJSONObject[0].farmeraddress.number + ', ' + ProductDetailJSONObject[0].farmeraddress.zipcode + ' ' + ProductDetailJSONObject[0].farmeraddress.city);
+			GoogleMapsTitle.push(ProductDetailJSONObject[0].farmerfirstname + ' ' + ProductDetailJSONObject[0].farmerlastname);
+			
+			startMap();
+		});
 		
-		startMap();
-	});
+		$.removeCookie("Farmer.ProductID");
+		$.removeCookie("Farmer.FarmerID");
+
+	} else {
+		$.ajax({
+			url: "/barnbay_ui/GetCheapestProduct?id=" + $.cookie("Product.ProductListCategoryID")
+		}).done(function(data) {
+			ProductDetailJSONObject = JSON.parse(data);
+			ProductDetailName = ProductDetailJSONObject.name;
+			ProductDetailDescription = ProductDetailJSONObject.description
+			ProductFarmerDescription = ProductDetailJSONObject.farmerproductdescription;
+			
+			productDetailFunction(ProductDetailJSONObject);
+			
+			/* Start Google Maps */
+			//startMap(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city, ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
+			GoogleMapsAddress.push(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city);
+			GoogleMapsTitle.push(ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
+			
+			startMap();
+		});
+	}
 </script>
 
 <div class="row">
@@ -71,7 +102,7 @@
 			out += '		</button>';
 			out += '		<div class="price">';
 			out += '			<span class="price-head">Price:</span>';
-			out += '			<span class="price-new">' + productDetailObject.price + ' &euro;</span> ';
+			out += '			<span class="price-new">' + (productDetailObject.price).toFixed(2) + ' &euro;</span> ';
 			out += '		</div>';
 			out += '		<hr>';
 			out += '		<div class="row productFamerLocation">';
@@ -147,19 +178,21 @@
 			out += '				<div class="panel-body">';
 			out += '					<table class="table table-striped">';
 			out += '						<tr>';
-			out += '							<th>Name of the Location</th>';
-			out += '							<th>Description</th>';
+			out += '							<th>Name</th>';
+			out += '							<th>Zip Code</th>';
+			out += '							<th>Address</th>';
 			out += '							<th>Pick-Up Times</th>';
 			out += '						</tr>';
-
+			
 			for(i = 0; i < productDetailObject.barnbays.length; i++) {
 				out += '						<tr>';
 				out += '							<td>' + productDetailObject.barnbays[i].name + '</td>';
-				out += '							<td>' + productDetailObject.barnbays[i].description + '</td>';
+				out += '							<td>' + productDetailObject.barnbays[i].address.zipcode + ' ' + productDetailObject.barnbays[i].address.city + '</td>';
+				out += '							<td>' + productDetailObject.barnbays[i].address.street + ' ' + productDetailObject.barnbays[i].address.number + '</td>';
 				out += '							<td>' + productDetailObject.barnbays[i].opening_hours + '</td>';
 				out += '						</tr>';
 				
-				GoogleMapsAddress.push(productDetailObject.barnbays[i].address.city);
+				GoogleMapsAddress.push(productDetailObject.barnbays[i].address.street + ' ' + productDetailObject.barnbays[i].address.number + ', ' + productDetailObject.barnbays[i].address.zipcode + ' ' + productDetailObject.barnbays[i].address.city);
 				GoogleMapsTitle.push(productDetailObject.barnbays[i].name);
 			}
 	
@@ -174,7 +207,7 @@
 			out += '		<div class="col-sm-12">';
 			out += '			<div class="panel panel-success">';
 			out += '				<div class="panel-heading">';
-			out += '					<span class="glyphicon glyphicon-time" aria-hidden="true"></span> BarnBay pickup Locations';
+			out += '					<span class="glyphicon glyphicon-map-marke" aria-hidden="true"></span> Farmer and BarnBay pickup Locations';
 			out += '				</div>';
 			out += '				<div class="panel-body">';
 			out += '					<div id="map_canvas" style="width: 100%; height: 480px;"></div>';

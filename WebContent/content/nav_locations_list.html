@@ -1,3 +1,17 @@
+<script type="text/javascript">
+	var LocationListJSONObject;
+	var ListOrGridView = "GridView";
+	
+	$.ajax({
+		url: "/barnbay_ui/GetAllBarnbays"
+	}).done(function(data) {
+		LocationListJSONObject = JSON.parse(data);
+		
+		countBarnbayListFunction(LocationListJSONObject);
+		BarnbayListFunction(LocationListJSONObject);
+	});
+</script>
+
 <!-- Implement the JSON Script File for the Location list -->
 <script src="./json/nav_locations_list.js"></script>
 <!-- End of Implementation -->
@@ -46,7 +60,23 @@
 				</div>
 				<div id="collapseListGroupPickupTime" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupPickupTime" aria-expanded="true">
 					<ul class="list-group">
-          				<li class="list-group-item">Placeholder</li>
+          				<li class="list-group-item">
+          					<div class="input-group">
+							  	<input type="text" id="barnbayPickUpFrom" class="form-control input-sm" placeholder="From">
+							  	<div class="input-group-addon">
+							  		<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+							  	</div>
+							</div>
+         					<div class="input-group" style="margin-top: 10px;">
+  								<input type="text" id="barnbayPickUpTo" class="form-control input-sm" placeholder="To">
+  								<div class="input-group-addon">
+							  		<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+							  	</div>
+							</div>
+							<div style="margin-top: 10px;">
+								<button class="btn btn-sm btn-success btn-block signup-btn" type="submit"><b>Go</b></button>
+							</div>
+          				</li>
         			</ul>
       			</div>
 			</div><!-- end of pickup time -->	
@@ -55,17 +85,13 @@
 	</div><!-- end left column -->
 	
 	<!-- Right Column -->
-	<div class="col-lg-9 col-md-9 col-sm-12" style="margin-top: 20px;">
-		<!-- <img src="http://placehold.it/1000x300" class="img-responsive" alt="Responsive image">  -->
-				
+	<div class="col-lg-9 col-md-9 col-sm-12" style="margin-top: 20px;">				
 		<div class="well well-sm">
 			Showing <strong id="countLocations"></strong> Locations
 			<script>
-				countLocationListFunction(LocationListJSONObject);
-				
-				function countLocationListFunction(locationArray) {
-					document.getElementById("countLocations").innerHTML = locationArray.length;
-				}
+			function countBarnbayListFunction(farmerArray) {
+				document.getElementById("countLocations").innerHTML = farmerArray.length;
+			}
 			</script>
 						
 			<div class="pull-right">
@@ -95,27 +121,44 @@
 		<div id="locations" class="row list-group">
 			<!-- JSON - Create the Location List -->
 			<script>
-				locationListFunction(LocationListJSONObject);
-				
-				function locationListFunction(locationArray) {
+				function BarnbayListFunction(locationArray) {
 				    var out = "";
 				    var i;
 				    for(i = 0; i < locationArray.length; i++) {
-				    	out += '<div class="item  col-xs-4 col-lg-4">';
-				    	out += '	<div class="thumbnail">';					
-				    	out += '		<img class="group list-group-image" id="locationDetailView" src="./img/locations/' + locationArray[i].lName + '.png" alt="" style="cursor:pointer;" onclick="locationGetDetailedLocationInfo(' + locationArray[i].lId + ')" height="90"/></a>';
-				    	out += '		<div class="caption">';
-				    	out += '			<h3 class="group inner list-group-item-heading">' + locationArray[i].lName + '</h3>';
-				    	out += '			<p class="group inner list-group-item-text">' + locationArray[i].lDescription + '</p>';
-				    	out += '			<div class="row">';
-				    	out += '				<div class="col-xs-12 col-md-6" style="height: 34px;">';
-				    	out += '					<h3 class="list-group-item-price"></h3>';
-				    	out += '				</div>';
-				    	out += '			</div>';
-				    	out += '		</div>';
-				    	out += '	</div>';
-				    	out += '</div>';
+				    	if(ListOrGridView == "GridView") {
+					    	out += '<div class="item  col-md-4 col-lg-4">';
+					    	out += '	<div class="thumbnail">';				
+					    	out += '		<img class="group gridview-group-small-image" id="locationDetailView" src="./img/locations/' + locationArray[i].name + '.png" alt="" onclick="locationGetDetailedLocationInfo(' + locationArray[i].id + ')"/>';
+					    	out += '		<div class="gridview-group-item-caption">';
+					    	out += '			<div class="gridview-group-item-heading" id="farmerDetailView" style="cursor:pointer;" onclick="farmerGetDetailedFarmerInfo(' + locationArray[i].id + ')">';
+					    	out += '				' + locationArray[i].name;
+					    	out += '			</div>';
+					    	out += '			<div class="gridview-group-item-text">';
+					    	out += '				' + locationArray[i].description;
+					    	out += '			</div>';
+					    	out += '		</div>';
+					    	out += '	</div>';
+					    	out += '</div>';
+				    	} else {
+					    	out += '<div class="col-md-12 col-lg-12" style="margin-top: 10px;">';
+					    	out += '	<div class="listview col-md-12"></div>';
+					    	out += '	<div class="col-md-5">';
+					    	out += '		<img class="group listview-group-image" id="locationDetailView" src="./img/locations/' + locationArray[i].name + '.png" alt="" onclick="locationGetDetailedLocationInfo(' + locationArray[i].id + ')"/>';
+					    	out += '	</div>';
+					    	out += '	<div class="col-md-7">';
+					    	out += '		<div class="listview-group-item-caption" style="margin-left: 10px;">';
+					    	out += '			<div class="listview-group-item-heading" id="locationDetailView" style="cursor:pointer;" onclick="locationGetDetailedLocationInfo(' + locationArray[i].id + ')">';
+					    	out += '				' + locationArray[i].name;
+					    	out += '			</div>';
+					    	out += '			<div class="listview-group-item-text">';
+					    	out += '				' + locationArray[i].description;
+					    	out += '			</div>';
+					    	out += '		</div>';
+					    	out += '	</div>';
+					    	out += '</div>';	
+				    	}
 				    }
+				    
 				    document.getElementById("locations").innerHTML = out;
 				}
 			</script>
@@ -128,7 +171,7 @@
 
 <script type="text/javascript">	
 	/* Display Detailed Information about the Product */
-	function locationGetDetailedLocationInfo(farmerid) {
+	function locationGetDetailedLocationInfo(locationid) {
 		$.cookie("Location.LocationListCategoryID", locationid, { expires: 1 });
 	}
 </script>

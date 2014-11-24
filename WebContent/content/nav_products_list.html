@@ -93,7 +93,7 @@
 			</div><!-- end of category -->
 			
 			<!-- Price -->
-			<div class="panel panel-default" id="panelProducts">
+			<div class="panel panel-default">
 				<div class="panel-heading" role="tab">
 					<h4 class="panel-title">
 						<a class="accordion-toggle" data-toggle="collapse" href="#collapseListGroupPrice" aria-expanded="true" aria-controls="collapseListGroupPrice">Price</a>
@@ -166,7 +166,7 @@
 				    	if(ListOrGridView == "GridView") {
 					    	out += '<div class="col-md-4 col-lg-4">';
 					    	out += '	<div class="thumbnail">';
-					    	out += '		<img class="group gridview-group-image" id="productDetailView" src="./img/products/' + productArray[i].name + '.png" alt="" onclick="productGetDetailedProductInfo(' + productArray[i].idcategory + ')"/></a>';
+					    	out += '		<img class="group gridview-group-image" id="productDetailView" src="./img/products/' + productArray[i].name + '.png" alt="" onclick="productGetDetailedProductInfo(' + productArray[i].idcategory + ')"/>';
 					    	out += '		<div class="gridview-group-item-caption">';
 					    	out += '			<div class="gridview-group-item-heading" id="productDetailView" style="cursor:pointer;" onclick="productGetDetailedProductInfo(' + productArray[i].idcategory + ')">';
 					    	out += '				' + productArray[i].name;
@@ -175,18 +175,18 @@
 					    	out += '				' + productArray[i].category_description;
 					    	out += '			</div>';
 					    	out += '			<div class="gridview-group-item-price">';
-					    	out += '				' + productArray[i].price + ' &euro;';
+					    	out += '				' + (productArray[i].price).toFixed(2) + ' &euro;';
 					    	out += '			</div>';
 					    	out += '		</div>';
 					    	out += '	</div>';
 					    	out += '</div>';
 				    	} else {
-					    	out += '<div class="col-xs-12 col-lg-12">';
-					    	out += '	<div class="listview col-xs-12"></div>';
-					    	out += '	<div class="col-xs-4">';
-					    	out += '		<img class="group listview-group-image" id="productDetailView" src="./img/products/' + productArray[i].name + '.png" alt="" onclick="productGetDetailedProductInfo(' + productArray[i].idcategory + ')"/></a>';
+					    	out += '<div class="col-md-12 col-lg-12">';
+					    	out += '	<div class="listview col-md-12"></div>';
+					    	out += '	<div class="col-md-4">';
+					    	out += '		<img class="group listview-group-small-image" id="productDetailView" src="./img/products/' + productArray[i].name + '.png" alt="" onclick="productGetDetailedProductInfo(' + productArray[i].idcategory + ')"/>';
 					    	out += '	</div>';
-					    	out += '	<div class="col-xs-8">';
+					    	out += '	<div class="col-md-8">';
 					    	out += '		<div class="listview-group-item-caption">';
 					    	out += '			<div class="listview-group-item-heading" id="productDetailView" style="cursor:pointer;" onclick="productGetDetailedProductInfo(' + productArray[i].idcategory + ')">';
 					    	out += '				' + productArray[i].name;
@@ -195,7 +195,7 @@
 					    	out += '				' + productArray[i].category_description;
 					    	out += '			</div>';
 					    	out += '			<div class="listview-group-item-price">';
-					    	out += '				' + productArray[i].price + ' &euro;';
+					    	out += '				' + (productArray[i].price).toFixed(2) + ' &euro;';
 					    	out += '			</div>';
 					    	out += '		</div>';
 					    	out += '	</div>';

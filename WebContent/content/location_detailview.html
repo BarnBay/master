@@ -1,34 +1,48 @@
-	<div class="row">
-		<div class="col-md-3" id="leftCol">
-			<h3>SAP</h3>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>Kontaktdaten</h4>
-				</div>
-				<div class="panel-body">
-					<h4>
-						Adresse: <small>Barn 1</small>
-					</h4>
-					<h4>
-						Telefon: <small>01234 56789</small>
-					</h4>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-9">
-			<div class="row" id="category-row-1">
-				<img src="./img/locations/Sap.png" class="img-circle">
+<script type="text/javascript">	
+	var LocationDetailJSONObject;
+	
+	$.ajax({
+		url: "/barnbay_ui/GetBarnbayByBarnbayId?id=" + $.cookie("Location.LocationListCategoryID")
+	}).done(function(data) {
+		LocationDetailJSONObject = JSON.parse(data);		
+		LocationDetailFunction(LocationDetailJSONObject);
+	});
+</script>
 
-
-			</div>
-			<div class="row" id="category-row-1"></div>
-			At Bootply we like to build simple Bootstrap templates that utilize
-			the code Bootstap CSS without a lot of customization. Sure you can
-			find a lot of Bootstrap themes and inspiration, but these templates
-			tend to be heavy on customization.
-
-			<hr>
-
+<div class="row" id="locationDetailInformation">
+	<script type="text/javascript">
+		function LocationDetailFunction(LocationDetailObject) {
+			var out = "";
+			out += '<div class="col-md-12" style="font-family: \'Roboto Condensed\', sans-serif;">';
+			out += '	<div class="col-md-3" id="leftCol">';
+			out += '		<h3>' + LocationDetailObject.name + '</h3>';
+			out += '		<div class="panel panel-success">';
+			out += '			<div class="panel-heading">';
+			out += '				<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Address';
+			out += '			</div>';
+			out += '			<div class="panel-body">';
+			out += '				<address>';
+			out += '					' + LocationDetailObject.address.street + ' ' + LocationDetailObject.address.number + '<br/>'
+			out += '					' + LocationDetailObject.address.zipcode + ' ' + LocationDetailObject.address.city + '<br/><br/>';
+			out += '					<strong>Barnbay opening hours:</strong><br/>' + LocationDetailObject.opening_hours;
+			out += '				</address>';
+			out += '			</div>';
+			out += '		</div>';
+			out += '	</div>';
+			out += '	<div class="col-md-9">';
+			out += '		<div style="width: 100%; height: 270px; overflow: hidden">';
+			out += '			<img src="./img/locations/' + LocationDetailObject.name + '.png" alt="Image" class="img-responsive center-block" width="100%" height="350">';
+			out += '		</div>';
+			out += '	</div>';
+			out += '	<hr>';
+			out += '';
+			out += '	</div>';
+			out += '</div>';
+			
+			document.getElementById("locationDetailInformation").innerHTML = out;
+		}
+	</script>
+	
 			<h2 id="sec1">About</h2>
 			<p>Rem aperiam, eaque ipsa quae ab illo inventore veritatis et
 				quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
@@ -64,36 +78,6 @@
 							auctor accumsan. Aliquam in felis sit amet augue.</div>
 					</div>
 				</div>
-			</div>
-
-			<hr>
-
-			<h2 id="sec2">Locations</h2>
-			<p>Rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-				quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-				voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-				cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
-				porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-				consectetur, adipisci velit, sed quia non numquam eius modi tempora
-				incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut
-				enim ad minima veniam, quis nostrum exercitationem ullam corporis
-				suscipit laboriosam, nisi ut!</p>
-			<div class="row">
-				<table class="table table-striped">
-					<tr>
-						<th>Name of the Location</th>
-						<th>PLZ</th>
-						<th>Adresse</th>
-						<th>Pick-Up Times</th>
-					</tr>
-					<tr>
-						<td>SAP</td>
-						<td>69190 Walldorf</td>
-						<td>Hasso-Plattner-Ring 7</td>
-						<td>Mo-Fr je 11.00 bis 14:00</td>
-					</tr>
-
-				</table>
 			</div>
 		</div>
 	</div>

@@ -1,84 +1,150 @@
-<div class="span9">
-	<h2>Settings of Useraccount</h2>
-	<p>Click on fields to edit:</p>
-	<div>
-		<table id="user" class="table table-bordered table-striped">
-			<tbody>
+<div class="row" id="userDetailInformation">
+	<script type="text/javascript">
+		var out = "";
+		var male = "";
+		var female = "";
+		var JSONUserObject = JSON.parse($.cookie('User.JSON'));
+		
+		if(JSONUserObject.title == "Herr") {
+			male = 'checked="checked"';	
+		} else {
+			female = 'checked="checked"';
+		}
+		
+		out += '<div class="panel panel-success">';
+		out += '	<div class="panel-heading">';
+		out += '		<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Settings of Useraccount';
+		out += '	</div>';
+		out += '	<div class="panel-body" style="padding-bottom: 0px;">';
+		out += '		<form id="navUpdateUserDataForm" accept-charset="utf-8" role="form">';
+		out += '			<table class="table table-bordered table-striped">';
+		out += '				<tbody>';
+		out += '					<tr>';
+		out += '						<td style="vertical-align:middle">Gender</td>';
+		out += '						<td>';
+		out += '							<label class="radio-inline">';
+		out += '								<input type="radio" name="navEditGender" value="Herr" ' + male + '/> Male';
+		out += '							</label>'; 
+		out += '							<label class="radio-inline">';
+		out += '								<input type="radio" name="navEditGender" value="Frau" ' + female + '/> Female';
+		out += '							</label> ';
+		out += '						</td>';
+		out += '					</tr>';
+		out += '					<tr>';
+		out += '						<td style="vertical-align:middle">Firstname</td>';
+		out += '						<td><input type="email" name="email" id="navEditFirstname" value="' + JSONUserObject.firstname + '" class="form-control input-md" required/></td>';
+		out += '					</tr>';
+		out += '					<tr>';
+		out += '						<td style="vertical-align:middle">Lastname</td>';
+		out += '						<td><input type="email" name="email" id="navEditLastname" value="' + JSONUserObject.lastname + '" class="form-control input-md" required/></td>';
+		out += '					</tr>';
+		out += '					<tr>';
+		out += '						<td style="vertical-align:middle">Email Address</td>';
+		out += '						<td><input type="email" name="email" id="navEditEmail" value="' + JSONUserObject.email + '" class="form-control input-md" required/></td>';
+		out += '					</tr>';
+		out += '					<tr>';
+		out += '						<td style="vertical-align:middle">Password</td>';
+		out += '						<td><input type="email" name="email" id="navEditPassword" value="" class="form-control input-md" required/></td>';
+		out += '					</tr>';
+		out += '					<tr>';
+		out += '						<td style="vertical-align:middle">City</td>';
+		out += '						<td><input type="email" name="email" id="navEditCity" value="' + JSONUserObject.town + '" class="form-control input-md" required/></td>';
+		out += '					</tr>';
+		out += '					<tr>';
+		out += '						<td style="vertical-align:middle">Zip/ Postal code</td>';
+		out += '						<td><input type="email" name="email" id="navEditZipcode" value="' + JSONUserObject.zip + '" class="form-control input-md" required/></td>';
+		out += '					</tr>';
+		out += '					<tr>';
+		out += '						<td style="vertical-align:middle">Address</td>';
+		out += '						<td><input type="email" name="email" id="navEditAddress" value="' + JSONUserObject.street + '" class="form-control input-md" required/></td>';
+		out += '					</tr>';
+		out += '					<tr>';
+		out += '						<td style="vertical-align:middle">Number</td>';
+		out += '						<td><input type="email" name="email" id="navEditNumber" value="' + JSONUserObject.number + '" class="form-control input-md" required/></td>';
+		out += '					</tr>';
+		out += '					<tr>';
+		out += '						<td></td>';
+		out += '						<td>';
+		out += '							<button type="submit" class="btn btn-success">';
+		out += '								<span class="glyphicon glyphicon-saved"></span> Save Userdata';
+		out += '							</button>';
+		out += '						</td>';
+		out += '					</tr>';
+		out += '				</tbody>';
+		out += '			</table>';
+		out += '		</form>';
+		out += '	</div>';
+		out += '</div>';
+		
+		document.getElementById("userDetailInformation").innerHTML = out;
+	</script>
+</div>
 
-				<tr>
-					<td>First name</td>
-					<td><a href="#" id="firstname" data-type="text" data-pk="1"
-						data-name="firstname" data-placement="right"
-						data-placeholder="Required"
-						data-original-title="Enter your firstname">Donald</a></td>
-
-				</tr>
-				<tr>
-					<td>Last name</td>
-					<td><a href="#" id="lastname" data-type="text" data-pk="1"
-						data-name="lastname" data-placement="right"
-						data-placeholder="Required"
-						data-original-title="Enter your lastname">Duck</a></td>
-
-				</tr>
-				<tr>
-					<td>Your Email</td>
-					<td><a href="#" id="lastname" data-type="text" data-pk="1"
-						data-name="lastname" data-placement="right"
-						data-placeholder="Required" data-original-title="Enter your mail">Donald@Duck.de</a></td>
-
-				</tr>
-				<tr>
-					<td>Password</td>
-					<td><a href="#" id="password" data-type="text" data-pk="1"
-						data-name="password" data-placement="right"
-						data-placeholder="Required"
-						data-original-title="Enter your password">Change Password</a></td>
-
-				</tr>
-				<tr>
-					<td>State/Province</td>
-					<td><a href="#" id="state" data-type="text" data-pk="1"
-						data-name="state" data-placement="right"
-						data-placeholder="Required" data-original-title="Enter your state"></a></td>
-				</tr>
-				<tr>
-					<td>City</td>
-					<td><a href="#" id="city" data-type="text" data-pk="1"
-						data-name="city" data-placement="right"
-						data-placeholder="Required" data-original-title="Enter your city"></a></td>
-				</tr>
-				<tr>
-					<td>ZIP/Postal code</td>
-					<td><a href="#" id="zip" data-type="text" data-pk="1"
-						data-name="zip" data-placement="right" data-placeholder="Required"
-						data-original-title="Enter your zip"></a></td>
-				</tr>
-				<tr>
-					<td>Address</td>
-					<td><a href="#" id="address" data-type="text" data-pk="1"
-						data-name="address" data-placement="right"
-						data-placeholder="Required"
-						data-original-title="Enter your address"></a></td>
-				</tr>
-				<tr>
-					<td>Phone</td>
-					<td><a href="#" id="phone" data-type="text" data-pk="1"
-						data-name="phone" data-placement="right"
-						data-placeholder="Required" data-original-title="Enter your phone"></a></td>
-				</tr>
-
-				<tr>
-					<td></td>
-					<td><button type="button" class="btn btn-success">
-							<span class="glyphicon glyphicon-saved"></span> Save
-						</button></td>
-				</tr>
+<script type="text/javascript">
+	$("#navUpdateUserDataForm").submit(function(event) {
+		event.preventDefault();
+		
+		/*$.ajax({
+			type: "POST",
+			url: "/barnbay_ui/Register",
+			dataType : "json",
+			data: JSON.stringify({
+				"title":$('input[name=navEditGender]:checked', '#navUpdateUserDataForm').val(),
+				"firstname":$('#navEditFirstname').val(),
+				"lastname":$('#navEditLastname').val(),
+				"email":$('#navEditEmail').val(),
+				"passwordhash":$('#navRegisterPassword').val(),
+				"town":$('#navEditCity').val(),
+				"zip":$('#navEditZipcode').val(),
+				"street":$('#navEditAddress').val(),
+				"number":$('#navEditNumber').val()
+			}),
+			success:function(data) {
+				if(data.register == "success") {
+					$('#UpdateUserDataModalSuccess').modal('show');	
+				} else {
+					$('#UpdateUserDataModalSQL').modal('show');
+				}
+			}, error: function(data) {
+				//Do nothing!
+			}
+		});*/
+	});
+</script>
 
 
+<!-- Update UserData Success -->
+<div class="modal fade" id="UpdateUserDataModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+  			<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal" onclick="reloadOnSuccess()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    			<h4 class="modal-title" id="myModalLabel">Successfully Changed Data</h4>
+  			</div>
+  			<div class="modal-body">
+    			You successfully changed your Data.
+  			</div>
+  			<div class="modal-footer">
+    			<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reloadOnSuccess()">Close</button>
+  			</div>
+		</div>
+	</div>
+</div>
 
-
-			</tbody>
-		</table>
+<!-- Update UserData Failed -->
+<div class="modal fade" id="UpdateUserDataModalSQL" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+  			<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    			<h4 class="modal-title" id="myModalLabel">Something went wrong!</h4>
+  			</div>
+  			<div class="modal-body">
+    			We are sorry but something went wrong, please check again later.
+  			</div>
+  			<div class="modal-footer">
+    			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  			</div>
+		</div>
 	</div>
 </div>

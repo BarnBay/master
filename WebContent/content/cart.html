@@ -31,7 +31,7 @@
 			var out = "";
 			var productSubTotal = 0;
 			
-			out += '<div class="row">';
+			out += '<div class="row" id="contentShoppingCart">';
 			out += '	<div class="col-sm-12 col-md-12">';
 			out += '		<table class="table table-hover">';
 			out += '        	<thead>';
@@ -68,10 +68,10 @@
 				out += '						<input type="email" class="form-control" id="number" value="' + shoppingcart[i].productQuantity + '" disabled>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1 text-center">';
-				out += '						<strong>' + shoppingcart[i].productPrice + ' &euro;</strong>';
+				out += '						<strong>' + (shoppingcart[i].productPrice).toFixed(2) + ' &euro;</strong>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1 text-center">';
-				out += '						<strong>' + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity) + ' &euro;</strong>';
+				out += '						<strong>' + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity).toFixed(2) + ' &euro;</strong>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1">';
 				out += '						<button type="button" class="btn btn-danger" onClick="removeItemFromShoppingCart(' + i + ')">';
@@ -87,7 +87,7 @@
 			out += '					<td></td>';
 			out += '					<td></td>';
 			out += '					<td><h5>Subtotal</h5></td>';
-			out += '					<td class="text-right"><h5><strong>' + productSubTotal + ' &euro;</strong></h5></td>';
+			out += '					<td class="text-right"><h5><strong>' + productSubTotal.toFixed(2) + ' &euro;</strong></h5></td>';
 			out += '              	</tr';
 			out += '				<tr>';
 			out += '					<td></td>';
@@ -95,7 +95,7 @@
 			out += '					<td></td>';
 			out += '					<td></td>';
 			out += '					<td><h5>Barnbay fee</h5></td>';
-			out += '					<td class="text-right"><h5><strong>' + (productSubTotal * 0.15) + ' &euro;</strong></h5></td>';
+			out += '					<td class="text-right"><h5><strong>' + (productSubTotal * 0.15).toFixed(2) + ' &euro;</strong></h5></td>';
 			out += '              	</tr';
 			out += '				<tr>';
 			out += '					<td></td>';
@@ -103,7 +103,7 @@
 			out += '					<td></td>';
 			out += '					<td></td>';
 			out += '					<td><h3>Total</h3></td>';
-			out += '					<td class="text-right"><h3><strong>' + (productSubTotal * 1.15) + ' &euro;</strong></h3></td>';
+			out += '					<td class="text-right"><h3><strong>' + (productSubTotal * 1.15).toFixed(2) + ' &euro;</strong></h3></td>';
 			out += '              	</tr';
 			out += '				<tr>';
 			out += '					<td></td>';
@@ -116,8 +116,8 @@
 			out += '						</button>';
 			out += '					</td>';
 			out += '					<td>';
-			out += '						<button type="button" id="checkout" class="btn btn-success">';
-			out += '							<span class="glyphicon glyphicon-usd"></span>Checkout';
+			out += '						<button type="button" id="Continue_shoppingCart" class="btn btn-success">';
+			out += '							<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Address Data';
 			out += '						</button>';
 			out += '					</td>';
 			out += '				</tr>';
@@ -148,5 +148,151 @@
 		$.cookie('Products.ShoppingCart', JSON.stringify(result));
 		displayShoppingCartItem();
 		updateMiniShoppingCart();
+	}
+</script>
+
+
+<script type="text/javascript">
+	/* Change Progress to Address */
+	$('#Continue_shoppingCart').click(function(e) {
+		e.preventDefault();
+		
+		$('#addressData').removeClass('btn btn-default btn-circle');
+		$('#addressData').addClass('btn btn-success btn-circle');
+		
+		$('#shoppingCartContainer').hide();
+		displayContactInformation();
+		$('#shoppingCartContainer').fadeIn('500');
+		
+		//
+    });
+	
+	/* Change Progress to Payment */
+	$('#mainContainer').on('click', '#Continue_AddressData', function(e) {
+		e.preventDefault();
+		
+		$('#payment').removeClass('btn btn-default btn-circle');
+		$('#payment').addClass('btn btn-success btn-circle');
+		
+		$('#shoppingCartContainer').hide();
+		displayPaymentInformation();
+		$('#shoppingCartContainer').fadeIn('500');
+    });
+	
+	/* Change Progress to Done */
+	$('#mainContainer').on('click', '#Continue_Payment', function(e) {
+		e.preventDefault();
+		
+		$('#done').removeClass('btn btn-default btn-circle');
+		$('#done').addClass('btn btn-success btn-circle');
+		
+		$('#shoppingCartContainer').hide();
+		$('#shoppingCartContainer').load('./content/orderConfirmation.html').fadeIn('500');
+		
+		/* Ajax Call to Hana */
+		
+		/* Clear Shopping Cart Coockie */
+		$.cookie('Products.ShoppingCart', '{"shoppingcart":[]}');
+    });
+</script>
+
+<!-- Show Contact Information of User -->
+<script type="text/javascript">
+	function displayContactInformation() {
+		var JSONUserObject = JSON.parse($.cookie('User.JSON'));
+		var out = "";
+		
+		out += '<div class="panel panel-success">';
+		out += '	<div class="panel-heading">';
+		out += '		<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Address Data';
+		out += '	</div>';
+		out += '	<div class="panel-body" style="padding-bottom: 0px;">';
+		out += '		<table class="table table-bordered table-striped">';
+		out += '			<tbody>';
+		out += '				<tr>';
+		out += '					<td style="vertical-align:middle">Firstname</td>';
+		out += '					<td><input type="email" name="email" id="navEditFirstname" value="' + JSONUserObject.firstname + '" class="form-control input-md" required/></td>';
+		out += '				</tr>';
+		out += '				<tr>';
+		out += '					<td style="vertical-align:middle">Lastname</td>';
+		out += '					<td><input type="email" name="email" id="navEditLastname" value="' + JSONUserObject.lastname + '" class="form-control input-md" required/></td>';
+		out += '				</tr>';
+		out += '				<tr>';
+		out += '					<td style="vertical-align:middle">City</td>';
+		out += '					<td><input type="email" name="email" id="navEditCity" value="' + JSONUserObject.town + '" class="form-control input-md" required/></td>';
+		out += '				</tr>';
+		out += '				<tr>';
+		out += '					<td style="vertical-align:middle">Zip/ Postal code</td>';
+		out += '					<td><input type="email" name="email" id="navEditZipcode" value="' + JSONUserObject.zip + '" class="form-control input-md" required/></td>';
+		out += '				</tr>';
+		out += '				<tr>';
+		out += '					<td style="vertical-align:middle">Address</td>';
+		out += '					<td><input type="email" name="email" id="navEditAddress" value="' + JSONUserObject.street + '" class="form-control input-md" required/></td>';
+		out += '				</tr>';
+		out += '				<tr>';
+		out += '					<td style="vertical-align:middle">Number</td>';
+		out += '					<td><input type="email" name="email" id="navEditNumber" value="' + JSONUserObject.number + '" class="form-control input-md" required/></td>';
+		out += '				</tr>';
+		out += '			</tbody>';
+		out += '		</table>';
+		out += '	</div>';
+		out += '	<div class="panel-footer">';
+		out += '		<button type="button" id="Continue_AddressData" class="btn btn-success pull-right">';
+		out += '			<span class="glyphicon glyphicon-euro" aria-hidden="true"></span> Payment';
+		out += '		</button>';
+		out += '		<div class="clearfix"></div>';
+		out += '	</div>';
+		out += '</div>';
+		
+		document.getElementById("shoppingCartContainer").innerHTML = out;
+	}
+</script>
+
+<!-- Show Contact Information of User -->
+<script type="text/javascript">
+	function displayPaymentInformation() {
+		var out = "";
+		
+		out += '<div class="panel panel-success">';
+		out += '	<div class="panel-heading">';
+		out += '		<span class="glyphicon glyphicon-euro" aria-hidden="true"></span> Payment';
+		out += '	</div>';
+		out += '	<div class="panel-body">';
+		out += '		<div class="form-row">';
+		out += '			<div class="col-xs-12 form-group required">';
+		out += '				<label class="control-label">Name on Card</label>';
+		out += '				<input class="form-control" size="4" type="text">';
+		out += '			</div>';
+		out += '		</div>';
+		out += '		<div class="form-row">';
+		out += '			<div class="col-xs-12 form-group card required">';
+		out += '				<label class="control-label">Card Number</label>';
+		out += '				<input autocomplete="off" class="form-control card-number" size="20" type="text">';
+		out += '			</div>';
+		out += '		</div>';
+		out += '		<div class="form-row">';
+		out += '			<div class="col-xs-4 form-group cvc required">';
+		out += '				<label class="control-label">CVC</label>';
+		out += '				<input autocomplete="off" class="form-control card-cvc" placeholder="ex. 311" size="4" type="text">';
+		out += '			</div>';
+		out += '			<div class="col-xs-4 form-group expiration required">';
+		out += '				<label class="control-label">Expiration</label>';
+		out += '				<input class="form-control card-expiry-month" placeholder="MM" size="2" type="text">';
+		out += '			</div>';
+		out += '			<div class="col-xs-4 form-group expiration required">';
+		out += '				<label class="control-label"></label>';
+		out += '				<input class="form-control card-expiry-year" placeholder="YYYY" size="4" type="text">';
+		out += '			</div>';
+		out += '		</div>';
+		out += '	</div>';
+		out += '	<div class="panel-footer">';
+		out += '		<button type="button" id="Continue_Payment" class="btn btn-success pull-right">';
+		out += '			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Checkout';
+		out += '		</button>';
+		out += '		<div class="clearfix"></div>';
+		out += '	</div>';
+		out += '</div>';
+		
+		document.getElementById("shoppingCartContainer").innerHTML = out;
 	}
 </script>
