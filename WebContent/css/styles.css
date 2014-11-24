@@ -268,6 +268,50 @@ html, body {
 	padding-top: 5px;
 }
 
+
+/* ------------------------------------------------------------------------------------
+   Farmer Detail View
+   ------------------------------------------------------------------------------------ */
+#farmerDetailInformation .col-sm-3 {
+	margin-top: 20px;
+	padding: 10px;
+}
+
+#farmerDetailInformation .col-sm-3 img {
+	max-height: 250px;
+	max-width: 250px;
+}
+
+#farmerDetailInformation .col-sm-3 h2 {
+	margin-top: 5px;
+	font-size: 28px;
+	text-align: center;
+}
+
+#farmerDetailInformation .col-sm-3 .panel-heading {
+	font-size: 16px;
+}
+
+#farmerDetailInformation .col-sm-3 .panel-body {
+	font-size: 14px;
+	padding-bottom: 5px;
+}
+
+#farmerDetailInformation .col-sm-9 h2 {
+	margin-top: 5px;
+	font-size: 24px;
+}
+
+#farmerDetailInformation .col-sm-9 .barnbays .panel-heading {
+	font-size: 16px;
+}
+
+#farmerDetailInformation .col-sm-9 .barnbays .panel-body {
+	font-size: 16px;
+	padding-bottom: 5px;
+}
+
+
 /* ------------------------------------------------------------------------------------
    Footer
    ------------------------------------------------------------------------------------ */

@@ -1,184 +1,164 @@
 <script src="./js/star-rating.js"></script>
 <link href="./css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
-<div class="row">
-	<div class="col-md-3" id="leftCol">
-		<img src="http://placehold.it/200x200" class="img-circle">
-		<h3>Farmer John</h3>
-		<input id="input-21b" value="4" type="number" class="rating" min=0 max=5 step=0.2 data-size="xs">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>Kontaktdaten</h4>
-				</div>
-				<div class="panel-body">
-					<h4>Adresse: <small>Barn 1</small></h4>
-					<h4>Telefon: <small>01234 56789</small></h4>
-				</div>
-			</div>
-	</div>
-	<div class="col-md-9">
-		<h2 id="sec0">Produkte</h2>
-		<div class="row" id="category-row-1">
-			<div class="col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Produkt 1</h3>
-					</div>
-					<div class="panel-body">
-						<img src="http://placehold.it/100x100" class="img-circle">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Produkt 2</h3>
-					</div>
-					<div class="panel-body">
-						<img src="http://placehold.it/100x100" class="img-circle">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Produkt 3</h3>
-					</div>
-					<div class="panel-body">
-						<img src="http://placehold.it/100x100" class="img-circle">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Produkt 4</h3>
-					</div>
-					<div class="panel-body">
-						<img src="http://placehold.it/100x100" class="img-circle">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row" id="category-row-1">
-			<div class="col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Produkt 5</h3>
-					</div>
-					<div class="panel-body">
-						<img src="http://placehold.it/100x100" class="img-circle">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Produkt 6</h3>
-					</div>
-					<div class="panel-body">
-						<img src="http://placehold.it/100x100" class="img-circle">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Produkt 7</h3>
-					</div>
-					<div class="panel-body">
-						<img src="http://placehold.it/100x100" class="img-circle">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Produkt 8</h3>
-					</div>
-					<div class="panel-body">
-						<img src="http://placehold.it/100x100" class="img-circle">
-					</div>
-				</div>
-			</div>
-		</div>
-		At Bootply we like to build simple Bootstrap templates that utilize
-		the code Bootstap CSS without a lot of customization. Sure you can
-		find a lot of Bootstrap themes and inspiration, but these templates
-		tend to be heavy on customization.
-		
-		<hr>
 
-		<h2 id="sec1">About</h2>
-		<p>Rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-		quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-		voluptatem quia voluptas sit aspernatur aut odit aut.
-		At Bootply we like to build simple Bootstrap templates that utilize
-		the code Bootstap CSS without a lot of customization. Sure you can
-		find a lot of Bootstrap themes and inspiration, but these templates
-		tend to be heavy on customization.</p>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3>Hello.</h3>
-					</div>
-					<div class="panel-body">Lorem ipsum dolor sit amet,
-						consectetur adipiscing elit. Duis pharetra varius quam sit amet
-						vulputate. Quisque mauris augue, molestie tincidunt condimentum
-						vitae, gravida a libero. Aenean sit amet felis dolor, in
-						sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis
-						elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3>Hello.</h3>
-					</div>
-					<div class="panel-body">Lorem ipsum dolor sit amet,
-						consectetur adipiscing elit. Duis pharetra varius quam sit amet
-						vulputate. Quisque mauris augue, molestie tincidunt condimentum
-						vitae, gravida a libero. Aenean sit amet felis dolor, in
-						sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis
-						elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
-				</div>
-			</div>
-		</div>
+<script type="text/javascript">	
+	var FarmerDetailJSONObject;
+	var countProducts = 0;
+	
+	$.ajax({
+		url: "/barnbay_ui/GetFarmerByFarmerId?id=" + $.cookie("Farmer.FarmerListCategoryID")
+	}).done(function(data) {
+		FarmerDetailJSONObject = JSON.parse(data);		
+		farmerDetailFunction(FarmerDetailJSONObject);
+	});
+</script>
 
-		<hr>
-
-		<h2 id="sec2">Locations</h2>
-		<p>Rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-			quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-			voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed
-			quia cor magni dolores eos qui ratione voluptatem sequi nesciunt.
-			Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-			consectetur, adipisci velit, sed quia non numquam eius modi tempora
-			incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut
-			enim ad minima veniam, quis nostrum exercitationem ullam corporis
-			suscipit laboriosam, nisi ut!</p>
-		<div class="row">
-			<table class="table table-striped">
-				<tr>
-					<th>Name of the Location</th>
-					<th>PLZ</th>
-					<th>Adresse</th>
-					<th>Pick-Up Times</th>
-				</tr>
-				<tr>
-					<td>SAP</td>
-					<td>69190 Walldorf</td>
-					<td>Hasso-Plattner-Ring 7</td>
-					<td>Mo-Fr je 11.00 bis 14:00</td>
-				</tr>
+<div class="row" id="farmerDetailInformation">
+	<script type="text/javascript">
+		function farmerDetailFunction(farmerDetailObject) {
+			var out = "";
 			
-				<tr>
-					<td>Uni Mannheim</td>
-					<td>68131 Mannheim</td>
-					<td>Schloss</td>
-					<td>Mo-Fr je 11.00 bis 14:00</td>
-				</tr>
-			</table>
+			out += '<div class="col-sm-12" style="font-family: \'Roboto Condensed\', sans-serif;">';
+			out += '	<div class="col-sm-3">';
+			out += '		<img src="./img/farmers/' + farmerDetailObject.firstname + ' ' + farmerDetailObject.lastname + '.png" alt="Image" class="img-circle center-block">';
+			out += '		<h2>' + farmerDetailObject.firstname + ' ' + farmerDetailObject.lastname + '</h2>';
+			out += '		<input id="input-21b" value="4" type="number" class="rating" min=0 max=5 step=0.2 data-size="xs">';
+			out += '		<br/>';
+			out += '		<div class="panel panel-success">';
+			out += '			<div class="panel-heading">';
+			out += '				<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Address';
+			out += '			</div>';
+			out += '			<div class="panel-body">';
+			out += '				<address>';
+			out += '					' + farmerDetailObject.street + ' ' + farmerDetailObject.number + '<br/>'
+			out += '					' + farmerDetailObject.zipcode + ' ' + farmerDetailObject.city + '<br/>';
+			out += '					' + farmerDetailObject.email + '<br/><br/>';
+			out += '					<strong>Farm opening hours:</strong><br/>' + farmerDetailObject.farmopeninghours;
+			out += '				</address>';
+			out += '			</div>';
+			out += '		</div>';
+			out += '	</div>';
+			out += '	<div class="col-sm-9" farmerDetail>';
+			//out += '		<img src="./img/farms/' + farmerDetailObject.farmname + '.png" alt="Image" class="img-responsive center-block">';
+			out += '		<h3 id="sec0">Products</h3>';
+			
+			for(i = 0; i < farmerDetailObject.products.length; i++) {
+				if(countProducts == 0) {
+					out += '		<div class="row" id="category-row-1">';
+				}
+				
+				out += '		<div class="col-md-3">';
+				out += '			<div class="panel panel-default">';
+				out += '				<div class="panel-heading">';
+				out += '					<h3 class="panel-title">Produkt 1</h3>';
+				out += '				</div>';
+				out += '				<div class="panel-body">';
+				out += '					<img src="http://placehold.it/100x100" class="img-circle">';
+				out += '				</div>';
+				out += '			</div>';
+				out += '		</div>';
+								
+				if(countProducts < 3) {
+					countProducts++;
+				} else {
+					out += '		</div>';
+					countProducts = 0;	
+				}
+			}
+			
+			out += '		<hr>';
+			out += '		<div class="panel panel-success barnbays">';
+			out += '			<div class="panel-heading">';
+			out += '				<span class="glyphicon glyphicon-time" aria-hidden="true"></span> BarnBay pickup Locations';
+			out += '			</div>';
+			out += '			<div class="panel-body">';
+			out += '				<table class="table table-striped">';
+			out += '					<tr>';
+			out += '						<th>Name</th>';
+			out += '						<th>Zip Code</th>';
+			out += '						<th>Address</th>';
+			out += '						<th>Pick-Up Times</th>';
+			out += '					</tr>';
+			
+			for(i = 0; i < farmerDetailObject.barnbays.length; i++) {
+				out += '					<tr>';
+				out += '						<td>' + farmerDetailObject.barnbays[i].name + '</td>';
+				out += '						<td>' + farmerDetailObject.barnbays[i].address.zipcode + ' ' + farmerDetailObject.barnbays[i].address.city + '</td>';
+				out += '						<td>' + farmerDetailObject.barnbays[i].address.street + ' ' + farmerDetailObject.barnbays[i].address.number + '</td>';
+				out += '						<td>' + farmerDetailObject.barnbays[i].opening_hours + '</td>';
+				out += '					</tr>';
+			}
+	
+			out += '				</table>';
+			out += '			</div>';
+			out += '		</div>';
+			
+			out += '';
+			out += '';
+			out += '';
+			out += '';
+			out += '';
+			out += '';
+			out += '';
+			out += '';
+			out += '';
+			out += '';
+			out += '';
+			out += '';
+			out += '	</div>';
+			out += '</div>';
+			
+			document.getElementById("farmerDetailInformation").innerHTML = out;
+		}
+	</script>
+
+
+			</div>
+			At Bootply we like to build simple Bootstrap templates that utilize
+			the code Bootstap CSS without a lot of customization. Sure you can
+			find a lot of Bootstrap themes and inspiration, but these templates
+			tend to be heavy on customization.
+			
+			<hr>
+	
+			<h2 id="sec1">About</h2>
+			<p>Rem aperiam, eaque ipsa quae ab illo inventore veritatis et
+			quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+			voluptatem quia voluptas sit aspernatur aut odit aut.
+			At Bootply we like to build simple Bootstrap templates that utilize
+			the code Bootstap CSS without a lot of customization. Sure you can
+			find a lot of Bootstrap themes and inspiration, but these templates
+			tend to be heavy on customization.</p>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3>Hello.</h3>
+						</div>
+						<div class="panel-body">Lorem ipsum dolor sit amet,
+							consectetur adipiscing elit. Duis pharetra varius quam sit amet
+							vulputate. Quisque mauris augue, molestie tincidunt condimentum
+							vitae, gravida a libero. Aenean sit amet felis dolor, in
+							sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis
+							elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3>Hello.</h3>
+						</div>
+						<div class="panel-body">Lorem ipsum dolor sit amet,
+							consectetur adipiscing elit. Duis pharetra varius quam sit amet
+							vulputate. Quisque mauris augue, molestie tincidunt condimentum
+							vitae, gravida a libero. Aenean sit amet felis dolor, in
+							sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis
+							elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
+					</div>
+				</div>
+			</div>
+	
+			<hr>
 		</div>
 	</div>
 </div>
