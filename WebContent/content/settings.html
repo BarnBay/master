@@ -1,7 +1,15 @@
 <div class="row" id="userDetailInformation">
 	<script type="text/javascript">
 		var out = "";
+		var male = "";
+		var female = "";
 		var JSONUserObject = JSON.parse($.cookie('User.JSON'));
+		
+		if(JSONUserObject.title == "Herr") {
+			male = 'checked="checked"';	
+		} else {
+			female = 'checked="checked"';
+		}
 		
 		out += '<div class="panel panel-success">';
 		out += '	<div class="panel-heading">';
@@ -13,7 +21,14 @@
 		out += '				<tbody>';
 		out += '					<tr>';
 		out += '						<td style="vertical-align:middle">Gender</td>';
-		out += '						<td></td>';
+		out += '						<td>';
+		out += '							<label class="radio-inline">';
+		out += '								<input type="radio" name="navEditGender" value="Herr" ' + male + '/> Male';
+		out += '							</label>'; 
+		out += '							<label class="radio-inline">';
+		out += '								<input type="radio" name="navEditGender" value="Frau" ' + female + '/> Female';
+		out += '							</label> ';
+		out += '						</td>';
 		out += '					</tr>';
 		out += '					<tr>';
 		out += '						<td style="vertical-align:middle">Firstname</td>';
@@ -74,7 +89,7 @@
 			url: "/barnbay_ui/Register",
 			dataType : "json",
 			data: JSON.stringify({
-				"title":$('input[name=navRegisterGender]:checked', '#navRegisterForm').val(),
+				"title":$('input[name=navEditGender]:checked', '#navUpdateUserDataForm').val(),
 				"firstname":$('#navEditFirstname').val(),
 				"lastname":$('#navEditLastname').val(),
 				"email":$('#navEditEmail').val(),
