@@ -8,23 +8,54 @@
 	var ProductDetailDescription;
 	var ProductFarmerDescription;
 	
-	$.ajax({
-		url: "/barnbay_ui/GetCheapestProduct?id=" + $.cookie("Product.ProductListCategoryID")
-	}).done(function(data) {
-		ProductDetailJSONObject = JSON.parse(data);
-		ProductDetailName = ProductDetailJSONObject.name;
-		ProductDetailDescription = ProductDetailJSONObject.description
-		ProductFarmerDescription = ProductDetailJSONObject.farmerproductdescription;
+	if($.cookie("Farmer.ProductID") && $.cookie("Farmer.FarmerID")) {
 		
-		productDetailFunction(ProductDetailJSONObject);
+		$.ajax({
+			url: "/barnbay_ui/GetCheapestProduct?id=" + $.cookie("Farmer.ProductID")
+		}).done(function(data) {
+			ProductDetailJSONObject = JSON.parse(data);
+			ProductDetailName = ProductDetailJSONObject.name;
+			ProductDetailDescription = ProductDetailJSONObject.description
+			ProductFarmerDescription = ProductDetailJSONObject.farmerproductdescription;
+		});
 		
-		/* Start Google Maps */
-		//startMap(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city, ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
-		GoogleMapsAddress.push(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city);
-		GoogleMapsTitle.push(ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
+		$.ajax({
+			url: "/barnbay_ui/GetProductByCategoryAndFarmer?catid=" + $.cookie("Farmer.ProductID") + "&farmerid=" + $.cookie("Farmer.FarmerID")
+		}).done(function(data) {
+			ProductDetailJSONObject = JSON.parse(data);
+			ProductFarmerDescription = ProductDetailJSONObject[0].description;
+			
+			productDetailFunction(ProductDetailJSONObject[0]);
+
+			/* Start Google Maps */
+			GoogleMapsAddress.push(ProductDetailJSONObject[0].farmeraddress.street + ' ' + ProductDetailJSONObject[0].farmeraddress.number + ', ' + ProductDetailJSONObject[0].farmeraddress.zipcode + ' ' + ProductDetailJSONObject[0].farmeraddress.city);
+			GoogleMapsTitle.push(ProductDetailJSONObject[0].farmerfirstname + ' ' + ProductDetailJSONObject[0].farmerlastname);
+			
+			startMap();
+		});
 		
-		startMap();
-	});
+		$.removeCookie("Farmer.ProductID");
+		$.removeCookie("Farmer.FarmerID");
+
+	} else {
+		$.ajax({
+			url: "/barnbay_ui/GetCheapestProduct?id=" + $.cookie("Product.ProductListCategoryID")
+		}).done(function(data) {
+			ProductDetailJSONObject = JSON.parse(data);
+			ProductDetailName = ProductDetailJSONObject.name;
+			ProductDetailDescription = ProductDetailJSONObject.description
+			ProductFarmerDescription = ProductDetailJSONObject.farmerproductdescription;
+			
+			productDetailFunction(ProductDetailJSONObject);
+			
+			/* Start Google Maps */
+			//startMap(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city, ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
+			GoogleMapsAddress.push(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city);
+			GoogleMapsTitle.push(ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
+			
+			startMap();
+		});
+	}
 </script>
 
 <div class="row">

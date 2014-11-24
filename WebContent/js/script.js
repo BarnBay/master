@@ -250,6 +250,16 @@ $(document).ready(function() {
 	});
 	
 	/* On click of Item */
+	$('#mainContainer').on('click', '#FarmerSingleProduct', function(event) {
+		$('#mainContainer').hide().load('./content/product_detailview.html').fadeIn('500');
+	});
+
+
+/* ------------------------------------------------------------------------------------
+	Farmer List View
+	------------------------------------------------------------------------------------ */
+	
+	/* On click of Item */
 	$('#mainContainer').on('click', '#locationDetailView', function(event) {
 		$('#mainContainer').hide().load('./content/location_detailview.html').fadeIn('500');
 	});
