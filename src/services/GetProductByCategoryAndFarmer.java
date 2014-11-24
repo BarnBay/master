@@ -101,8 +101,8 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 						ResultSet rs7;
 						while(rs6!=null && rs6.next()){
 							rs7 = db.executeSQL("SELECT * FROM TEST.USERD WHERE IDUSER=" + rs6.getInt(4));
-							Farmer f = new Farmer();
 							while(rs7!=null && rs7.next()){
+								Farmer f = new Farmer();
 								f.idfarmer = rs7.getInt(1);
 								f.firstname = rs7.getString(2);
 								f.lastname = rs7.getString(3);
