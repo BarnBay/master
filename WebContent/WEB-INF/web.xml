@@ -153,4 +153,14 @@
     <servlet-name>GetFarmerByFarmerId</servlet-name>
     <url-pattern>/GetFarmerByFarmerId</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAllBarnbays</display-name>
+    <servlet-name>GetAllBarnbays</servlet-name>
+    <servlet-class>services.GetAllBarnbays</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllBarnbays</servlet-name>
+    <url-pattern>/GetAllBarnbays</url-pattern>
+  </servlet-mapping>
 </web-app>
