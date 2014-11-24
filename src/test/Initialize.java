@@ -95,11 +95,11 @@ public class Initialize extends HttpServlet {
 		 * Initialize Apple Cripps Pink
 		 */
 		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
-          		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(1,"
+          		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(3,"
            	 + "'You will love this Product.', 5, 1, 2, 100, 0, 0)");
 		
 		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
-         		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(2,"
+         		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(4,"
           	 + "'Best Product in my stock.', 5, 2, 3, 20, 0, 0)");
 		
 		
@@ -107,22 +107,22 @@ public class Initialize extends HttpServlet {
 		 * Initialize carrot
 		 */
 		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
-           		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(1,"
+           		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(5,"
             	 + "'You will love this Product.', 6, 1, 3, 100, 0, 0)");
 		
 		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
-          		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(2,"
+          		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(6,"
            	 + "'Best Product in my stock.', 6, 2, 4, 20, 0, 0)");
 		
 		/**
 		 * Initialize tomato
 		 */
 		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
-          		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(1,"
+          		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(7,"
            	 + "'You will love this Product.', 7, 1, 4, 100, 0, 0)");
 		
 		db.executeSQL("INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
-         		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(2,"
+         		 + "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(8,"
           	 + "'Best Product in my stock.', 7, 2, 5, 20, 0, 0)");
 		
 		db.executeSQL("INSERT INTO TEST.CATEGORY VALUES(1, 'Fruits', 0,'')");
