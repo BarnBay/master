@@ -30,12 +30,12 @@
 				<div class="row">
 					<div class="col-xs-6 col-md-6">
 						<p>
-							<input type="text" name="firstname" id="navRegisterFirstname" value="" class="form-control input-md" placeholder="First Name" required />
+							<input type="text" name="firstname" id="navRegisterFirstname" value="" class="form-control input-md" placeholder="Firstname" required />
 						</p>
 					</div>
 					<div class="col-xs-6 col-md-6">
 						<p>
-							<input type="text" name="lastname" id="navRegisterLastname" value="" class="form-control input-md" placeholder="Last Name" required />
+							<input type="text" name="lastname" id="navRegisterLastname" value="" class="form-control input-md" placeholder="Lastname" required />
 						</p>
 					</div>
 				</div>
@@ -91,23 +91,7 @@
 <script type="text/javascript">
 	$("#navRegisterForm").submit(function(event) {
 		event.preventDefault();
-		
-		var test = JSON.stringify({
-			"usertype":$('#navRegisterType').val(),
-			"title":$('input[name=navRegisterGender]:checked', '#navRegisterForm').val(),
-			"firstname":$('#navRegisterFirstname').val(),
-			"lastname":$('#navRegisterLastname').val(),
-			"email":$('#navRegisterEmail').val(),
-			"username":$('#navRegisterEmail').val(),
-			"passwordhash":$('#navRegisterPassword').val(),
-			"town":$('#navRegisterCity').val(),
-			"zip":$('#navRegisterZip').val(),
-			"street":$('#navRegisterAddress').val(),
-			"number":$('#navRegisterPhone').val()
-		});
-		
-		document.getElementById("testProduct").innerHTML = test;
-		
+				
 		$.ajax({
 			type: "POST",
 			url: "/barnbay_ui/Register",
@@ -129,7 +113,6 @@
 				if(data.register == "success") {
 					$('#navRegisterModalSuccess').modal('show');	
 				} else {
-					alert("Reason:" + data.reason);
 					if(data.reason == "exists") {
 						$('#navRegisterModalExists').modal('show');	
 					} else {
@@ -137,7 +120,7 @@
 					}
 				}
 			}, error: function(data) {
-				//alert(JSON.stringify(data));
+				//Do nothing!
 			}
 		});
 	});
