@@ -272,32 +272,32 @@ html, body {
 /* ------------------------------------------------------------------------------------
    Farmer Detail View
    ------------------------------------------------------------------------------------ */
-#farmerDetailInformation .col-sm-3 {
+#farmerDetailInformation .col-md-3 {
 	margin-top: 20px;
 	padding: 10px;
 }
 
-#farmerDetailInformation .col-sm-3 img {
+#farmerDetailInformation .col-md-3 img {
 	max-height: 250px;
 	max-width: 250px;
 }
 
-#farmerDetailInformation .col-sm-3 h2 {
+#farmerDetailInformation .col-md-3 h2 {
 	margin-top: 5px;
 	font-size: 28px;
 	text-align: center;
 }
 
-#farmerDetailInformation .col-sm-3 .panel-heading {
+#farmerDetailInformation .col-md-3 .panel-heading {
 	font-size: 16px;
 }
 
-#farmerDetailInformation .col-sm-3 .panel-body {
+#farmerDetailInformation .col-md-3 .panel-body {
 	font-size: 14px;
 	padding-bottom: 5px;
 }
 
-#farmerDetailInformation .col-sm-9 #farmerDetailImageInfo {
+#farmerDetailInformation .col-md-9 #farmerDetailImageInfo {
 	position: absolute;
 	width: 100%;
 	top: 185px;
@@ -307,17 +307,42 @@ html, body {
 	text-shadow: 1px 1px #000000;
 }
 
-#farmerDetailInformation .col-sm-9 #farmerDetailImageInfo h4 {
+#farmerDetailInformation .col-md-9 #farmerDetailImageInfo h4 {
 	font-size: 28px;
 }
 
-#farmerDetailInformation .col-sm-9 .barnbays .panel-heading {
+#farmerDetailInformation .col-md-9 .barnbays .panel-heading {
 	font-size: 16px;
 }
 
-#farmerDetailInformation .col-sm-9 .barnbays .panel-body {
+#farmerDetailInformation .col-md-9 .barnbays .panel-body {
 	font-size: 16px;
 	padding-bottom: 5px;
+}
+
+/* ------------------------------------------------------------------------------------
+   Farmer Detail View
+   ------------------------------------------------------------------------------------ */
+#locationDetailInformation .col-md-3 .panel-heading {
+	font-size: 16px;
+}
+
+#locationDetailInformation .col-md-3 .panel-body {
+	font-size: 14px;
+	padding-bottom: 5px;
+}
+#locationDetailInformation .col-md-9 #barnbayDetailImageInfo {
+	position: absolute;
+	width: 100%;
+	top: 205px;
+	font-size: 20px;
+	text-align: center;
+	color: #FFFFFF;
+	text-shadow: 1px 1px #000000;
+}
+
+#locationDetailInformation .col-md-9 #barnbayDetailImageInfo h4 {
+	font-size: 28px;
 }
 
 

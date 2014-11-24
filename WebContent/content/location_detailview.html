@@ -33,10 +33,12 @@
 			out += '		<div style="width: 100%; height: 270px; overflow: hidden">';
 			out += '			<img src="./img/locations/' + LocationDetailObject.name + '.png" alt="Image" class="img-responsive center-block" width="100%" height="350">';
 			out += '		</div>';
+			out += '		<div id="barnbayDetailImageInfo">';
+			out += '			<h4>' + LocationDetailObject.description + '</h4>';
+			out += '		</div>';
+			out += '	</div>';
 			out += '	</div>';
 			out += '	<hr>';
-			out += '';
-			out += '	</div>';
 			out += '</div>';
 			
 			document.getElementById("locationDetailInformation").innerHTML = out;
