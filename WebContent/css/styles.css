@@ -151,6 +151,11 @@ html, body {
 	cursor: pointer;
 }
 
+.thumbnail .gridview-group-small-image {
+	height: 165px;
+	cursor: pointer;
+}
+
 .thumbnail .gridview-group-item-heading {
 	padding-top: 5px;
 	font-size: 18px;
@@ -185,7 +190,12 @@ html, body {
 }
 
 .listview-group-image {
-	height: 225px;
+	width: 360px;
+	cursor: pointer;
+}
+
+.listview-group-small-image {
+	width: 260px;
 	cursor: pointer;
 }
 

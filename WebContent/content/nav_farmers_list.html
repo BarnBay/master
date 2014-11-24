@@ -76,7 +76,7 @@
 				    	if(ListOrGridView == "GridView") {
 					    	out += '<div class="item  col-xs-3 col-lg-3">';
 					    	out += '	<div class="thumbnail">';					
-					    	out += '		<img class="group gridview-group-image" id="farmerDetailView" src="http://placehold.it/400x250" alt="" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')"/></a>';
+					    	out += '		<img class="group gridview-group-small-image" id="farmerDetailView" src="./img/farms/' + farmerArray[i].farmname + '.png" alt="" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')"/></a>';
 					    	out += '		<div class="gridview-group-item-caption">';
 					    	out += '			<div class="gridview-group-item-heading" id="farmerDetailView" style="cursor:pointer;" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')">';
 					    	out += '				' + farmerArray[i].farmname;
@@ -91,7 +91,7 @@
 					    	out += '<div class="col-xs-12 col-lg-12" style="margin-top: 10px;">';
 					    	out += '	<div class="listview col-xs-12"></div>';
 					    	out += '	<div class="col-xs-4">';
-					    	out += '		<img class="group listview-group-image" id="farmerDetailView" src="http://placehold.it/400x250" alt="" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')"/></a>';
+					    	out += '		<img class="group listview-group-image" id="farmerDetailView" src="./img/farms/' + farmerArray[i].farmname + '.png" alt="" onclick="farmerGetDetailedFarmerInfo(' + farmerArray[i].idfarmer + ')"/></a>';
 					    	out += '	</div>';
 					    	out += '	<div class="col-xs-8">';
 					    	out += '		<div class="listview-group-item-caption">';
