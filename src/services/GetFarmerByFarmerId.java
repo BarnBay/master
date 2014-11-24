@@ -48,6 +48,7 @@ public class GetFarmerByFarmerId extends HttpServlet {
 				f.idfarmer = rs.getInt(1);
 				f.firstname = rs.getString(2);
 				f.lastname = rs.getString(3);
+				f.email = rs.getString(10);
 				fk_address = rs.getInt(7);
 				fk_farm = rs.getInt(8);
 				fk_barnbay = rs.getInt(9);
@@ -64,6 +65,8 @@ public class GetFarmerByFarmerId extends HttpServlet {
 					
 					ResultSet rs12 = db.executeSQL("SELECT * FROM TEST.CATEGORY WHERE IDCATEGORY =" + rs1.getInt(3));
 					if(rs12 != null && rs12.next()){
+						p.name = rs12.getString(2);
+						p.catid = rs12.getInt(1);
 						p.description = rs12.getString(4);
 					}
 					

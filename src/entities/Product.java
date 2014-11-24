@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Product{
 	public int id;
+	public int catid;
 	public String name;
 	public String description;
 	public String farmerproductdescription;
