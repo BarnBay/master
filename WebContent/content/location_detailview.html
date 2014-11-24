@@ -6,6 +6,8 @@
 	}).done(function(data) {
 		LocationDetailJSONObject = JSON.parse(data);		
 		LocationDetailFunction(LocationDetailJSONObject);
+		
+		startMap(LocationDetailJSONObject.address.street + ' ' + LocationDetailJSONObject.address.number + ', ' + LocationDetailJSONObject.address.zipcode + ' ' + LocationDetailJSONObject.address.city, LocationDetailJSONObject.name);
 	});
 </script>
 
@@ -37,49 +39,61 @@
 			out += '			<h4>' + LocationDetailObject.description + '</h4>';
 			out += '		</div>';
 			out += '	</div>';
+			out += '</div>';
+			out += '<div class="col-md-12"><hr></div>';
+			out += '<div class="col-md-12">';
+			out += '	<div class="panel panel-success">';
+			out += '		<div class="panel-heading">';
+			out += '			<span class="glyphicon glyphicon-map-marke" aria-hidden="true"></span> BarnBay pickup Locations';
+			out += '		</div>';
+			out += '		<div class="panel-body">';
+			out += '			<div id="map_barnbay_canvas" style="width: 100%; height: 480px;"></div>';
+			out += '		</div>';
 			out += '	</div>';
-			out += '	<hr>';
 			out += '</div>';
 			
 			document.getElementById("locationDetailInformation").innerHTML = out;
 		}
 	</script>
+</div>
+
+<!-- Google Maps Scripte -->
+<script type="text/javascript">
+	var markerBounds, geocoder, map;
 	
-			<h2 id="sec1">About</h2>
-			<p>Rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-				quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-				voluptatem quia voluptas sit aspernatur aut odit aut. At Bootply we
-				like to build simple Bootstrap templates that utilize the code
-				Bootstap CSS without a lot of customization. Sure you can find a lot
-				of Bootstrap themes and inspiration, but these templates tend to be
-				heavy on customization.</p>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3>Hello.</h3>
-						</div>
-						<div class="panel-body">Lorem ipsum dolor sit amet,
-							consectetur adipiscing elit. Duis pharetra varius quam sit amet
-							vulputate. Quisque mauris augue, molestie tincidunt condimentum
-							vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis
-							nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum
-							auctor accumsan. Aliquam in felis sit amet augue.</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3>Hello.</h3>
-						</div>
-						<div class="panel-body">Lorem ipsum dolor sit amet,
-							consectetur adipiscing elit. Duis pharetra varius quam sit amet
-							vulputate. Quisque mauris augue, molestie tincidunt condimentum
-							vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis
-							nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum
-							auctor accumsan. Aliquam in felis sit amet augue.</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	function startMap(address, title) {
+		
+ 		var mapOptions = {
+     		zoom: 12,
+     		disableDefaultUI: true,
+     	    mapTypeId: google.maps.MapTypeId.ROADMAP
+    	}
+ 		
+ 	  	geocoder = new google.maps.Geocoder();
+ 		markerBounds = new google.maps.LatLngBounds();
+ 	    map = new google.maps.Map(document.getElementById("map_barnbay_canvas"), mapOptions);
+
+ 	  	geocoder.geocode({'address': address}, function(results, status) {
+	 	  	if(status == google.maps.GeocoderStatus.OK) {
+	 	  		map.setCenter(results[0].geometry.location);
+	 	  		var marker = new google.maps.Marker({
+	 	  			map: map,
+	 	  			position: results[0].geometry.location
+	 	  		});
+	 	  		
+	 	  		var infowindow = new google.maps.InfoWindow({
+	 	  			content: '<div style="width: 150px;"><h4>' + title + '</h4></div>'
+  	  	  		});
+	 	  		
+	 	  		google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map, marker);
+				});
+	 	  		
+	 	  		markerBounds.extend(results[0].geometry.location);
+				map.fitBounds(markerBounds);
+			} else {
+	 	    	alert("Geocode was not successful for the following reason: " + status);
+	 	   	}
+		});
+  	}
+</script>
