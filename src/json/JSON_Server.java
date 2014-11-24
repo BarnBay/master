@@ -75,9 +75,9 @@ public class JSON_Server {
 		return gs;
 	}
 	
-	public static String productToJson(Product p){
+	public static String objectToJson(Object o){
 		Gson g = new Gson();
-		String gs = g.toJson(p);
+		String gs = g.toJson(o);
 		return gs;
 	}
 }

@@ -149,7 +149,7 @@ public class GetCheapestProduct extends HttpServlet {
 						}
 					}
 
-					String json = JSON_Server.productToJson(p);
+					String json = JSON_Server.objectToJson(p);
 					response.getWriter().println(json);
 				}
 				// String json = JSON_Server.categoryArrayToJson(a);
