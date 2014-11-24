@@ -3,6 +3,7 @@ package services;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import json.JSON_Server;
-
-import org.json.simple.JSONObject;
-
 import database.DB_Connection;
+import entities.Address;
+import entities.Barnbay;
 import entities.Farmer;
+import entities.Product;
 
 /**
  * Servlet implementation class GetFarmerByFarmerId
@@ -51,6 +52,24 @@ public class GetFarmerByFarmerId extends HttpServlet {
 				fk_farm = rs.getInt(8);
 				fk_barnbay = rs.getInt(9);
 				
+				ResultSet rs1 = db.executeSQL("SELECT * FROM TEST.PRODUCT WHERE FK_USER =" + id);
+				f.products = new ArrayList<Product>();
+				while(rs1 !=null && rs1.next()){
+					Product p = new Product();
+					p.id = rs1.getInt(1);
+					p.farmerproductdescription = rs1.getString(2);
+					p.price = rs1.getDouble(5);
+					p.stock = rs1.getInt(7);
+					p.available = rs1.getInt(8);
+					
+					ResultSet rs12 = db.executeSQL("SELECT * FROM TEST.CATEGORY WHERE IDCATEGORY =" + rs1.getInt(3));
+					if(rs12 != null && rs12.next()){
+						p.description = rs12.getString(4);
+					}
+					
+					f.products.add(p);
+				}
+				
 				ResultSet rs2 = db.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS =" + fk_address);
 				if(rs2 != null && rs2.next()){
 					f.street = rs2.getString(2);
@@ -66,7 +85,30 @@ public class GetFarmerByFarmerId extends HttpServlet {
 					f.farmdescription = rs3.getString(4);
 					f.farmopeninghours = rs3.getString(5);
 				}
-				JSONObject json = JSON_Server.wrap_JSON(f);
+				
+				ResultSet rs4 = db.executeSQL("SELECT * FROM TEST.BARNBAY WHERE IDBARNBAY=" + fk_barnbay);
+				f.barnbays = new ArrayList<Barnbay>();
+				while(rs4 != null && rs4.next()){
+					Barnbay b = new Barnbay();
+					b.id = rs4.getInt(1);
+					b.name = rs4.getString(2);
+					b.description = rs4.getString(4);
+					b.opening_hours = rs4.getString(5);
+					
+					ResultSet rs5 = db.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS=" + rs4.getInt(6));
+					b.address = new Address();
+					if(rs5 != null && rs5.next()){
+						b.address.idaddress = rs5.getInt(1);
+						b.address.street = rs5.getString(2);
+						b.address.number = rs5.getString(3);
+						b.address.zipcode = rs5.getString(4);
+						b.address.city = rs5.getString(5);
+					}
+					
+					f.barnbays.add(b);
+				}
+				
+				String json = JSON_Server.objectToJson(f);
 				response.getWriter().println(json);
 			}
 		} catch (SQLException e) {
