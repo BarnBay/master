@@ -1,54 +1,68 @@
 <script src="./js/star-rating.js"></script>
-<link href="./css/star-rating.css" media="all" rel="stylesheet"
-	type="text/css" />
+<link href="./css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+
 <div class="row">
 	<div class="col-md-3" id="leftCol">
 		<img src="http://placehold.it/200x200" class="img-circle">
-		<h3>Farmer John</h3>
-		<input id="input-21b" value="4" type="number" class="rating" min=0
-			max=5 step=0.2 data-size="xs">
-		<div class="panel panel-default">
+		<h3 id="farmerName">
+			<script type="text/javascript">
+				var JSONUserObject = JSON.parse($.cookie('User.JSON'));
+				document.getElementById("farmerName").innerHTML = JSONUserObject.firstname + ' ' + JSONUserObject.lastname;
+			</script>
+		</h3>
+		<input id="input-21b" value="4" type="number" class="rating" min=0 max=5 step=0.2 data-size="xs">
+		<br/>
+		<div class="panel panel-success">
 			<div class="panel-heading">
-				<h4>Kontaktdaten</h4>
+				<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Address
 			</div>
-			<div class="panel-body">
-				<form action="textarea.htm">
-					<input type="text" name="adress" id="adress" placeholder="Barn 1"></input>
-					<input type="text" name="phone" id="phone" placeholder="01234 5678"></input>
-					<input type="text" name="mail" id="mail"
-						placeholder="farmer(at)barnbay"></input>
-				</form>
+			<div class="panel-body" id="FarmerProfilContactData">
+				<address>
+					<script type="text/javascript">
+						var out = "";
+						var JSONUserObject = JSON.parse($.cookie('User.JSON'));
+						
+						out += '	' + JSONUserObject.street + ' ' + JSONUserObject.number + '<br/>'
+						out += '	' + JSONUserObject.zip + ' ' + JSONUserObject.town + '<br/>';
+						out += '	' + JSONUserObject.email;
+						
+						document.getElementById("FarmerProfilContactData").innerHTML = out;
+					</script>
+				</address>
 			</div>
 		</div>
 	</div>
 	<div class="col-md-9">
-		<h2 id="sec1">About</h2>
-		<textarea class="col-md-12" name="user_eingabe" rows="10"></textarea>
-		<h2 id="sec2">Locations</h2>
-		<table class="col-md-12 table table-striped">
-			<tr>
-				<th>Name of the Location</th>
-				<th>PLZ</th>
-				<th>Adresse</th>
-				<th>Pick-Up Times</th>
-			</tr>
-			<tr>
-				<td>SAP</td>
-				<td>69190 Walldorf</td>
-				<td>Hasso-Plattner-Ring 7</td>
-				<td>Mo-Fr je 11.00 bis 14:00</td>
-			</tr>
-
-			<tr>
-				<td>Uni Mannheim</td>
-				<td>68131 Mannheim</td>
-				<td>Schloss</td>
-				<td>Mo-Fr je 11.00 bis 14:00</td>
-			</tr>
-		</table>
-		<button type="button" class="btn btn-success">
-			<span class="glyphicon glyphicon-saved"></span> Update changes
-		</button>
-		</tr>
+		<div class="row">
+			<h2 id="sec1">About</h2>
+			<textarea class="col-md-12" name="user_eingabe" rows="10"></textarea>
+		</div>
+		<div class="row">
+			<h2 id="sec2">Locations</h2>
+			<table class="col-md-12 table table-striped">
+				<tr>
+					<th>Name of the Location</th>
+					<th>PLZ</th>
+					<th>Adresse</th>
+					<th>Pick-Up Times</th>
+				</tr>
+				<tr>
+					<td>SAP</td>
+					<td>69190 Walldorf</td>
+					<td>Hasso-Plattner-Ring 7</td>
+					<td>Mo-Fr je 11.00 bis 14:00</td>
+				</tr>
+	
+				<tr>
+					<td>Uni Mannheim</td>
+					<td>68131 Mannheim</td>
+					<td>Schloss</td>
+					<td>Mo-Fr je 11.00 bis 14:00</td>
+				</tr>
+			</table>
+			<button type="button" class="btn btn-success">
+				<span class="glyphicon glyphicon-saved"></span> Update changes
+			</button>
+		</div>
 	</div>
 </div>
