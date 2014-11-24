@@ -2,19 +2,26 @@
 <link href="./css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
 
 <div class="row">
-	<div class="col-md-3" id="leftCol">
-		<img src="http://placehold.it/200x200" class="img-circle">
+	<div class="col-md-3" id="profileLeftCol">
+		<div id="imageFarmer">
+			<script type="text/javascript">
+				var JSONUserObject = JSON.parse($.cookie('User.JSON'));
+				document.getElementById("farmerName").innerHTML = '<img src="./img/farmers/' + JSONUserObject.firstname + ' ' + JSONUserObject.lastname + '.png" class="img-circle" style="width: 200px; height: 200px;">';
+			</script>
+		</div>
+		
 		<h3 id="farmerName">
 			<script type="text/javascript">
 				var JSONUserObject = JSON.parse($.cookie('User.JSON'));
 				document.getElementById("farmerName").innerHTML = JSONUserObject.firstname + ' ' + JSONUserObject.lastname;
 			</script>
 		</h3>
-		<input id="input-21b" value="4" type="number" class="rating" min=0 max=5 step=0.2 data-size="xs">
-		<br/>
+		
+		<input id="input-21b" value="4" type="number" class="rating" min=0 max=5 step=0.2 data-size="xs"><br/>
+		
 		<div class="panel panel-success">
-			<div class="panel-heading">
-				<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Address
+ 			<div class="panel-heading">
+ 				<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Address
 			</div>
 			<div class="panel-body" id="FarmerProfilContactData">
 				<address>
@@ -29,9 +36,10 @@
 						document.getElementById("FarmerProfilContactData").innerHTML = out;
 					</script>
 				</address>
-			</div>
-		</div>
+	 		</div>
+	 	</div>
 	</div>
+
 	<div class="col-md-9">
 		<div class="row">
 			<h2 id="sec1">About</h2>
