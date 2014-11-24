@@ -163,4 +163,14 @@
     <servlet-name>GetAllBarnbays</servlet-name>
     <url-pattern>/GetAllBarnbays</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetBarnbayByBarnbayId</display-name>
+    <servlet-name>GetBarnbayByBarnbayId</servlet-name>
+    <servlet-class>services.GetBarnbayByBarnbayId</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetBarnbayByBarnbayId</servlet-name>
+    <url-pattern>/GetBarnbayByBarnbayId</url-pattern>
+  </servlet-mapping>
 </web-app>
