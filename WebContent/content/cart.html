@@ -68,10 +68,10 @@
 				out += '						<input type="email" class="form-control" id="number" value="' + shoppingcart[i].productQuantity + '" disabled>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1 text-center">';
-				out += '						<strong>' + shoppingcart[i].productPrice + ' &euro;</strong>';
+				out += '						<strong>' + (shoppingcart[i].productPrice).toFixed(2) + ' &euro;</strong>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1 text-center">';
-				out += '						<strong>' + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity) + ' &euro;</strong>';
+				out += '						<strong>' + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity).toFixed(2) + ' &euro;</strong>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1">';
 				out += '						<button type="button" class="btn btn-danger" onClick="removeItemFromShoppingCart(' + i + ')">';
@@ -87,7 +87,7 @@
 			out += '					<td></td>';
 			out += '					<td></td>';
 			out += '					<td><h5>Subtotal</h5></td>';
-			out += '					<td class="text-right"><h5><strong>' + productSubTotal + ' &euro;</strong></h5></td>';
+			out += '					<td class="text-right"><h5><strong>' + productSubTotal.toFixed(2) + ' &euro;</strong></h5></td>';
 			out += '              	</tr';
 			out += '				<tr>';
 			out += '					<td></td>';
@@ -95,7 +95,7 @@
 			out += '					<td></td>';
 			out += '					<td></td>';
 			out += '					<td><h5>Barnbay fee</h5></td>';
-			out += '					<td class="text-right"><h5><strong>' + (productSubTotal * 0.15) + ' &euro;</strong></h5></td>';
+			out += '					<td class="text-right"><h5><strong>' + (productSubTotal * 0.15).toFixed(2) + ' &euro;</strong></h5></td>';
 			out += '              	</tr';
 			out += '				<tr>';
 			out += '					<td></td>';
@@ -103,7 +103,7 @@
 			out += '					<td></td>';
 			out += '					<td></td>';
 			out += '					<td><h3>Total</h3></td>';
-			out += '					<td class="text-right"><h3><strong>' + (productSubTotal * 1.15) + ' &euro;</strong></h3></td>';
+			out += '					<td class="text-right"><h3><strong>' + (productSubTotal * 1.15).toFixed(2) + ' &euro;</strong></h3></td>';
 			out += '              	</tr';
 			out += '				<tr>';
 			out += '					<td></td>';

@@ -64,12 +64,12 @@
 			out += '<tr>';
 			out += '	<td class="text-left">' + shoppingcart[i].productName + '</td>';
 			out += '	<td class="text-center">' + shoppingcart[i].productQuantity + '</td>';
-			out += '	<td class="text-center">' + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity) + ' &euro;</td>';
+			out += '	<td class="text-center">' + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity).toFixed(2) + ' &euro;</td>';
 			out += '</tr>';
 			
 		}
 		
 		document.getElementById("miniShopingCart").innerHTML = out;
-		document.getElementById("miniShopingCartSubTotal").innerHTML = "Subtotal " + productSubTotal + " &euro;";
+		document.getElementById("miniShopingCartSubTotal").innerHTML = "Subtotal " + productSubTotal.toFixed(2) + " &euro;";
 	}
 </script>
