@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class Farmer {
 	public int idfarmer;
 	public String firstname;
@@ -13,4 +15,6 @@ public class Farmer {
 	public String zipcode;
 	public String city;
 	public String email;
+	public ArrayList<Barnbay> barnbays;
+	public ArrayList<Product> products;
 }
