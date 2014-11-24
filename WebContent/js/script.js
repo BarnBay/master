@@ -246,7 +246,7 @@ $(document).ready(function() {
 	
 	/* On click of Item */
 	$('#mainContainer').on('click', '#farmerDetailView', function(event) {
-		$('#mainContainer').hide().load('./content/farmer_chris.html').fadeIn('500');
+		$('#mainContainer').hide().load('./content/farmer_detailview.html').fadeIn('500');
 	});
 	
 	/* On click of Item */
@@ -319,12 +319,6 @@ $(document).ready(function() {
 		
 		locationListFunction(LocationListJSONObject);
 	});
-	
-	
-	/* On click of Item */
-	/*$('#mainContainer').on('click', '#farmerDetailView', function(event) {
-		$('#mainContainer').hide().load('./content/farmer_chris.html').fadeIn('500');
-	});*/
 });
 
 
