@@ -111,7 +111,7 @@
 			out += '					<td></td>';
 			out += '					<td></td>';
 			out += '					<td>';
-			out += '						<button type="button" class="btn btn-default">';
+			out += '						<button type="button" id="Continue_Product" class="btn btn-default">';
 			out += '							<span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping';
 			out += '						</button>';
 			out += '					</td>';
@@ -153,6 +153,14 @@
 
 
 <script type="text/javascript">
+	
+	
+/* When presing Continue Shopping change to Products  */
+	$('#mainContainer').on('click', '#Continue_Product', function(event) {
+		$('#mainContainer').hide().load('./content/nav_products_list.html').fadeIn('500');
+	});
+
+	
 	/* Change Progress to Address */
 	$('#Continue_shoppingCart').click(function(e) {
 		e.preventDefault();

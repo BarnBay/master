@@ -1,5 +1,5 @@
 <script src="./js/star-rating.js"></script>
-<link href="./css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+<link href="./css/star-rating.css" rel="stylesheet"/>
 
 <script type="text/javascript">	
 	var FarmerDetailJSONObject;
@@ -10,6 +10,8 @@
 	}).done(function(data) {
 		FarmerDetailJSONObject = JSON.parse(data);		
 		farmerDetailFunction(FarmerDetailJSONObject);
+		
+		startMap(FarmerDetailJSONObject.street + ' ' + FarmerDetailJSONObject.number + ', ' + FarmerDetailJSONObject.zipcode + ' ' + FarmerDetailJSONObject.city, FarmerDetailJSONObject.farmname);
 	});
 </script>
 
@@ -18,12 +20,11 @@
 		function farmerDetailFunction(farmerDetailObject) {
 			var out = "";
 			
-			out += '<div class="col-sm-12" style="font-family: \'Roboto Condensed\', sans-serif;">';
-			out += '	<div class="col-sm-3">';
+			out += '<div class="col-md-12" style="font-family: \'Roboto Condensed\', sans-serif;">';
+			out += '	<div class="col-md-3">';
 			out += '		<img src="./img/farmers/' + farmerDetailObject.firstname + ' ' + farmerDetailObject.lastname + '.png" alt="Image" class="img-circle center-block">';
 			out += '		<h2>' + farmerDetailObject.firstname + ' ' + farmerDetailObject.lastname + '</h2>';
-			/* RATING FIXEN !!!!!!!!!!!!!!!!!!!!! */
-			out += '		<input id="input-21b" value="4" type="number" class="rating" min=0 max=5 step=0.2 data-size="xs">';
+			out += '		<div class="text-center"><input id="farmerRating" type="text"></div>';
 			out += '		<br/>';
 			out += '		<div class="panel panel-success">';
 			out += '			<div class="panel-heading">';
@@ -39,7 +40,7 @@
 			out += '			</div>';
 			out += '		</div>';
 			out += '	</div>';
-			out += '	<div class="col-sm-9">';			
+			out += '	<div class="col-md-9">';			
 			out += '		<div style="width: 100%; height: 270px; overflow: hidden">';
 			out += '			<img src="./img/farms/' + farmerDetailObject.farmname + '.png" alt="Image" class="img-responsive center-block" width="100%" height="350">';
 			out += '		</div>';
@@ -55,12 +56,12 @@
 				}
 				/* ID UND NAME ANPASSEN !!!!!!!!!!!!!!!!!!!!!! */
 				out += '		<div class="col-md-3">';
-				out += '			<div class="panel panel-default" id="FarmerSingleProduct" style="cursor: pointer" onclick="farmerSwitchToProduct(' + farmerDetailObject.idfarmer + ', ' + farmerDetailObject.products[i].id + ')">';
+				out += '			<div class="panel panel-success" id="FarmerSingleProduct" style="cursor: pointer" onclick="farmerSwitchToProduct(' + farmerDetailObject.idfarmer + ', ' + farmerDetailObject.products[i].catid + ')">';
 				out += '				<div class="panel-body">';
-				out += '					<img src="http://placehold.it/100x100" class="img-circle">';
+				out += '					<img src="./img/products/' + farmerDetailObject.products[i].name + '.png" alt="Image" class="img-responsive center-block" width="100" height="100">';
 				out += '				</div>';
 				out += '				<div class="panel-footer">';
-				out += '					<h3 class="panel-title">Produkt 1</h3>';
+				out += '					<h3 class="panel-title">' + farmerDetailObject.products[i].name + '</h3>';
 				out += '				</div>';
 				out += '			</div>';
 				out += '		</div>';
@@ -101,10 +102,30 @@
 			out += '		</div>';
 			out += '	</div>';
 			out += '</div>';
-			
-			/* Vielleicht noch Google Maps */
-			
+			out += '<div class="col-md-12"><hr></div>';
+			out += '<div class="col-md-12">';
+			out += '	<div class="panel panel-success">';
+			out += '		<div class="panel-heading">';
+			out += '			<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Farmer Locations';
+			out += '		</div>';
+			out += '		<div class="panel-body">';
+			out += '			<div id="map_farmer_canvas" style="width: 100%; height: 480px;"></div>';
+			out += '		</div>';
+			out += '	</div>';
+			out += '</div>';
+						
 			document.getElementById("farmerDetailInformation").innerHTML = out;
+			
+			/* Set the Rating of the Ratingbar */
+			$("#farmerRating").rating({
+			    size: 'md',
+			    readonly: true,
+			    showCaption: false,
+			    clearButton: ''
+			});
+			
+			/* Set the Value of the Rating (3. Stars) */
+			$('#farmerRating').rating('update', 3);
 		}
 		
 	</script>
@@ -115,4 +136,41 @@
 		$.cookie("Farmer.FarmerID", farmerid, { expires: 1 });
 		$.cookie("Farmer.ProductID", productid, { expires: 1 });
 	}
+</script>
+
+<!-- Google Maps Scripte -->
+<script type="text/javascript">
+	var geocoder, map;
+	
+	function startMap(address, title) {
+		
+ 		var mapOptions = {
+     		zoom: 15,
+     		disableDefaultUI: true,
+     	    mapTypeId: google.maps.MapTypeId.ROADMAP
+    	}
+ 		
+ 	  	geocoder = new google.maps.Geocoder();
+ 	    map = new google.maps.Map(document.getElementById("map_farmer_canvas"), mapOptions);
+
+ 	  	geocoder.geocode({'address': address}, function(results, status) {
+	 	  	if(status == google.maps.GeocoderStatus.OK) {
+	 	  		map.setCenter(results[0].geometry.location);
+	 	  		var marker = new google.maps.Marker({
+	 	  			map: map,
+	 	  			position: results[0].geometry.location
+	 	  		});
+	 	  		
+	 	  		var infowindow = new google.maps.InfoWindow({
+	 	  			content: '<div style="width: 150px;"><h4>' + title + '</h4></div>'
+  	  	  		});
+	 	  		
+	 	  		google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map, marker);
+				});
+			} else {
+	 	    	alert("Geocode was not successful for the following reason: " + status);
+	 	   	}
+		});
+  	}
 </script>
