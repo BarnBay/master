@@ -173,4 +173,24 @@
     <servlet-name>GetBarnbayByBarnbayId</servlet-name>
     <url-pattern>/GetBarnbayByBarnbayId</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetSubCategoriesByPrice</display-name>
+    <servlet-name>GetSubCategoriesByPrice</servlet-name>
+    <servlet-class>services.GetSubCategoriesByPrice</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetSubCategoriesByPrice</servlet-name>
+    <url-pattern>/GetSubCategoriesByPrice</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SendNotification</display-name>
+    <servlet-name>SendNotification</servlet-name>
+    <servlet-class>test.SendNotification</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendNotification</servlet-name>
+    <url-pattern>/SendNotification</url-pattern>
+  </servlet-mapping>
 </web-app>
