@@ -1,5 +1,5 @@
 <script src="./js/star-rating.js"></script>
-<link href="./css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+<link href="./css/star-rating.css" rel="stylesheet"/>
 
 <script type="text/javascript">	
 	var FarmerDetailJSONObject;
@@ -22,8 +22,7 @@
 			out += '	<div class="col-md-3">';
 			out += '		<img src="./img/farmers/' + farmerDetailObject.firstname + ' ' + farmerDetailObject.lastname + '.png" alt="Image" class="img-circle center-block">';
 			out += '		<h2>' + farmerDetailObject.firstname + ' ' + farmerDetailObject.lastname + '</h2>';
-			/* RATING FIXEN !!!!!!!!!!!!!!!!!!!!! */
-			out += '		<input id="input-21b" value="4" type="number" class="rating" min=0 max=5 step=0.2 data-size="xs">';
+			out += '		<div class="text-center"><input id="farmerRating" type="text"></div>';
 			out += '		<br/>';
 			out += '		<div class="panel panel-success">';
 			out += '			<div class="panel-heading">';
@@ -105,6 +104,17 @@
 			/* Vielleicht noch Google Maps */
 			
 			document.getElementById("farmerDetailInformation").innerHTML = out;
+			
+			/* Set the Rating of the Ratingbar */
+			$("#farmerRating").rating({
+			    size: 'md',
+			    readonly: true,
+			    showCaption: false,
+			    clearButton: ''
+			});
+			
+			/* Set the Value of the Rating (3. Stars) */
+			$('#farmerRating').rating('update', 3);
 		}
 		
 	</script>

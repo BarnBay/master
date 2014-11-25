@@ -59,18 +59,17 @@
 
 <!-- Google Maps Scripte -->
 <script type="text/javascript">
-	var markerBounds, geocoder, map;
+	var geocoder, map;
 	
 	function startMap(address, title) {
 		
  		var mapOptions = {
-     		zoom: 12,
+     		zoom: 15,
      		disableDefaultUI: true,
      	    mapTypeId: google.maps.MapTypeId.ROADMAP
     	}
  		
  	  	geocoder = new google.maps.Geocoder();
- 		markerBounds = new google.maps.LatLngBounds();
  	    map = new google.maps.Map(document.getElementById("map_barnbay_canvas"), mapOptions);
 
  	  	geocoder.geocode({'address': address}, function(results, status) {
@@ -88,9 +87,6 @@
 	 	  		google.maps.event.addListener(marker, 'click', function() {
 					infowindow.open(map, marker);
 				});
-	 	  		
-	 	  		markerBounds.extend(results[0].geometry.location);
-				map.fitBounds(markerBounds);
 			} else {
 	 	    	alert("Geocode was not successful for the following reason: " + status);
 	 	   	}
