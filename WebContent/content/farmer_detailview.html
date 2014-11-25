@@ -10,6 +10,8 @@
 	}).done(function(data) {
 		FarmerDetailJSONObject = JSON.parse(data);		
 		farmerDetailFunction(FarmerDetailJSONObject);
+		
+		startMap(FarmerDetailJSONObject.street + ' ' + FarmerDetailJSONObject.number + ', ' + FarmerDetailJSONObject.zipcode + ' ' + FarmerDetailJSONObject.city, FarmerDetailJSONObject.farmname);
 	});
 </script>
 
@@ -100,9 +102,18 @@
 			out += '		</div>';
 			out += '	</div>';
 			out += '</div>';
-			
-			/* Vielleicht noch Google Maps */
-			
+			out += '<div class="col-md-12"><hr></div>';
+			out += '<div class="col-md-12">';
+			out += '	<div class="panel panel-success">';
+			out += '		<div class="panel-heading">';
+			out += '			<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Farmer Locations';
+			out += '		</div>';
+			out += '		<div class="panel-body">';
+			out += '			<div id="map_farmer_canvas" style="width: 100%; height: 480px;"></div>';
+			out += '		</div>';
+			out += '	</div>';
+			out += '</div>';
+						
 			document.getElementById("farmerDetailInformation").innerHTML = out;
 			
 			/* Set the Rating of the Ratingbar */
@@ -125,4 +136,41 @@
 		$.cookie("Farmer.FarmerID", farmerid, { expires: 1 });
 		$.cookie("Farmer.ProductID", productid, { expires: 1 });
 	}
+</script>
+
+<!-- Google Maps Scripte -->
+<script type="text/javascript">
+	var geocoder, map;
+	
+	function startMap(address, title) {
+		
+ 		var mapOptions = {
+     		zoom: 15,
+     		disableDefaultUI: true,
+     	    mapTypeId: google.maps.MapTypeId.ROADMAP
+    	}
+ 		
+ 	  	geocoder = new google.maps.Geocoder();
+ 	    map = new google.maps.Map(document.getElementById("map_farmer_canvas"), mapOptions);
+
+ 	  	geocoder.geocode({'address': address}, function(results, status) {
+	 	  	if(status == google.maps.GeocoderStatus.OK) {
+	 	  		map.setCenter(results[0].geometry.location);
+	 	  		var marker = new google.maps.Marker({
+	 	  			map: map,
+	 	  			position: results[0].geometry.location
+	 	  		});
+	 	  		
+	 	  		var infowindow = new google.maps.InfoWindow({
+	 	  			content: '<div style="width: 150px;"><h4>' + title + '</h4></div>'
+  	  	  		});
+	 	  		
+	 	  		google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map, marker);
+				});
+			} else {
+	 	    	alert("Geocode was not successful for the following reason: " + status);
+	 	   	}
+		});
+  	}
 </script>
