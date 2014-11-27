@@ -59,21 +59,21 @@
 				out += '							</div>';
 				out += '						</div>';
 				out += '					</td>';
-				out += '					<td class="col-md-3">';
+				out += '					<td class="col-md-3" style="vertical-align: middle;">';
 				out += '						<select class="form-control input-md" disabled>';
 				out += '							<option>' + shoppingcart[i].barnbayName + '</option>';
 				out += '						</select>';
 				out += '					</td>';
-				out += '					<td class="col-sm-1 col-md-1" style="text-align: center">';
+				out += '					<td class="col-sm-1 col-md-1" style="text-align: center; vertical-align: middle;">';
 				out += '						<input type="email" class="form-control" id="number" value="' + shoppingcart[i].productQuantity + '" disabled>';
 				out += '					</td>';
-				out += '					<td class="col-sm-1 col-md-1 text-center">';
+				out += '					<td class="col-sm-1 col-md-1 text-center" style="vertical-align: middle;">';
 				out += '						<strong>' + (shoppingcart[i].productPrice).toFixed(2) + ' &euro;</strong>';
 				out += '					</td>';
-				out += '					<td class="col-sm-1 col-md-1 text-center">';
+				out += '					<td class="col-sm-1 col-md-1 text-center" style="vertical-align: middle;">';
 				out += '						<strong>' + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity).toFixed(2) + ' &euro;</strong>';
 				out += '					</td>';
-				out += '					<td class="col-sm-1 col-md-1">';
+				out += '					<td class="col-sm-1 col-md-1" style="vertical-align: middle;">';
 				out += '						<button type="button" class="btn btn-danger" onClick="removeItemFromShoppingCart(' + i + ')">';
 				out += '							<span class="glyphicon glyphicon-remove"></span> Remove';
 				out += '						</button>';
@@ -157,6 +157,7 @@
 	
 /* When presing Continue Shopping change to Products  */
 	$('#mainContainer').on('click', '#Continue_Product', function(event) {
+		event.preventDefault();
 		$('#mainContainer').hide().load('./content/nav_products_list.html').fadeIn('500');
 	});
 
