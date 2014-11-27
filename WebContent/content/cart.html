@@ -10,6 +10,10 @@
 	            <button type="button" id="addressData" class="btn btn-default btn-circle" disabled="disabled"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
 	            <p>Address Data</p>
 	        </div>
+	       	<div class="stepwizard-step">
+	            <button type="button" id="pickupTime" class="btn btn-default btn-circle" disabled="disabled"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></button>
+	            <p>Pickup-Time</p>
+	        </div>
 	        <div class="stepwizard-step">
 	            <button type="button" id="payment" class="btn btn-default btn-circle" disabled="disabled"><span class="glyphicon glyphicon-euro" aria-hidden="true"></span></button>
 	            <p>Payment</p>
@@ -172,12 +176,22 @@
 		$('#shoppingCartContainer').hide();
 		displayContactInformation();
 		$('#shoppingCartContainer').fadeIn('500');
+    });
+	
+	/* Change Progress to Pickup-Time */
+	$('#mainContainer').on('click', '#Continue_AddressData', function(e) {
+		e.preventDefault();
 		
-		//
+		$('#pickupTime').removeClass('btn btn-default btn-circle');
+		$('#pickupTime').addClass('btn btn-success btn-circle');
+		
+		$('#shoppingCartContainer').hide();
+		displayPickupTimeinformation();
+		$('#shoppingCartContainer').fadeIn('500');
     });
 	
 	/* Change Progress to Payment */
-	$('#mainContainer').on('click', '#Continue_AddressData', function(e) {
+	$('#mainContainer').on('click', '#Continue_PickupTime', function(e) {
 		e.preventDefault();
 		
 		$('#payment').removeClass('btn btn-default btn-circle');
@@ -247,6 +261,68 @@
 		out += '	</div>';
 		out += '	<div class="panel-footer">';
 		out += '		<button type="button" id="Continue_AddressData" class="btn btn-success pull-right">';
+		out += '			<span class="glyphicon glyphicon-time" aria-hidden="true"></span> Pickup-Time';
+		out += '		</button>';
+		out += '		<div class="clearfix"></div>';
+		out += '	</div>';
+		out += '</div>';
+		
+		document.getElementById("shoppingCartContainer").innerHTML = out;
+	}
+</script>
+
+<!-- Show Pickup-Time Information -->
+<script type="text/javascript">
+	function displayPickupTimeinformation() {
+		var out = "";
+		var pDate, pMonth, pYear;
+		var currentDate = new Date();
+		var pickupTime = currentDate.getHours();
+		
+		var weekday = new Array(7);
+			weekday[0] =  "Sunday";
+			weekday[1] = "Monday";
+			weekday[2] = "Tuesday";
+			weekday[3] = "Wednesday";
+			weekday[4] = "Thursday";
+			weekday[5] = "Friday";
+			weekday[6] = "Saturday";
+		
+		out += '<div class="panel panel-success">';
+		out += '	<div class="panel-heading">';
+		out += '		<span class="glyphicon glyphicon-time" aria-hidden="true"></span> Pickup-Time';
+		out += '	</div>';
+		out += '	<div class="panel-body">';
+		out += '		<select class="form-control input-md" id="selectPickupTime">';
+		
+		for(i = 0; i < 3; i++) {
+			if(pickupTime < "16") {
+				currentDate.setDate(currentDate.getDate() + 1);
+				
+				pDate = currentDate.getDate();
+				pMonth = currentDate.getMonth() + 1;
+				pYear = currentDate.getFullYear();
+
+				out += '			<option value="' + pDate + '.' + pMonth + '.'+ pYear + '">' + weekday[currentDate.getDay()] +', ' + pDate + '.' + pMonth + '.'+ pYear + '</option>';
+			} else {
+				if(i == 0) {
+					currentDate.setDate(currentDate.getDate() + 2);
+				} else {
+					currentDate.setDate(currentDate.getDate() + 1);	
+				}
+				
+				pDate = currentDate.getDate();
+				pMonth = currentDate.getMonth() + 1;
+				pYear = currentDate.getFullYear();
+
+				out += '			<option value="' + pDate + '.' + pMonth + '.'+ pYear + '">' + weekday[currentDate.getDay()] +', ' + pDate + '.' + pMonth + '.'+ pYear + '</option>';
+			}
+		}
+		out += '		</select>';
+		
+		out += '	</div>';
+		out += '	<div class="panel-footer">';
+		out += '		<button type="button" id="Continue_PickupTime" class="btn btn-success pull-right">';
 		out += '			<span class="glyphicon glyphicon-euro" aria-hidden="true"></span> Payment';
 		out += '		</button>';
 		out += '		<div class="clearfix"></div>';
@@ -257,7 +333,7 @@
 	}
 </script>
 
-<!-- Show Contact Information of User -->
+<!-- Show Payment Information -->
 <script type="text/javascript">
 	function displayPaymentInformation() {
 		var out = "";
