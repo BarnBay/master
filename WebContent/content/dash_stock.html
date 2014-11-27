@@ -3,13 +3,14 @@
 <table id="stockUpdate" class="table table-hover">
 	<thead>
 		<tr>
-			<th class="col-md-1">#</th>
-			<th class="col-md-3">Productname</th>
-			<th class="col-md-2">Quantity</th>
-			<th class="col-md-2">Update Quantity</th>
-			<th class="col-md-1">Countable</th>
-			<th class="col-md-1">Price ($)</th>
-			<th class="col-md-4">Update Price</th>
+			<th class="col-md-1">#</th> <!-- 1 -->
+			<th class="col-md-2">Productname</th> <!-- 3 -->
+			<th class="col-md-1">Quantity</th> <!-- 2 -->
+			<th class="col-md-1">Update Quantity to</th> <!-- 2 -->
+			<!--<th class="col-md-1">Countable</th>-->
+			<th class="col-md-1">Price in Euro</th> <!-- 2 -->
+			<th class="col-md-1">Update Price</th> <!-- 4 -->
+			<th class="col-md-5">Describtion</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -17,19 +18,21 @@
 			<td>1</td>
 			<td>Potato</td>
 			<td>150</td>
-			<td><input></td>
-			<td>kg</td>
+			<td class="col-md-1"><input></td>
+			<!--<td>kg</td>-->
 			<td>2.00</td>
-			<td><input></td>		
+			<td><input></td>	
+			<td><textarea class="form-control" rows="3"></textarea></td>
 		</tr>
 		<tr>
 			<td>2</td>
 			<td>Apple</td>
 			<td>75</td>
 			<td><input></td>
-			<td>kg</td>
+			<!--<td>kg</td>-->
 			<td>1.29</td>
 			<td><input></td>
+			<td><textarea class="form-control" rows="3"></textarea></td>
 		</tr>
 		<tr>
 			<td></td>
@@ -38,7 +41,7 @@
 			<td></td>
 			<td></td>
 			<td></td>
-			<td><button type="button" class="btn btn-success">
+			<td align="right"><button type="button" class="btn btn-success">
 					<span class="glyphicon glyphicon-saved"></span> Update stock
 				</button></td>
 		</tr>
@@ -54,9 +57,10 @@
 	<thead>
 		<tr>
 			<th class="col-md-3">Productname</th>
-			<th class="col-md-2">Quantity</th>
-			<th class="col-md-1">Countable</th>
-			<th class="col-md-1">Price ($)</th>
+			<th class="col-md-1">Quantity</th>
+			<!--<th class="col-md-1">Countable</th>-->
+			<th class="col-md-1">Price in Euro</th>
+			<th class="col-md-7">Describtion</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -67,15 +71,15 @@
 					<option>Potato</option>
 			</select></td>
 			<td><input></td>
-			<td>kg</td>
 			<td><input></td>
+			<td><textarea class="form-control" rows="3"></textarea></td>
 		</tr>
 
 		<tr>
 			<td></td>
 			<td></td>
 			<td></td>
-			<td><button type="button" class="btn btn-success">
+			<td align="right"><button type="button" class="btn btn-success">
 					<span class="glyphicon glyphicon-saved"></span> Add Product
 				</button></td>
 		</tr>
