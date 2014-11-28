@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import json.JSON_Server;
 
-import org.json.simple.JSONObject;
-
 import database.DB_Connection;
 import entities.Category;
 

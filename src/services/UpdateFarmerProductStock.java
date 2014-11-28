@@ -12,18 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import json.JSON_Server;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import database.DB_Connection;
 import entities.AddProduct;
 
-public class AddProductToFarmerStock extends HttpServlet {
+public class UpdateFarmerProductStock extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddProductToFarmerStock() {
+    public UpdateFarmerProductStock() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,6 +43,7 @@ public class AddProductToFarmerStock extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		JSONArray jsonarray = new JSONArray();
 		JSONObject jsonobject = new JSONObject();
 		StringBuffer jb = new StringBuffer();
 		DB_Connection dbconnect;
@@ -56,32 +58,34 @@ public class AddProductToFarmerStock extends HttpServlet {
 		} catch (Exception e) {
 			/*report an error*/
 		}
-
-		jsonobject = JSON_Server.http_post_json(jb.toString());
-		AddProduct receivedproduct = JSON_Server.jsonToProduct(jsonobject);
-
-		// Inserting Product data:
-		int max_product_id = 1;
-		dbconnect = new DB_Connection();
-		sql = "SELECT MAX(IDPRODUCT) FROM TEST.PRODUCT";
-		rs = dbconnect.executeSQL(sql);
 		
-		try {
-			rs.next();
-			max_product_id = rs.getInt(1) + 1;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		dbconnect = new DB_Connection();
+		
+		jsonarray = JSON_Server.http_post_jsonArray(jb.toString(), "product");
+		
+		for(int i = 0; i < jsonarray.size(); i++) {
+			jsonobject = (JSONObject) jsonarray.get(i);		
+			
+			Integer id = Integer.parseInt(jsonobject.get("Id").toString());
+			Integer stock = Integer.parseInt(jsonobject.get("Stock").toString());
+			Double price = Double.parseDouble(jsonobject.get("Price").toString());
+			String description = jsonobject.get("Description").toString();
+			
+			sql = "SELECT * FROM TEST.PRODUCT WHERE IDPRODUCT = " + id;
+			rs = dbconnect.executeSQL(sql);
+		
+			try {
+				while (rs.next()) {
+					if(!(rs.getString("PRODUCT_DESCRIPTION").equals(description)) || rs.getDouble("PRICE") != price || rs.getInt("CURRENT_STOCK") != stock) {
+						sql = "UPDATE TEST.PRODUCT SET PRODUCT_DESCRIPTION='" + description + "', PRICE=" + price + ", CURRENT_STOCK=" + stock + " WHERE IDPRODUCT = " + id;
+						dbconnect.executeSQL(sql);
+					}
+				} 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		dbconnect.close();
-		
-		// Creating SQL Statement		
-		sql = "INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
-				+ "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(" + max_product_id + ","
-				+ "'" + receivedproduct.productdescription + "', " + receivedproduct.categoryid + ", " 
-				+ receivedproduct.userid + ", " + receivedproduct.productprice  + ", " + receivedproduct.productstock + ", 0, 0)";
-		dbconnect = new DB_Connection();
-		rs = dbconnect.executeSQL(sql);
 		
 		dbconnect.close();
 		

@@ -168,12 +168,25 @@
 		});
 		
 		for(i = 0; i < pStock.length; i++) {
-			obj['product'].push({"Id:":pId[i],"Stock":pStock[i],"Price":pPrice[i],"Description":pDescription[i]});
+			obj['product'].push({"Id":pId[i],"Stock":pStock[i],"Price":pPrice[i],"Description":pDescription[i]});
 		}
 		
-		
-		
-		alert(JSON.stringify(obj));
+		$.ajax({
+			type: "POST",
+			url: "/barnbay_ui/UpdateFarmerProductStock",
+			dataType : "json",
+			data: JSON.stringify(obj),
+			success:function(data) {
+				/* Update View */
+				$.ajax({
+					url: "/barnbay_ui/GetAllProductsByFarmerId?id=" + JSONUserObject.id
+				}).done(function(data) {
+					displayAllFarmerProducts(JSON.parse(data));
+				});	
+			}, error: function(data) {
+				//Do nothing!
+			}
+		});
 	});
 </script>
 

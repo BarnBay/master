@@ -2,6 +2,7 @@ package json;
 
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -30,7 +31,6 @@ public class JSON_Server {
 			
 		} catch(ParseException e) {
 			jsonobject = new JSONObject();
-			// Nothing to do here
 		}	
 		
 		return jsonobject;
@@ -61,9 +61,24 @@ public class JSON_Server {
 			
 		} catch(ParseException e) {
 			jsonobject = new JSONObject();
-			// Nothing to do here
 		}	
 		return jsonobject;
+	}
+	
+	public static JSONArray http_post_jsonArray(String request, String value) {
+		JSONParser jsonparser;
+		JSONObject jsonobject;
+		JSONArray jsonarray;
+		
+		try {
+			jsonparser = new JSONParser();
+			jsonobject = (JSONObject) jsonparser.parse(request);
+			jsonarray = (JSONArray) jsonobject.get(value);
+		} catch(ParseException e) {
+			jsonarray = new JSONArray();
+		}	
+		
+		return jsonarray;
 	}
 	
 	public static String categoryArrayToJson(ArrayList<Category> a){
