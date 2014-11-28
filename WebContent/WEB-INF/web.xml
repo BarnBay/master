@@ -193,4 +193,14 @@
     <servlet-name>SendNotification</servlet-name>
     <url-pattern>/SendNotification</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>GetAllProductsByFarmerId</display-name>
+    <servlet-name>GetAllProductsByFarmerId</servlet-name>
+    <servlet-class>services.GetAllProductsByFarmerId</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllProductsByFarmerId</servlet-name>
+    <url-pattern>/GetAllProductsByFarmerId</url-pattern>
+  </servlet-mapping>
 </web-app>
