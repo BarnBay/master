@@ -213,4 +213,14 @@
     <servlet-name>AddProductToFarmerStock</servlet-name>
     <url-pattern>/AddProductToFarmerStock</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RemoveProductFromStockByFarmerId</display-name>
+    <servlet-name>RemoveProductFromStockByFarmerId</servlet-name>
+    <servlet-class>services.RemoveProductFromStockByFarmerId</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveProductFromStockByFarmerId</servlet-name>
+    <url-pattern>/RemoveProductFromStockByFarmerId</url-pattern>
+  </servlet-mapping>
 </web-app>
