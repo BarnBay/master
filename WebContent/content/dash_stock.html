@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	var JSONUserObject = JSON.parse($.cookie('User.JSON'));
+	var pId = new Array();
 	
 	$.ajax({
 		url: "/barnbay_ui/GetAllProductsByFarmerId?id=" + JSONUserObject.id
@@ -27,9 +28,11 @@
 </div>
 
 <h2>Update actual stock!</h2>
-<table id="stockProductTable" class="table table-hover">
-
-</table>
+<form id="formUpdateProductTable" accept-charset="utf-8" role="form">
+	<table id="stockProductTable" class="table table-hover">
+	
+	</table>
+</form>
 
 <h2>Add new Products to your stock!</h2>
 <form id="formAddProductTable" accept-charset="utf-8" role="form">
@@ -57,18 +60,21 @@
 		out += '		</thead>';
 		out += '		<tbody id="stockUpdateTable">';
 		
-		for(i = 0; i < farmerProducts.length; i++) {		
+		pId = [];
+		for(i = 0; i < farmerProducts.length; i++) {
+			pId.push(farmerProducts[i].id);
+			
 			out += '			<tr>';
-			out += '				<td style="vertical-align: middle;">';
+			out += '				<td class="text-center" style="vertical-align: middle;">';
 			out += '					<button type="button" class="btn btn-danger" onClick="removeItemFromStock(' + farmerProducts[i].id + ')">';
 			out += '						<span class="glyphicon glyphicon-remove"></span>';
 			out += '					</button>';
 			out += '				</td>';
 			out += '				<td style="vertical-align: middle;">' + farmerProducts[i].name + '</td>';
-			out += '				<td style="vertical-align: middle;">' + farmerProducts[i].stock + '</td>';
+			out += '				<td class="text-center" style="vertical-align: middle;">' + farmerProducts[i].stock + '</td>';
 			out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerProductStock" maxlength="4" value="' + farmerProducts[i].stock + '" placeholder="' + farmerProducts[i].stock + '"></td>';
-			out += '				<td style="vertical-align: middle;">' + (farmerProducts[i].price).toFixed(2) + ' &euro;</td>';
-			out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerProductPrice" value="' + (farmerProducts[i].price).toFixed(2) + '" placeholder="' + (farmerProducts[i].price).toFixed(2) + '"></td>';
+			out += '				<td class="text-center" style="vertical-align: middle;">' + (farmerProducts[i].price).toFixed(2) + ' &euro;</td>';
+			out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerProductPrice" value="' + (farmerProducts[i].price).toFixed(2) + '" placeholder="' + (farmerProducts[i].price).toFixed(2) + ' &euro;"></td>';
 			out += '				<td style="vertical-align: middle;"><textarea class="form-control farmerProductDescription" rows="2" placeholder="' + farmerProducts[i].description + '">' + farmerProducts[i].description + '</textarea></td>';
 			out += '			</tr>';
 		}
@@ -81,7 +87,7 @@
 		out += '				<td></td>';
 		out += '				<td></td>';
 		out += '				<td>';
-		out += '					<button type="button" id="updateFarmerProduct" class="btn btn-block btn-success">';
+		out += '					<button type="submit" id="updateFarmerProduct" class="btn btn-block btn-success">';
 		out += '						<span class="glyphicon glyphicon-saved"></span> Update stock';
 		out += '					</button>';
 		out += '				</td>';
@@ -117,7 +123,7 @@
 		out += '					</select>';
 		out += '				</td>';
 		out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerAddProductStock" maxlength="4" required /></td>';
-		out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerAddProductPrice" required /></td>';
+		out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerAddProductPrice" min="0" max="9999" step="0.01" required /></td>';
 		out += '				<td style="vertical-align: middle;"><textarea class="form-control farmerAddProductDescription" rows="2" required /></textarea></td>';
 		out += '			</tr>';
 		out += '			<tr>';
@@ -139,12 +145,35 @@
 
 <!-- Check if update Button was clicked -->
 <script type="text/javascript">
-	$('#mainContainer').on('click', '#updateFarmerProduct', function(e) {
-		e.preventDefault();
+	$("#formUpdateProductTable").submit(function(event) {
+		event.preventDefault();
+		
+		var obj = JSON.parse('{"product":[]}');
+		
+		var result = new Array();
+		var pStock = new Array();
+		var pPrice = new Array();
+		var pDescription = new Array();
+		
+		$('#stockUpdateTable').find('.farmerProductStock').each(function() {
+			pStock.push(this.value);
+		});
 		
 		$('#stockUpdateTable').find('.farmerProductPrice').each(function() {
-			//alert(this.value);
+			pPrice.push(this.value);
 		});
+		
+		$('#stockUpdateTable').find('.farmerProductDescription').each(function() {
+			pDescription.push(this.value);
+		});
+		
+		for(i = 0; i < pStock.length; i++) {
+			obj['product'].push({"Id:":pId[i],"Stock":pStock[i],"Price":pPrice[i],"Description":pDescription[i]});
+		}
+		
+		
+		
+		alert(JSON.stringify(obj));
 	});
 </script>
 
