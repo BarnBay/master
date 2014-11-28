@@ -12,10 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import json.JSON_Server;
 import database.DB_Connection;
-import entities.Address;
-import entities.Barnbay;
-import entities.Category;
-import entities.Farmer;
 import entities.Product;
 
 /**
@@ -39,8 +35,8 @@ public class GetAllProductsByFarmerId extends HttpServlet {
 		String id = request.getParameter("id");
 		DB_Connection db = new DB_Connection();
 		
-		ResultSet rs = db.executeSQL("SELECT * FROM TEST.PRODUCT WHERE FK_USER ==" + id);
-		System.out.println("Result: " + rs);
+		ResultSet rs = db.executeSQL("SELECT p.IDPRODUCT, c.Name, p.PRICE, p.CURRENT_STOCK, p.PRODUCT_DESCRIPTION FROM TEST.PRODUCT p, TEST.CATEGORY c WHERE FK_USER =" + id + " AND p.FK_CATEGORY = c.IDCATEGORY");
+		
 		if(rs!=null){
 			ArrayList<Product> a = new ArrayList<Product>();
 			try {
@@ -50,6 +46,7 @@ public class GetAllProductsByFarmerId extends HttpServlet {
 					p.name = rs.getString(2);
 					p.price = rs.getDouble(3);
 					p.stock = rs.getInt(4);
+					p.description = rs.getString(5);
 					
 					a.add(p);
 				}
