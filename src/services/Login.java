@@ -73,12 +73,13 @@ public class Login extends HttpServlet {
 
 			try {
 				while(rs.next()){
-
+					
+					db_user.id = rs.getInt(1);
 					db_user.firstname = rs.getString(2);
 					db_user.lastname = rs.getString(3);
 					db_user.username = rs.getString(4);
 					db_user.email = rs.getString(10);
-					db_user.passwordhash = rs.getString(11);
+					//db_user.passwordhash = rs.getString(11);
 					db_user.usertype = rs.getString(15);
 					db_user.street = rs.getString(17);
 					db_user.number = rs.getString(18);

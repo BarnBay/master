@@ -35,7 +35,7 @@ public class GetAllProductsByFarmerId extends HttpServlet {
 		String id = request.getParameter("id");
 		DB_Connection db = new DB_Connection();
 		
-		ResultSet rs = db.executeSQL("SELECT p.IDPRODUCT, c.Name, p.PRICE, p.CURRENT_STOCK, p.PRODUCT_DESCRIPTION FROM TEST.PRODUCT p, TEST.CATEGORY c WHERE FK_USER =" + id + " AND p.FK_CATEGORY = c.IDCATEGORY");
+		ResultSet rs = db.executeSQL("SELECT p.IDPRODUCT, c.Name, p.PRICE, p.CURRENT_STOCK, p.PRODUCT_DESCRIPTION FROM TEST.PRODUCT p, TEST.CATEGORY c WHERE p.FK_USER = " + id + " AND p.FK_CATEGORY = c.IDCATEGORY");
 		
 		if(rs!=null){
 			ArrayList<Product> a = new ArrayList<Product>();

@@ -1,54 +1,74 @@
-<h2>Update actual stock!</h2>
+<script type="text/javascript">
+	var JSONUserObject = JSON.parse($.cookie('User.JSON'));
+	
+	$.ajax({
+		url: "/barnbay_ui/GetAllProductsByFarmerId?id=" + JSONUserObject.id
+	}).done(function(data1) {
+		displayAllFarmerProducts(JSON.parse(data1));
+	});
+	
+	$.ajax({
+		url: "/barnbay_ui/GetAllSubCategories"
+	}).done(function(data2) {
+		displayAllProductCategroys(JSON.parse(data2));
+		alert(data2);
+	});
+</script>
 
-<table id="stockUpdate" class="table table-hover">
-	<thead>
-		<tr>
-			<th class="col-md-1">#</th> <!-- 1 -->
-			<th class="col-md-2">Productname</th> <!-- 3 -->
-			<th class="col-md-1">Quantity</th> <!-- 2 -->
-			<th class="col-md-1">Update Quantity to</th> <!-- 2 -->
-			<!--<th class="col-md-1">Countable</th>-->
-			<th class="col-md-1">Price in Euro</th> <!-- 2 -->
-			<th class="col-md-1">Update Price</th> <!-- 4 -->
-			<th class="col-md-5">Describtion</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>1</td>
-			<td>Potato</td>
-			<td>150</td>
-			<td class="col-md-1"><input></td>
-			<!--<td>kg</td>-->
-			<td>2.00</td>
-			<td><input></td>	
-			<td><textarea class="form-control" rows="3"></textarea></td>
-		</tr>
-		<tr>
-			<td>2</td>
-			<td>Apple</td>
-			<td>75</td>
-			<td><input></td>
-			<!--<td>kg</td>-->
-			<td>1.29</td>
-			<td><input></td>
-			<td><textarea class="form-control" rows="3"></textarea></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td align="right"><button type="button" class="btn btn-success">
-					<span class="glyphicon glyphicon-saved"></span> Update stock
-				</button></td>
-		</tr>
-	</tbody>
+<h2>Update actual stock!</h2>
+<table id="stockProductTable" class="table table-hover">
+
 </table>
 
-
+<script type="text/javascript">
+	function displayAllFarmerProducts(farmerProducts) {
+		var out = "";
+		
+		out += '		<thead>';
+		out += '			<tr>';
+		out += '				<th class="col-md-1 text-center">#</th>';
+		out += '				<th class="col-md-2 text-center">Productname</th>';
+		out += '				<th class="col-md-1 text-center">Quantity</th>';
+		out += '				<th class="col-md-2 text-center">Update Quantity</th>';
+		out += '				<th class="col-md-1 text-center">Price</th>';
+		out += '				<th class="col-md-2 text-center">Update Price</th>';
+		out += '				<th class="col-md-3 text-center">Description</th>';
+		out += '			</tr>';
+		out += '		</thead>';
+		out += '		<tbody id="stockUpdateTable">';
+		
+		for(i = 0; i < farmerProducts.length; i++) {
+			p = i + 1;
+			
+			out += '			<tr class="text-center">';
+			out += '				<td style="vertical-align: middle;">' + p + '</td>';
+			out += '				<td style="vertical-align: middle;">' + farmerProducts[i].name + '</td>';
+			out += '				<td style="vertical-align: middle;">' + farmerProducts[i].stock + '</td>';
+			out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerProductStock" maxlength="4" value="' + farmerProducts[i].stock + '"></td>';
+			out += '				<td style="vertical-align: middle;">' + (farmerProducts[i].price).toFixed(2) + ' &euro;</td>';
+			out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerProductPrice" value="' + (farmerProducts[i].price).toFixed(2) + '"></td>';
+			out += '				<td style="vertical-align: middle;"><textarea class="form-control farmerProductDescription" rows="2">' + farmerProducts[i].description + '</textarea></td>';
+			out += '			</tr>';
+		}
+		
+		out += '			<tr>';
+		out += '				<td></td>';
+		out += '				<td></td>';
+		out += '				<td></td>';
+		out += '				<td></td>';
+		out += '				<td></td>';
+		out += '				<td></td>';
+		out += '				<td>';
+		out += '					<button type="button" id="updateFarmerProduct" class="btn btn-block btn-success">';
+		out += '						<span class="glyphicon glyphicon-saved"></span> Update stock';
+		out += '					</button>';
+		out += '				</td>';
+		out += '			</tr>';
+		out += '		</tbody>';
+		
+		document.getElementById("stockProductTable").innerHTML = out;
+	}
+</script>
 
 
 <h2>Add new Products to your stock!</h2>
@@ -86,3 +106,13 @@
 
 	</tbody>
 </table>
+
+<script type="text/javascript">
+	$('#mainContainer').on('click', '#updateFarmerProduct', function(e) {
+		e.preventDefault();
+		
+		$('#stockUpdateTable').find('.farmerProductPrice').each(function() {
+			//alert(this.value);
+		});
+	});
+</script>

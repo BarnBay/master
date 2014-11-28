@@ -1,6 +1,7 @@
 package entities;
 
 public class User {
+	public Integer id;
 	public String firstname;
 	public String lastname;
 	public String title;      // Mr. or Mrs. (Dr.)
