@@ -11,7 +11,6 @@
 		url: "/barnbay_ui/GetAllSubCategories"
 	}).done(function(data2) {
 		displayAllProductCategroys(JSON.parse(data2));
-		alert(data2);
 	});
 </script>
 
@@ -20,6 +19,13 @@
 
 </table>
 
+<h2>Add new Products to your stock!</h2>
+
+<table id="stockAddProductTable" class="table table-hover">
+
+</table>
+
+<!-- Update Table: stockProductTable -->
 <script type="text/javascript">
 	function displayAllFarmerProducts(farmerProducts) {
 		var out = "";
@@ -40,7 +46,7 @@
 		for(i = 0; i < farmerProducts.length; i++) {
 			p = i + 1;
 			
-			out += '			<tr class="text-center">';
+			out += '			<tr>';
 			out += '				<td style="vertical-align: middle;">' + p + '</td>';
 			out += '				<td style="vertical-align: middle;">' + farmerProducts[i].name + '</td>';
 			out += '				<td style="vertical-align: middle;">' + farmerProducts[i].stock + '</td>';
@@ -70,43 +76,52 @@
 	}
 </script>
 
+<!-- Update Table: stockProductTable -->
+<script type="text/javascript">
+	function displayAllProductCategroys(ProductCategories) {
+		var out = "";
+		
+		out += '		<thead>';
+		out += '			<tr>';
+		out += '				<th class="col-md-3 text-center">Productname</th>';
+		out += '				<th class="col-md-2 text-center">Quantity</th>';
+		out += '				<th class="col-md-2 text-center">Price in Euro</th>';
+		out += '				<th class="col-md-5 text-center">Description</th>';
+		out += '			</tr>';
+		out += '		</thead>';
+		out += '		<tbody>';
+		out += '			<tr>';
+		out += '				<td style="vertical-align: middle; class="col-md-2">';
+		out += '					<select class="form-control input-md">';
+		
+		for(i = 0; i < ProductCategories.length; i++) {
+			out += '						<option value="' + ProductCategories[i].idcategory + '">' + ProductCategories[i].name + '</option>';	
+		}
+		
+		out += '					</select>';
+		out += '				</td>';
+		out += '				<td style="vertical-align: middle;><input></td>';
+		out += '				<td style="vertical-align: middle;><input></td>';
+		out += '				<td style="vertical-align: middle;><textarea class="form-control" rows="3"></textarea></td>';
+		out += '			</tr>';
+		out += '			<tr>';
+		out += '				<td></td>';
+		out += '				<td></td>';
+		out += '				<td></td>';
+		out += '				<td align="right">';
+		out += '					<button type="button" class="btn btn-success">';
+		out += '						<span class="glyphicon glyphicon-saved"></span> Add Product';
+		out += '					</button>';
+		out += '				</td>';
+		out += '			</tr>';
+		out += '		</tbody>';
+		
+		
+		document.getElementById("stockAddProductTable").innerHTML = out;
+	}
+</script>
 
-<h2>Add new Products to your stock!</h2>
-
-<table id="stockAdd" class="table table-hover">
-	<thead>
-		<tr>
-			<th class="col-md-3">Productname</th>
-			<th class="col-md-1">Quantity</th>
-			<!--<th class="col-md-1">Countable</th>-->
-			<th class="col-md-1">Price in Euro</th>
-			<th class="col-md-7">Describtion</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td class="col-md-2"><select class="form-control input-md">
-					<option>Carrot</option>
-					<option>Apple</option>
-					<option>Potato</option>
-			</select></td>
-			<td><input></td>
-			<td><input></td>
-			<td><textarea class="form-control" rows="3"></textarea></td>
-		</tr>
-
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td align="right"><button type="button" class="btn btn-success">
-					<span class="glyphicon glyphicon-saved"></span> Add Product
-				</button></td>
-		</tr>
-
-	</tbody>
-</table>
-
+<!-- Check if update Button was clicked -->
 <script type="text/javascript">
 	$('#mainContainer').on('click', '#updateFarmerProduct', function(e) {
 		e.preventDefault();
