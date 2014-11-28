@@ -1,6 +1,7 @@
 <script src="./js/star-rating.js"></script>
 <link href="./css/star-rating.css" rel="stylesheet"/>
 
+
 <script type="text/javascript">	
 	var FarmerDetailJSONObject;
 	var countProducts = 0;
@@ -25,6 +26,11 @@
 			out += '		<img src="./img/farmers/' + farmerDetailObject.firstname + ' ' + farmerDetailObject.lastname + '.png" alt="Image" class="img-circle center-block">';
 			out += '		<h2>' + farmerDetailObject.firstname + ' ' + farmerDetailObject.lastname + '</h2>';
 			out += '		<div class="text-center"><input id="farmerRating" type="text"></div>';
+			
+			out += '		<a class="btn btn-block btn-social btn-twitter">';
+			out += ' 	 <i class="fa fa-facebook"></i> Share via Facebook';
+			out += '		</a>';
+			
 			out += '		<br/>';
 			out += '		<div class="panel panel-success">';
 			out += '			<div class="panel-heading">';
@@ -87,6 +93,7 @@
 			out += '						<th>Address</th>';
 			out += '						<th>Pick-Up Times</th>';
 			out += '					</tr>';
+
 			
 			for(i = 0; i < farmerDetailObject.barnbays.length; i++) {
 				out += '					<tr>';
@@ -124,12 +131,17 @@
 			    clearButton: ''
 			});
 			
+
+			
 			/* Set the Value of the Rating (3. Stars) */
 			$('#farmerRating').rating('update', 3);
+			
 		}
-		
+			
 	</script>
+	
 </div>
+
 
 <script type="text/javascript">
 	function farmerSwitchToProduct(farmerid, productid) {
