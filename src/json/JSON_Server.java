@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
+import entities.AddProduct;
 import entities.Category;
 import entities.Farmer;
 import entities.Product;
@@ -41,6 +42,14 @@ public class JSON_Server {
 		currentuser = gson.fromJson(jsonobject.toString(), User.class);
 		
 		return currentuser;
+	}
+	
+	public static AddProduct jsonToProduct(JSONObject jsonobject) {
+		AddProduct currentProduct = new AddProduct();
+		Gson gson = new Gson();
+		currentProduct = gson.fromJson(jsonobject.toString(), AddProduct.class);
+		
+		return currentProduct;
 	}
 	
 	public static JSONObject http_post_json(String request){

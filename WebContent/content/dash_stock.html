@@ -3,14 +3,14 @@
 	
 	$.ajax({
 		url: "/barnbay_ui/GetAllProductsByFarmerId?id=" + JSONUserObject.id
-	}).done(function(data1) {
-		displayAllFarmerProducts(JSON.parse(data1));
+	}).done(function(data) {
+		displayAllFarmerProducts(JSON.parse(data));
 	});
 	
 	$.ajax({
 		url: "/barnbay_ui/GetAllSubCategories"
-	}).done(function(data2) {
-		displayAllProductCategroys(JSON.parse(data2));
+	}).done(function(data) {
+		displayAllProductCategroys(JSON.parse(data));
 	});
 </script>
 
@@ -20,10 +20,12 @@
 </table>
 
 <h2>Add new Products to your stock!</h2>
+<form id="formAddProductTable" accept-charset="utf-8" role="form">
+	<table id="stockAddProductTable" class="table table-hover">
 
-<table id="stockAddProductTable" class="table table-hover">
+	</table>
+</form>
 
-</table>
 
 <!-- Update Table: stockProductTable -->
 <script type="text/javascript">
@@ -50,10 +52,10 @@
 			out += '				<td style="vertical-align: middle;">' + p + '</td>';
 			out += '				<td style="vertical-align: middle;">' + farmerProducts[i].name + '</td>';
 			out += '				<td style="vertical-align: middle;">' + farmerProducts[i].stock + '</td>';
-			out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerProductStock" maxlength="4" value="' + farmerProducts[i].stock + '"></td>';
+			out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerProductStock" maxlength="4" value="' + farmerProducts[i].stock + '" placeholder="' + farmerProducts[i].stock + '"></td>';
 			out += '				<td style="vertical-align: middle;">' + (farmerProducts[i].price).toFixed(2) + ' &euro;</td>';
-			out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerProductPrice" value="' + (farmerProducts[i].price).toFixed(2) + '"></td>';
-			out += '				<td style="vertical-align: middle;"><textarea class="form-control farmerProductDescription" rows="2">' + farmerProducts[i].description + '</textarea></td>';
+			out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerProductPrice" value="' + (farmerProducts[i].price).toFixed(2) + '" placeholder="' + (farmerProducts[i].price).toFixed(2) + '"></td>';
+			out += '				<td style="vertical-align: middle;"><textarea class="form-control farmerProductDescription" rows="2" placeholder="' + farmerProducts[i].description + '">' + farmerProducts[i].description + '</textarea></td>';
 			out += '			</tr>';
 		}
 		
@@ -84,15 +86,15 @@
 		out += '		<thead>';
 		out += '			<tr>';
 		out += '				<th class="col-md-3 text-center">Productname</th>';
-		out += '				<th class="col-md-2 text-center">Quantity</th>';
-		out += '				<th class="col-md-2 text-center">Price in Euro</th>';
-		out += '				<th class="col-md-5 text-center">Description</th>';
+		out += '				<th class="col-md-3 text-center">Quantity</th>';
+		out += '				<th class="col-md-3 text-center">Price in Euro</th>';
+		out += '				<th class="col-md-3 text-center">Description</th>';
 		out += '			</tr>';
 		out += '		</thead>';
 		out += '		<tbody>';
 		out += '			<tr>';
 		out += '				<td style="vertical-align: middle; class="col-md-2">';
-		out += '					<select class="form-control input-md">';
+		out += '					<select class="form-control input-md farmerAddProductCategory">';
 		
 		for(i = 0; i < ProductCategories.length; i++) {
 			out += '						<option value="' + ProductCategories[i].idcategory + '">' + ProductCategories[i].name + '</option>';	
@@ -100,16 +102,16 @@
 		
 		out += '					</select>';
 		out += '				</td>';
-		out += '				<td style="vertical-align: middle;><input></td>';
-		out += '				<td style="vertical-align: middle;><input></td>';
-		out += '				<td style="vertical-align: middle;><textarea class="form-control" rows="3"></textarea></td>';
+		out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerAddProductStock" maxlength="4" required /></td>';
+		out += '				<td style="vertical-align: middle;"><input type="number" class="form-control farmerAddProductPrice" required /></td>';
+		out += '				<td style="vertical-align: middle;"><textarea class="form-control farmerAddProductDescription" rows="2" required /></textarea></td>';
 		out += '			</tr>';
 		out += '			<tr>';
 		out += '				<td></td>';
 		out += '				<td></td>';
 		out += '				<td></td>';
 		out += '				<td align="right">';
-		out += '					<button type="button" class="btn btn-success">';
+		out += '					<button type="submit" id="AddFarmerProduct" class="btn btn-block btn-success">';
 		out += '						<span class="glyphicon glyphicon-saved"></span> Add Product';
 		out += '					</button>';
 		out += '				</td>';
@@ -128,6 +130,38 @@
 		
 		$('#stockUpdateTable').find('.farmerProductPrice').each(function() {
 			//alert(this.value);
+		});
+	});
+</script>
+
+<!-- Add Product to Database -->
+<script type="text/javascript">
+	$("#formAddProductTable").submit(function(event) {
+		event.preventDefault();
+		
+		$.ajax({
+			type: "POST",
+			url: "/barnbay_ui/AddProductToFarmerStock",
+			dataType : "json",
+			data: JSON.stringify({
+				"categoryid":$('.farmerAddProductCategory').val(),
+				"productstock":$('.farmerAddProductStock').val(),
+				"productprice":$('.farmerAddProductPrice').val(),
+				"productdescription":$('.farmerAddProductDescription').val(),
+				"userid":JSONUserObject.id
+			}),
+			success:function(data) {
+				alert(data);
+			}, error: function(data) {
+				//Do nothing!
+			}
+		});
+		
+		
+		$.ajax({
+			url: "/barnbay_ui/GetAllProductsByFarmerId?id=" + JSONUserObject.id
+		}).done(function(data) {
+			displayAllFarmerProducts(JSON.parse(data));
 		});
 	});
 </script>
