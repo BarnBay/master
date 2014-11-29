@@ -39,9 +39,10 @@ public class GetCheapestProduct extends HttpServlet {
 		String paramName = "id";
 		String id = request.getParameter(paramName);
 		DB_Connection db = new DB_Connection();
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
 
 		ResultSet rs = db
-				.executeSQL("SELECT * FROM TEST.CATEGORY WHERE IDCATEGORY ="
+				.executeSQL("SELECT * FROM " + schema + "CATEGORY WHERE IDCATEGORY ="
 						+ id);
 		if (rs != null) {
 			Product p = new Product();
@@ -51,13 +52,13 @@ public class GetCheapestProduct extends HttpServlet {
 					p.description = rs.getString(4);
 
 					ResultSet rs2 = db
-							.executeSQL("SELECT MIN(PRICE) FROM TEST.PRODUCT WHERE FK_CATEGORY="
+							.executeSQL("SELECT MIN(PRICE) FROM " + schema + "PRODUCT WHERE FK_CATEGORY="
 									+ id);
 					if (rs2 != null && rs2.next()) {
 						p.price = rs2.getInt(1);
 
 						ResultSet rs3 = db
-								.executeSQL("SELECT * FROM TEST.PRODUCT WHERE FK_CATEGORY="
+								.executeSQL("SELECT * FROM " + schema + "PRODUCT WHERE FK_CATEGORY="
 										+ id + "AND PRICE=" + p.price);
 						int fk_farmer = 0;
 						if (rs3 != null && rs3.next()) {
@@ -70,7 +71,7 @@ public class GetCheapestProduct extends HttpServlet {
 							int fk_barnbay = 0;
 							int fk_address = 0;
 							ResultSet rs4 = db
-									.executeSQL("SELECT * FROM TEST.USERD WHERE IDUSER="
+									.executeSQL("SELECT * FROM " + schema + "USERD WHERE IDUSER="
 											+ fk_farmer);
 							if (rs4 != null && rs4.next()) {
 								p.farmerfirstname = rs4.getString(2);
@@ -79,7 +80,7 @@ public class GetCheapestProduct extends HttpServlet {
 								fk_barnbay = rs4.getInt(9);
 								fk_address = rs4.getInt(7);
 								
-								ResultSet rs45 = db.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS=" + fk_address);
+								ResultSet rs45 = db.executeSQL("SELECT * FROM " + schema + "ADDRESS WHERE IDADDRESS=" + fk_address);
 								p.farmeraddress = new Address();
 								if(rs45!=null && rs45.next()){
 									p.farmeraddress.idaddress = rs45.getInt(1);
@@ -90,7 +91,7 @@ public class GetCheapestProduct extends HttpServlet {
 								}
 
 								ResultSet rs5 = db
-										.executeSQL("SELECT * FROM TEST.BARNBAY WHERE IDBARNBAY="
+										.executeSQL("SELECT * FROM " + schema + "BARNBAY WHERE IDBARNBAY="
 												+ fk_barnbay);
 
 								while (rs5 != null && rs5.next()) {
@@ -101,7 +102,7 @@ public class GetCheapestProduct extends HttpServlet {
 									b.opening_hours = rs5.getString(5);
 
 									ResultSet rs56 = db
-											.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS="
+											.executeSQL("SELECT * FROM " + schema + "ADDRESS WHERE IDADDRESS="
 													+ rs5.getInt(6));
 									if(rs56 != null && rs56.next()){
 										b.address = new Address();
@@ -116,11 +117,11 @@ public class GetCheapestProduct extends HttpServlet {
 									p.barnbays.add(b);
 
 									ResultSet rs6 = db
-											.executeSQL("SELECT * FROM TEST.PRODUCT WHERE FK_CATEGORY="
+											.executeSQL("SELECT * FROM " + schema + "PRODUCT WHERE FK_CATEGORY="
 													+ id);
 									ResultSet rs7;
 									while (rs6 != null && rs6.next()) {
-										rs7 = db.executeSQL("SELECT * FROM TEST.USERD WHERE IDUSER="
+										rs7 = db.executeSQL("SELECT * FROM " + schema + "USERD WHERE IDUSER="
 												+ rs6.getInt(4));
 										while (rs7 != null && rs7.next()) {
 											Farmer f = new Farmer();
@@ -131,7 +132,7 @@ public class GetCheapestProduct extends HttpServlet {
 											
 											fk_address = rs7.getInt(7);
 											
-											ResultSet rs8 = db.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS=" + fk_address);
+											ResultSet rs8 = db.executeSQL("SELECT * FROM " + schema + "ADDRESS WHERE IDADDRESS=" + fk_address);
 											if(rs8 != null && rs8.next()){
 												f.street = rs8.getString(2);
 												f.number = rs8.getString(3);

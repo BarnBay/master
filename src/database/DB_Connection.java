@@ -69,5 +69,14 @@ public class DB_Connection {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public static String getSchemaName(String url){
+		String s;
+		if(url.indexOf("ondemand.com") > -1){
+			s="";
+		}else{
+			s="TEST.";
+		}
+		return s;
+	}
 }

@@ -29,8 +29,9 @@ public class RemoveProductFromStockByFarmerId extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		DB_Connection db = new DB_Connection();
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
 		
-		db.executeSQL("DELETE FROM TEST.PRODUCT WHERE IDPRODUCT=" + id);
+		db.executeSQL("DELETE FROM "+ schema + "PRODUCT WHERE IDPRODUCT=" + id);
 		
 		db.close();
 	}

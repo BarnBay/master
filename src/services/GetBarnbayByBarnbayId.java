@@ -35,7 +35,8 @@ public class GetBarnbayByBarnbayId extends HttpServlet {
 		String id = request.getParameter("id");
 		
 		DB_Connection db = new DB_Connection();
-		ResultSet rs = db.executeSQL("SELECT * FROM TEST.BARNBAY WHERE IDBARNBAY=" + id);
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
+		ResultSet rs = db.executeSQL("SELECT * FROM " + schema + "BARNBAY WHERE IDBARNBAY=" + id);
 		try {
 			Barnbay b = new Barnbay();
 			
@@ -47,7 +48,7 @@ public class GetBarnbayByBarnbayId extends HttpServlet {
 				b.opening_hours = rs.getString(5);
 				b.address = new Address();
 				
-				ResultSet rs1 = db.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS=" + rs.getInt(6));
+				ResultSet rs1 = db.executeSQL("SELECT * FROM " + schema + "ADDRESS WHERE IDADDRESS=" + rs.getInt(6));
 				if(rs1 != null && rs1.next()){
 					b.address.idaddress = rs1.getInt(1);
 					b.address.street = rs1.getString(2);

@@ -37,8 +37,9 @@ public class GetSubCategoriesByPrice extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
         DB_Connection db = new DB_Connection();
+        String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
 		
-		ResultSet rs = db.executeSQL("SELECT * FROM TEST.CATEGORY WHERE FK_SUPER_CATEGORY =" + id);
+		ResultSet rs = db.executeSQL("SELECT * FROM " + schema + "CATEGORY WHERE FK_SUPER_CATEGORY =" + id);
 		if(rs!=null){
 			ArrayList<Category> a = new ArrayList<Category>();
 			try {
@@ -48,7 +49,7 @@ public class GetSubCategoriesByPrice extends HttpServlet {
 					c.name = rs.getString(2);
 					c.category_description = rs.getString(4);
 					
-					ResultSet rs2 = db.executeSQL("SELECT MIN(PRICE) FROM TEST.PRODUCT WHERE FK_CATEGORY=" + c.idcategory);
+					ResultSet rs2 = db.executeSQL("SELECT MIN(PRICE) FROM " + schema + "PRODUCT WHERE FK_CATEGORY=" + c.idcategory);
 					if(rs2!=null && rs2.next()){
 						c.price = rs2.getInt(1);
 					}

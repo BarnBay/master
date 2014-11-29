@@ -28,16 +28,22 @@ public class DropSchema extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DB_Connection db = new DB_Connection();
-		db.executeSQL("DROP TABLE TEST.CATEGORY");
-		db.executeSQL("DROP TABLE TEST.FARM");
-		db.executeSQL("DROP TABLE TEST.PRODUCT");
-		db.executeSQL("DROP TABLE TEST.USERD");
-		db.executeSQL("DROP TABLE TEST.USERTYPE");
-		db.executeSQL("DROP TABLE TEST.ADDRESS");
-		db.executeSQL("DROP TABLE TEST.TITLE");
-		db.executeSQL("DROP TABLE TEST.BARNBAY");
-		db.executeSQL("DROP SCHEMA TEST RESTRICT");
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
+		
+		db.executeSQL("DROP TABLE " + schema + "CATEGORY");
+		db.executeSQL("DROP TABLE " + schema + "FARM");
+		db.executeSQL("DROP TABLE " + schema + "PRODUCT");
+		db.executeSQL("DROP TABLE " + schema + "USERD");
+		db.executeSQL("DROP TABLE " + schema + "USERTYPE");
+		db.executeSQL("DROP TABLE " + schema + "ADDRESS");
+		db.executeSQL("DROP TABLE " + schema + "TITLE");
+		db.executeSQL("DROP TABLE " + schema + "BARNBAY");
+		if(schema== "TEST."){
+			db.executeSQL("DROP SCHEMA TEST RESTRICT");
+		}
 		db.close();
+		
+		response.getWriter().println("Schema dropped.");
 	}
 
 	/**

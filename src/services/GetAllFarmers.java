@@ -33,7 +33,9 @@ public class GetAllFarmers extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DB_Connection db = new DB_Connection();
-		ResultSet rs = db.executeSQL("SELECT * FROM TEST.USERD WHERE FK_USERTYPE=1");
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
+		
+		ResultSet rs = db.executeSQL("SELECT * FROM " + schema + "USERD WHERE FK_USERTYPE=1");
 		if(rs!=null){
 			ArrayList<Farmer> a = new ArrayList<Farmer>();
 			try {
@@ -46,7 +48,7 @@ public class GetAllFarmers extends HttpServlet {
 					int fk_farm = rs.getInt(8);
 					int fk_address = rs.getInt(7);
 					
-					ResultSet rs2 = db.executeSQL("SELECT * FROM TEST.FARM WHERE IDFARM="+fk_farm);
+					ResultSet rs2 = db.executeSQL("SELECT * FROM " + schema + "FARM WHERE IDFARM="+fk_farm);
 					if(rs2!=null){
 						while(rs2.next()){
 							f.farmname = rs2.getString(2);
@@ -54,7 +56,7 @@ public class GetAllFarmers extends HttpServlet {
 							f.farmdescription =rs2.getString(4);
 						}	
 					}
-					ResultSet rs3 = db.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS="+fk_address);
+					ResultSet rs3 = db.executeSQL("SELECT * FROM " + schema + "ADDRESS WHERE IDADDRESS="+fk_address);
 					if(rs3!=null){
 						while(rs3.next()){
 							f.street = rs3.getString(2);

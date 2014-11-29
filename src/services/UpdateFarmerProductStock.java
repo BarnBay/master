@@ -47,6 +47,7 @@ public class UpdateFarmerProductStock extends HttpServlet {
 		JSONObject jsonobject = new JSONObject();
 		StringBuffer jb = new StringBuffer();
 		DB_Connection dbconnect;
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
 		String line;
 		String sql;
 		ResultSet rs;
@@ -71,13 +72,13 @@ public class UpdateFarmerProductStock extends HttpServlet {
 			Double price = Double.parseDouble(jsonobject.get("Price").toString());
 			String description = jsonobject.get("Description").toString();
 			
-			sql = "SELECT * FROM TEST.PRODUCT WHERE IDPRODUCT = " + id;
+			sql = "SELECT * FROM "+ schema + "PRODUCT WHERE IDPRODUCT = " + id;
 			rs = dbconnect.executeSQL(sql);
 		
 			try {
 				while (rs.next()) {
 					if(!(rs.getString("PRODUCT_DESCRIPTION").equals(description)) || rs.getDouble("PRICE") != price || rs.getInt("CURRENT_STOCK") != stock) {
-						sql = "UPDATE TEST.PRODUCT SET PRODUCT_DESCRIPTION='" + description + "', PRICE=" + price + ", CURRENT_STOCK=" + stock + " WHERE IDPRODUCT = " + id;
+						sql = "UPDATE "+ schema + "PRODUCT SET PRODUCT_DESCRIPTION='" + description + "', PRICE=" + price + ", CURRENT_STOCK=" + stock + " WHERE IDPRODUCT = " + id;
 						dbconnect.executeSQL(sql);
 					}
 				} 

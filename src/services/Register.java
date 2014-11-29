@@ -68,8 +68,9 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		}
 		
 		// Checking if user exists:		
-		DB_Connection dbconnect = new DB_Connection(); //
-		String sql = "SELECT  * FROM TEST.USERD WHERE USERNAME = '" + receiveduser.username + "'";
+		DB_Connection dbconnect = new DB_Connection();
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
+		String sql = "SELECT  * FROM " + schema + "USERD WHERE USERNAME = '" + receiveduser.username + "'";
 		ResultSet rs = dbconnect.executeSQL(sql);
 		boolean check_connect = true;
 		if(rs!=null){
@@ -96,7 +97,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			if (!receiveduser.street.isEmpty() && !receiveduser.number.isEmpty() && 
 					!receiveduser.zip.isEmpty() && !receiveduser.town.isEmpty()) {
 				// Getting highest id from table
-				sql = "SELECT MAX(IDADDRESS) FROM TEST.ADDRESS";
+				sql = "SELECT MAX(IDADDRESS) FROM " + schema + "ADDRESS";
 				dbconnect = new DB_Connection(); //
 				rs = dbconnect.executeSQL(sql);
 				max_address_id = 1;
@@ -111,7 +112,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				dbconnect.close();
 		
 				// Creating SQL Statement
-				sql = "INSERT INTO TEST.ADDRESS VALUES(" + max_address_id + ", '"
+				sql = "INSERT INTO " + schema + "ADDRESS VALUES(" + max_address_id + ", '"
 						+ receiveduser.street +"', '"+ receiveduser.number +"', '" 
 						+ receiveduser.zip +"', '"+ receiveduser.town +"')";
 				dbconnect = new DB_Connection();
@@ -129,7 +130,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				int title_id = 0;
 				
 				// Usertype
-				sql = "SELECT IDUSERTYPE FROM TEST.USERTYPE WHERE TYPE = '" + receiveduser.usertype + "'";
+				sql = "SELECT IDUSERTYPE FROM " + schema + "USERTYPE WHERE TYPE = '" + receiveduser.usertype + "'";
 				dbconnect = new DB_Connection();
 				rs = dbconnect.executeSQL(sql);
 				try {
@@ -142,7 +143,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				dbconnect.close();
 				
 				// Title
-				sql = "SELECT IDTITLE FROM TEST.TITLE WHERE TITLE = '" + receiveduser.title + "'";
+				sql = "SELECT IDTITLE FROM " + schema + "TITLE WHERE TITLE = '" + receiveduser.title + "'";
 				dbconnect = new DB_Connection();
 				rs = dbconnect.executeSQL(sql);
 				try {
@@ -155,7 +156,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				dbconnect.close();
 				
 				// Getting maximum User ID
-				sql = "SELECT MAX(IDUSER) FROM TEST.USERD";
+				sql = "SELECT MAX(IDUSER) FROM " + schema + "USERD";
 				dbconnect = new DB_Connection(); //
 				rs = dbconnect.executeSQL(sql);
 				int max_user_id = 1;
@@ -227,7 +228,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				
 				
 				
-				sql = "INSERT INTO TEST.USERD ( " + cols + " ) VALUES ( " + vals + ")";
+				sql = "INSERT INTO " + schema + "USERD ( " + cols + " ) VALUES ( " + vals + ")";
 				dbconnect = new DB_Connection();
 				check_connect = dbconnect.executeSQLbool(sql);
 				

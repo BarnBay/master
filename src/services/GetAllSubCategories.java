@@ -34,8 +34,9 @@ public class GetAllSubCategories extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DB_Connection db = new DB_Connection();
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
 		
-		ResultSet rs = db.executeSQL("SELECT * FROM TEST.CATEGORY WHERE FK_SUPER_CATEGORY!=0");
+		ResultSet rs = db.executeSQL("SELECT * FROM " + schema + "CATEGORY WHERE FK_SUPER_CATEGORY!=0");
 		if(rs!=null){
 			ArrayList<Category> a = new ArrayList<Category>();
 			try {
@@ -46,7 +47,7 @@ public class GetAllSubCategories extends HttpServlet {
 					c.super_category = rs.getInt(3);
 					c.category_description = rs.getString(4);
 					
-					ResultSet rs2 = db.executeSQL("SELECT MIN(PRICE) FROM TEST.PRODUCT WHERE FK_CATEGORY=" + c.idcategory);
+					ResultSet rs2 = db.executeSQL("SELECT MIN(PRICE) FROM " + schema + "PRODUCT WHERE FK_CATEGORY=" + c.idcategory);
 					if(rs2!=null && rs2.next()){
 						c.price = rs2.getInt(1);
 					}

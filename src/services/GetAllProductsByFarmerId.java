@@ -34,8 +34,9 @@ public class GetAllProductsByFarmerId extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		DB_Connection db = new DB_Connection();
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
 		
-		ResultSet rs = db.executeSQL("SELECT p.IDPRODUCT, c.Name, p.PRICE, p.CURRENT_STOCK, p.PRODUCT_DESCRIPTION FROM TEST.PRODUCT p, TEST.CATEGORY c WHERE p.FK_USER = " + id + " AND p.FK_CATEGORY = c.IDCATEGORY");
+		ResultSet rs = db.executeSQL("SELECT p.IDPRODUCT, c.Name, p.PRICE, p.CURRENT_STOCK, p.PRODUCT_DESCRIPTION FROM "+ schema + "PRODUCT p, "+ schema + "CATEGORY c WHERE p.FK_USER = " + id + " AND p.FK_CATEGORY = c.IDCATEGORY");
 		
 		if(rs!=null){
 			ArrayList<Product> a = new ArrayList<Product>();

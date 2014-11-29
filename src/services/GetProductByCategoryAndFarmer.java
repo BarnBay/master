@@ -38,8 +38,9 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 		String catid = request.getParameter("catid");
 		String farmerid = request.getParameter("farmerid");
 		DB_Connection db = new DB_Connection();
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
 		
-		ResultSet rs = db.executeSQL("SELECT * FROM TEST.PRODUCT WHERE FK_CATEGORY =" + catid + " AND FK_USER =" + farmerid);
+		ResultSet rs = db.executeSQL("SELECT * FROM " + schema + "PRODUCT WHERE FK_CATEGORY =" + catid + " AND FK_USER =" + farmerid);
 		
 		ArrayList<Product> a = new ArrayList<Product>();
 		
@@ -53,7 +54,7 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 					p.available = rs.getInt(8);
 					p.stock = rs.getInt(7);
 					
-					ResultSet rs2 = db.executeSQL("SELECT * FROM TEST.USERD WHERE IDUSER =" + farmerid);
+					ResultSet rs2 = db.executeSQL("SELECT * FROM " + schema + "USERD WHERE IDUSER =" + farmerid);
 					int fk_address;
 					if(rs2!=null && rs2.next()){
 						int fk_barnbay = rs2.getInt(9);
@@ -63,7 +64,7 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 						p.farmeremail = rs2.getString(10);
 						fk_address = rs2.getInt(7);
 						
-						ResultSet rs4 = db.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS=" + fk_address);
+						ResultSet rs4 = db.executeSQL("SELECT * FROM " + schema + "ADDRESS WHERE IDADDRESS=" + fk_address);
 						p.farmeraddress = new Address();
 						if(rs4!=null && rs4.next()){
 							p.farmeraddress.idaddress = rs4.getInt(1);
@@ -73,7 +74,7 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 							p.farmeraddress.city = rs4.getString(5);
 						}
 						
-						ResultSet rs3 = db.executeSQL("SELECT * FROM TEST.BARNBAY WHERE IDBARNBAY =" + fk_barnbay);
+						ResultSet rs3 = db.executeSQL("SELECT * FROM " + schema + "BARNBAY WHERE IDBARNBAY =" + fk_barnbay);
 						while(rs3!=null && rs3.next()){
 							Barnbay b = new Barnbay();
 							b.id = rs3.getInt(1);
@@ -82,7 +83,7 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 							b.opening_hours = rs3.getString(5);
 							
 							ResultSet rs5 = db
-									.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS="
+									.executeSQL("SELECT * FROM " + schema + "ADDRESS WHERE IDADDRESS="
 											+ rs3.getInt(6));
 							if(rs5 != null && rs5.next()){
 								b.address = new Address();
@@ -97,10 +98,10 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 							p.barnbays.add(b);
 						}
 						
-						ResultSet rs6 = db.executeSQL("SELECT * FROM TEST.PRODUCT WHERE FK_CATEGORY=" + catid);
+						ResultSet rs6 = db.executeSQL("SELECT * FROM " + schema + "PRODUCT WHERE FK_CATEGORY=" + catid);
 						ResultSet rs7;
 						while(rs6!=null && rs6.next()){
-							rs7 = db.executeSQL("SELECT * FROM TEST.USERD WHERE IDUSER=" + rs6.getInt(4));
+							rs7 = db.executeSQL("SELECT * FROM " + schema + "USERD WHERE IDUSER=" + rs6.getInt(4));
 							while(rs7!=null && rs7.next()){
 								Farmer f = new Farmer();
 								f.idfarmer = rs7.getInt(1);
@@ -110,7 +111,7 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 								
 								fk_address = rs7.getInt(7);
 								
-								ResultSet rs8 = db.executeSQL("SELECT * FROM TEST.ADDRESS WHERE IDADDRESS=" + fk_address);
+								ResultSet rs8 = db.executeSQL("SELECT * FROM " + schema + "ADDRESS WHERE IDADDRESS=" + fk_address);
 								if(rs8 != null && rs8.next()){
 									f.street = rs8.getString(2);
 									f.number = rs8.getString(3);

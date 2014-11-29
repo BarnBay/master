@@ -45,6 +45,7 @@ public class AddProductToFarmerStock extends HttpServlet {
 		JSONObject jsonobject = new JSONObject();
 		StringBuffer jb = new StringBuffer();
 		DB_Connection dbconnect;
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
 		String line;
 		String sql;
 		ResultSet rs;
@@ -63,7 +64,7 @@ public class AddProductToFarmerStock extends HttpServlet {
 		// Inserting Product data:
 		int max_product_id = 1;
 		dbconnect = new DB_Connection();
-		sql = "SELECT MAX(IDPRODUCT) FROM TEST.PRODUCT";
+		sql = "SELECT MAX(IDPRODUCT) FROM "+ schema + "PRODUCT";
 		rs = dbconnect.executeSQL(sql);
 		
 		try {
@@ -76,7 +77,7 @@ public class AddProductToFarmerStock extends HttpServlet {
 		dbconnect.close();
 		
 		// Creating SQL Statement		
-		sql = "INSERT INTO TEST.PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
+		sql = "INSERT INTO "+ schema + "PRODUCT(IDPRODUCT, PRODUCT_DESCRIPTION, FK_CATEGORY,"
 				+ "FK_USER, PRICE, CURRENT_STOCK, FK_CURRENCY, FK_AMOUNT_TYPE) VALUES(" + max_product_id + ","
 				+ "'" + receivedproduct.productdescription + "', " + receivedproduct.categoryid + ", " 
 				+ receivedproduct.userid + ", " + receivedproduct.productprice  + ", " + receivedproduct.productstock + ", 0, 0)";

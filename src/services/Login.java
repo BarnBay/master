@@ -63,7 +63,8 @@ public class Login extends HttpServlet {
 		
 		// Getting Data from Database:	
 		DB_Connection dbconnect = new DB_Connection(); //
-		String sql = "SELECT  * FROM TEST.USERD, TEST.USERTYPE, TEST.ADDRESS, TEST.TITLE WHERE FK_USERTYPE = IDUSERTYPE AND IDADDRESS = FK_ADDRESS AND IDTITLE = FK_TITLE AND USERNAME = '" + receiveduser.username + "'";
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
+		String sql = "SELECT  * FROM " + schema + "USERD, " + schema + "USERTYPE, " + schema + "ADDRESS, " + schema + "TITLE WHERE FK_USERTYPE = IDUSERTYPE AND IDADDRESS = FK_ADDRESS AND IDTITLE = FK_TITLE AND USERNAME = '" + receiveduser.username + "'";
 		ResultSet rs = dbconnect.executeSQL(sql);
 		int length = 0;
 		
@@ -106,7 +107,7 @@ public class Login extends HttpServlet {
 			JSONObject returnjson = JSON_Server.http_post_json(returnstring);
 			response.getWriter().print(returnjson.toString());
 			
-			String sql2 = "UPDATE TEST.USERD SET SESSION = '" + db_user.session + "' WHERE USERNAME = '" + db_user.username + "'";
+			String sql2 = "UPDATE " + schema + "USERD SET SESSION = '" + db_user.session + "' WHERE USERNAME = '" + db_user.username + "'";
 			DB_Connection dbconnect2 = new DB_Connection();
 			ResultSet rs2 = dbconnect2.executeSQL(sql2);
 
