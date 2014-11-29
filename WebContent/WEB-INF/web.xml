@@ -255,4 +255,15 @@
     	<servlet-name>UpdateFarmerProductStock</servlet-name>
     	<url-pattern>/UpdateFarmerProductStock</url-pattern>
   	</servlet-mapping>
+  	
+  	<servlet>
+    	<description></description>
+    	<display-name>GetNewsFeedActivity</display-name>
+    	<servlet-name>GetNewsFeedActivity</servlet-name>
+    	<servlet-class>services.GetNewsFeedActivity</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+    	<servlet-name>GetNewsFeedActivity</servlet-name>
+    	<url-pattern>/GetNewsFeedActivity</url-pattern>
+  	</servlet-mapping>
 </web-app>
