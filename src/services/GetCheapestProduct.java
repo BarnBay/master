@@ -51,15 +51,16 @@ public class GetCheapestProduct extends HttpServlet {
 					p.name = rs.getString(2);
 					p.description = rs.getString(4);
 
+					
 					ResultSet rs2 = db
 							.executeSQL("SELECT MIN(PRICE) FROM " + schema + "PRODUCT WHERE FK_CATEGORY="
 									+ id);
 					if (rs2 != null && rs2.next()) {
-						p.price = rs2.getInt(1);
+						p.price = rs2.getDouble(1);
 
 						ResultSet rs3 = db
 								.executeSQL("SELECT * FROM " + schema + "PRODUCT WHERE FK_CATEGORY="
-										+ id + "AND PRICE=" + p.price);
+										+ id + " AND PRICE=" + p.price);
 						int fk_farmer = 0;
 						if (rs3 != null && rs3.next()) {
 							p.id = rs.getInt(1);
