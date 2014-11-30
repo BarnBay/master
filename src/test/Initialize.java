@@ -97,21 +97,21 @@ public class Initialize extends HttpServlet {
 			
 		}
 			
-			db.executeSQL("INSERT INTO " + schema + "BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS, FK_ADDRESS) VALUES(1, 'Barnbay am Schloss', 'Unser original Barnbay am Schloss', 'Montag-Sonntag von 7:00 bis 10:00', 4)");
-			db.executeSQL("INSERT INTO " + schema + "BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS, FK_ADDRESS) VALUES(2, 'Barnbay am HBF Mannheim', 'Naechster Halt: Barnbay!', 'Montag-Sonntag von 7:00 bis 10:00', 5)");
-			db.executeSQL("INSERT INTO " + schema + "BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS, FK_ADDRESS) VALUES(3, 'Barnbay@SAP', 'Perfekt fuer SAP-Mitarbeiter', 'Montag-Sonntag von 7:00 bis 10:00', 6)");
+			db.executeSQL("INSERT INTO " + schema + "BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS, FK_ADDRESS) VALUES(1, 'Barnbay@Castle', 'Our original Barnbay at the castle in Mannheim!', 'Monday-Sunday 7:00 am-10:00 pm', 4)");
+			db.executeSQL("INSERT INTO " + schema + "BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS, FK_ADDRESS) VALUES(2, 'Barnbay@HBF Mannheim', 'Next Stop: Barnbay!', 'Monday-Sunday 6:00 am-10:00 pm', 5)");
+			db.executeSQL("INSERT INTO " + schema + "BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS, FK_ADDRESS) VALUES(3, 'Barnbay@SAP', 'Perfect for SAP employees!', 'Monday-Sunday 8:00 am-10:00 pm', 6)");
 			
-			db.executeSQL("INSERT INTO " + schema + "ADDRESS VALUES(1, 'Waldstrasse', '23', '54329', 'KONZ')");
+			db.executeSQL("INSERT INTO " + schema + "ADDRESS VALUES(1, 'In den Boellenruthen', '15', '68623', 'Lampertheim')");
 			db.executeSQL("INSERT INTO " + schema + "ADDRESS VALUES(2, 'Seckenheimerstr.', '5', '68163', 'Mannheim')");
 			db.executeSQL("INSERT INTO " + schema + "ADDRESS VALUES(4, 'L1', '1', '68161', 'Mannheim')");
 			db.executeSQL("INSERT INTO " + schema + "ADDRESS VALUES(5, 'Tattersallstr.', '2', '68165', 'Mannheim')");
 			db.executeSQL("INSERT INTO " + schema + "ADDRESS VALUES(6, 'Dietmar-Hopp-Allee', '20', '69190', 'Walldorf')");
 			
 			db.executeSQL("INSERT INTO " + schema + "FARM(IDFARM, NAME, PICTURE, DESCRIPTION, OPENING_HOURS) VALUES"
-					+"(1, 'Seckenheimer Obsthof', '1', 'Wir haben Obstsorten aller Art und stellen alles biologisch her. Kommen Sie vorbei!', 'Montag-Sonntag 9:00-18:00 Uhr')");
+					+"(1, 'Seckenheimer Obsthof', '1', 'We have fruits of all kinds and grow them organically. Taste and smile!', 'Monday-Sunday 9:00 am-6:00 pm')");
 			
 			db.executeSQL("INSERT INTO " + schema + "FARM(IDFARM, NAME, PICTURE, DESCRIPTION, OPENING_HOURS) VALUES"
-					+"(2, 'Super Hof', '2', 'Unsere Produkte koennen Sie sich schmecken lassen', 'Montag-Sonntag 9:00-18:00 Uhr')");
+					+"(2, 'Super Hof', '2', 'Come and try our products!', 'Monday-Sunday 9:00 am-6:00 pm')");
 			
 			db.executeSQL("INSERT INTO " + schema + "USERTYPE VALUES(1, 'FARMER')");
 			db.executeSQL("INSERT INTO " + schema + "USERTYPE VALUES(2, 'CUSTOMER')");
