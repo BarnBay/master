@@ -35,7 +35,7 @@ public class SendNotification extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String to = request.getParameter("to");
 		String[] s = request.getRequestURL().toString().split("/");
-		String url = s[0] +"//" + s[1] +s[2] + "/" + s[3] + "/content/dashboard.html";
+		String url = s[0] +"//" + s[1] +s[2] + "/" + s[3];
 		
 	    SendEmailTest emailer = new SendEmailTest();
 	    emailer.sendEmail(to, url);

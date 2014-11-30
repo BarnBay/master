@@ -32,7 +32,7 @@ try {
 
     message.setSubject ("New Orders@Barnbay");
     message.setFrom (new InternetAddress ("barnbay.organic.food@gmail.com"));
-    String content = "<h1 style='color:green'>You have received new orders for tomorrow!</h1><p>Please visit your Dashboard on Barnbay:</p><p><a href=" + url + ">" + url + "</a></p>";
+    String content = "<h1 style='color:green'>You have received new orders for tomorrow!</h1><p>Please visit your Dashboard on Barnbay:</p><p><a href=" + url + ">" + url + "</a></p><p>Best regards</p><p>Your Barnbay-Team!</p>";
     message.setContent (content, "text/html");
     message.addRecipient (Message.RecipientType.TO, new InternetAddress (to));
 
