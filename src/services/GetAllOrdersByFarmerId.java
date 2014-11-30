@@ -67,7 +67,7 @@ public class GetAllOrdersByFarmerId extends HttpServlet {
 		// Pickup date
 		
 		String sql;
-		String attributes = "bb.name, cat.name, o.pickup_date, orderproduct.amount";
+		String attributes = "bb.name, cat.name, o.pickup_date, orderproduct.amount, farmer.username";
 		String tables = "TEST.BARNBAY bb, TEST.CATEGORY cat, TEST.ORDER_HAS_PRODUCT orderproduct, TEST.ORDERS o, TEST.USERD barnbayuser, TEST.USERD farmer, TEST.PRODUCT prod";
 		String where_clause = "farmer.username = '" + receiveduser.username + "' AND farmer.idUser = prod.fk_User AND prod.fk_category = cat.idCategory " + 
 		                      "AND orderproduct.fk_Product = prod.idProduct AND orderproduct.fk_Order = o.idOrder AND o.fk_Users_pickup = barnbayuser.idUser " + 
@@ -75,15 +75,14 @@ public class GetAllOrdersByFarmerId extends HttpServlet {
 		
 		sql = "SELECT " + attributes + " FROM " + tables + " WHERE " + where_clause;
 		
+		System.out.println("SQL-String: " + sql);
+		
 		DB_Connection db_connect = new DB_Connection();
 		ResultSet rs = db_connect.executeSQL(sql);
 		
 		try {
 			while (rs.next()) {
-				System.out.println(rs.getString(1));
-				System.out.println(rs.getString(2));
-				System.out.println(rs.getString(3));
-				System.out.println(rs.getString(4));
+				System.out.print(rs.getString(1) + " | " + rs.getString(2) + " | " + rs.getString(3) + " | " + rs.getString(4) + " | " + rs.getString(5));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

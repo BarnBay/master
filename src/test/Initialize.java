@@ -122,7 +122,7 @@ public class Initialize extends HttpServlet {
 			db.executeSQL("INSERT INTO " + schema + "TITLE VALUES(2, 'Frau')");
 			
 			db.executeSQL("INSERT INTO " + schema + "USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
-					+"VALUES (1, 'John', 'Bauer', 'johnb', 1, 1, 1, 2, 'johnb@farms.com', 'stuhl', 0)");
+					+"VALUES (1, 'John', 'Bauer', 'johnb', 1, 1, 1, 2, 'johnb@farms.com', 'tisch', 0)");
 			
 			db.executeSQL("INSERT INTO " + schema + "USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
 					+"VALUES (2, 'Peter', 'Meier', 'peterm', 1, 1, 2, 1, 'peterm@vollbio.org', 'tisch', 0)");
@@ -218,10 +218,10 @@ public class Initialize extends HttpServlet {
 						" VALUES(2, 4, 4, 7, 0, 0)");
 			// Carrots:
 			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
-					" VALUES(2, 6, 3, 3, 0, 0)");			
+					" VALUES(2, 6, 3, 4, 0, 0)");			
 			// Tomatoes:
 			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
-					" VALUES(2, 8, 7, 10, 0, 0)");			
+					" VALUES(2, 8, 7, 9, 0, 0)");			
 			
 			
 			db.executeSQL("INSERT INTO " + schema + "CATEGORY VALUES(1, 'Fruits', 0,'')");
