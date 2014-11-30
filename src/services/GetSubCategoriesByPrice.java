@@ -38,8 +38,12 @@ public class GetSubCategoriesByPrice extends HttpServlet {
 		
         DB_Connection db = new DB_Connection();
         String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
-		
-		ResultSet rs = db.executeSQL("SELECT * FROM " + schema + "CATEGORY WHERE FK_SUPER_CATEGORY =" + id);
+        ResultSet rs;
+        if(id==0){
+        	rs = db.executeSQL("SELECT * FROM " + schema + "CATEGORY WHERE FK_SUPER_CATEGORY !=" + id);
+        }else{
+        	rs = db.executeSQL("SELECT * FROM " + schema + "CATEGORY WHERE FK_SUPER_CATEGORY =" + id);
+        }
 		if(rs!=null){
 			ArrayList<Category> a = new ArrayList<Category>();
 			try {
