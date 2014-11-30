@@ -138,7 +138,10 @@ public class Initialize extends HttpServlet {
 			
 
 			db.executeSQL("INSERT INTO " + schema + "USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
-					+"VALUES (3, 'Erika', 'Giebel', 'egiebel', 2, 2, 2, 0, 'cmueller@vollbio.org', 'tisch', 0)");
+					+"VALUES (6, 'Erika', 'Giebel', 'egiebel', 2, 2, 2, 0, 'cmueller@vollbio.org', 'tisch', 0)");
+			
+			db.executeSQL("INSERT INTO " + schema + "USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
+					+"VALUES (7, '', '', 'BBSAP', 4, 1, 2, 0, 'bbsap@vollbio.org', 'tisch', 3)");
 			
 			/**
 			 * Initialize Grannys Apfel
@@ -223,6 +226,38 @@ public class Initialize extends HttpServlet {
 			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
 					" VALUES(2, 8, 7, 9, 0, 0)");			
 			
+			
+			// Order 3: 7 Cripps Pink apples, 3 Carrots Milan, 7 Tomatoes
+
+			// Create Order:
+			db.executeSQL("INSERT INTO " + schema + "ORDERS (IDORDER , FK_USERS_CUSTOMER , FK_USERS_PICKUP , FK_USERS_FINANCIALS , FK_ORDER_STATUS , FK_PACKAGING_TYPE , PICKUP_DATE)" +
+					" VALUES(3, 6, 7, 1, 0, 0, '2014-12-10')");
+			
+			// Cripps Pink apples:
+			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
+						" VALUES(3, 4, 4, 1, 0, 0)");
+			// Carrots:
+			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
+					" VALUES(3, 6, 3, 1, 0, 0)");			
+			// Tomatoes:
+			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
+					" VALUES(3, 8, 7, 1, 0, 0)");			
+
+			// Order 4: 5 Granny Smith apples, 3 Carrots Milan, 10 Tomatoes
+			
+			// Create Order:
+			db.executeSQL("INSERT INTO " + schema + "ORDERS (IDORDER , FK_USERS_CUSTOMER , FK_USERS_PICKUP , FK_USERS_FINANCIALS , FK_ORDER_STATUS , FK_PACKAGING_TYPE , PICKUP_DATE )" +
+					" VALUES(4, 3, 4, 5, 0, 0 , '2014-12-11')");
+
+			// Granny Smith apples:
+			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
+						" VALUES(4, 1, 2, 6, 0, 0)");
+			// Carrots:
+			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
+					" VALUES(4, 5, 3, 4, 0, 0)");			
+			// Tomatoes:
+			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
+					" VALUES(4, 8, 5, 2, 0, 0)");					
 			
 			db.executeSQL("INSERT INTO " + schema + "CATEGORY VALUES(1, 'Fruits', 0,'')");
 			db.executeSQL("INSERT INTO " + schema + "CATEGORY VALUES(2, 'Vegetables', 0, '')");
