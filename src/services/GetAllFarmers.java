@@ -70,7 +70,7 @@ public class GetAllFarmers extends HttpServlet {
 					
 				}
 				
-				String json = JSON_Server.farmerArrayToJson(a);
+				String json = JSON_Server.objectToJson(a);
 				response.getWriter().println(json);
 				db.close();
 				

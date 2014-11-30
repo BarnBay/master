@@ -17,25 +17,6 @@ import entities.User;
 
 public class JSON_Server {
 	
-	public static JSONObject wrap_JSON(Object myObject) {
-		JSONObject jsonobject;
-		JSONParser jsonparser;
-		Gson mygson = new Gson();
-		String jsonstring = "";
-		jsonstring = mygson.toJson(myObject);
-		// TODO: Wrapping of objects.
-		
-		try {
-			jsonparser = new JSONParser();
-			jsonobject = (JSONObject)jsonparser.parse(jsonstring);
-			
-		} catch(ParseException e) {
-			jsonobject = new JSONObject();
-		}	
-		
-		return jsonobject;
-	}
-	
 	public static User jsonToUser(JSONObject jsonobject) {
 		User currentuser = new User();
 		Gson gson = new Gson();
@@ -79,24 +60,6 @@ public class JSON_Server {
 		}	
 		
 		return jsonarray;
-	}
-	
-	public static String categoryArrayToJson(ArrayList<Category> a){
-		Gson g = new Gson();
-		String gs = g.toJson(a);
-		return gs;
-	}
-	
-	public static String farmerArrayToJson(ArrayList<Farmer> a){
-		Gson g = new Gson();
-		String gs = g.toJson(a);
-		return gs;
-	}
-	
-	public static String productArrayToJson(ArrayList<Product> a){
-		Gson g = new Gson();
-		String gs = g.toJson(a);
-		return gs;
 	}
 	
 	public static String objectToJson(Object o){

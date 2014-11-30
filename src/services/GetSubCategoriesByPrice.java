@@ -62,7 +62,7 @@ public class GetSubCategoriesByPrice extends HttpServlet {
 						a.add(c);
 					}
 				}
-				String json = JSON_Server.categoryArrayToJson(a);
+				String json = JSON_Server.objectToJson(a);
 				response.getWriter().println(json);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
