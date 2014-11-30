@@ -1,5 +1,12 @@
 package entities;
 
+/**
+ * 
+ * @author Anne
+ * 
+ * User entity class
+ *
+ */
 public class User {
 	public Integer id;
 	public String firstname;

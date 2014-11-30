@@ -2,6 +2,13 @@ package entities;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Anne
+ * 
+ * Farmer entity class
+ *
+ */
 public class Farmer {
 	public int idfarmer;
 	public String firstname;

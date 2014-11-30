@@ -2,6 +2,13 @@ package entities;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Anne
+ * 
+ * Product entity class
+ *
+ */
 public class Product{
 	public int id;
 	public int catid;

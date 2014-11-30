@@ -1,5 +1,12 @@
 package entities;
 
+/**
+ * 
+ * @author Anne
+ * 
+ * Barnbay entity class
+ *
+ */
 public class Barnbay {
 	public int id;
 	public String name;

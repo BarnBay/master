@@ -2,6 +2,13 @@ package entities;
 
 import java.util.Random;
 
+/**
+ * 
+ * @author Anne
+ * 
+ * class for generating random strings
+ *
+ */
 public final class RandomString {
 	private static final char[] symbols;
 

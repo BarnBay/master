@@ -1,5 +1,12 @@
 package entities;
 
+/**
+ * 
+ * @author Anne
+ * 
+ * AddProduct entity class
+ *
+ */
 public class AddProduct{
 	public String productdescription;
 	public int categoryid;
