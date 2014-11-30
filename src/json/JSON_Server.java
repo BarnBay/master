@@ -15,27 +15,21 @@ import entities.Farmer;
 import entities.Product;
 import entities.User;
 
+/**
+ * 
+ * @author Anne
+ * This class offers methods
+ * for json conversion which are used by the services
+ *
+ */
 public class JSON_Server {
 	
-	public static JSONObject wrap_JSON(Object myObject) {
-		JSONObject jsonobject;
-		JSONParser jsonparser;
-		Gson mygson = new Gson();
-		String jsonstring = "";
-		jsonstring = mygson.toJson(myObject);
-		// TODO: Wrapping of objects.
-		
-		try {
-			jsonparser = new JSONParser();
-			jsonobject = (JSONObject)jsonparser.parse(jsonstring);
-			
-		} catch(ParseException e) {
-			jsonobject = new JSONObject();
-		}	
-		
-		return jsonobject;
-	}
-	
+	/**
+	 * method for converting a json object to a user object
+	 * 
+	 * @param jsonobject
+	 * @return User
+	 */
 	public static User jsonToUser(JSONObject jsonobject) {
 		User currentuser = new User();
 		Gson gson = new Gson();
@@ -44,6 +38,12 @@ public class JSON_Server {
 		return currentuser;
 	}
 	
+	/**
+	 * method for converting a json object to a AddProduct
+	 * 
+	 * @param jsonobject JSONObject
+	 * @return AddProduct Object
+	 */
 	public static AddProduct jsonToProduct(JSONObject jsonobject) {
 		AddProduct currentProduct = new AddProduct();
 		Gson gson = new Gson();
@@ -52,6 +52,13 @@ public class JSON_Server {
 		return currentProduct;
 	}
 	
+	
+	/**
+	 * method for converting a request string to a json object
+	 * 
+	 * @param request String
+	 * @return JSONObject
+	 */
 	public static JSONObject http_post_json(String request){
 		JSONParser jsonparser;
 		JSONObject jsonobject;
@@ -64,6 +71,14 @@ public class JSON_Server {
 		}	
 		return jsonobject;
 	}
+	
+	/**
+	 * method for converting a request string to a json array
+	 * 
+	 * @param request String
+	 * @param value String
+	 * @return JSONArray
+	 */
 	
 	public static JSONArray http_post_jsonArray(String request, String value) {
 		JSONParser jsonparser;
@@ -81,24 +96,12 @@ public class JSON_Server {
 		return jsonarray;
 	}
 	
-	public static String categoryArrayToJson(ArrayList<Category> a){
-		Gson g = new Gson();
-		String gs = g.toJson(a);
-		return gs;
-	}
-	
-	public static String farmerArrayToJson(ArrayList<Farmer> a){
-		Gson g = new Gson();
-		String gs = g.toJson(a);
-		return gs;
-	}
-	
-	public static String productArrayToJson(ArrayList<Product> a){
-		Gson g = new Gson();
-		String gs = g.toJson(a);
-		return gs;
-	}
-	
+	/**
+	 * This method converses an object to json string
+	 * 
+	 * @param o Object that should be converted to json string
+	 * @return Json-String gs
+	 */
 	public static String objectToJson(Object o){
 		Gson g = new Gson();
 		String gs = g.toJson(o);

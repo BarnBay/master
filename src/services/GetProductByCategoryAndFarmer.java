@@ -126,7 +126,7 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 					
 					a.add(p);
 				}
-				String json = JSON_Server.productArrayToJson(a);
+				String json = JSON_Server.objectToJson(a);
 				response.getWriter().println(json);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

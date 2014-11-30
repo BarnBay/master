@@ -38,6 +38,8 @@ public class DropSchema extends HttpServlet {
 		db.executeSQL("DROP TABLE " + schema + "ADDRESS");
 		db.executeSQL("DROP TABLE " + schema + "TITLE");
 		db.executeSQL("DROP TABLE " + schema + "BARNBAY");
+		db.executeSQL("DROP TABLE " + schema + "ORDERS");
+		db.executeSQL("DROP TABLE " + schema + "ORDER_HAS_PRODUCT");
 		if(schema== "TEST."){
 			db.executeSQL("DROP SCHEMA TEST RESTRICT");
 		}
