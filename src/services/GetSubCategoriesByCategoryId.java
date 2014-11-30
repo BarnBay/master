@@ -32,12 +32,20 @@ public class GetSubCategoriesByCategoryId extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String paramName = "id";
-		String id = request.getParameter(paramName);
+		String id = request.getParameter("id");
+		String id2 = request.getParameter("id2");
+		String id3 = request.getParameter("id3");
         DB_Connection db = new DB_Connection();
 		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
-        
-		ResultSet rs = db.executeSQL("SELECT * FROM " + schema + "CATEGORY WHERE FK_SUPER_CATEGORY =" + id);
+		
+		ResultSet rs = null;
+		if(id != null && id2 != null && id3 != null){
+			rs = db.executeSQL("SELECT * FROM " + schema + "CATEGORY WHERE FK_SUPER_CATEGORY =" + id + " OR FK_SUPER_CATEGORY =" + id2 + " OR FK_SUPER_CATEGORY =" + id3);
+		}else if(id != null && id2 != null){
+			rs = db.executeSQL("SELECT * FROM " + schema + "CATEGORY WHERE FK_SUPER_CATEGORY =" + id + " OR FK_SUPER_CATEGORY =" + id2);
+		}else if(id != null){
+			rs = db.executeSQL("SELECT * FROM " + schema + "CATEGORY WHERE FK_SUPER_CATEGORY =" + id);
+		}
 		if(rs!=null){
 			ArrayList<Category> a = new ArrayList<Category>();
 			try {
