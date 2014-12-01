@@ -116,33 +116,33 @@ public class GetCheapestProduct extends HttpServlet {
 									}
 									
 									p.barnbays.add(b);
-
-									ResultSet rs6 = db
-											.executeSQL("SELECT * FROM " + schema + "PRODUCT WHERE FK_CATEGORY="
-													+ id);
-									ResultSet rs7;
-									while (rs6 != null && rs6.next()) {
-										rs7 = db.executeSQL("SELECT * FROM " + schema + "USERD WHERE IDUSER="
-												+ rs6.getInt(4));
-										while (rs7 != null && rs7.next()) {
-											Farmer f = new Farmer();
-											f.idfarmer = rs7.getInt(1);
-											f.firstname = rs7.getString(2);
-											f.lastname = rs7.getString(3);
-											f.email = rs7.getString(10);
-											
-											fk_address = rs7.getInt(7);
-											
-											ResultSet rs8 = db.executeSQL("SELECT * FROM " + schema + "ADDRESS WHERE IDADDRESS=" + fk_address);
-											if(rs8 != null && rs8.next()){
-												f.street = rs8.getString(2);
-												f.number = rs8.getString(3);
-												f.zipcode = rs8.getString(4);
-												f.city = rs8.getString(5);
-											}
-
-											p.farmers.add(f);
+								}
+								
+								ResultSet rs6 = db
+										.executeSQL("SELECT * FROM " + schema + "PRODUCT WHERE FK_CATEGORY="
+												+ id);
+								ResultSet rs7;
+								while (rs6 != null && rs6.next()) {
+									rs7 = db.executeSQL("SELECT * FROM " + schema + "USERD WHERE IDUSER="
+											+ rs6.getInt(4));
+									while (rs7 != null && rs7.next()) {
+										Farmer f = new Farmer();
+										f.idfarmer = rs7.getInt(1);
+										f.firstname = rs7.getString(2);
+										f.lastname = rs7.getString(3);
+										f.email = rs7.getString(10);
+										
+										fk_address = rs7.getInt(7);
+										
+										ResultSet rs8 = db.executeSQL("SELECT * FROM " + schema + "ADDRESS WHERE IDADDRESS=" + fk_address);
+										if(rs8 != null && rs8.next()){
+											f.street = rs8.getString(2);
+											f.number = rs8.getString(3);
+											f.zipcode = rs8.getString(4);
+											f.city = rs8.getString(5);
 										}
+
+										p.farmers.add(f);
 									}
 								}
 
