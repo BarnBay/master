@@ -40,7 +40,7 @@
 				</div>
 				<div id="collapseListGroupCategory" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupCategory" aria-expanded="true">
 					<ul class="list-group checkbox">
-          				<li class="list-group-item productCheckbox"><input type="checkbox" onclick="productFilterCategory(this, 1)"> Fruits 
+          				<li class="list-group-item productCheckbox"><input type="checkbox" onclick="productFilterCategory()" id="checkProductsFruits"> Fruits 
           					<span id="countProducts_Fruits" class="badge pull-right">
 	          					<script>				
 									function countProductListFruits(productArray) {
@@ -56,7 +56,7 @@
 								</script>
           					</span>
           				</li>
-          				<li class="list-group-item productCheckbox"><input type="checkbox" onclick="productFilterCategory(this, 2)"> Vegetables 
+          				<li class="list-group-item productCheckbox"><input type="checkbox" onclick="productFilterCategory()" id="checkProductsVegetables"> Vegetables 
 	          				<span id="countProducts_Vegetables" class="badge pull-right">
 	          					<script>				
 									function countProductListVegetables(productArray) {
@@ -72,7 +72,7 @@
 								</script>
 	          				</span>
           				</li>
-          				<li class="list-group-item productCheckbox" id="productCheckbox"><input type="checkbox" onclick="productFilterCategory(this, 3)"> Meat 
+          				<li class="list-group-item productCheckbox" id="productCheckbox"><input type="checkbox" onclick="productFilterCategory()" id="checkProductsMeat"> Meat 
           					<span id="countProducts_Meat" class="badge pull-right">
           						<script>				
 									function countProductListMeat(productArray) {
@@ -103,15 +103,15 @@
 					<ul class="list-group">
           				<li class="list-group-item">
           					<p class="input-group">
-							  	<input type="text" name="low" id="productsPriceLow" class="form-control input-sm" placeholder="low">
+							  	<input type="text" name="low" id="productsPriceLow" class="form-control input-sm" placeholder="low"/>
 							  	<span class="input-group-addon">&euro;</span>
 							</p>
          					<p class="input-group">
-  								<input type="text" name="high" id="productsPriceHigh" class="form-control input-sm" placeholder="high">
+  								<input type="text" name="high" id="productsPriceHigh" class="form-control input-sm" placeholder="high"/>
   								<span class="input-group-addon">&euro;</span>
 							</p>
 							<p>
-								<button class="btn btn-sm btn-success btn-block signup-btn" type="submit"><b>Go</b></button>
+								<button class="btn btn-sm btn-success btn-block signup-btn" type="button" id="getProductsByPrice"><b>Go</b></button>
 							</p>
           				</li>
         			</ul>
@@ -214,28 +214,75 @@
 
 <!-- Filter Products, will be removed an added to script.js later -->
 <script type="text/javascript">
-	function productFilterCategory(element, categoryid) {
-		if(element.checked) {
-			$.ajax({
-				url: "/barnbay_ui/GetSubCategoriesByCategoryId?id=" + categoryid
-			}).done(function(result) {
-				ProductListFilterJSONObject = JSON.parse(result);
-				
-				productListFunction(ProductListFilterJSONObject);
-			});
+	function productFilterCategory() {
+		var fruits = document.getElementById('checkProductsFruits').checked
+		var vegetables = document.getElementById('checkProductsVegetables').checked
+		var meat = document.getElementById('checkProductsMeat').checked;
+		var category_url = "";
+		
+		
+		if(fruits && vegetables && meat) {
+			category_url = "/barnbay_ui/GetSubCategoriesByCategoryId?id=1&id2=2&id3=3";
+		} else if (fruits && vegetables) {
+			category_url = "/barnbay_ui/GetSubCategoriesByCategoryId?id=1&id2=2";
+		} else if (fruits && meat) {
+			category_url = "/barnbay_ui/GetSubCategoriesByCategoryId?id=1&id2=3";
+		} else if (vegetables && meat) {
+			category_url = "/barnbay_ui/GetSubCategoriesByCategoryId?id=2&id2=3";
+		} else if (fruits) {
+			category_url = "/barnbay_ui/GetSubCategoriesByCategoryId?id=1";
+		} else if (vegetables) {
+			category_url = "/barnbay_ui/GetSubCategoriesByCategoryId?id=2";
+		} else if (meat) {
+			category_url = "/barnbay_ui/GetSubCategoriesByCategoryId?id=3";
 		} else {
-			$.ajax({
-				url: "/barnbay_ui/GetAllSubCategories"
-			}).done(function(result) {
-				ProductListFilterJSONObject = JSON.parse(result);
-				
-				productListFunction(ProductListFilterJSONObject);
-			});	
-		}		
+			category_url = "/barnbay_ui/GetAllSubCategories";
+		}
+		
+		$.ajax({
+			url: category_url
+		}).done(function(result) {
+			ProductListFilterJSONObject = JSON.parse(result);
+			
+			countProductListFunction(ProductListFilterJSONObject);
+			productListFunction(ProductListFilterJSONObject);
+		});	
 	}
 	
 	/* Display Detailed Information about the Product */
 	function productGetDetailedProductInfo(categoryid) {
 		$.cookie("Product.ProductListCategoryID", categoryid, { expires: 1 });
 	}
+	
+
+	/* Get Products by Price */
+	$('#mainContainer').on('click', '#getProductsByPrice', function(event) {
+		event.preventDefault();
+		
+		var start = 0;
+		var end = 0;
+		var id = 0;
+		
+		if(($('#productsPriceLow').val() != "") && ($('#productsPriceHigh').val() != "")) {
+			start = $('#productsPriceLow').val();
+			end = $('#productsPriceHigh').val();
+			
+			if(document.getElementById('checkProductsFruits').checked) {
+				id = 1;
+			} else if(document.getElementById('checkProductsVegetables').checked) {
+				id = 2;	
+			} else if(document.getElementById('checkProductsMeat').checked) {
+				id = 3;	
+			}
+			
+			$.ajax({
+				url: "/barnbay_ui/GetSubCategoriesByPrice?start=" + start + "&end=" + end + "&id="+id
+			}).done(function(result) {
+				ProductListFilterJSONObject = JSON.parse(result);
+				
+				countProductListFunction(ProductListFilterJSONObject);
+				productListFunction(ProductListFilterJSONObject);
+			});
+		}
+	});
 </script>
