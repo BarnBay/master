@@ -285,16 +285,7 @@
 		var pDate, pMonth, pYear;
 		var currentDate = new Date();
 		var pickupTime = currentDate.getHours();
-		
-		var weekday = new Array(7);
-			weekday[0] =  "Sunday";
-			weekday[1] = "Monday";
-			weekday[2] = "Tuesday";
-			weekday[3] = "Wednesday";
-			weekday[4] = "Thursday";
-			weekday[5] = "Friday";
-			weekday[6] = "Saturday";
-		
+				
 		out += '<div class="panel panel-success">';
 		out += '	<div class="panel-heading">';
 		out += '		<span class="glyphicon glyphicon-time" aria-hidden="true"></span> Pickup-Time';
@@ -310,7 +301,7 @@
 				pMonth = currentDate.getMonth() + 1;
 				pYear = currentDate.getFullYear();
 
-				out += '			<option value="' + pDate + '.' + pMonth + '.'+ pYear + '">' + weekday[currentDate.getDay()] +', ' + pDate + '.' + pMonth + '.'+ pYear + '</option>';
+				out += '			<option value="' + pYear + '-' + pMonth + '-'+ pDate + '">' + getWeekdayFromDay(pYear + '-' + pMonth + '-'+ pDate) +', ' + pDate + '.' + pMonth + '.'+ pYear + '</option>';
 			} else {
 				if(i == 0) {
 					currentDate.setDate(currentDate.getDate() + 2);
@@ -322,7 +313,7 @@
 				pMonth = currentDate.getMonth() + 1;
 				pYear = currentDate.getFullYear();
 
-				out += '			<option value="' + pDate + '.' + pMonth + '.'+ pYear + '">' + weekday[currentDate.getDay()] +', ' + pDate + '.' + pMonth + '.'+ pYear + '</option>';
+				out += '			<option value="' + pYear + '-' + pMonth + '-'+ pDate + '">' + getWeekdayFromDay(pYear + '-' + pMonth + '-'+ pDate) +', ' + pDate + '.' + pMonth + '.'+ pYear + '</option>';
 			}
 		}
 		out += '		</select>';
