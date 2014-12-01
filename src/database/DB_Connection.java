@@ -11,9 +11,10 @@ import javax.sql.DataSource;
 
 /**
  * 
- * @author Anne
  * This class manages the connection to the database (local Derby
  *  or SAP HANA) and offers methods that are used by the services
+ * @author Anne
+ * 
  */
 public class DB_Connection {
 
