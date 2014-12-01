@@ -1,3 +1,29 @@
+<!-- Count Stock and Orders -->
+<script type="text/javascript">
+	var JSONUserObject = JSON.parse($.cookie('User.JSON'));
+	var username = $.cookie('User.Username');
+	
+	/* Count Stock */
+	$.ajax({
+		url: "/barnbay_ui/GetAllProductsByFarmerId?id=" + JSONUserObject.id
+	}).done(function(data) {
+		document.getElementById("dash_viewDetails_countStock").innerHTML = JSON.parse(data).length;
+	});
+	
+	/* Count Orders */
+	$.ajax({
+		type: "POST",
+		url: "/barnbay_ui/GetAllOrdersByFarmerId",
+		dataType : "json",
+		data: JSON.stringify({
+			"username":username
+		})
+	}).done(function(data) {
+		document.getElementById("dash_viewDetails_countOrders").innerHTML = data.delivery.length;
+	});
+	
+</script>
+
 <!-- <div id="page-wrapper"> -->
 <div class="row">
 
@@ -9,7 +35,7 @@
 						<i class="fa fa-apple fa-5x"></i>
 					</div>
 					<div class="col-xs-9 text-right">
-						<div class="huge">4</div>
+						<div class="huge" id="dash_viewDetails_countStock"></div>
 						<div>Stock!</div>
 					</div>
 				</div>
@@ -53,7 +79,7 @@
 						<i class="fa fa-shopping-cart fa-5x"></i>
 					</div>
 					<div class="col-xs-9 text-right">
-						<div class="huge">5</div>
+						<div class="huge" id="dash_viewDetails_countOrders"></div>
 						<div>New Orders!</div>
 					</div>
 				</div>
@@ -144,14 +170,13 @@
 	</div>
 </div>
 
-		<!-- Custom CSS -->
-		<link href="css/dashboard.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="css/dashboard.css" rel="stylesheet">
 
 
 <!-- Morris Charts JavaScript -->
 <script src="js/plugins/morris/raphael.min.js"></script>
 <script src="js/plugins/morris/morris.min.js"></script>
-
 
 
 <script src="js/plugins/morris/morris-data.js"></script>
