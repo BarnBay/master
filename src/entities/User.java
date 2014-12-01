@@ -2,7 +2,7 @@ package entities;
 
 /**
  * 
- * @author Anne
+ * @author Anne & Andreas
  * 
  * User entity class
  *

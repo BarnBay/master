@@ -17,19 +17,23 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class SendNotification
+ * for triggering the sendemailtest class
+ * @author Anne
+ * 
  */
 public class SendNotification extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Contructor
      * @see HttpServlet#HttpServlet()
      */
     public SendNotification() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
+	 * When the servlet receives an http get request a new emailer is created and sendEmail is calles
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

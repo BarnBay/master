@@ -10,17 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import database.DB_Connection;
 
 /**
- * Servlet implementation class GetFarmerByFarmerId
+ * Servlet implementation class RemoveProductFromStrockByFarmerId
+ * @author Patrick
  */
 public class RemoveProductFromStockByFarmerId extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Constructor
      * @see HttpServlet#HttpServlet()
      */
     public RemoveProductFromStockByFarmerId() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

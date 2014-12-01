@@ -19,23 +19,24 @@ import org.json.simple.parser.ParseException;
 
 /**
  * Servlet implementation class TestService
+ * TESTSERVICE: No relevance for the application
+ * @author Andreas, Anne
  */
 public class TestService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Constructor
      * @see HttpServlet#HttpServlet()
      */
     public TestService() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 		JSONObject jsonobject = new JSONObject();
 		JSONParser jsonparser = new JSONParser();
@@ -57,7 +58,6 @@ public class TestService extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 		StringBuffer jb = new StringBuffer();
 		String line;

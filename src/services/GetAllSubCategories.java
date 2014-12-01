@@ -16,20 +16,24 @@ import database.DB_Connection;
 import entities.Category;
 
 /**
- * Servlet implementation class GetAllProducts
+ * Servlet implementation class GetAllSubCategories,
+ * which offers a json-service to the frontend
+ * @author Anne
+ * 
  */
 public class GetAllSubCategories extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Contructor
      * @see HttpServlet#HttpServlet()
      */
     public GetAllSubCategories() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
+	 * Method which is executed when the servlet receives an http get request
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,7 +61,6 @@ public class GetAllSubCategories extends HttpServlet {
 				String json = JSON_Server.objectToJson(a);
 				response.getWriter().println(json);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -70,7 +73,6 @@ public class GetAllSubCategories extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

@@ -16,20 +16,26 @@ import entities.Category;
 
 /**
  * Servlet implementation class GetSubCategoriesByPrice
+ * which offers a json-service to the frontend
+ * @author Anne
+ * 
  */
 public class GetSubCategoriesByPrice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Contructor
      * @see HttpServlet#HttpServlet()
      */
     public GetSubCategoriesByPrice() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
+	 * Method which is executed when the servlet receives an http get request
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * takes categoryid, startprice and endprice of the products as url-parameters
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		double start = Double.parseDouble(request.getParameter("start"));
@@ -65,7 +71,6 @@ public class GetSubCategoriesByPrice extends HttpServlet {
 				String json = JSON_Server.objectToJson(a);
 				response.getWriter().println(json);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

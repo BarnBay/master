@@ -11,19 +11,23 @@ import database.DB_Connection;
 
 /**
  * Servlet implementation class DropSchema
+ * for dropping the schema with all test data
+ * @author Anne
+ * 
  */
 public class DropSchema extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Contructor
      * @see HttpServlet#HttpServlet()
      */
     public DropSchema() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
+	 * When this servlet receives an http get request, all tables and the schema (for derby) are dropped
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

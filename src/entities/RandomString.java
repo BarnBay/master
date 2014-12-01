@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * 
- * @author Anne
+ * @author Andreas
  * 
  * class for generating random strings
  *

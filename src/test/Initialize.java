@@ -11,19 +11,23 @@ import database.DB_Connection;
 
 /**
  * Servlet implementation class Initialize
+ * for schema and test data initialization
+ * @author Andreas, Anne
  */
 public class Initialize extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Constructor
      * @see HttpServlet#HttpServlet()
      */
     public Initialize() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
+	 * When the servlet receives an http get request the schema and the test data is initialized.
+	 * There are some differences (e.g. datatypes) for SAP HANA and for Derby
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {		
@@ -58,7 +62,6 @@ public class Initialize extends HttpServlet {
 			try {
 				response.getWriter().println("Initialization of database on hana cloud platform done.");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

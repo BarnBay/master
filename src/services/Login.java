@@ -21,26 +21,33 @@ import database.DB_Connection;
 import entities.Category;
 import entities.User;
 
+/**
+ * Servlet implementation class Login,
+ * which offers a Login-Service to the frontend
+ * @author Andreas
+ *
+ */
+
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Contructor
      * @see HttpServlet#HttpServlet()
      */
     public Login() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 	}
 
 	/**
+	 * Method which is executed when the servlet received a http post request
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -91,7 +98,6 @@ public class Login extends HttpServlet {
 				}
 
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

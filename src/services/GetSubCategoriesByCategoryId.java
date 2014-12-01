@@ -15,21 +15,27 @@ import database.DB_Connection;
 import entities.Category;
 
 /**
- * Servlet implementation class GetCategoryByCategoryId
+ * Servlet implementation class GetCategoryByCategoryId,
+ * which offers a json-service to the frontend
+ * @author Anne
+ * 
  */
 public class GetSubCategoriesByCategoryId extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Contructor
      * @see HttpServlet#HttpServlet()
      */
     public GetSubCategoriesByCategoryId() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
+	 * Method which is executed when the servlet receives an http get request
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * takes one, two or three ids of the supercategories as url-parameters
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
@@ -65,7 +71,6 @@ public class GetSubCategoriesByCategoryId extends HttpServlet {
 				String json = JSON_Server.objectToJson(a);
 				response.getWriter().println(json);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

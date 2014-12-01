@@ -20,27 +20,32 @@ import database.DB_Connection;
 import entities.RandomString;
 import entities.User;
 
+/**
+ * Servlet implementation class Register,
+ * which offers a Register-Service to the frontend
+ * @author Andreas
+ *
+ */
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Constructor
      * @see HttpServlet#HttpServlet()
      */
     public Register() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		response.getWriter().println("");
 	}
 
 	/**
+	 * Method wich is executed when the servlet receives an http post request
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

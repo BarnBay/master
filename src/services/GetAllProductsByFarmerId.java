@@ -15,12 +15,15 @@ import database.DB_Connection;
 import entities.Product;
 
 /**
- * Servlet implementation class GetFarmerByFarmerId
+ * Servlet implementation class GetAllProductsByFarmerId,
+ * which offers a json-service to the frontend
+ * @author Andreas
  */
 public class GetAllProductsByFarmerId extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Constructor
      * @see HttpServlet#HttpServlet()
      */
     public GetAllProductsByFarmerId() {
@@ -29,6 +32,7 @@ public class GetAllProductsByFarmerId extends HttpServlet {
     }
 
 	/**
+	 * Method which is executed when the servlet receives an http get request
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,7 +58,6 @@ public class GetAllProductsByFarmerId extends HttpServlet {
 				String json = JSON_Server.objectToJson(a);
 				response.getWriter().println(json);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

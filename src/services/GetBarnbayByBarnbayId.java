@@ -15,20 +15,24 @@ import entities.Address;
 import entities.Barnbay;
 
 /**
- * Servlet implementation class GetBarnbayByBarnbayId
+ * Servlet implementation class GetBarnbayByBarnbayId,
+ * which offers a json-service to the frontend
+ * @author Anne
+ * 
  */
 public class GetBarnbayByBarnbayId extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Constructor
      * @see HttpServlet#HttpServlet()
      */
     public GetBarnbayByBarnbayId() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
+	 * Method which is executed when the servlet receives an http get request
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,7 +65,6 @@ public class GetBarnbayByBarnbayId extends HttpServlet {
 			response.getWriter().println(json);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -72,7 +75,6 @@ public class GetBarnbayByBarnbayId extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

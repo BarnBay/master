@@ -17,20 +17,24 @@ import entities.Farmer;
 import entities.Product;
 
 /**
- * Servlet implementation class GetCheapestProduct
+ * Servlet implementation class GetCheapestProduct,
+ * which offers a json-service to the frontend
+ * @author Anne
+ * 
  */
 public class GetCheapestProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Constructor
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public GetCheapestProduct() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
+	 * Method which is executed when the servlet receives an http get request
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -154,10 +158,7 @@ public class GetCheapestProduct extends HttpServlet {
 					String json = JSON_Server.objectToJson(p);
 					response.getWriter().println(json);
 				}
-				// String json = JSON_Server.categoryArrayToJson(a);
-				// response.getWriter().println(json);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
