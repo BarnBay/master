@@ -1,65 +1,82 @@
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Next Pickup Orders
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-      	<table class="table table-hover">
-      <caption>Pickuplist</caption>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Productname</th>
-          <th>Quantity</th>
-          <th>Countable<th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Potatoes</td>
-          <td>30</td>
-          <td>1 kg</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Cherry</td>
-          <td>5</td>
-          <td>1 kg</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Apple</td>
-          <td>50</td>
-          <td>1 kg</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Product 4</td>
-          <td>40</td>
-          <td>1 kg</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>Product 5</td>
-          <td>50</td>
-          <td>1 kg</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>Product 6</td>
-          <td>50</td>
-          <td>1 kg</td>
-        </tr>
-      </tbody>
-    </table>
-      </div>
-    </div>
-  </div>
- 
+<script type="text/javascript">
+	var username = $.cookie('User.Username');
+	
+	$.ajax({
+		type: "POST",
+		url: "/barnbay_ui/GetAllOrdersByFarmerId",
+		dataType : "json",
+		data: JSON.stringify({
+			"username":username
+		}),
+		success:function(data) {
+			alert(JSON.stringify(data));
+			displayAllOrdersFromFarmer(sortJSON(sortJSON(data.delivery, "barnbay", true), "deliverydate", true));
+			//displayAllOrdersFromFarmer(sortJSON(data.delivery, "deliverydate", true));
+		}, error: function(data) {
+			alert("Something went wrong, please try again");
+		}
+	});
+</script>
+
+
+<div class="panel-group" id="newOrdersForFarmer" role="tablist" aria-multiselectable="true">
+
+	<!-- Update View: New Orders -->
+	<script type="text/javascript">
+		function displayAllOrdersFromFarmer(allOrders) {
+			var out = "";
+			var altDate = "";
+			var newDate = "";
+			
+			
+			for(i = 0; i < allOrders.length; i++) {
+				newDate = allOrders[i].deliverydate;
+				
+				if(newDate != altDate) {				
+					if(i != 0) {
+						out += '					</tbody>';
+						out += '				</table>';
+						out += '			</div>';
+						out += '		</div>';
+						out += '	</div>';
+						out += '	<br/>';
+					}
+					
+					out += '	<div class="panel panel-success">';
+					out += '		<div class="panel-heading" role="tab" id="headingOne">';
+					out += '			<h4 class="panel-title">';
+					out += '				<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne' + i + '" aria-expanded="true" aria-controls="collapseOne' + i + '">';
+					out += '					Next Pickup Orders for: <b>'+ getWeekdayFromDay(allOrders[i].deliverydate) + ', ' + allOrders[i].deliverydate + '</b>';
+					out += '				</a>';
+					out += '			</h4>';
+					out += '		</div>';
+					out += '		<div id="collapseOne' + i + '" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">';
+					out += '			<div class="panel-body">';
+					out += '				<table class="table table-hover">';
+					out += '					<thead>';
+					out += '						<tr>';
+					out += '							<th></th>';
+					out += '							<th>Productname</th>';
+					out += '							<th>Quantity</th>';
+					out += '							<th>Location<th>';
+					out += '						</tr>';
+					out += '					</thead>';
+					out += '					<tbody>';
+					
+					altDate = allOrders[i].deliverydate;
+				}
+				
+				out += '						<tr>';
+				out += '							<td><img class="media-object pull-left" src="./img/products/' + allOrders[i].productcategory + '.png" style="width: 95px"></td>';
+				out += '							<td>' + allOrders[i].productcategory + '</td>';
+				out += '							<td>' + allOrders[i].amount + ' kg</td>';
+				out += '							<td>' + allOrders[i].barnbay + '</td>';
+				out += '						</tr>';
+	
+			}
+	
+			document.getElementById("newOrdersForFarmer").innerHTML = out;
+		}
+	</script>
+
 </div>
