@@ -1,4 +1,5 @@
-<script type="text/javascript">	
+<script type="text/javascript">
+	var checkFormular = true;
 	var GoogleMapsAddress = [];
 	var GoogleMapsTitle = [];
 	
@@ -49,7 +50,6 @@
 			productDetailFunction(ProductDetailJSONObject);
 			
 			/* Start Google Maps */
-			//startMap(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city, ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
 			GoogleMapsAddress.push(ProductDetailJSONObject.farmeraddress.street + ' ' + ProductDetailJSONObject.farmeraddress.number + ', ' + ProductDetailJSONObject.farmeraddress.zipcode + ' ' + ProductDetailJSONObject.farmeraddress.city);
 			GoogleMapsTitle.push(ProductDetailJSONObject.farmerfirstname + ' ' + ProductDetailJSONObject.farmerlastname);
 			
@@ -97,55 +97,57 @@
 			out += '			</div>';
 			out += '		</div>';
 			out += '		<hr>';
-			out += '		<button type="button" id="addProductToCartButton" class="btn btn-success pull-right" onclick="productAddToCart()">';
-			out += '			<span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart';
-			out += '		</button>';
-			out += '		<div class="price">';
-			out += '			<span class="price-head">Price:</span>';
-			out += '			<span class="price-new">' + (productDetailObject.price).toFixed(2) + ' &euro;</span> ';
-			out += '		</div>';
-			out += '		<hr>';
-			out += '		<div class="row productFamerLocation">';
-			out += '			<div class="col-sm-2">';
-			out += '				<span>Farmer:</span>';
+			out += '		<form id="addProductToShoppingCart" accept-charset="utf-8" role="form">';
+			out += '			<button type="submit" id="addProductToCartButton" class="btn btn-success pull-right">';
+			out += '				<span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart';
+			out += '			</button>';
+			out += '			<div class="price">';
+			out += '				<span class="price-head">Price:</span>';
+			out += '				<span class="price-new">' + (productDetailObject.price).toFixed(2) + ' &euro;</span> ';
 			out += '			</div>';
-			out += '			<div class="col-sm-10">';
-			out += '				<select class="form-control input-md" id="selectproductDetailFarmer" onchange="productFarmerSelect(this)">';
+			out += '			<hr>';
+			out += '			<div class="row productFamerLocation">';
+			out += '				<div class="col-sm-2">';
+			out += '					<span>Farmer:</span>';
+			out += '				</div>';
+			out += '				<div class="col-sm-10">';
+			out += '					<select class="form-control input-md" id="selectproductDetailFarmer" onchange="productFarmerSelect(this)">';
 			
 			ProductPrice = productDetailObject.price;
 			for(i = 0; i < productDetailObject.farmers.length; i++) {
 				if((productDetailObject.farmerfirstname == productDetailObject.farmers[i].firstname) && (productDetailObject.farmerlastname == productDetailObject.farmers[i].lastname)) {
-					out += '					<option value="' + productDetailObject.farmers[i].idfarmer + '" selected="selected">' + productDetailObject.farmers[i].firstname + ' ' + productDetailObject.farmers[i].lastname + '</option>';
+					out += '						<option value="' + productDetailObject.farmers[i].idfarmer + '" selected="selected">' + productDetailObject.farmers[i].firstname + ' ' + productDetailObject.farmers[i].lastname + '</option>';
 				} else {
-					out += '					<option value="' + productDetailObject.farmers[i].idfarmer + '">' + productDetailObject.farmers[i].firstname + ' ' + productDetailObject.farmers[i].lastname + '</option>';	
+					out += '						<option value="' + productDetailObject.farmers[i].idfarmer + '">' + productDetailObject.farmers[i].firstname + ' ' + productDetailObject.farmers[i].lastname + '</option>';	
 				}
 			}
 			
-			out += '				</select>';
+			out += '					</select>';
+			out += '				</div>';
 			out += '			</div>';
-			out += '		</div>';
-			out += '		<div class="row productFamerLocation">';
-			out += '			<div class="col-sm-2">';
-			out += '				<span>BarnBay:</span>';
-			out += '			</div>';
-			out += '			<div class="col-sm-10">';
-			out += '				<select class="form-control input-md" id="selectproductDetailLocation">';
+			out += '			<div class="row productFamerLocation">';
+			out += '				<div class="col-sm-2">';
+			out += '					<span>BarnBay:</span>';
+			out += '				</div>';
+			out += '				<div class="col-sm-10">';
+			out += '					<select class="form-control input-md" id="selectproductDetailLocation">';
 			
 			for(i = 0; i < productDetailObject.barnbays.length; i++) {
-				out += '					<option value="' + productDetailObject.barnbays[i].id + '">' + productDetailObject.barnbays[i].name + '</option>';	
+				out += '						<option value="' + productDetailObject.barnbays[i].id + '">' + productDetailObject.barnbays[i].name + '</option>';	
 			}
 			
-			out += '				</select>';
+			out += '					</select>';
+			out += '				</div>';
 			out += '			</div>';
-			out += '		</div>';
-			out += '		<div class="row productFamerLocation">';
-			out += '			<div class="col-sm-2">';
-			out += '				<span>Quantity:</span>';
+			out += '			<div class="row productFamerLocation">';
+			out += '				<div class="col-sm-2">';
+			out += '					<span>Quantity:</span>';
+			out += '				</div>';
+			out += '				<div class="col-sm-10">';
+			out += '					<input type="number" class="form-control" id="exampleInputQuantity" maxlength="4" min="1" max="' + productDetailObject.stock + '" placeholder="1 kg" required />';
+			out += '				</div>';
 			out += '			</div>';
-			out += '			<div class="col-sm-10">';
-			out += '				<input type="number" class="form-control" id="exampleInputQuantity" maxlength="4" placeholder="1 kg">';
-			out += '			</div>';
-			out += '		</div>';
+			out += '		</form>';
 			out += '	</div>';
 			out += '	<br/>';
 			out += '	<div class="col-sm-12" style="font-size: 16px">';
@@ -233,9 +235,6 @@
 			productDetailFunction(ProductDetailJSONObject[0]);
 			
 			/* Start Google Maps */
-			//startMap(ProductDetailJSONObject[0].farmeraddress.street + ' ' + ProductDetailJSONObject[0].farmeraddress.number + ', ' + ProductDetailJSONObject[0].farmeraddress.zipcode + ' ' + ProductDetailJSONObject[0].farmeraddress.city, ProductDetailJSONObject[0].farmerfirstname + ' ' + ProductDetailJSONObject[0].farmerlastname);
-			
-			/* Start Google Maps */
 			GoogleMapsAddress.push(ProductDetailJSONObject[0].farmeraddress.street + ' ' + ProductDetailJSONObject[0].farmeraddress.number + ', ' + ProductDetailJSONObject[0].farmeraddress.zipcode + ' ' + ProductDetailJSONObject[0].farmeraddress.city);
 			GoogleMapsTitle.push(ProductDetailJSONObject[0].farmerfirstname + ' ' + ProductDetailJSONObject[0].farmerlastname);
 			
@@ -243,33 +242,39 @@
 		});
 	}
 	
-	function productAddToCart() {
+	
+	$('#mainContainer').on('submit', '#addProductToShoppingCart', function(event) {
+		event.preventDefault();
+		
 		if($.cookie('User.Session')) {
-			$('#addProductToCartButton').prop('disabled', true);
-			
-			var obj = JSON.parse($.cookie('Products.ShoppingCart'));
-			
-			var productID = $.cookie("Product.ProductListCategoryID");
-			var productName = ProductDetailName;
-			var productPrice = ProductPrice;
-			var productQuantity = $("#exampleInputQuantity").val();
-			var farmerID = $("#selectproductDetailFarmer option:selected").val();
-			var farmerName = $("#selectproductDetailFarmer option:selected").text();
-			var barnbayID = $("#selectproductDetailLocation option:selected").val();
-			var barnbayName = $("#selectproductDetailLocation option:selected").text();
-			
-			obj['shoppingcart'].push({"productID":productID,"productName":productName,"productPrice":productPrice,"productQuantity":productQuantity,"farmerID":farmerID,"farmerName":farmerName,"barnbayID":barnbayID,"barnbayName":barnbayName});			
-			$.cookie('Products.ShoppingCart', JSON.stringify(obj));
-			
-			$('#successAlert').slideDown();
-			
-			/* Call Mini Shoping Card Method */
-			updateMiniShoppingCart();
+			if(checkFormular) {
+				checkFormular = false;
+				
+				$('#addProductToCartButton').prop('disabled', true);
+				
+				var obj = JSON.parse($.cookie('Products.ShoppingCart'));
+				
+				var productID = $.cookie("Product.ProductListCategoryID");
+				var productName = ProductDetailName;
+				var productPrice = ProductPrice;
+				var productQuantity = $("#exampleInputQuantity").val();
+				var farmerID = $("#selectproductDetailFarmer option:selected").val();
+				var farmerName = $("#selectproductDetailFarmer option:selected").text();
+				var barnbayID = $("#selectproductDetailLocation option:selected").val();
+				var barnbayName = $("#selectproductDetailLocation option:selected").text();
+				
+				obj['shoppingcart'].push({"productID":productID,"productName":productName,"productPrice":productPrice,"productQuantity":productQuantity,"farmerID":farmerID,"farmerName":farmerName,"barnbayID":barnbayID,"barnbayName":barnbayName});			
+				$.cookie('Products.ShoppingCart', JSON.stringify(obj));
+				
+				$('#successAlert').slideDown();
+				
+				/* Call Mini Shoping Card Method */
+				updateMiniShoppingCart();
+			}
 		} else {
 			$('#productAddToCartLogin').modal('show'); 	
 		}
-	}
-	
+	});	
 </script>
 
 <!-- Modal Login -->
@@ -337,44 +342,4 @@
  	  	GoogleMapsAddress = [];
  	  	GoogleMapsTitle = [];
   	}
- 	
- 	/*function addMarkerToMap() {
- 		
- 		var mapOptions = {
-     		zoom: 12,
-     		disableDefaultUI: true,
-     	    mapTypeId: google.maps.MapTypeId.ROADMAP
-    	}
- 		
- 	  	geocoder = new google.maps.Geocoder();
- 		markerBounds = new google.maps.LatLngBounds();
- 	    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
- 		for (var i = 0; i < GoogleMapsAddress.length; i++) { 			
- 			var address = GoogleMapsAddress[i];
- 			var title = GoogleMapsTitle[i];
- 			 			 			
-	 		geocoder.geocode({'address': address}, function(results, status) {
-	 			if(status == google.maps.GeocoderStatus.OK) {	    	  				
-	 				var marker = new google.maps.Marker({
-	 					map: map,
-						title: title,
-						position: results[0].geometry.location
-					});
-					
-					var infowindow = new google.maps.InfoWindow({
-						content: '<div style="width: 150px;"><h4>' + title + '</h4></div>'
-	  	  	  		});
-										
-					google.maps.event.addListener(marker, 'click', function() {
-						infowindow.open(map, marker);
-					});
-					
-					markerBounds.extend(results[0].geometry.location);
-					map.fitBounds(markerBounds);
-				} else {
-	      			alert("Geocode was not successful for the following reason: " + status);
-	    		}
-			});
- 		}*/
  </script>

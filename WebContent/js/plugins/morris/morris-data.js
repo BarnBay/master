@@ -64,13 +64,13 @@ $(function() {
     Morris.Donut({
         element: 'morris-donut-chart',
         data: [{
-            label: "University of Mannheim",
+            label: "Barnbay@Castle",
             value: 210
         }, {
-            label: "Mannheim Mainstation",
+            label: "Barnbay@HBF Mannheim",
             value: 122
         }, {
-            label: "SAP SE",
+            label: "Barnbay@SAP",
             value: 200
         }],
         resize: true

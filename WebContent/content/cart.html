@@ -1,3 +1,6 @@
+<script type="text/javascript">
+	var sendCheckOut = true;
+</script>
 <br/>
 <div class="container">
 	<div class="stepwizard">
@@ -52,6 +55,7 @@
 			
 			for(i = 0; i < shoppingcart.length; i++) {
 				productSubTotal = productSubTotal + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity);
+				
 				out += '				<tr>';
 				out += '					<td class="col-md-5">';
 				out += '						<div class="media">';
@@ -158,8 +162,7 @@
 
 <script type="text/javascript">
 	
-	
-/* When presing Continue Shopping change to Products  */
+	/* When presing Continue Shopping change to Products  */
 	$('#mainContainer').on('click', '#Continue_Product', function(event) {
 		event.preventDefault();
 		$('#mainContainer').hide().load('./content/nav_products_list.html').fadeIn('500');
@@ -167,26 +170,34 @@
 
 	
 	/* Change Progress to Address */
-	$('#Continue_shoppingCart').click(function(e) {
+	//$('#Continue_shoppingCart').click(function(e) {
+	$('#mainContainer').on('click', '#Continue_shoppingCart', function(e) {
 		e.preventDefault();
 		
-		$('#addressData').removeClass('btn btn-default btn-circle');
-		$('#addressData').addClass('btn btn-success btn-circle');
+		var obj = JSON.parse($.cookie('Products.ShoppingCart'));
+		var shoppingcart = obj['shoppingcart'];
 		
-		$('#shoppingCartContainer').hide();
-		displayContactInformation();
-		$('#shoppingCartContainer').fadeIn('500');
+		if(shoppingcart.length != 0) {
+			$('#shoppingCartContainer').hide();
+			
+			$('#addressData').removeClass('btn btn-default btn-circle');
+			$('#addressData').addClass('btn btn-success btn-circle');
+			displayContactInformation();
+			
+			$('#shoppingCartContainer').fadeIn('500');	
+		}
     });
 	
 	/* Change Progress to Pickup-Time */
 	$('#mainContainer').on('click', '#Continue_AddressData', function(e) {
 		e.preventDefault();
 		
+		$('#shoppingCartContainer').hide();
+		
 		$('#pickupTime').removeClass('btn btn-default btn-circle');
 		$('#pickupTime').addClass('btn btn-success btn-circle');
-		
-		$('#shoppingCartContainer').hide();
 		displayPickupTimeinformation();
+		
 		$('#shoppingCartContainer').fadeIn('500');
     });
 	
@@ -194,11 +205,15 @@
 	$('#mainContainer').on('click', '#Continue_PickupTime', function(e) {
 		e.preventDefault();
 		
-		$('#payment').removeClass('btn btn-default btn-circle');
-		$('#payment').addClass('btn btn-success btn-circle');
+		/* Save DeliveryDate in Coockie */
+		$.cookie('Date.DeliveryDate', $('#selectPickupTime').val(), { expires: 1 });
 		
 		$('#shoppingCartContainer').hide();
+		
+		$('#payment').removeClass('btn btn-default btn-circle');
+		$('#payment').addClass('btn btn-success btn-circle');
 		displayPaymentInformation();
+		
 		$('#shoppingCartContainer').fadeIn('500');
     });
 	
@@ -206,23 +221,53 @@
 	$('#mainContainer').on('click', '#Continue_Payment', function(e) {
 		e.preventDefault();
 		
-		$('#done').removeClass('btn btn-default btn-circle');
-		$('#done').addClass('btn btn-success btn-circle');
-		
-		$('#shoppingCartContainer').hide();
-		$('#shoppingCartContainer').load('./content/orderConfirmation.html').fadeIn('500');
-		
-		/* Ajax Call to Hana */
-		
-		/* Ajax Call for Sending Notification */
-		/* Password for this Account is of course Apdtld14*/
-		$.ajax({
-		url: "/barnbay_ui/SendNotification?to=johnbauer.vollbio@gmail.com"
+		if(sendCheckOut) {
+			sendCheckOut = false;
+
+			$('#shoppingCartContainer').hide();
+			
+			$('#done').removeClass('btn btn-default btn-circle');
+			$('#done').addClass('btn btn-success btn-circle');
+			displayOrderConfirmationInformation();
+			
+			$('#shoppingCartContainer').fadeIn('500');
+			
+			/* {"orders":[{productid, amaount, price, barnbayid}],"username":"bla","pickupdate":"30.11.2014"} */
+			/* Send Order to Hana */
+			var obj = JSON.parse($.cookie('Products.ShoppingCart'));
+			var username = $.cookie('User.Username');
+			var delivery = $.cookie('Date.DeliveryDate');
+			var orders = obj['shoppingcart']; 
+			
+			var result = JSON.stringify({
+				"username":username,
+				"pickupdate":delivery,
+				"orders":orders
+			});
+			
+			alert("Result: " + result);
+			
+			
+			
+			
+			/* Ajax Call to Hana */
+			
+			/* Ajax Call for Sending Notification */
+			/* Password for this Account is of course Apdtld14 */
+			/* -------------------------------------------------------------------- */
+			/* $.ajax({
+				url: "/barnbay_ui/SendNotification?to=johnbauer.vollbio@gmail.com"
 			}).done(function() {
-		});
-		
-		/* Clear Shopping Cart Coockie */
-		$.cookie('Products.ShoppingCart', '{"shoppingcart":[]}');
+				
+			}); */
+			
+			/* Clear Shopping Cart Coockie */
+			$.cookie('Products.ShoppingCart', '{"shoppingcart":[]}');
+			$.removeCookie('Date.DeliveryDate');
+			
+			/* Call Mini Shoping Card Method */
+			updateMiniShoppingCart();
+		}
     });
 </script>
 
@@ -323,6 +368,9 @@
 		out += '		<button type="button" id="Continue_PickupTime" class="btn btn-success pull-right">';
 		out += '			<span class="glyphicon glyphicon-euro" aria-hidden="true"></span> Payment';
 		out += '		</button>';
+		out += '		<button type="button" id="Continue_shoppingCart" class="btn btn-success pull-left">';
+		out += '			<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Address Data';
+		out += '		</button>';
 		out += '		<div class="clearfix"></div>';
 		out += '	</div>';
 		out += '</div>';
@@ -372,7 +420,31 @@
 		out += '		<button type="button" id="Continue_Payment" class="btn btn-success pull-right">';
 		out += '			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Checkout';
 		out += '		</button>';
+		out += '		<button type="button" id="Continue_AddressData" class="btn btn-success pull-left">';
+		out += '			<span class="glyphicon glyphicon-time" aria-hidden="true"></span> Pickup-Time';
+		out += '		</button>';
 		out += '		<div class="clearfix"></div>';
+		out += '	</div>';
+		out += '</div>';
+		
+		document.getElementById("shoppingCartContainer").innerHTML = out;
+	}
+</script>
+
+<!-- Show Order Confirmation Information -->
+<script type="text/javascript">
+	function displayOrderConfirmationInformation() {
+		var out = "";
+		
+		out += '<div class="panel panel-success">';
+		out += '	<div class="panel-heading">';
+		out += '		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Order Confirmation';
+		out += '	</div>';
+		out += '	<div class="panel-body">';
+		out += '		<h2>Thanks for your Order</h2>';
+		out += '		<p>';
+		out += '			You can rate the farmer(s) you ordered from by clicking to "My Account" > "Orders"';
+		out += '		</p>';
 		out += '	</div>';
 		out += '</div>';
 		
