@@ -94,7 +94,10 @@ public class GetFarmerByFarmerId extends HttpServlet {
 					f.farmopeninghours = rs3.getString(5);
 				}
 				
-				ResultSet rs4 = db.executeSQL("SELECT * FROM " + schema + "BARNBAY WHERE IDBARNBAY=" + fk_barnbay);
+				ResultSet rs4 = db
+						.executeSQL("SELECT * FROM "+ schema +"BARNBAY b , "
+								+ ""+ schema +"USER_HAS_BARNBAY h WHERE h.FK_USER ="+ id + 
+								" AND b.IDBARNBAY = h.FK_BARNBAY");
 				f.barnbays = new ArrayList<Barnbay>();
 				while(rs4 != null && rs4.next()){
 					Barnbay b = new Barnbay();

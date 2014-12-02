@@ -73,7 +73,7 @@ public class GetCheapestProduct extends HttpServlet {
 							p.farmerproductdescription =rs3.getString(2);
 							fk_farmer = rs3.getInt(4);
 
-							int fk_barnbay = 0;
+							//int fk_barnbay = 0;
 							int fk_address = 0;
 							ResultSet rs4 = db
 									.executeSQL("SELECT * FROM " + schema + "USERD WHERE IDUSER="
@@ -82,7 +82,7 @@ public class GetCheapestProduct extends HttpServlet {
 								p.farmerfirstname = rs4.getString(2);
 								p.farmerlastname = rs4.getString(3);
 								p.farmeremail = rs4.getString(10);
-								fk_barnbay = rs4.getInt(9);
+								//fk_barnbay = rs4.getInt(9);
 								fk_address = rs4.getInt(7);
 								
 								ResultSet rs45 = db.executeSQL("SELECT * FROM " + schema + "ADDRESS WHERE IDADDRESS=" + fk_address);
@@ -96,8 +96,9 @@ public class GetCheapestProduct extends HttpServlet {
 								}
 
 								ResultSet rs5 = db
-										.executeSQL("SELECT * FROM " + schema + "BARNBAY WHERE IDBARNBAY="
-												+ fk_barnbay);
+										.executeSQL("SELECT * FROM "+ schema +"BARNBAY b , "
+												+ ""+ schema +"USER_HAS_BARNBAY h WHERE h.FK_USER ="+ fk_farmer + 
+												" AND b.IDBARNBAY = h.FK_BARNBAY");
 
 								while (rs5 != null && rs5.next()) {
 									Barnbay b = new Barnbay();
