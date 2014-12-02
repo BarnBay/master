@@ -79,7 +79,10 @@ public class GetProductByCategoryAndFarmer extends HttpServlet {
 							p.farmeraddress.city = rs4.getString(5);
 						}
 						
-						ResultSet rs3 = db.executeSQL("SELECT * FROM " + schema + "BARNBAY WHERE IDBARNBAY =" + fk_barnbay);
+						ResultSet rs3 = db
+								.executeSQL("SELECT * FROM "+ schema +"BARNBAY b , "
+										+ ""+ schema +"USER_HAS_BARNBAY h WHERE h.FK_USER ="+ farmerid + 
+										" AND b.IDBARNBAY = h.FK_BARNBAY");
 						while(rs3!=null && rs3.next()){
 							Barnbay b = new Barnbay();
 							b.id = rs3.getInt(1);

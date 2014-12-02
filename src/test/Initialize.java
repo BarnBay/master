@@ -37,8 +37,6 @@ public class Initialize extends HttpServlet {
 		
 		if(schema ==""){
 
-			//db.executeSQL("CREATE SCHEMA NEO_39ENP71K0F1EDD9OYBD7IWIME");
-
 			db.executeSQL("CREATE TABLE PRODUCT (IDPRODUCT INT, PRODUCT_DESCRIPTION VARCHAR(100), FK_CATEGORY INT, FK_USER INT, PRICE DECIMAL(2,0), FK_OVERALL_RATING INT, CURRENT_STOCK INT, AVAILABLE INT, SETUP_DATE DATE, DEACTIVATION_DATE DATE, FK_CURRENCY INT, FK_AMOUNT_TYPE INT)");
 			
 			db.executeSQL("CREATE TABLE CATEGORY (IDCATEGORY INT NOT NULL, NAME VARCHAR(100) NOT NULL, FK_SUPER_CATEGORY INT, CATEGORY_DESCRIPTION VARCHAR(100))");
@@ -56,9 +54,12 @@ public class Initialize extends HttpServlet {
 			db.executeSQL("CREATE TABLE BARNBAY (IDBARNBAY INT NOT NULL , NAME VARCHAR(50) NOT NULL , PICTURE VARCHAR(256), DESCRIPTION VARCHAR(256), OPENING_HOURS VARCHAR(100), FK_ADDRESS INT NOT NULL)");
 			
 			// Added order support
+			
+			db.executeSQL("CREATE TABLE USER_HAS_BARNBAY (FK_USER INT NOT NULL , FK_BARNBAY INT NOT NULL)");
+
 			db.executeSQL("CREATE TABLE ORDERS (IDORDER INTEGER NOT NULL , FK_USERS_CUSTOMER INTEGER NOT NULL , FK_USERS_PICKUP INTEGER NOT NULL , FK_USERS_FINANCIALS INTEGER NOT NULL , FK_ORDER_STATUS INTEGER NOT NULL , FK_PACKAGING_TYPE INTEGER NOT NULL , PICKUP_DATE VARCHAR(20) NOT NULL )");
 			db.executeSQL("CREATE TABLE ORDER_HAS_PRODUCT (FK_ORDER INTEGER NOT NULL , FK_PRODUCT INTEGER NOT NULL , CURRENT_PRICE DECIMAL(2,0) NOT NULL , AMOUNT INTEGER NOT NULL , FK_CURRENCY INTEGER NOT NULL , FK_AMOUNT_TYPE INTEGER NOT NULL)");
-					
+
 			try {
 				response.getWriter().println("Initialization of database on hana cloud platform done.");
 			} catch (IOException e) {
@@ -91,6 +92,9 @@ public class Initialize extends HttpServlet {
 			db.executeSQL("CREATE TABLE " + schema + "ORDERS (IDORDER INTEGER NOT NULL , FK_USERS_CUSTOMER INTEGER NOT NULL , FK_USERS_PICKUP INTEGER NOT NULL , FK_USERS_FINANCIALS INTEGER NOT NULL , FK_ORDER_STATUS INTEGER NOT NULL , FK_PACKAGING_TYPE INTEGER NOT NULL , PICKUP_DATE VARCHAR(20) NOT NULL )");
 			db.executeSQL("CREATE TABLE " + schema + "ORDER_HAS_PRODUCT (FK_ORDER INTEGER NOT NULL , FK_PRODUCT INTEGER NOT NULL , CURRENT_PRICE DECIMAL(2,0) NOT NULL , AMOUNT INTEGER NOT NULL , FK_CURRENCY INTEGER NOT NULL , FK_AMOUNT_TYPE INTEGER NOT NULL)");
 		
+			
+			db.executeSQL("CREATE TABLE " + schema + "USER_HAS_BARNBAY (FK_USER INTEGER NOT NULL , FK_BARNBAY INTEGER NOT NULL)");
+			
 			try {
 				response.getWriter().println("Initialization of database on local derby done.");
 			} catch (IOException e) {
@@ -125,13 +129,13 @@ public class Initialize extends HttpServlet {
 			db.executeSQL("INSERT INTO " + schema + "TITLE VALUES(2, 'Frau')");
 			
 			db.executeSQL("INSERT INTO " + schema + "USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
-					+"VALUES (1, 'John', 'Bauer', 'johnb', 1, 1, 1, 2, 'johnb@farms.com', 'tisch', 1)");
+					+"VALUES (1, 'John', 'Bauer', 'johnb', 1, 1, 1, 2, 'johnb@farms.com', 'tisch', 0)");
 			
 			db.executeSQL("INSERT INTO " + schema + "USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
-					+"VALUES (2, 'Peter', 'Meier', 'peterm', 1, 1, 2, 1, 'peterm@vollbio.org', 'tisch', 2)");
+					+"VALUES (2, 'Peter', 'Meier', 'peterm', 1, 1, 2, 1, 'peterm@vollbio.org', 'tisch', 0)");
 			
 			db.executeSQL("INSERT INTO " + schema + "USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
-					+"VALUES (3, 'Christian', 'Mueller', 'cmueller', 2, 1, 2, 0, 'cmueller@vollbio.org', 'tisch', 3)");
+					+"VALUES (3, 'Christian', 'Mueller', 'cmueller', 2, 1, 2, 0, 'cmueller@vollbio.org', 'tisch', 0)");
 			
 			db.executeSQL("INSERT INTO " + schema + "USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
 					+"VALUES (4, '', '', 'BBSchloss', 3, 1, 2, 0, 'bbmaschloss@vollbio.org', 'tisch', 1)");
@@ -148,6 +152,26 @@ public class Initialize extends HttpServlet {
 			
 			db.executeSQL("INSERT INTO " + schema + "USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
 					+"VALUES (8, '', '', 'BBHBF', 3, 1, 2, 0, 'bbsap@vollbio.org', 'tisch', 2)");
+			
+			
+			/**
+			 * Inititalize USER_HAS_BARNBAY
+			 * 
+			 */
+			db.executeSQL("INSERT INTO " + schema + "USER_HAS_BARNBAY (FK_USER, FK_BARNBAY)"
+					+"VALUES (1, 2)");
+			
+			db.executeSQL("INSERT INTO " + schema + "USER_HAS_BARNBAY (FK_USER, FK_BARNBAY)"
+					+"VALUES (1, 3)");
+			
+			db.executeSQL("INSERT INTO " + schema + "USER_HAS_BARNBAY (FK_USER, FK_BARNBAY)"
+					+"VALUES (2, 1)");
+			
+			db.executeSQL("INSERT INTO " + schema + "USER_HAS_BARNBAY (FK_USER, FK_BARNBAY)"
+					+"VALUES (2, 2)");
+			
+			db.executeSQL("INSERT INTO " + schema + "USER_HAS_BARNBAY (FK_USER, FK_BARNBAY)"
+					+"VALUES (2, 3)");
 			
 			/**
 			 * Initialize Grannys Apfel
