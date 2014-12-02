@@ -83,32 +83,6 @@
 <script type="text/javascript">
 	$("#navUpdateUserDataForm").submit(function(event) {
 		event.preventDefault();
-		
-		/*$.ajax({
-			type: "POST",
-			url: "/barnbay_ui/Register",
-			dataType : "json",
-			data: JSON.stringify({
-				"title":$('input[name=navEditGender]:checked', '#navUpdateUserDataForm').val(),
-				"firstname":$('#navEditFirstname').val(),
-				"lastname":$('#navEditLastname').val(),
-				"email":$('#navEditEmail').val(),
-				"passwordhash":$('#navRegisterPassword').val(),
-				"town":$('#navEditCity').val(),
-				"zip":$('#navEditZipcode').val(),
-				"street":$('#navEditAddress').val(),
-				"number":$('#navEditNumber').val()
-			}),
-			success:function(data) {
-				if(data.register == "success") {
-					$('#UpdateUserDataModalSuccess').modal('show');	
-				} else {
-					$('#UpdateUserDataModalSQL').modal('show');
-				}
-			}, error: function(data) {
-				//Do nothing!
-			}
-		});*/
 	});
 </script>
 

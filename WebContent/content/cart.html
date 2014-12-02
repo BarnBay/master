@@ -256,24 +256,19 @@
 					"orders":orders
 				}),
 				success:function(data) {
-					alert("Result: " + JSON.stringify(data));
+					
 				}, error: function(data) {
-					//alert("Something went wrong, please try again");
+
 				}
 			});
 			
-			
-			
-			/* Ajax Call to Hana */
-			
 			/* Ajax Call for Sending Notification */
 			/* Password for this Account is of course Apdtld14 */
-			/* -------------------------------------------------------------------- */
-			/* $.ajax({
+			$.ajax({
 				url: "/barnbay_ui/SendNotification?to=johnbauer.vollbio@gmail.com"
 			}).done(function() {
 				
-			}); */
+			});
 			
 			/* Clear Shopping Cart Coockie */
 			$.cookie('Products.ShoppingCart', '{"shoppingcart":[]}');
