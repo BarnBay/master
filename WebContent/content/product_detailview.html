@@ -113,7 +113,8 @@
 			out += '				<div class="col-sm-10">';
 			out += '					<select class="form-control input-md" id="selectproductDetailFarmer" onchange="productFarmerSelect(this)">';
 			
-			ProductPrice = productDetailObject.price;
+			//ProductPrice = productDetailObject.price;
+			ProductPrice = (productDetailObject.price).toFixed(2);
 			for(i = 0; i < productDetailObject.farmers.length; i++) {
 				if((productDetailObject.farmerfirstname == productDetailObject.farmers[i].firstname) && (productDetailObject.farmerlastname == productDetailObject.farmers[i].lastname)) {
 					out += '						<option value="' + productDetailObject.farmers[i].idfarmer + '" selected="selected">' + productDetailObject.farmers[i].firstname + ' ' + productDetailObject.farmers[i].lastname + '</option>';
@@ -262,10 +263,10 @@
 				var farmerName = $("#selectproductDetailFarmer option:selected").text();
 				var barnbayID = $("#selectproductDetailLocation option:selected").val();
 				var barnbayName = $("#selectproductDetailLocation option:selected").text();
-				
+								
 				obj['shoppingcart'].push({"productID":productID,"productName":productName,"productPrice":productPrice,"productQuantity":productQuantity,"farmerID":farmerID,"farmerName":farmerName,"barnbayID":barnbayID,"barnbayName":barnbayName});			
 				$.cookie('Products.ShoppingCart', JSON.stringify(obj));
-				
+								
 				$('#successAlert').slideDown();
 				
 				/* Call Mini Shoping Card Method */
