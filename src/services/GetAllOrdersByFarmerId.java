@@ -64,12 +64,13 @@ public class GetAllOrdersByFarmerId extends HttpServlet {
 		// How many products
 		// Pickup date
 		
+		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
 		
 		String json_string = "";
 		JSONObject json = new JSONObject();
 		String sql;
 		String attributes = "bb.name, cat.name, o.pickup_date, SUM(orderproduct.amount)";
-		String tables = "TEST.BARNBAY bb, TEST.CATEGORY cat, TEST.ORDER_HAS_PRODUCT orderproduct, TEST.ORDERS o, TEST.USERD barnbayuser, TEST.USERD farmer, TEST.PRODUCT prod";
+		String tables = schema + "BARNBAY bb, " + schema + "CATEGORY cat, " + schema + "ORDER_HAS_PRODUCT orderproduct, " + schema + "ORDERS o, " + schema + "USERD barnbayuser, " + schema + "USERD farmer, " + schema + "PRODUCT prod";
 		String where_clause = "farmer.username = '" + receiveduser.username + "' AND farmer.idUser = prod.fk_User AND prod.fk_category = cat.idCategory " + 
 		                      "AND orderproduct.fk_Product = prod.idProduct AND orderproduct.fk_Order = o.idOrder AND o.fk_Users_pickup = barnbayuser.idUser " + 
 				              "AND barnbayuser.fk_BarnBay = bb.idBarnBay";
