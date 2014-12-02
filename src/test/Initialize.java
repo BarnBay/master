@@ -109,7 +109,7 @@ public class Initialize extends HttpServlet {
 			db.executeSQL("INSERT INTO " + schema + "BARNBAY(IDBARNBAY, NAME, DESCRIPTION, OPENING_HOURS, FK_ADDRESS) VALUES(3, 'Barnbay@SAP', 'Perfect for SAP employees!', 'Monday-Sunday 8:00 am-10:00 pm', 6)");
 			
 			db.executeSQL("INSERT INTO " + schema + "ADDRESS VALUES(1, 'In den Boellenruthen', '15', '68623', 'Lampertheim')");
-			db.executeSQL("INSERT INTO " + schema + "ADDRESS VALUES(2, 'Seckenheimerstr.', '5', '68163', 'Mannheim')");
+			db.executeSQL("INSERT INTO " + schema + "ADDRESS VALUES(2, 'Turfweg', '5', '68239', 'Mannheim')");
 			db.executeSQL("INSERT INTO " + schema + "ADDRESS VALUES(4, 'L1', '1', '68161', 'Mannheim')");
 			db.executeSQL("INSERT INTO " + schema + "ADDRESS VALUES(5, 'Tattersallstr.', '2', '68165', 'Mannheim')");
 			db.executeSQL("INSERT INTO " + schema + "ADDRESS VALUES(6, 'Dietmar-Hopp-Allee', '20', '69190', 'Walldorf')");
