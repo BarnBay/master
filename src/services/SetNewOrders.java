@@ -274,10 +274,6 @@ public class SetNewOrders extends HttpServlet {
 			}
 			i++;
 
-
-
-			
-
 		}
 
 		if (update_stock && insert_order_products && insert_order) {

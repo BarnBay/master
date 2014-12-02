@@ -204,7 +204,7 @@ public class Initialize extends HttpServlet {
 			
 			// Create Order:
 			db.executeSQL("INSERT INTO " + schema + "ORDERS (IDORDER , FK_USERS_CUSTOMER , FK_USERS_PICKUP , FK_USERS_FINANCIALS , FK_ORDER_STATUS , FK_PACKAGING_TYPE , PICKUP_DATE )" +
-					" VALUES(1, 3, 4, 5, 0, 0 , '2014-12-05')");
+					" VALUES(1, 3, 4, 5, 0, 0 , '2014-12-5')");
 
 			// Granny Smith apples:
 			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
@@ -220,7 +220,7 @@ public class Initialize extends HttpServlet {
 
 			// Create Order:
 			db.executeSQL("INSERT INTO " + schema + "ORDERS (IDORDER , FK_USERS_CUSTOMER , FK_USERS_PICKUP , FK_USERS_FINANCIALS , FK_ORDER_STATUS , FK_PACKAGING_TYPE , PICKUP_DATE)" +
-					" VALUES(2, 6, 4, 5, 0, 0, '2014-12-05')");
+					" VALUES(2, 6, 4, 5, 0, 0, '2014-12-5')");
 			
 			// Cripps Pink apples:
 			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
@@ -237,7 +237,7 @@ public class Initialize extends HttpServlet {
 
 			// Create Order:
 			db.executeSQL("INSERT INTO " + schema + "ORDERS (IDORDER , FK_USERS_CUSTOMER , FK_USERS_PICKUP , FK_USERS_FINANCIALS , FK_ORDER_STATUS , FK_PACKAGING_TYPE , PICKUP_DATE)" +
-					" VALUES(3, 6, 7, 1, 0, 0, '2014-12-05')");
+					" VALUES(3, 6, 7, 1, 0, 0, '2014-12-5')");
 			
 			// Cripps Pink apples:
 			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
@@ -253,7 +253,7 @@ public class Initialize extends HttpServlet {
 			
 			// Create Order:
 			db.executeSQL("INSERT INTO " + schema + "ORDERS (IDORDER , FK_USERS_CUSTOMER , FK_USERS_PICKUP , FK_USERS_FINANCIALS , FK_ORDER_STATUS , FK_PACKAGING_TYPE , PICKUP_DATE )" +
-					" VALUES(4, 3, 4, 5, 0, 0 , '2014-12-06')");
+					" VALUES(4, 3, 4, 5, 0, 0 , '2014-12-6')");
 
 			// Granny Smith apples:
 			db.executeSQL("INSERT INTO " + schema + "ORDER_HAS_PRODUCT(FK_ORDER, FK_PRODUCT, CURRENT_PRICE, AMOUNT, FK_CURRENCY, FK_AMOUNT_TYPE)" + 
