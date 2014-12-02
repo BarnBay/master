@@ -11,7 +11,7 @@
 		success:function(data) {
 			displayAllOrdersFromFarmer(sortJSON(sortJSON(data.delivery, "barnbay", true), "deliverydate", true));
 		}, error: function(data) {
-			alert("Something went wrong, please try again");
+			
 		}
 	});
 </script>
