@@ -134,7 +134,7 @@ public class Initialize extends HttpServlet {
 					+"VALUES (3, 'Christian', 'Mueller', 'cmueller', 2, 1, 2, 0, 'cmueller@vollbio.org', 'tisch', 3)");
 			
 			db.executeSQL("INSERT INTO " + schema + "USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
-					+"VALUES (4, '', '', 'BBMaschloss', 3, 1, 2, 0, 'bbmaschloss@vollbio.org', 'tisch', 1)");
+					+"VALUES (4, '', '', 'BBSchloss', 3, 1, 2, 0, 'bbmaschloss@vollbio.org', 'tisch', 1)");
 			
 			db.executeSQL("INSERT INTO " + schema + "USERD (IDUSER, FIRST_NAME, LAST_NAME, USERNAME, FK_USERTYPE, FK_TITLE, FK_ADDRESS, FK_FARM, EMAIL_ADDRESS, PASSWORDHASH, FK_BARNBAY)"
 					+"VALUES (5, '', '', 'BBFinance', 4, 1, 2, 0, 'bbmaschloss@vollbio.org', 'tisch', 0)");
