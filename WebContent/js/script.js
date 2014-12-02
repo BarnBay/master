@@ -348,8 +348,12 @@ function sortJSON(data, key, asc) {
     });
 }
 
-function getWeekdayFromDay(DateToConvert) {
-	var d = new Date(DateToConvert);
+/* ------------------------------------------------------------------------------------
+   Calculate Weekday from day
+   ------------------------------------------------------------------------------------ */
+
+function getWeekdayFromDay(DateToConvert) {	
+	var d = new Date(convertDateToRightFormat(DateToConvert));
 	var weekday = new Array(7);
 		weekday[0]=  "Sunday";
 		weekday[1] = "Monday";
@@ -360,4 +364,22 @@ function getWeekdayFromDay(DateToConvert) {
 		weekday[6] = "Saturday";
 	
 	return (weekday[d.getDay()]);
+}
+
+/* Split Date, for FireFox and other Browsers */
+function convertDateToRightFormat(DateToConvertInRightFormat) {
+	var convert = DateToConvertInRightFormat.split("-");
+	var year = convert[0];
+	var month = convert[1];
+	var day = convert[2];
+	
+	if(month.length == 1) {
+		month = "0" + month;	
+	}
+	
+	if(day.length == 1) {
+		day = "0" + day;	
+	}
+	
+	return year + "-" + month + "-" + day;
 }
