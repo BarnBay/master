@@ -59,10 +59,10 @@ public class GetAllOrdersByUserId extends HttpServlet {
 		
 		String schema = DB_Connection.getSchemaName(request.getRequestURL().toString());
 		
-		String json_string = "";
+		String order_json_string = "";
 		JSONObject json = new JSONObject();
 		String sql;
-		String attributes = "bb.name, cat.name, o.pickup_date, orderproduct.amount, orderproduct.price ";
+		String attributes = "bb.name, cat.name, o.pickup_date, orderproduct.amount, orderproduct.current_price, o.idOrder ";
 		String tables = schema + "BARNBAY bb, " + schema + "CATEGORY cat, " + schema + "ORDER_HAS_PRODUCT orderproduct, " + schema + "ORDERS o, " + 
 						schema + "USERD barnbayuser, " + schema + "USERD customer, " + schema + "PRODUCT prod";
 		String where_clause = "customer.username = '" + receiveduser.username + "' AND customer.idUser = o.FK_USERS_CUSTOMER AND prod.fk_category = cat.idCategory " + 
@@ -72,16 +72,23 @@ public class GetAllOrdersByUserId extends HttpServlet {
 		
 		sql = "SELECT " + attributes + " FROM " + tables + " WHERE " + where_clause + " ORDER BY " + sort;
 		
-		System.out.println("SQL-String: " + sql);
+		// System.out.println("SQL-String: " + sql);
 		
 		DB_Connection db_connect = new DB_Connection();
 		ResultSet rs = db_connect.executeSQL(sql);
 		
+		int k=0;
+		
+		String[] orderids = new String[100];
+		
+		String json_string;
+		
+		
+		json_string = "{ \"pickup\" : [ \"orderid\" : \"" + orderids[k] + "\"";
 		
 		int i = 1;
-		json_string = "{ \"ordered_products\" : [ ";
+		order_json_string = "{ \"ordered_products\" : [ ";
 		String comma = "";
-		
 		if (rs != null) {
 		
 			try {
@@ -90,18 +97,19 @@ public class GetAllOrdersByUserId extends HttpServlet {
 						comma = ",";
 					}
 					i++;
-					json_string = json_string + comma + " { ";
+					order_json_string = order_json_string + comma + " { ";
 					Integer amount = Integer.parseInt(rs.getString(4));
 					Double price = Double.parseDouble(rs.getString(5));
 					Double overall_price_per_product = amount * price;
-					json_string = json_string + "\"barnbay\" : " + "\"" + rs.getString(1) + "\", " + 
+					order_json_string = order_json_string + "\"barnbay\" : " + "\"" + rs.getString(1) + "\", " + 
 							"\"productcategory\" : \"" + rs.getString(2) + "\", " +
 							"\"deliverydate\" : \"" + rs.getString(3) + "\", " +
-							"\"amount\" : \"" + rs.getString(4) + "\" " +
-							"\"price\" : \"" + rs.getString(5) + "\"" + 
-							"\"overall_price_per_product\" : \"" + overall_price_per_product.toString() + "\"" ;
+							"\"amount\" : \"" + rs.getString(4) + "\", " +
+							"\"price\" : \"" + rs.getString(5) + "\", " + 
+							"\"overall_price_per_product\" : \"" + overall_price_per_product.toString() + "\", " +
+							"\"orderid\" : \"" + rs.getString(6) + "\"";
 							
-					json_string = json_string + " }  ";		
+					order_json_string = order_json_string + " }  ";		
 					//System.out.print(rs.getString(1) + " | " + rs.getString(2) + " | " + rs.getString(3) + " | " + rs.getString(4)) ;
 				}
 			} catch (SQLException e) {
@@ -110,9 +118,9 @@ public class GetAllOrdersByUserId extends HttpServlet {
 			}
 		}
 		
-		json_string = json_string + "]}";
+		order_json_string = order_json_string + "]}";
 		
-		response.getWriter().print(json_string);
+		response.getWriter().print(order_json_string);
 		
 		db_connect.close();
 		
