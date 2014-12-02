@@ -1,5 +1,26 @@
 <script src="./js/star-rating.js"></script>
 <link href="./css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+
+
+<script type="text/javascript">
+	var username = $.cookie('User.Username');
+	
+	$.ajax({
+		type: "POST",
+		url: "/barnbay_ui/GetAllOrdersByUserId",
+		dataType : "json",
+		data: JSON.stringify({
+			"username":username
+		}),
+		success:function(data) {
+			//displayAllOrdersFromFarmer(sortJSON(sortJSON(data.delivery, "barnbay", true), "deliverydate", true));
+			alert(JSON.stringify(data));
+		}, error: function(data) {
+			
+		}
+	});
+</script>
+
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 	<div class="panel panel-default">
 		<div class="panel-heading" role="tab" id="headingOne">
@@ -68,8 +89,7 @@
 					aria-controls="collapseTwo"> Previous Orders </a>
 			</h4>
 		</div>
-		<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
-			aria-labelledby="headingTwo">
+		<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 			<div class="panel-body">
 				<table class="table table-hover">
 					<caption>List of previous orders</caption>
