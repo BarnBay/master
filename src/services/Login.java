@@ -104,7 +104,7 @@ public class Login extends HttpServlet {
 		dbconnect.close();
 		
 		
-		
+		// Updating Session and returning JSON
 		
 		if ( receiveduser.passwordhash.equals(db_user.passwordhash) ) {
 			db_user.generateSession();

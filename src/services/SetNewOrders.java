@@ -50,9 +50,6 @@ public class SetNewOrders extends HttpServlet {
 
 		StringBuffer jb = new StringBuffer();
 		String line;
-//		String teststring = "{\"orders\":[{\"productid\" : \"1\", \"amount\" : \"13\", \"price\" : \"2\", \"barnbayid\" : \"1\"}, {\"productid\" : \"2\", \"amount\" : \"14\", \"price\" : \"3\", \"barnbayid\" : \"2\"}, {\"productid\" : \"1\", \"amount\" : \"13\", \"price\" : \"2\", \"barnbayid\" : \"1\"}],\"username\":\"peterm\",\"pickupdate\":\"2014-12-12\"}";
-//		teststring = "{\"username\":\"johnb\", \"pickupdate\":\"2014-12-2\", \"orders\":[{\"productID\":\"4\", \"productName\":\"Apple Granny Smith\", \"productPrice\":1.99, \"productQuantity\":\"9\", \"farmerID\":\"2\", \"farmerName\":\"Peter Meier\", \"barnbayID\":\"2\", \"barnbayName\":\"Barnbay@HBF Mannheim\"}, {\"productID\":\"3\", \"productName\":\"Apple Granny Smith\", \"productPrice\":1.99, \"productQuantity\":\"2\", \"farmerID\":\"2\", \"farmerName\":\"Peter Meier\", \"barnbayID\":\"2\", \"barnbayName\":\"Barnbay@HBF Mannheim\"}]}";
-//		teststring = "{"username":"johnb", "pickupdate":"2014-12-2", "orders":[{"productID":"4", "productName":"Apple Granny Smith", "productPrice":1.99, "productQuantity":"9", "farmerID":"2", "farmerName":"Peter Meier", "barnbayID":"2", "barnbayName":"Barnbay@HBF Mannheim"}, {"productID":"3", "productName":"Apple Granny Smith", "productPrice":1.99, "productQuantity":"2", "farmerID":"2", "farmerName":"Peter Meier", "barnbayID":"1", "barnbayName":"Barnbay@HBF Mannheim"}]}";
 		JSONObject jsonobject = new JSONObject();
 		JSONParser jsonparser = new JSONParser();
 		User farmer = new User();
@@ -65,7 +62,7 @@ public class SetNewOrders extends HttpServlet {
 		}
 
 		jsonobject = JSON_Server.http_post_json(jb.toString());
-		//jsonobject = JSON_Server.http_post_json(teststring);
+		// jsonobject = JSON_Server.http_post_json(teststring);
 
 		String[][] orders = new String[100][6];
 
@@ -86,15 +83,17 @@ public class SetNewOrders extends HttpServlet {
 			currentrow = (JSONObject) jsonarray.get(i);
 			orders[i][0] = (String) currentrow.get("productID");
 			orders[i][1] = (String) currentrow.get("productQuantity");
-			
+
 			orders[i][2] = (String) currentrow.get("productPrice");
 			orders[i][3] = (String) currentrow.get("barnbayID");
 			orders[i][4] = (String) currentrow.get("farmerID");
-			
+
 			// Calculating the product id from the information.
-			sql = "SELECT IDPRODUCT FROM " + schema + "PRODUCT WHERE FK_CATEGORY = " + orders[i][0] + " AND FK_USER = " + orders[i][4];
+			sql = "SELECT IDPRODUCT FROM " + schema
+					+ "PRODUCT WHERE FK_CATEGORY = " + orders[i][0]
+					+ " AND FK_USER = " + orders[i][4];
 			System.out.println(sql);
-			
+
 			rs = dbconnect.executeSQL(sql);
 			if (rs != null) {
 				try {
@@ -106,7 +105,7 @@ public class SetNewOrders extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			
+
 			orders[i][5] = product_id.toString();
 		}
 
@@ -147,12 +146,11 @@ public class SetNewOrders extends HttpServlet {
 			j++;
 		}
 
-
 		// Getting Max ID:
-		
+
 		sql = "SELECT MAX(IDORDER) FROM " + schema + "ORDERS";
 
-		 //
+		//
 		rs = dbconnect.executeSQL(sql);
 		int max_order_id = 1;
 		if (rs != null) {
@@ -184,12 +182,12 @@ public class SetNewOrders extends HttpServlet {
 		}
 
 		int barnbay_user_id;
-		
+
 		// Getting Barnbay User-ID
 		int currentorder = 0;
 		boolean success = false;
 		int i = 0;
-		
+
 		boolean insert_order = true;
 		boolean insert_order_products = true;
 		boolean update_stock = true;
@@ -218,7 +216,7 @@ public class SetNewOrders extends HttpServlet {
 			success = dbconnect.executeSQLbool(sql);
 
 			if (!success) {
-				 insert_order = false;
+				insert_order = false;
 
 			}
 
@@ -227,49 +225,47 @@ public class SetNewOrders extends HttpServlet {
 			int new_stock = 0;
 			int k = 0;
 			n = 0;
-				success = true;
-				while (orders[k][3] != null && !orders[k][3].isEmpty()) {
-					if ( db_orders[i][1].equals(orders[k][3])) {
-						sql = "INSERT INTO " + schema + "ORDER_HAS_PRODUCT VALUES("
-								+ currentorder + ", " + orders[k][5] + ", "
-								+ orders[k][2] + ", " + orders[k][1] + ", 0, 0)";
-						success = dbconnect.executeSQLbool(sql);
-		
-						if (!success) {
-							 insert_order_products = false;
+			success = true;
+			while (orders[k][3] != null && !orders[k][3].isEmpty()) {
+				if (db_orders[i][1].equals(orders[k][3])) {
+					sql = "INSERT INTO " + schema + "ORDER_HAS_PRODUCT VALUES("
+							+ currentorder + ", " + orders[k][5] + ", "
+							+ orders[k][2] + ", " + orders[k][1] + ", 0, 0)";
+					success = dbconnect.executeSQLbool(sql);
 
-						}
-						
-						
-						// Subtracting Amount from current stock
-						
-						sql = "SELECT CURRENT_STOCK FROM " + schema
-								+ "PRODUCT WHERE IDPRODUCT = " + orders[k][5] + "";
-						rs = dbconnect.executeSQL(sql);
-						if (rs != null) {
-							try {
-								rs.next();
-								int amount = Integer.parseInt(orders[k][1]);
-								new_stock = rs.getInt(1) - amount;
-		
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-						
-						sql = "UPDATE " + schema + "PRODUCT SET CURRENT_STOCK = "
-								+ new_stock + " WHERE IDPRODUCT = " + orders[k][5];
-		
-	
-						success = dbconnect.executeSQLbool(sql);
-						
-						if (!success) {
-							 update_stock = false;
+					if (!success) {
+						insert_order_products = false;
 
+					}
+
+					// Subtracting Amount from current stock
+
+					sql = "SELECT CURRENT_STOCK FROM " + schema
+							+ "PRODUCT WHERE IDPRODUCT = " + orders[k][5] + "";
+					rs = dbconnect.executeSQL(sql);
+					if (rs != null) {
+						try {
+							rs.next();
+							int amount = Integer.parseInt(orders[k][1]);
+							new_stock = rs.getInt(1) - amount;
+
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
 					}
-					k++;
+
+					sql = "UPDATE " + schema + "PRODUCT SET CURRENT_STOCK = "
+							+ new_stock + " WHERE IDPRODUCT = " + orders[k][5];
+
+					success = dbconnect.executeSQLbool(sql);
+
+					if (!success) {
+						update_stock = false;
+
+					}
+				}
+				k++;
 
 			}
 			i++;
@@ -281,7 +277,7 @@ public class SetNewOrders extends HttpServlet {
 		} else {
 			response.getWriter().print("{\"set_order\":\"fail\"}");
 		}
-		
+
 		dbconnect.close();
 
 	}
