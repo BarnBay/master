@@ -38,6 +38,17 @@
   	
   	<servlet>
     	<description></description>
+    	<display-name>GetAllOrdersByUserId</display-name>
+    	<servlet-name>GetAllOrdersByUserId</servlet-name>
+    	<servlet-class>services.GetAllOrdersByUserId</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+    	<servlet-name>GetAllOrdersByUserId</servlet-name>
+    	<url-pattern>/GetAllOrdersByUserId</url-pattern>
+  	</servlet-mapping>
+  	
+  	<servlet>
+    	<description></description>
     	<display-name>SetNewOrders</display-name>
     	<servlet-name>SetNewOrders</servlet-name>
     	<servlet-class>services.SetNewOrders</servlet-class>
