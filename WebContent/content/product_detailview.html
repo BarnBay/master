@@ -18,21 +18,22 @@
 			ProductDetailName = ProductDetailJSONObject.name;
 			ProductDetailDescription = ProductDetailJSONObject.description
 			ProductFarmerDescription = ProductDetailJSONObject.farmerproductdescription;
-		});
 		
-		$.ajax({
-			url: "/barnbay_ui/GetProductByCategoryAndFarmer?catid=" + $.cookie("Farmer.ProductID") + "&farmerid=" + $.cookie("Farmer.FarmerID")
-		}).done(function(data) {
-			ProductDetailJSONObject = JSON.parse(data);
-			ProductFarmerDescription = ProductDetailJSONObject[0].description;
+			$.ajax({
+				url: "/barnbay_ui/GetProductByCategoryAndFarmer?catid=" + $.cookie("Farmer.ProductID") + "&farmerid=" + $.cookie("Farmer.FarmerID")
+			}).done(function(data) {
+				ProductDetailJSONObject = JSON.parse(data);
+				ProductFarmerDescription = ProductDetailJSONObject[0].description;
+				
+				productDetailFunction(ProductDetailJSONObject[0]);
+	
+				/* Start Google Maps */
+				GoogleMapsAddress.push(ProductDetailJSONObject[0].farmeraddress.street + ' ' + ProductDetailJSONObject[0].farmeraddress.number + ', ' + ProductDetailJSONObject[0].farmeraddress.zipcode + ' ' + ProductDetailJSONObject[0].farmeraddress.city);
+				GoogleMapsTitle.push(ProductDetailJSONObject[0].farmerfirstname + ' ' + ProductDetailJSONObject[0].farmerlastname);
+				
+				startMap();
+			});
 			
-			productDetailFunction(ProductDetailJSONObject[0]);
-
-			/* Start Google Maps */
-			GoogleMapsAddress.push(ProductDetailJSONObject[0].farmeraddress.street + ' ' + ProductDetailJSONObject[0].farmeraddress.number + ', ' + ProductDetailJSONObject[0].farmeraddress.zipcode + ' ' + ProductDetailJSONObject[0].farmeraddress.city);
-			GoogleMapsTitle.push(ProductDetailJSONObject[0].farmerfirstname + ' ' + ProductDetailJSONObject[0].farmerlastname);
-			
-			startMap();
 		});
 		
 		$.removeCookie("Farmer.ProductID");
