@@ -13,159 +13,156 @@
 			"username":username
 		}),
 		success:function(data) {
-			//displayAllOrdersFromFarmer(sortJSON(sortJSON(data.delivery, "barnbay", true), "deliverydate", true));
-			alert(JSON.stringify(data));
+			displayAllOrdersFromCustomer(data.ordered_products);
+			//alert(JSON.stringify(data));
 		}, error: function(data) {
 			
 		}
 	});
 </script>
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-	<div class="panel panel-default">
-		<div class="panel-heading" role="tab" id="headingOne">
-			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> Latest order </a>
-			</h4>
-		</div>
-		<div id="collapseOne" class="panel-collapse collapse in"
-			role="tabpanel" aria-labelledby="headingOne">
-			<div class="panel-body">
-				<table class="table table-hover">
-					<caption>Your order</caption>
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Productname</th>
-							<th>Quantity</th>
-							<th>Countable
-							<th>Price
+<div class="panel-group" id="newOrdersForCustomer" role="tablist" aria-multiselectable="true">
 
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Potatoes</td>
-							<td>30</td>
-							<td>1 kg</td>
-							<td>$10.23</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Cherry</td>
-							<td>5</td>
-							<td>1 kg</td>
-							<td>$2.11</td>
+	<!-- Update View: New Orders -->
+	<script type="text/javascript">
+		function displayAllOrdersFromCustomer(allOrders) {
+			var out = "";
+			var newOrder = "";
+			var oldOrder = "";
+			var totalOrderPrice = 0;
+			var dateDisplay = "";
+			
+			if(allOrders.length > 0) {
+				for(i = 0; i < allOrders.length; i++) {
+					newOrder = allOrders[i].orderid;
+					dateDisplay = allOrders[i].deliverydate.split("-");
+									
+					/* If the new date is unequal the old date, display a new panel */ 
+					if(newOrder != oldOrder) {
+						if(i != 0) {
+							out += '						<tr>';
+							out += '							<td></td>';
+							out += '							<td></td>';
+							out += '							<td></td>';
+							out += '							<td class="text-center" style="vertical-align: middle;">';
+							out += '								<h4>Total</h4>';
+							out += '							</td>';
+							out += '							<td class="text-center" style="vertical-align: middle;">';
+							out += '								<h4><strong>' + parseFloat(totalOrderPrice).toFixed(2) + ' &euro;</strong></h4>';
+							out += '							</td>';
+							out += '						</tr>';
+							out += '					</tbody>';
+							out += '				</table>';
+							out += '			</div>';
+							out += '		</div>';
+							out += '	</div>';
+							out += '	<br/>';
+							
+							totalOrderPrice = 0;
+						}
+						
+						out += '	<div class="panel panel-success">';
+						out += '		<div class="panel-heading" role="tab" id="headingOne' + i + '">';
+						out += '			<h4 class="panel-title">';
+						out += '				<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne' + i + '" aria-expanded="true" aria-controls="collapseOne' + i + '">';						
+						out += '					Your order from: <b>'+ getWeekdayFromDay(allOrders[i].deliverydate) + ', ' + dateDisplay[2] + '.' + dateDisplay[1] + '.' + dateDisplay[0] + '</b>';
+						out += '				</a>';
+						out += '			</h4>';
+						out += '		</div>';
+						
+						if(i == 0) {
+							out += '		<div id="collapseOne' + i + '" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne' + i + '">';	
+						} else {
+							out += '		<div id="collapseOne' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne' + i + '">';	
+						}
 
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Apple</td>
-							<td>50</td>
-							<td>1 kg</td>
-							<td>$25.44</td>
+						out += '			<div class="panel-body">';
+						out += '				<table class="table table-hover">';
+						out += '					<thead>';
+						out += '						<tr>';
+						out += '							<th class="col-sm-2 col-md-2"></th>';
+						out += '							<th class="col-sm-3 col-md-3">Productname</th>';
+						out += '							<th class="col-sm-3 col-md-3">Location</th>';
+						out += '							<th class="col-sm-2 col-md-2 text-center">Quantity</th>';
+						out += '							<th class="col-sm-2 col-md-2 text-center">Price</th>';
+						out += '						</tr>';
+						out += '					</thead>';
+						out += '					<tbody>';
+						
+						oldOrder = allOrders[i].orderid;
+					}
+									
+					out += '						<tr>';
+					out += '							<td class="text-center" style="vertical-align: middle;"><img class="media-object" src="./img/products/' + allOrders[i].productcategory + '.png" style="width: 75px"></td>';
+					out += '							<td style="vertical-align: middle;">' + allOrders[i].productcategory + '</td>';
+					out += '							<td style="vertical-align: middle;">' + allOrders[i].barnbay + '</td>';
+					out += '							<td class="text-center" style="vertical-align: middle;">' + allOrders[i].amount + ' kg</td>';
+					out += '							<td class="text-center" style="vertical-align: middle;">' + (parseFloat(allOrders[i].price)).toFixed(2) + ' &euro;</td>';
+					out += '						</tr>';
+					
+					totalOrderPrice = (parseFloat(totalOrderPrice) + parseFloat(allOrders[i].overall_price_per_product));
+				
+					/* If Array is finished, close the Table */
+					if(i == allOrders.length) {
+						out += '						<tr>';
+						out += '							<td></td>';
+						out += '							<td></td>';
+						out += '							<td></td>';
+						out += '							<td class="text-center" style="vertical-align: middle;">';
+						out += '								<h4>Total</h4>';
+						out += '							</td>';
+						out += '							<td class="text-center" style="vertical-align: middle;">';
+						out += '								<h4><strong>' + parseFloat(totalOrderPrice).toFixed(2) + ' &euro;</strong></h4>';
+						out += '							</td>';
+						out += '						</tr>';
+						out += '					</tbody>';
+						out += '				</table>';
+						out += '			</div>';
+						out += '		</div>';
+						out += '	</div>';
+						out += '	<br/>';
+						
+						totalOrderPrice = 0;
+					}
+				}
+				
+				document.getElementById("newOrdersForCustomer").innerHTML = out;
+			}
+		}
+	</script>
+	
+</div>
 
-						</tr>
-
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><h3>Total</h3></td>
-							<td><h3><strong>$37.78</strong>
-								</h3></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+<!-- Dummy Data for Rating a Farmer, will be implemented dynamically in a later step! -->
+<br/>
+<div class="panel panel-success">
+	<div class="panel-heading" role="tab" id="headingThree">
+		<h4 class="panel-title">
+			<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><b>Farmers you ordered from</b> </a>
+		</h4>
 	</div>
-	<div class="panel panel-default">
-		<div class="panel-heading" role="tab" id="headingTwo">
-			<h4 class="panel-title">
-				<a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-					href="#collapseTwo" aria-expanded="false"
-					aria-controls="collapseTwo"> Previous Orders </a>
-			</h4>
+	<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+		<div class="panel-body">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="col-sm-1 col-md-1"></th>
+						<th class="col-sm-4 col-md-4">Name</th>
+						<th class="col-sm-4 col-md-4">Rating</th>
+						<th class="col-sm-2 col-md-2 text-center">Confirm</th>
+						<th class="col-sm-1 col-md-1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="vertical-align: middle;">1</td>
+						<td style="vertical-align: middle;">Farmer John</td>
+						<td style="vertical-align: middle;"><input id="input-21b" value="2.5" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs"></td>
+						<td class="text-center" style="vertical-align: middle;"><button type="button" class="btn btn-success">Confirm</button></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-			<div class="panel-body">
-				<table class="table table-hover">
-					<caption>List of previous orders</caption>
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Productname</th>
-							<th>Quantity</th>
-							<th>Countable
-							<th>Price
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Potatoes</td>
-							<td>30</td>
-							<td>1 kg</td>
-							<td>$10.23</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Cherry</td>
-							<td>5</td>
-							<td>1 kg</td>
-							<td>$2.11</td>
-
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Apple</td>
-							<td>50</td>
-							<td>1 kg</td>
-							<td>$25.44</td>
-
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		</div>
-		
-		<div class="panel panel-default">
-		<div class="panel-heading" role="tab" id="headingThree">
-			<h4 class="panel-title">
-				<a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-					href="#collapseThree" aria-expanded="false"
-					aria-controls="collapseThree"> Farmers you ordered from </a>
-			</h4>
-		</div>
-		<div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
-			aria-labelledby="headingThree">
-			<div class="panel-body">
-				<table class="table table-hover">
-					<caption>Farmers you ordered from</caption>
-					<thead>
-						<tr>
-							<th class="col-md-1">#</th>
-							<th class="col-md-5">Name</th>
-							<th class="col-md-5">Rating</th>
-							<th class="col-md-1">Confirm</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Farmer John</td>
-							<td>
-								<input id="input-21b" value="2.5" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs">
-							</td>
-							<td><button type="button" class="btn btn-success">Confirm</button></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-
 	</div>
 </div>
