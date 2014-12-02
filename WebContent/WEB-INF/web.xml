@@ -38,6 +38,17 @@
   	
   	<servlet>
     	<description></description>
+    	<display-name>SetNewOrders</display-name>
+    	<servlet-name>SetNewOrders</servlet-name>
+    	<servlet-class>services.SetNewOrders</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+    	<servlet-name>SetNewOrders</servlet-name>
+    	<url-pattern>/SetNewOrders</url-pattern>
+  	</servlet-mapping>
+  	
+  	<servlet>
+    	<description></description>
     	<display-name>TestService</display-name>
     	<servlet-name>TestService</servlet-name>
     	<servlet-class>test.TestService</servlet-class>

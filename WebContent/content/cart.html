@@ -34,7 +34,7 @@
 	<script type="text/javascript">							
 		function displayShoppingCartItem() {
 			var obj = JSON.parse($.cookie('Products.ShoppingCart'));
-			var shoppingcart = obj['shoppingcart'];
+			var shoppingcart = obj['shoppingcart'];			
 			var out = "";
 			var productSubTotal = 0;
 			
@@ -53,8 +53,8 @@
 			out += '			</thead>';
 			out += '			<tbody>';
 			
-			for(i = 0; i < shoppingcart.length; i++) {
-				productSubTotal = productSubTotal + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity);
+			for(i = 0; i < shoppingcart.length; i++) {				
+				productSubTotal = productSubTotal + (parseFloat(shoppingcart[i].productPrice) * shoppingcart[i].productQuantity);
 				
 				out += '				<tr>';
 				out += '					<td class="col-md-5">';
@@ -76,10 +76,10 @@
 				out += '						<input type="email" class="form-control" id="number" value="' + shoppingcart[i].productQuantity + '" disabled>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1 text-center" style="vertical-align: middle;">';
-				out += '						<strong>' + (shoppingcart[i].productPrice).toFixed(2) + ' &euro;</strong>';
+				out += '						<strong>' + shoppingcart[i].productPrice + ' &euro;</strong>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1 text-center" style="vertical-align: middle;">';
-				out += '						<strong>' + (shoppingcart[i].productPrice * shoppingcart[i].productQuantity).toFixed(2) + ' &euro;</strong>';
+				out += '						<strong>' + (parseFloat(shoppingcart[i].productPrice) * shoppingcart[i].productQuantity).toFixed(2) + ' &euro;</strong>';
 				out += '					</td>';
 				out += '					<td class="col-sm-1 col-md-1" style="vertical-align: middle;">';
 				out += '						<button type="button" class="btn btn-danger" onClick="removeItemFromShoppingCart(' + i + ')">';
@@ -232,7 +232,7 @@
 			
 			$('#shoppingCartContainer').fadeIn('500');
 			
-			/* {"orders":[{productid, amaount, price, barnbayid}],"username":"bla","pickupdate":"30.11.2014"} */
+			
 			/* Send Order to Hana */
 			var obj = JSON.parse($.cookie('Products.ShoppingCart'));
 			var username = $.cookie('User.Username');
@@ -245,8 +245,22 @@
 				"orders":orders
 			});
 			
-			alert("Result: " + result);
 			
+			$.ajax({
+				type: "POST",
+				url: "/barnbay_ui/SetNewOrders",
+				dataType : "json",
+				data: JSON.stringify({
+					"username":username,
+					"pickupdate":delivery,
+					"orders":orders
+				}),
+				success:function(data) {
+					alert("Result: " + JSON.stringify(data));
+				}, error: function(data) {
+					//alert("Something went wrong, please try again");
+				}
+			});
 			
 			
 			

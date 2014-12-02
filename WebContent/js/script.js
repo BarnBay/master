@@ -276,7 +276,7 @@ $(document).ready(function() {
 	
 	$('#mainContainer').on('click', '#dash_viewDetails', function(event) {
 		$('#mainContainer').hide().load('./content/dashboard.html').fadeIn('500');
-		event.Default();
+		event.preventDefault();
 	});
 	
 	$('#mainContainer').on('click', '#dash_NewOrders', function(event) {
