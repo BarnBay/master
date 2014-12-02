@@ -62,7 +62,7 @@ public class GetAllOrdersByUserId extends HttpServlet {
 		String json_string = "";
 		JSONObject json = new JSONObject();
 		String sql;
-		String attributes = "bb.name, cat.name, o.pickup_date, orderproduct.amount ";
+		String attributes = "bb.name, cat.name, o.pickup_date, orderproduct.amount, orderproduct.price ";
 		String tables = schema + "BARNBAY bb, " + schema + "CATEGORY cat, " + schema + "ORDER_HAS_PRODUCT orderproduct, " + schema + "ORDERS o, " + 
 						schema + "USERD barnbayuser, " + schema + "USERD customer, " + schema + "PRODUCT prod";
 		String where_clause = "customer.username = '" + receiveduser.username + "' AND customer.idUser = o.FK_USERS_CUSTOMER AND prod.fk_category = cat.idCategory " + 
@@ -79,7 +79,7 @@ public class GetAllOrdersByUserId extends HttpServlet {
 		
 		
 		int i = 1;
-		json_string = "{ \"pickup\" : [ ";
+		json_string = "{ \"ordered_products\" : [ ";
 		String comma = "";
 		
 		if (rs != null) {
@@ -91,10 +91,15 @@ public class GetAllOrdersByUserId extends HttpServlet {
 					}
 					i++;
 					json_string = json_string + comma + " { ";
+					Integer amount = Integer.parseInt(rs.getString(4));
+					Double price = Double.parseDouble(rs.getString(5));
+					Double overall_price_per_product = amount * price;
 					json_string = json_string + "\"barnbay\" : " + "\"" + rs.getString(1) + "\", " + 
 							"\"productcategory\" : \"" + rs.getString(2) + "\", " +
 							"\"deliverydate\" : \"" + rs.getString(3) + "\", " +
-							"\"amount\" : \"" + rs.getString(4) + "\" ";
+							"\"amount\" : \"" + rs.getString(4) + "\" " +
+							"\"price\" : \"" + rs.getString(5) + "\"" + 
+							"\"overall_price_per_product\" : \"" + overall_price_per_product.toString() + "\"" ;
 							
 					json_string = json_string + " }  ";		
 					//System.out.print(rs.getString(1) + " | " + rs.getString(2) + " | " + rs.getString(3) + " | " + rs.getString(4)) ;
@@ -105,7 +110,7 @@ public class GetAllOrdersByUserId extends HttpServlet {
 			}
 		}
 		
-		json_string = json_string + "] }";
+		json_string = json_string + "]}";
 		
 		response.getWriter().print(json_string);
 		
